@@ -70,10 +70,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//BasicLabelType/basiclabel"/>
     </genClasses>
     <genClasses ecoreClass="datadictionary.ecore#//ConsentLabelType">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//ConsentLabelType/consentlabel"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//ConsentLabelType/consentlabel"/>
     </genClasses>
     <genClasses ecoreClass="datadictionary.ecore#//RoleLabelType">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//RoleLabelType/rolelabel"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//RoleLabelType/rolelabel"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Consent_model" ecorePackage="../../org.dataflowanalysis.privacy.consent_model/model/consent_model.ecore#/">

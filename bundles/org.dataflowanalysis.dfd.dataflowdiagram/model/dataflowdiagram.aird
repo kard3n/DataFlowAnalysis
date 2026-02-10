@@ -12,6 +12,7 @@
     <semanticResources>platform:/resource/mdpa.dfd.datadictionary/model/datadictionary.genmodel</semanticResources>
     <semanticResources>platform:/resource/org.dataflowanalysis.dfd.datadictionary/model/datadictionary.genmodel</semanticResources>
     <semanticResources>platform:/resource/org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore</semanticResources>
+    <semanticResources>platform:/resource/org.dataflowanalysis.privacy.consent_model/model/consent_model.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_foQPQOsjEe2lBNeU2kqS8w">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_fqAiwOsjEe2lBNeU2kqS8w" name="DataFlowDiagramModel" repPath="#_fpflYOsjEe2lBNeU2kqS8w" changeId="1702135626016">

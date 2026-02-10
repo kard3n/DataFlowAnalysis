@@ -140,14 +140,14 @@ public class BehaviorConverter {
                         .stream()
                         .filter(labelType -> labelType.getEntityName()
                                 .equals(typeName))
-                        .flatMap(labelType -> labelType.getLabel()
+                        .flatMap(labelType -> labelType.getBasicLabels()
                                 .stream())
                         .filter(label -> label.getEntityName()
                                 .equals(valueName))
                         .findAny());
 
         Label value = optionalValue.orElseGet(() -> {
-            Label label = ddFactory.createLabel();
+            Label label = ddFactory.createBasicLabel();
             label.setEntityName(token);
             return label;
         });

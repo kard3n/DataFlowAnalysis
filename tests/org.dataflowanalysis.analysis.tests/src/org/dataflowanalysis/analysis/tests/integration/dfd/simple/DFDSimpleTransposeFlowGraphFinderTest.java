@@ -5,6 +5,7 @@ import org.dataflowanalysis.analysis.dfd.simple.DFDSimpleVertex;
 import org.dataflowanalysis.analysis.tests.integration.dfd.util.DFDTestUtil;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
+import org.dataflowanalysis.dfd.datadictionary.Label;
 import org.dataflowanalysis.dfd.datadictionary.datadictionaryFactory;
 import org.dataflowanalysis.dfd.dataflowdiagram.DataFlowDiagram;
 import org.dataflowanalysis.dfd.dataflowdiagram.Node;
@@ -41,7 +42,7 @@ public class DFDSimpleTransposeFlowGraphFinderTest {
                 .forEach(pin -> {
                     DFDTestUtil.createAndAddAssignment(a, null, pin, dataDictionary.getLabelTypes()
                             .get(0)
-                            .getLabel(), ddFactory.createTRUE(), Assignment.class);
+                            .getBasicLabels().stream().map(label -> (Label) label).toList(), ddFactory.createTRUE(), Assignment.class);
                 });
 
         var tfg = new DFDSimpleTransposeFlowGraphFinder(dataDictionary, dataFlowDiagram).findTransposeFlowGraphs()

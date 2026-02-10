@@ -43,7 +43,7 @@
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="DataFlowDiagramModel.ecore#/"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_aLa00CImEe61EaawvcHIJg" name="dataflowdiagram class diagram" repPath="#_aLYYkCImEe61EaawvcHIJg" changeId="1702135626016">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_aLa00CImEe61EaawvcHIJg" name="dataflowdiagram class diagram" repPath="#_aLYYkCImEe61EaawvcHIJg" changeId="1770729083060">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="dataflowdiagram.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -1699,9 +1699,9 @@
         <children xmi:type="notation:Node" xmi:id="_ajmrYiImEe61EaawvcHIJg" type="2003" element="_ajZ3AiImEe61EaawvcHIJg">
           <children xmi:type="notation:Node" xmi:id="_ajnSYCImEe61EaawvcHIJg" type="5007"/>
           <children xmi:type="notation:Node" xmi:id="_ajnSYSImEe61EaawvcHIJg" type="7004">
-            <children xmi:type="notation:Node" xmi:id="_ajnSaiImEe61EaawvcHIJg" type="3010" element="_ajfWkiImEe61EaawvcHIJg">
-              <styles xmi:type="notation:FontStyle" xmi:id="_ajnSayImEe61EaawvcHIJg" fontName="Segoe UI" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_ajnSbCImEe61EaawvcHIJg"/>
+            <children xmi:type="notation:Node" xmi:id="__2VpIAaBEfG_TpibjC48iQ" type="3010" element="__2Sl0gaBEfG_TpibjC48iQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="__2VpIQaBEfG_TpibjC48iQ" fontName="Noto Sans" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="__2VpIgaBEfG_TpibjC48iQ"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_3lu8MDLZEe6pu4w2btpW1A" type="3010" element="_3lP0ATLZEe6pu4w2btpW1A">
               <styles xmi:type="notation:FontStyle" xmi:id="_3lu8MTLZEe6pu4w2btpW1A" fontName="Segoe UI" fontHeight="8"/>
@@ -1933,10 +1933,10 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@conditionnalStyles.1/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_ajfWkiImEe61EaawvcHIJg" name=" behaviour : Behaviour" tooltipText="">
-        <target xmi:type="ecore:EReference" href="dataflowdiagram.ecore#//Node/behaviour"/>
-        <semanticElements xmi:type="ecore:EReference" href="dataflowdiagram.ecore#//Node/behaviour"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_ajf9oCImEe61EaawvcHIJg" labelAlignment="LEFT" color="114,159,207">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="__2Sl0gaBEfG_TpibjC48iQ" name=" behavior : Behavior" tooltipText="">
+        <target xmi:type="ecore:EReference" href="dataflowdiagram.ecore#//Node/behavior"/>
+        <semanticElements xmi:type="ecore:EReference" href="dataflowdiagram.ecore#//Node/behavior"/>
+        <ownedStyle xmi:type="diagram:BundledImage" uid="__2TM4AaBEfG_TpibjC48iQ" labelAlignment="LEFT" color="114,159,207">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']"/>

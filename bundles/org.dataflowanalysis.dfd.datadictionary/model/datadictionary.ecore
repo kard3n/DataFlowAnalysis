@@ -7,9 +7,9 @@
         eType="#//BasicLabelType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" upperBound="-1"
         eType="#//Behavior" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="consentlabeltype" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consentLabelTypes" upperBound="-1"
         eType="#//ConsentLabelType" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rolelabeltype" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleLabelTypes" upperBound="-1"
         eType="#//RoleLabelType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="consentModel" eType="ecore:EClass ../../org.dataflowanalysis.privacy.consent_model/model/consent_model.ecore#//ConsentModel"/>
   </eClassifiers>
@@ -73,15 +73,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="ecore:EClass ../../org.dataflowanalysis.privacy.consent_model/model/consent_model.ecore#//Role"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BasicLabelType" eSuperTypes="#//LabelType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="basiclabel" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="basicLabels" lowerBound="1"
         upperBound="-1" eType="#//BasicLabel" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConsentLabelType" eSuperTypes="#//LabelType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="consentlabel" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consentLabels" lowerBound="1"
         upperBound="-1" eType="#//ConsentLabel" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleLabelType" eSuperTypes="#//LabelType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rolelabel" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleLabels" lowerBound="1"
         upperBound="-1" eType="#//RoleLabel" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

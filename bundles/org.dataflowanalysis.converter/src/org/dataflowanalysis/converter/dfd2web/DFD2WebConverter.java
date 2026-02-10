@@ -186,9 +186,9 @@ public class DFD2WebConverter extends Converter {
     }
 
     private void createLabelTypesAndValues(List<WebEditorLabelType> labelTypes, DataDictionary dataDictionary) {
-        for (LabelType labelType : dataDictionary.getLabelTypes()) {
+        for (BasicLabelType labelType : dataDictionary.getLabelTypes()) {
             List<Value> values = new ArrayList<>();
-            for (Label label : labelType.getLabel()) {
+            for (Label label : labelType.getBasicLabels()) {
                 values.add(new Value(label.getId(), label.getEntityName()));
             }
             labelTypes.add(new WebEditorLabelType(labelType.getId(), labelType.getEntityName(), values));

@@ -14,5 +14,13 @@
             genModel="model/datadictionary.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated datadictionary -->
+      <package
+            uri="http://www.dataflowanalysis.org/consent_model"
+            class="consent_model.Consent_modelPackage"
+            genModel="model/datadictionary.genmodel"/>
+   </extension>
+
 null
 </plugin>

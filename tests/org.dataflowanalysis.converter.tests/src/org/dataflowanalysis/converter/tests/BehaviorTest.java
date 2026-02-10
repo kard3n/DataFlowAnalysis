@@ -49,11 +49,11 @@ public class BehaviorTest {
     @DisplayName("Test Behavior Conversion")
     void testBehaviorConversion(String behavior) {
         for (char c = 'A'; c <= 'G'; c++) {
-            LabelType type = ddFactory.createLabelType();
+            BasicLabelType type = ddFactory.createBasicLabelType();
             type.setEntityName("Type" + c);
-            Label label = ddFactory.createLabel();
+            BasicLabel label = ddFactory.createBasicLabel();
             label.setEntityName("Value" + c);
-            type.getLabel()
+            type.getBasicLabels()
                     .add(label);
             dataDictionary.getLabelTypes()
                     .add(type);
@@ -80,15 +80,15 @@ public class BehaviorTest {
         TRUE trueTerm = ddFactory.createTRUE();
         LabelReference ref = ddFactory.createLabelReference();
 
-        LabelType type = ddFactory.createLabelType();
+        BasicLabelType type = ddFactory.createBasicLabelType();
         type.setEntityName("type");
-        Label label = ddFactory.createLabel();
+        BasicLabel label = ddFactory.createBasicLabel();
         label.setEntityName("value");
-        type.getLabel()
+        type.getBasicLabels()
                 .add(label);
-        Label label2 = ddFactory.createLabel();
+        BasicLabel label2 = ddFactory.createBasicLabel();
         label2.setEntityName("value2");
-        type.getLabel()
+        type.getBasicLabels()
                 .add(label2);
         dataDictionary.getLabelTypes()
                 .add(type);

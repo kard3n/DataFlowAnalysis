@@ -34,478 +34,604 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class datadictionaryItemProviderAdapterFactory extends datadictionaryAdapterFactory
-        implements ComposeableAdapterFactory, IChangeNotifier, IDisposable, IChildCreationExtender {
-    /**
-     * This keeps track of the root adapter factory that delegates to this adapter factory. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    protected ComposedAdapterFactory parentAdapterFactory;
+		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable, IChildCreationExtender {
+	/**
+	 * This keeps track of the root adapter factory that delegates to this adapter factory.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	protected ComposedAdapterFactory parentAdapterFactory;
 
-    /**
-     * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    protected IChangeNotifier changeNotifier = new ChangeNotifier();
+	/**
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
-    /**
-     * This helps manage the child creation extenders. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected ChildCreationExtenderManager childCreationExtenderManager = new ChildCreationExtenderManager(DataDictionaryEditPlugin.INSTANCE,
-            datadictionaryPackage.eNS_URI);
+	/**
+	 * This helps manage the child creation extenders.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ChildCreationExtenderManager childCreationExtenderManager = new ChildCreationExtenderManager(
+			DataDictionaryEditPlugin.INSTANCE, datadictionaryPackage.eNS_URI);
 
-    /**
-     * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected Collection<Object> supportedTypes = new ArrayList<Object>();
+	/**
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
-    /**
-     * This constructs an instance. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    public datadictionaryItemProviderAdapterFactory() {
-        supportedTypes.add(IEditingDomainItemProvider.class);
-        supportedTypes.add(IStructuredItemContentProvider.class);
-        supportedTypes.add(ITreeItemContentProvider.class);
-        supportedTypes.add(IItemLabelProvider.class);
-        supportedTypes.add(IItemPropertySource.class);
-    }
+	/**
+	 * This constructs an instance.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public datadictionaryItemProviderAdapterFactory() {
+		supportedTypes.add(IEditingDomainItemProvider.class);
+		supportedTypes.add(IStructuredItemContentProvider.class);
+		supportedTypes.add(ITreeItemContentProvider.class);
+		supportedTypes.add(IItemLabelProvider.class);
+		supportedTypes.add(IItemPropertySource.class);
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.DataDictionary}
-     * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected DataDictionaryItemProvider dataDictionaryItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.DataDictionary} instances.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataDictionaryItemProvider dataDictionaryItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.DataDictionary}. <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createDataDictionaryAdapter() {
-        if (dataDictionaryItemProvider == null) {
-            dataDictionaryItemProvider = new DataDictionaryItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.DataDictionary}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataDictionaryAdapter() {
+		if (dataDictionaryItemProvider == null) {
+			dataDictionaryItemProvider = new DataDictionaryItemProvider(this);
+		}
 
-        return dataDictionaryItemProvider;
-    }
+		return dataDictionaryItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.Behavior} instances.
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected BehaviorItemProvider behaviorItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.Behavior} instances.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BehaviorItemProvider behaviorItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.Behavior}. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createBehaviorAdapter() {
-        if (behaviorItemProvider == null) {
-            behaviorItemProvider = new BehaviorItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.Behavior}.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBehaviorAdapter() {
+		if (behaviorItemProvider == null) {
+			behaviorItemProvider = new BehaviorItemProvider(this);
+		}
 
-        return behaviorItemProvider;
-    }
+		return behaviorItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.Pin} instances. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected PinItemProvider pinItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.Pin} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PinItemProvider pinItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.Pin}. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createPinAdapter() {
-        if (pinItemProvider == null) {
-            pinItemProvider = new PinItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.Pin}.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPinAdapter() {
+		if (pinItemProvider == null) {
+			pinItemProvider = new PinItemProvider(this);
+		}
 
-        return pinItemProvider;
-    }
+		return pinItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.Assignment}
-     * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected AssignmentItemProvider assignmentItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.Assignment} instances.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AssignmentItemProvider assignmentItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.Assignment}. <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createAssignmentAdapter() {
-        if (assignmentItemProvider == null) {
-            assignmentItemProvider = new AssignmentItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.Assignment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAssignmentAdapter() {
+		if (assignmentItemProvider == null) {
+			assignmentItemProvider = new AssignmentItemProvider(this);
+		}
 
-        return assignmentItemProvider;
-    }
+		return assignmentItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment}
-     * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected ForwardingAssignmentItemProvider forwardingAssignmentItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment} instances.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ForwardingAssignmentItemProvider forwardingAssignmentItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment}. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createForwardingAssignmentAdapter() {
-        if (forwardingAssignmentItemProvider == null) {
-            forwardingAssignmentItemProvider = new ForwardingAssignmentItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createForwardingAssignmentAdapter() {
+		if (forwardingAssignmentItemProvider == null) {
+			forwardingAssignmentItemProvider = new ForwardingAssignmentItemProvider(this);
+		}
 
-        return forwardingAssignmentItemProvider;
-    }
+		return forwardingAssignmentItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.Label} instances.
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected LabelItemProvider labelItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.TRUE} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TRUEItemProvider trueItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.Label}. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createLabelAdapter() {
-        if (labelItemProvider == null) {
-            labelItemProvider = new LabelItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.TRUE}.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTRUEAdapter() {
+		if (trueItemProvider == null) {
+			trueItemProvider = new TRUEItemProvider(this);
+		}
 
-        return labelItemProvider;
-    }
+		return trueItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.LabelType} instances.
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected LabelTypeItemProvider labelTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.AND} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ANDItemProvider andItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.LabelType}. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createLabelTypeAdapter() {
-        if (labelTypeItemProvider == null) {
-            labelTypeItemProvider = new LabelTypeItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.AND}.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createANDAdapter() {
+		if (andItemProvider == null) {
+			andItemProvider = new ANDItemProvider(this);
+		}
 
-        return labelTypeItemProvider;
-    }
+		return andItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.TRUE} instances. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected TRUEItemProvider trueItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.OR} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ORItemProvider orItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.TRUE}. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createTRUEAdapter() {
-        if (trueItemProvider == null) {
-            trueItemProvider = new TRUEItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.OR}.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createORAdapter() {
+		if (orItemProvider == null) {
+			orItemProvider = new ORItemProvider(this);
+		}
 
-        return trueItemProvider;
-    }
+		return orItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.AND} instances. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected ANDItemProvider andItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.NOT} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NOTItemProvider notItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.AND}. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createANDAdapter() {
-        if (andItemProvider == null) {
-            andItemProvider = new ANDItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.NOT}.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNOTAdapter() {
+		if (notItemProvider == null) {
+			notItemProvider = new NOTItemProvider(this);
+		}
 
-        return andItemProvider;
-    }
+		return notItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.OR} instances. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected ORItemProvider orItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.LabelReference} instances.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LabelReferenceItemProvider labelReferenceItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.OR}. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createORAdapter() {
-        if (orItemProvider == null) {
-            orItemProvider = new ORItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.LabelReference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLabelReferenceAdapter() {
+		if (labelReferenceItemProvider == null) {
+			labelReferenceItemProvider = new LabelReferenceItemProvider(this);
+		}
 
-        return orItemProvider;
-    }
+		return labelReferenceItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.NOT} instances. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected NOTItemProvider notItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.SetAssignment} instances.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SetAssignmentItemProvider setAssignmentItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.NOT}. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createNOTAdapter() {
-        if (notItemProvider == null) {
-            notItemProvider = new NOTItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.SetAssignment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSetAssignmentAdapter() {
+		if (setAssignmentItemProvider == null) {
+			setAssignmentItemProvider = new SetAssignmentItemProvider(this);
+		}
 
-        return notItemProvider;
-    }
+		return setAssignmentItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.LabelReference}
-     * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected LabelReferenceItemProvider labelReferenceItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.UnsetAssignment} instances.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnsetAssignmentItemProvider unsetAssignmentItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.LabelReference}. <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createLabelReferenceAdapter() {
-        if (labelReferenceItemProvider == null) {
-            labelReferenceItemProvider = new LabelReferenceItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.UnsetAssignment}.
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnsetAssignmentAdapter() {
+		if (unsetAssignmentItemProvider == null) {
+			unsetAssignmentItemProvider = new UnsetAssignmentItemProvider(this);
+		}
 
-        return labelReferenceItemProvider;
-    }
+		return unsetAssignmentItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.SetAssignment}
-     * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected SetAssignmentItemProvider setAssignmentItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.ConsentLabel} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConsentLabelItemProvider consentLabelItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.SetAssignment}. <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createSetAssignmentAdapter() {
-        if (setAssignmentItemProvider == null) {
-            setAssignmentItemProvider = new SetAssignmentItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.ConsentLabel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createConsentLabelAdapter() {
+		if (consentLabelItemProvider == null) {
+			consentLabelItemProvider = new ConsentLabelItemProvider(this);
+		}
 
-        return setAssignmentItemProvider;
-    }
+		return consentLabelItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.UnsetAssignment}
-     * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    protected UnsetAssignmentItemProvider unsetAssignmentItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.BasicLabel} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BasicLabelItemProvider basicLabelItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.UnsetAssignment}. <!-- begin-user-doc
-     * --> <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createUnsetAssignmentAdapter() {
-        if (unsetAssignmentItemProvider == null) {
-            unsetAssignmentItemProvider = new UnsetAssignmentItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.BasicLabel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBasicLabelAdapter() {
+		if (basicLabelItemProvider == null) {
+			basicLabelItemProvider = new BasicLabelItemProvider(this);
+		}
 
-        return unsetAssignmentItemProvider;
-    }
+		return basicLabelItemProvider;
+	}
 
-    /**
-     * This returns the root adapter factory that contains this factory. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    public ComposeableAdapterFactory getRootAdapterFactory() {
-        return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-    }
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.RoleLabel} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RoleLabelItemProvider roleLabelItemProvider;
 
-    /**
-     * This sets the composed adapter factory that contains this factory. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-        this.parentAdapterFactory = parentAdapterFactory;
-    }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.RoleLabel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRoleLabelAdapter() {
+		if (roleLabelItemProvider == null) {
+			roleLabelItemProvider = new RoleLabelItemProvider(this);
+		}
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public boolean isFactoryForType(Object type) {
-        return supportedTypes.contains(type) || super.isFactoryForType(type);
-    }
+		return roleLabelItemProvider;
+	}
 
-    /**
-     * This implementation substitutes the factory itself as the key for the adapter. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter adapt(Notifier notifier, Object type) {
-        return super.adapt(notifier, this);
-    }
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.BasicLabelType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BasicLabelTypeItemProvider basicLabelTypeItemProvider;
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Object adapt(Object object, Object type) {
-        if (isFactoryForType(type)) {
-            Object adapter = super.adapt(object, type);
-            if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
-                return adapter;
-            }
-        }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.BasicLabelType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBasicLabelTypeAdapter() {
+		if (basicLabelTypeItemProvider == null) {
+			basicLabelTypeItemProvider = new BasicLabelTypeItemProvider(this);
+		}
 
-        return null;
-    }
+		return basicLabelTypeItemProvider;
+	}
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    public List<IChildCreationExtender> getChildCreationExtenders() {
-        return childCreationExtenderManager.getChildCreationExtenders();
-    }
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.ConsentLabelType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConsentLabelTypeItemProvider consentLabelTypeItemProvider;
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    public Collection<?> getNewChildDescriptors(Object object, EditingDomain editingDomain) {
-        return childCreationExtenderManager.getNewChildDescriptors(object, editingDomain);
-    }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.ConsentLabelType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createConsentLabelTypeAdapter() {
+		if (consentLabelTypeItemProvider == null) {
+			consentLabelTypeItemProvider = new ConsentLabelTypeItemProvider(this);
+		}
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    public ResourceLocator getResourceLocator() {
-        return childCreationExtenderManager;
-    }
+		return consentLabelTypeItemProvider;
+	}
 
-    /**
-     * This adds a listener. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    public void addListener(INotifyChangedListener notifyChangedListener) {
-        changeNotifier.addListener(notifyChangedListener);
-    }
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.RoleLabelType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RoleLabelTypeItemProvider roleLabelTypeItemProvider;
 
-    /**
-     * This removes a listener. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    public void removeListener(INotifyChangedListener notifyChangedListener) {
-        changeNotifier.removeListener(notifyChangedListener);
-    }
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.RoleLabelType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRoleLabelTypeAdapter() {
+		if (roleLabelTypeItemProvider == null) {
+			roleLabelTypeItemProvider = new RoleLabelTypeItemProvider(this);
+		}
 
-    /**
-     * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * @generated
-     */
-    public void fireNotifyChanged(Notification notification) {
-        changeNotifier.fireNotifyChanged(notification);
+		return roleLabelTypeItemProvider;
+	}
 
-        if (parentAdapterFactory != null) {
-            parentAdapterFactory.fireNotifyChanged(notification);
-        }
-    }
+	/**
+	 * This returns the root adapter factory that contains this factory.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComposeableAdapterFactory getRootAdapterFactory() {
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+	}
 
-    /**
-     * This disposes all of the item providers created by this factory. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
-     */
-    public void dispose() {
-        if (dataDictionaryItemProvider != null)
-            dataDictionaryItemProvider.dispose();
-        if (behaviorItemProvider != null)
-            behaviorItemProvider.dispose();
-        if (pinItemProvider != null)
-            pinItemProvider.dispose();
-        if (assignmentItemProvider != null)
-            assignmentItemProvider.dispose();
-        if (forwardingAssignmentItemProvider != null)
-            forwardingAssignmentItemProvider.dispose();
-        if (labelItemProvider != null)
-            labelItemProvider.dispose();
-        if (labelTypeItemProvider != null)
-            labelTypeItemProvider.dispose();
-        if (trueItemProvider != null)
-            trueItemProvider.dispose();
-        if (andItemProvider != null)
-            andItemProvider.dispose();
-        if (orItemProvider != null)
-            orItemProvider.dispose();
-        if (notItemProvider != null)
-            notItemProvider.dispose();
-        if (labelReferenceItemProvider != null)
-            labelReferenceItemProvider.dispose();
-        if (setAssignmentItemProvider != null)
-            setAssignmentItemProvider.dispose();
-        if (unsetAssignmentItemProvider != null)
-            unsetAssignmentItemProvider.dispose();
-    }
+	/**
+	 * This sets the composed adapter factory that contains this factory.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
+		this.parentAdapterFactory = parentAdapterFactory;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isFactoryForType(Object type) {
+		return supportedTypes.contains(type) || super.isFactoryForType(type);
+	}
+
+	/**
+	 * This implementation substitutes the factory itself as the key for the adapter.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter adapt(Notifier notifier, Object type) {
+		return super.adapt(notifier, this);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object adapt(Object object, Object type) {
+		if (isFactoryForType(type)) {
+			Object adapter = super.adapt(object, type);
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+				return adapter;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<IChildCreationExtender> getChildCreationExtenders() {
+		return childCreationExtenderManager.getChildCreationExtenders();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Collection<?> getNewChildDescriptors(Object object, EditingDomain editingDomain) {
+		return childCreationExtenderManager.getNewChildDescriptors(object, editingDomain);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ResourceLocator getResourceLocator() {
+		return childCreationExtenderManager;
+	}
+
+	/**
+	 * This adds a listener.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void addListener(INotifyChangedListener notifyChangedListener) {
+		changeNotifier.addListener(notifyChangedListener);
+	}
+
+	/**
+	 * This removes a listener.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void removeListener(INotifyChangedListener notifyChangedListener) {
+		changeNotifier.removeListener(notifyChangedListener);
+	}
+
+	/**
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	public void fireNotifyChanged(Notification notification) {
+		changeNotifier.fireNotifyChanged(notification);
+
+		if (parentAdapterFactory != null) {
+			parentAdapterFactory.fireNotifyChanged(notification);
+		}
+	}
+
+	/**
+	 * This disposes all of the item providers created by this factory. 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void dispose() {
+		if (dataDictionaryItemProvider != null)
+			dataDictionaryItemProvider.dispose();
+		if (behaviorItemProvider != null)
+			behaviorItemProvider.dispose();
+		if (pinItemProvider != null)
+			pinItemProvider.dispose();
+		if (assignmentItemProvider != null)
+			assignmentItemProvider.dispose();
+		if (forwardingAssignmentItemProvider != null)
+			forwardingAssignmentItemProvider.dispose();
+		if (trueItemProvider != null)
+			trueItemProvider.dispose();
+		if (andItemProvider != null)
+			andItemProvider.dispose();
+		if (orItemProvider != null)
+			orItemProvider.dispose();
+		if (notItemProvider != null)
+			notItemProvider.dispose();
+		if (labelReferenceItemProvider != null)
+			labelReferenceItemProvider.dispose();
+		if (setAssignmentItemProvider != null)
+			setAssignmentItemProvider.dispose();
+		if (unsetAssignmentItemProvider != null)
+			unsetAssignmentItemProvider.dispose();
+		if (consentLabelItemProvider != null)
+			consentLabelItemProvider.dispose();
+		if (basicLabelItemProvider != null)
+			basicLabelItemProvider.dispose();
+		if (roleLabelItemProvider != null)
+			roleLabelItemProvider.dispose();
+		if (basicLabelTypeItemProvider != null)
+			basicLabelTypeItemProvider.dispose();
+		if (consentLabelTypeItemProvider != null)
+			consentLabelTypeItemProvider.dispose();
+		if (roleLabelTypeItemProvider != null)
+			roleLabelTypeItemProvider.dispose();
+	}
 
 }

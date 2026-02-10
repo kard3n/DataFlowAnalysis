@@ -19,6 +19,8 @@ import org.dataflowanalysis.converter.web2dfd.model.Value;
 import org.dataflowanalysis.converter.web2dfd.model.WebEditorDfd;
 import org.dataflowanalysis.converter.web2dfd.model.WebEditorLabelType;
 import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
+import org.dataflowanalysis.dfd.datadictionary.BasicLabel;
+import org.dataflowanalysis.dfd.datadictionary.BasicLabelType;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.Label;
 import org.dataflowanalysis.dfd.datadictionary.LabelType;
@@ -61,7 +63,7 @@ public class Web2DFDConverter extends Converter {
         idToNodeMap = new HashMap<>();
         Map<String, Node> pinToNodeMap = new HashMap<>();
         Map<String, Pin> idToPinMap = new HashMap<>();
-        Map<String, Label> idToLabelMap = new HashMap<>();
+        Map<String, BasicLabel> idToLabelMap = new HashMap<>();
         Map<Node, Map<Pin, String>> nodeOutpinBehaviorMap = new HashMap<>();
 
         DataFlowDiagram dataFlowDiagram = dfdFactory.createDataFlowDiagram();
@@ -87,7 +89,7 @@ public class Web2DFDConverter extends Converter {
         return new DataFlowDiagramAndDictionary(dataFlowDiagram, dataDictionary);
     }
 
-    private void createNodes(WebEditorDfd webdfd, Map<String, Node> pinToNodeMap, Map<String, Pin> pinMap, Map<String, Label> idToLabelMap,
+    private void createNodes(WebEditorDfd webdfd, Map<String, Node> pinToNodeMap, Map<String, Pin> pinMap, Map<String, BasicLabel> idToLabelMap,
             Map<Node, Map<Pin, String>> nodeOutpinBehavior, DataFlowDiagram dataFlowDiagram, DataDictionary dataDictionary) {
         for (Child child : webdfd.model()
                 .children()) {
@@ -124,7 +126,7 @@ public class Web2DFDConverter extends Converter {
 
                 List<Label> labelsAtNode = child.labels()
                         .stream()
-                        .map(it -> idToLabelMap.get(it.labelTypeValueId()))
+                        .map(it -> (Label) idToLabelMap.get(it.labelTypeValueId()))
                         .toList();
                 node.getProperties()
                         .addAll(labelsAtNode);
@@ -202,9 +204,9 @@ public class Web2DFDConverter extends Converter {
         return inPin;
     }
 
-    private void createLabelTypes(WebEditorDfd webdfd, Map<String, Label> idToLabelMap, DataDictionary dataDictionary) {
+    private void createLabelTypes(WebEditorDfd webdfd, Map<String, BasicLabel> idToLabelMap, DataDictionary dataDictionary) {
         for (WebEditorLabelType webLabelType : webdfd.labelTypes()) {
-            LabelType labelType = ddFactory.createLabelType();
+        	BasicLabelType labelType = ddFactory.createBasicLabelType();
             labelType.setEntityName(webLabelType.name());
             labelType.setId(webLabelType.id());
             for (Value value : webLabelType.values()) {
@@ -215,11 +217,11 @@ public class Web2DFDConverter extends Converter {
         }
     }
 
-    private void createLabel(Map<String, Label> idToLabelMap, LabelType labelType, Value value) {
-        Label label = ddFactory.createLabel();
+    private void createLabel(Map<String, BasicLabel> idToLabelMap, BasicLabelType labelType, Value value) {
+    	BasicLabel label = ddFactory.createBasicLabel();
         label.setEntityName(value.text());
         label.setId(value.id());
-        labelType.getLabel()
+        labelType.getBasicLabels()
                 .add(label);
         idToLabelMap.put(label.getId(), label);
     }
@@ -296,7 +298,7 @@ public class Web2DFDConverter extends Converter {
                             .stream()
                             .filter(labelType -> labelType.getEntityName()
                                     .equals(typeName))
-                            .flatMap(labelType -> labelType.getLabel()
+                            .flatMap(labelType -> labelType.getBasicLabels()
                                     .stream())
                             .filter(label -> label.getEntityName()
                                     .equals(valueName))

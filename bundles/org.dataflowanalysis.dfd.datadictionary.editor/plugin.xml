@@ -34,4 +34,32 @@
       </editor>
    </extension>
 
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated datadictionary -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="consent_model.presentation.Consent_modelModelWizardID"
+            name="%_UI_Consent_modelModelWizard_label"
+            class="consent_model.presentation.Consent_modelModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/Consent_modelModelFile.gif">
+         <description>%_UI_Consent_modelModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated datadictionary -->
+      <editor
+            id="consent_model.presentation.Consent_modelEditorID"
+            name="%_UI_Consent_modelEditor_label"
+            icon="icons/full/obj16/Consent_modelModelFile.gif"
+            extensions="consent_model"
+            class="consent_model.presentation.Consent_modelEditor"
+            contributorClass="consent_model.presentation.Consent_modelActionBarContributor">
+      </editor>
+   </extension>
+
 </plugin>

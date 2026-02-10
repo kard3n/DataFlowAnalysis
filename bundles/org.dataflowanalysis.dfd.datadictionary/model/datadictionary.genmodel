@@ -20,8 +20,9 @@
     <genClasses ecoreClass="datadictionary.ecore#//DataDictionary" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//DataDictionary/labelTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//DataDictionary/behavior"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//DataDictionary/consentlabeltype"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//DataDictionary/rolelabeltype"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//DataDictionary/consentLabelTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//DataDictionary/roleLabelTypes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//DataDictionary/consentModel"/>
     </genClasses>
     <genClasses ecoreClass="datadictionary.ecore#//Behavior" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//Behavior/inPin"/>
@@ -65,15 +66,17 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//ConsentLabel/consent"/>
     </genClasses>
     <genClasses ecoreClass="datadictionary.ecore#//BasicLabel"/>
-    <genClasses ecoreClass="datadictionary.ecore#//RoleLabel"/>
+    <genClasses ecoreClass="datadictionary.ecore#//RoleLabel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//RoleLabel/role"/>
+    </genClasses>
     <genClasses ecoreClass="datadictionary.ecore#//BasicLabelType">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//BasicLabelType/basiclabel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//BasicLabelType/basicLabels"/>
     </genClasses>
     <genClasses ecoreClass="datadictionary.ecore#//ConsentLabelType">
-      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//ConsentLabelType/consentlabel"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//ConsentLabelType/consentLabels"/>
     </genClasses>
     <genClasses ecoreClass="datadictionary.ecore#//RoleLabelType">
-      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//RoleLabelType/rolelabel"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//RoleLabelType/roleLabels"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Consent_model" ecorePackage="../../org.dataflowanalysis.privacy.consent_model/model/consent_model.ecore#/">

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.dataflowanalysis.analysis.dfd.DFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.analysis.dfd.resource.DFDModelResourceProvider;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
+import org.dataflowanalysis.dfd.datadictionary.BasicLabel;
+import org.dataflowanalysis.dfd.datadictionary.BasicLabelType;
 import org.dataflowanalysis.dfd.datadictionary.Behavior;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
@@ -30,11 +32,11 @@ public class EdgeCaseTest {
         dataFlowDiagram = dfdFactory.createDataFlowDiagram();
         dataDictionary = ddFactory.createDataDictionary();
 
-        LabelType type = ddFactory.createLabelType();
+        BasicLabelType type = ddFactory.createBasicLabelType();
         type.setEntityName("type");
-        Label label = ddFactory.createLabel();
+        BasicLabel label = ddFactory.createBasicLabel();
         label.setEntityName("value");
-        type.getLabel()
+        type.getLabels()
                 .add(label);
         dataDictionary.getLabelTypes()
                 .add(type);
@@ -63,7 +65,7 @@ public class EdgeCaseTest {
         fulfilledAssignment.getOutputLabels()
                 .add(dataDictionary.getLabelTypes()
                         .get(0)
-                        .getLabel()
+                        .getLabels()
                         .get(0));
         fulfilled.getBehavior()
                 .getAssignment()

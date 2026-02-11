@@ -10,7 +10,7 @@
     <semanticResources>dataDictionary.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_fWcmMOsmEe2lBNeU2kqS8w">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_AFm0kEyOEe6b_-CGWWX3Jw" name="datadictionary class diagram" repPath="#_AFmNgEyOEe6b_-CGWWX3Jw" changeId="1770742164879">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_AFm0kEyOEe6b_-CGWWX3Jw" name="datadictionary class diagram" repPath="#_AFmNgEyOEe6b_-CGWWX3Jw" changeId="1770801949938">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="datadictionary.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -462,17 +462,17 @@
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_4tfQ8AaeEfGVZeZvDLy_sQ" type="4001" element="_AWQfsEyOEe6b_-CGWWX3Jw" source="_AWV_QEyOEe6b_-CGWWX3Jw" target="_uJnCgAaeEfGVZeZvDLy_sQ">
           <children xmi:type="notation:Node" xmi:id="_4tf4AAaeEfGVZeZvDLy_sQ" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4tf4AQaeEfGVZeZvDLy_sQ" x="3" y="-10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4tf4AQaeEfGVZeZvDLy_sQ" x="5" y="-10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_4tf4AgaeEfGVZeZvDLy_sQ" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4tf4AwaeEfGVZeZvDLy_sQ" x="-1" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4tf4AwaeEfGVZeZvDLy_sQ" y="10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_4tf4BAaeEfGVZeZvDLy_sQ" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4tf4BQaeEfGVZeZvDLy_sQ" x="-2" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4tf4BQaeEfGVZeZvDLy_sQ" x="-3" y="10"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_4tfQ8QaeEfGVZeZvDLy_sQ" routing="Rectilinear"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_4tfQ8gaeEfGVZeZvDLy_sQ" fontColor="7490599" fontName="Noto Sans" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4tfQ8waeEfGVZeZvDLy_sQ" points="[65, -1, -324, -149]$[389, -1, 0, -149]$[389, 143, 0, -5]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4tfQ8waeEfGVZeZvDLy_sQ" points="[65, -1, -324, -149]$[386, -1, -3, -149]$[386, 143, -3, -5]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4thGIAaeEfGVZeZvDLy_sQ" id="(0.5,0.5)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4thGIQaeEfGVZeZvDLy_sQ" id="(0.5169491525423728,0.05102040816326531)"/>
         </edges>

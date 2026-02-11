@@ -7,6 +7,7 @@ import java.util.Stack;
 import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.dfd.datadictionary.AND;
+import org.dataflowanalysis.dfd.datadictionary.BasicLabel;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.Label;
 import org.dataflowanalysis.dfd.datadictionary.LabelReference;
@@ -135,19 +136,19 @@ public class BehaviorConverter {
         String typeName = token.split("\\.")[0];
         String valueName = token.split("\\.")[1];
 
-        Optional<Label> optionalValue = Optional.ofNullable(dataDictionary)
+        Optional<BasicLabel> optionalValue = Optional.ofNullable(dataDictionary)
                 .flatMap(dd -> dd.getLabelTypes()
                         .stream()
                         .filter(labelType -> labelType.getEntityName()
                                 .equals(typeName))
-                        .flatMap(labelType -> labelType.getLabel()
+                        .flatMap(labelType -> labelType.getLabels()
                                 .stream())
                         .filter(label -> label.getEntityName()
                                 .equals(valueName))
                         .findAny());
 
         Label value = optionalValue.orElseGet(() -> {
-            Label label = ddFactory.createLabel();
+        	BasicLabel label = ddFactory.createBasicLabel();
             label.setEntityName(token);
             return label;
         });

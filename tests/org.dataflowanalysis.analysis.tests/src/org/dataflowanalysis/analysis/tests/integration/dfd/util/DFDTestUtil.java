@@ -8,6 +8,8 @@ import org.dataflowanalysis.analysis.dfd.core.DFDCharacteristicValue;
 import org.dataflowanalysis.dfd.datadictionary.AND;
 import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
+import org.dataflowanalysis.dfd.datadictionary.BasicLabel;
+import org.dataflowanalysis.dfd.datadictionary.BasicLabelType;
 import org.dataflowanalysis.dfd.datadictionary.Behavior;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
@@ -79,17 +81,17 @@ public class DFDTestUtil {
 
         dataDictionary.getLabelTypes()
                 .stream()
-                .flatMap(type -> type.getLabel()
+                .flatMap(type -> type.getLabels()
                         .stream())
                 .forEach(it -> mapNameToEntity.put(it.getEntityName(), it));
 
-        Label label1 = dataDictionary.getLabelTypes()
+        BasicLabel label1 = dataDictionary.getLabelTypes()
                 .get(0)
-                .getLabel()
+                .getLabels()
                 .get(0);
-        Label label2 = dataDictionary.getLabelTypes()
+        BasicLabel label2 = dataDictionary.getLabelTypes()
                 .get(1)
-                .getLabel()
+                .getLabels()
                 .get(0);
 
         createAndAddAssignment(a, null, null, List.of(label1, label2), null, SetAssignment.class);
@@ -140,16 +142,16 @@ public class DFDTestUtil {
      * @param valueName Name of the new label, or null for valueX
      */
     public static void createAndAddLabelTypeAndLabel(DataDictionary dataDictionary, String typeName, String valueName) {
-        LabelType type = ddFactory.createLabelType();
+    	BasicLabelType type = ddFactory.createBasicLabelType();
         type.setEntityName(typeName == null ? "type" + dataDictionary.getLabelTypes()
                 .size() : typeName);
         dataDictionary.getLabelTypes()
                 .add(type);
 
-        Label label = ddFactory.createLabel();
+        BasicLabel label = ddFactory.createBasicLabel();
         label.setEntityName(valueName == null ? "label" + dataDictionary.getLabelTypes()
                 .size() : valueName);
-        type.getLabel()
+        type.getLabels()
                 .add(label);
     }
 
@@ -162,7 +164,7 @@ public class DFDTestUtil {
      * @param term Term for Assignment (non abstract) if required
      * @param assignmentType Type of assignment to be created
      */
-    public static void createAndAddAssignment(Node node, List<Pin> inPins, Pin outPin, List<Label> label, Term term,
+    public static void createAndAddAssignment(Node node, List<Pin> inPins, Pin outPin, List<BasicLabel> label, Term term,
             Class<? extends AbstractAssignment> assignmentType) {
         AbstractAssignment assignment;
 

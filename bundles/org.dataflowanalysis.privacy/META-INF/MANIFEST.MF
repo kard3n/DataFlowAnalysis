@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Privacy
+Bundle-SymbolicName: org.dataflowanalysis.privacy
+Bundle-Version: 1.0.0.qualifier
+Import-Package: org.dataflowanalysis.analysis.core,
+ org.dataflowanalysis.analysis.utils
+Require-Bundle: org.dataflowanalysis.dfd.datadictionary;bundle-version="4.0.0",
+ org.dataflowanalysis.analysis.dfd;bundle-version="4.0.0",
+ org.apache.log4j;bundle-version="1.2.26",
+ org.dataflowanalysis.dfd.dataflowdiagram,
+ org.dataflowanalysis.analysis,
+ org.eclipse.emf.ecore.xmi,
+ org.dataflowanalysis.privacy.consent_model
+Automatic-Module-Name: org.dataflowanalysis.privacy
+Bundle-RequiredExecutionEnvironment: JavaSE-17

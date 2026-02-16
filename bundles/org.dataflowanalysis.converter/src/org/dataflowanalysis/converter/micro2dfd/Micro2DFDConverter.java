@@ -26,9 +26,9 @@ public class Micro2DFDConverter extends Converter {
     private Map<String, Node> nodesMap;
     private Map<Node, List<String>> nodeToLabelNamesMap;
     private Map<Node, Map<String, List<String>>> nodeToLabelTypeNamesMap;
-    private Map<String, Map<String, Label>> labelMap;
-    private Map<String, LabelType> labelTypeMap;
-    private Map<Pin, List<Label>> outpinToFlowLabelMap;
+    private Map<String, Map<String, BasicLabel>> labelMap;
+    private Map<String, BasicLabelType> labelTypeMap;
+    private Map<Pin, List<BasicLabel>> outpinToFlowLabelMap;
 
     private int idCounter;
 
@@ -69,7 +69,7 @@ public class Micro2DFDConverter extends Converter {
 
         createProcesses(micro, dfd);
 
-        LabelType stereotype = ddFactory.createLabelType();
+        BasicLabelType stereotype = ddFactory.createBasicLabelType();
         stereotype.setEntityName("Stereotype");
         stereotype.setId(Integer.toString(idCounter++));
         dd.getLabelTypes()
@@ -113,7 +113,7 @@ public class Micro2DFDConverter extends Converter {
         nodeToLabelTypeNamesMap.put(dfdElement, microElement.taggedValues());
     }
 
-    private void createBehavior(DataDictionary dd, LabelType stereotype) {
+    private void createBehavior(DataDictionary dd, BasicLabelType stereotype) {
         for (Node node : nodesMap.values()) {
             var behaviour = ddFactory.createBehavior();
             behaviour.setId(Integer.toString(idCounter++));
@@ -139,7 +139,7 @@ public class Micro2DFDConverter extends Converter {
         }
     }
 
-    private void createFlows(MicroSecEnd micro, DataFlowDiagram dfd, DataDictionary dd, LabelType stereotype) {
+    private void createFlows(MicroSecEnd micro, DataFlowDiagram dfd, DataDictionary dd, BasicLabelType stereotype) {
         for (InformationFlow iflow : micro.informationFlows()) {
             var source = nodesMap.get(iflow.sender());
             var dest = nodesMap.get(iflow.receiver());
@@ -167,7 +167,7 @@ public class Micro2DFDConverter extends Converter {
             dfd.getFlows()
                     .add(flow);
 
-            List<Label> flowLabels = new ArrayList<>();
+            List<BasicLabel> flowLabels = new ArrayList<>();
             flowLabels.addAll(createLabels(iflow.stereotypes(), dd, stereotype));
             flowLabels.addAll(createTaggedValueLabels(iflow.taggedValues(), dd));
             outpinToFlowLabelMap.put(outPin, flowLabels);
@@ -233,8 +233,8 @@ public class Micro2DFDConverter extends Converter {
         }
     }
 
-    private List<Label> createLabels(List<String> labelNames, DataDictionary dd, LabelType labelType) {
-        List<Label> labels = new ArrayList<>();
+    private List<BasicLabel> createLabels(List<String> labelNames, DataDictionary dd, BasicLabelType labelType) {
+        List<BasicLabel> labels = new ArrayList<>();
         var labelTypeName = labelType.getEntityName();
         for (String labelName : labelNames) {
             if (labelMap.get(labelTypeName)
@@ -242,10 +242,10 @@ public class Micro2DFDConverter extends Converter {
                 labels.add(labelMap.get(labelTypeName)
                         .get(labelName));
             } else {
-                Label label = ddFactory.createLabel();
+                BasicLabel label = ddFactory.createBasicLabel();
                 label.setEntityName(labelName);
                 label.setId(Integer.toString(idCounter++));
-                labelType.getLabel()
+                labelType.getLabels()
                         .add(label);
                 labels.add(label);
                 labelMap.get(labelTypeName)
@@ -255,15 +255,15 @@ public class Micro2DFDConverter extends Converter {
         return labels;
     }
 
-    private List<Label> createTaggedValueLabels(Map<String, List<String>> taggedValues, DataDictionary dd) {
-        List<Label> labels = new ArrayList<>();
+    private List<BasicLabel> createTaggedValueLabels(Map<String, List<String>> taggedValues, DataDictionary dd) {
+        List<BasicLabel> labels = new ArrayList<>();
         for (String labelTypeName : taggedValues.keySet()) {
             var labelNames = taggedValues.get(labelTypeName);
-            LabelType labelType;
+            BasicLabelType labelType;
             if (labelTypeMap.containsKey(labelTypeName)) {
                 labelType = labelTypeMap.get(labelTypeName);
             } else {
-                labelType = ddFactory.createLabelType();
+                labelType = ddFactory.createBasicLabelType();
                 labelType.setEntityName(labelTypeName);
                 labelType.setId(Integer.toString(idCounter++));
                 dd.getLabelTypes()

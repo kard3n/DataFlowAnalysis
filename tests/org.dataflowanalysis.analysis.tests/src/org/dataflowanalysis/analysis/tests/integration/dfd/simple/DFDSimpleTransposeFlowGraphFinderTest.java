@@ -41,7 +41,7 @@ public class DFDSimpleTransposeFlowGraphFinderTest {
                 .forEach(pin -> {
                     DFDTestUtil.createAndAddAssignment(a, null, pin, dataDictionary.getLabelTypes()
                             .get(0)
-                            .getLabel(), ddFactory.createTRUE(), Assignment.class);
+                            .getLabels(), ddFactory.createTRUE(), Assignment.class);
                 });
 
         var tfg = new DFDSimpleTransposeFlowGraphFinder(dataDictionary, dataFlowDiagram).findTransposeFlowGraphs()

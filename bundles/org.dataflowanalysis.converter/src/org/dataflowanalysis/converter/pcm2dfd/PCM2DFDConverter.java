@@ -26,8 +26,6 @@ import org.dataflowanalysis.converter.dfd2web.DataFlowDiagramAndDictionary;
 import org.dataflowanalysis.dfd.datadictionary.AND;
 import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
-import org.dataflowanalysis.dfd.datadictionary.BasicLabel;
-import org.dataflowanalysis.dfd.datadictionary.BasicLabelType;
 import org.dataflowanalysis.dfd.datadictionary.Behavior;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
@@ -392,7 +390,7 @@ public class PCM2DFDConverter extends Converter {
      */
     private void addNodeCharacteristicsToNode(Node node, List<CharacteristicValue> charValues) {
         for (CharacteristicValue charValue : charValues) {
-        	BasicLabelType type = this.getOrCreateLabelType(charValue.getTypeName());
+            LabelType type = this.getOrCreateLabelType(charValue.getTypeName());
             Label label = this.getOrCreateDFDLabel(charValue.getValueName(), type);
             if (!node.getProperties()
                     .contains(label)) {
@@ -407,7 +405,7 @@ public class PCM2DFDConverter extends Converter {
      * @param name the name of the LabelType
      * @return the LabelType
      */
-    private BasicLabelType getOrCreateLabelType(String name) {
+    private LabelType getOrCreateLabelType(String name) {
         return dataDictionary.getLabelTypes()
                 .stream()
                 .filter(f -> f.getEntityName()
@@ -422,8 +420,8 @@ public class PCM2DFDConverter extends Converter {
      * @param type the LabelType
      * @return the Label
      */
-    private BasicLabel getOrCreateDFDLabel(String labelName, BasicLabelType type) {
-        return type.getLabels()
+    private Label getOrCreateDFDLabel(String labelName, LabelType type) {
+        return type.getLabel()
                 .stream()
                 .filter(f -> f.getEntityName()
                         .equals(labelName))
@@ -437,10 +435,10 @@ public class PCM2DFDConverter extends Converter {
      * @param type the LabelType
      * @return the created Label
      */
-    private BasicLabel createLabel(String name, BasicLabelType type) {
-    	BasicLabel label = datadictionaryFactory.eINSTANCE.createBasicLabel();
+    private Label createLabel(String name, LabelType type) {
+        Label label = datadictionaryFactory.eINSTANCE.createLabel();
         label.setEntityName(name);
-        type.getLabels()
+        type.getLabel()
                 .add(label);
         return label;
     }
@@ -450,8 +448,8 @@ public class PCM2DFDConverter extends Converter {
      * @param name the name of the LabelType
      * @return the created LabelType
      */
-    private BasicLabelType createLabelType(String name) {
-    	BasicLabelType type = datadictionaryFactory.eINSTANCE.createBasicLabelType();
+    private LabelType createLabelType(String name) {
+        LabelType type = datadictionaryFactory.eINSTANCE.createLabelType();
         type.setEntityName(name);
         this.dataDictionary.getLabelTypes()
                 .add(type);
@@ -543,7 +541,7 @@ public class PCM2DFDConverter extends Converter {
                                 .addAll(it.getAllCharacteristics()
                                         .stream()
                                         .map(characteristicValue -> {
-                                        	BasicLabelType type = this.getOrCreateLabelType(characteristicValue.getTypeName());
+                                            LabelType type = this.getOrCreateLabelType(characteristicValue.getTypeName());
                                             return this.getOrCreateDFDLabel(characteristicValue.getValueName(), type);
                                         })
                                         .toList());
@@ -727,7 +725,7 @@ public class PCM2DFDConverter extends Converter {
                 .getLiterals();
         for (Literal value : forwardedValues) {
             Assignment assignment = datadictionaryFactory.eINSTANCE.createAssignment();
-            BasicLabelType labelType = this.getOrCreateLabelType(characteristicType.getName());
+            LabelType labelType = this.getOrCreateLabelType(characteristicType.getName());
             Label label = this.getOrCreateDFDLabel(value.getName(), labelType);
             assignment.getOutputLabels()
                     .add(label);
@@ -780,7 +778,7 @@ public class PCM2DFDConverter extends Converter {
     private AbstractAssignment processAssignment(Node node, Term rightHandSide, Behavior behaviour, AbstractNamedReference reference,
             EnumCharacteristicType characteristicType, Literal characteristicValue) {
         Assignment assignment = datadictionaryFactory.eINSTANCE.createAssignment();
-        BasicLabelType labelType = getOrCreateLabelType(characteristicType.getName());
+        LabelType labelType = getOrCreateLabelType(characteristicType.getName());
 
         Label label = getOrCreateDFDLabel(characteristicValue.getName(), labelType);
         assignment.getOutputLabels()
@@ -860,7 +858,7 @@ public class PCM2DFDConverter extends Converter {
             return term;
         } else if (rightHandSide instanceof NamedEnumCharacteristicReference characteristicReference) {
             LabelReference term = datadictionaryFactory.eINSTANCE.createLabelReference();
-            BasicLabelType labelType = this.getOrCreateLabelType(characteristicReference.getCharacteristicType()
+            LabelType labelType = this.getOrCreateLabelType(characteristicReference.getCharacteristicType()
                     .getName());
             if (characteristicReference.getLiteral() != null) {
                 Label label = this.getOrCreateDFDLabel(characteristicReference.getLiteral()

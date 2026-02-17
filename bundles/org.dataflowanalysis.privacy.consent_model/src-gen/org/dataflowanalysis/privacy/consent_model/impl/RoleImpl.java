@@ -5,8 +5,8 @@ package org.dataflowanalysis.privacy.consent_model.impl;
 import identifier.impl.EntityImpl;
 import java.util.Collection;
 
+import org.dataflowanalysis.privacy.consent_model.ConsentOption;
 import org.dataflowanalysis.privacy.consent_model.Consent_modelPackage;
-import org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality;
 import org.dataflowanalysis.privacy.consent_model.Role;
 import org.eclipse.emf.common.util.EList;
 
@@ -36,7 +36,7 @@ public class RoleImpl extends EntityImpl implements Role {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ConsentedFunctionality> requires;
+	protected EList<ConsentOption> requires;
 
 	/**
 	 * The cached value of the '{@link #getAllows() <em>Allows</em>}' reference list.
@@ -46,7 +46,7 @@ public class RoleImpl extends EntityImpl implements Role {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ConsentedFunctionality> allows;
+	protected EList<ConsentOption> allows;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,9 +73,9 @@ public class RoleImpl extends EntityImpl implements Role {
 	 * @generated
 	 */
 	@Override
-	public EList<ConsentedFunctionality> getRequires() {
+	public EList<ConsentOption> getRequires() {
 		if (requires == null) {
-			requires = new EObjectResolvingEList<ConsentedFunctionality>(ConsentedFunctionality.class, this,
+			requires = new EObjectResolvingEList<ConsentOption>(ConsentOption.class, this,
 					Consent_modelPackage.ROLE__REQUIRES);
 		}
 		return requires;
@@ -87,9 +87,9 @@ public class RoleImpl extends EntityImpl implements Role {
 	 * @generated
 	 */
 	@Override
-	public EList<ConsentedFunctionality> getAllows() {
+	public EList<ConsentOption> getAllows() {
 		if (allows == null) {
-			allows = new EObjectResolvingEList<ConsentedFunctionality>(ConsentedFunctionality.class, this,
+			allows = new EObjectResolvingEList<ConsentOption>(ConsentOption.class, this,
 					Consent_modelPackage.ROLE__ALLOWS);
 		}
 		return allows;
@@ -122,11 +122,11 @@ public class RoleImpl extends EntityImpl implements Role {
 		switch (featureID) {
 		case Consent_modelPackage.ROLE__REQUIRES:
 			getRequires().clear();
-			getRequires().addAll((Collection<? extends ConsentedFunctionality>) newValue);
+			getRequires().addAll((Collection<? extends ConsentOption>) newValue);
 			return;
 		case Consent_modelPackage.ROLE__ALLOWS:
 			getAllows().clear();
-			getAllows().addAll((Collection<? extends ConsentedFunctionality>) newValue);
+			getAllows().addAll((Collection<? extends ConsentOption>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);

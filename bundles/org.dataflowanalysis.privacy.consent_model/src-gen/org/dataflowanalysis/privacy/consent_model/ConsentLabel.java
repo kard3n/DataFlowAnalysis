@@ -2,7 +2,7 @@
  */
 package org.dataflowanalysis.privacy.consent_model;
 
-import org.dataflowanalysis.dfd.datadictionary.Label;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,27 +20,27 @@ import org.dataflowanalysis.dfd.datadictionary.Label;
  * @model
  * @generated
  */
-public interface ConsentLabel extends Label {
+public interface ConsentLabel extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Consented Functionality</b></em>' reference.
+	 * Returns the value of the '<em><b>Consented Functionality</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Consented Functionality</em>' reference.
-	 * @see #setConsentedFunctionality(ConsentedFunctionality)
+	 * @return the value of the '<em>Consented Functionality</em>' containment reference.
+	 * @see #setConsentedFunctionality(ConsentOption)
 	 * @see org.dataflowanalysis.privacy.consent_model.Consent_modelPackage#getConsentLabel_ConsentedFunctionality()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	ConsentedFunctionality getConsentedFunctionality();
+	ConsentOption getConsentedFunctionality();
 
 	/**
-	 * Sets the value of the '{@link org.dataflowanalysis.privacy.consent_model.ConsentLabel#getConsentedFunctionality <em>Consented Functionality</em>}' reference.
+	 * Sets the value of the '{@link org.dataflowanalysis.privacy.consent_model.ConsentLabel#getConsentedFunctionality <em>Consented Functionality</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Consented Functionality</em>' reference.
+	 * @param value the new value of the '<em>Consented Functionality</em>' containment reference.
 	 * @see #getConsentedFunctionality()
 	 * @generated
 	 */
-	void setConsentedFunctionality(ConsentedFunctionality value);
+	void setConsentedFunctionality(ConsentOption value);
 
 } // ConsentLabel

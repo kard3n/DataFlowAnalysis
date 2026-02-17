@@ -7,6 +7,7 @@ import java.util.Stack;
 import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.dfd.datadictionary.AND;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.Label;
 import org.dataflowanalysis.dfd.datadictionary.LabelReference;
@@ -140,14 +141,14 @@ public class BehaviorConverter {
                         .stream()
                         .filter(labelType -> labelType.getEntityName()
                                 .equals(typeName))
-                        .flatMap(labelType -> labelType.getLabels()
+                        .flatMap(labelType -> labelType.getLabel()
                                 .stream())
                         .filter(label -> label.getEntityName()
                                 .equals(valueName))
                         .findAny());
 
         Label value = optionalValue.orElseGet(() -> {
-            Label label = ddFactory.createBasicLabel();
+            Label label = ddFactory.createLabel();
             label.setEntityName(token);
             return label;
         });
@@ -160,7 +161,7 @@ public class BehaviorConverter {
 
     private String termToString(Term term, boolean isNested) {
         if (term instanceof LabelReference labelReference) {
-            Label label = labelReference.getLabel();
+        	AbstractLabel label = labelReference.getLabel();
             return ((LabelType) label.eContainer()).getEntityName() + "." + label.getEntityName();
         } else if (term instanceof TRUE) {
             return "TRUE";

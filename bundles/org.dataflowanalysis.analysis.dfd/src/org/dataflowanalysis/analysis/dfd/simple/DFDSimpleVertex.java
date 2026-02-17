@@ -17,12 +17,12 @@ import org.dataflowanalysis.analysis.core.DataCharacteristic;
 import org.dataflowanalysis.analysis.dfd.core.DFDCharacteristicValue;
 import org.dataflowanalysis.dfd.datadictionary.AND;
 import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabelType;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
 import org.dataflowanalysis.dfd.datadictionary.BinaryOperator;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
-import org.dataflowanalysis.dfd.datadictionary.Label;
 import org.dataflowanalysis.dfd.datadictionary.LabelReference;
-import org.dataflowanalysis.dfd.datadictionary.LabelType;
 import org.dataflowanalysis.dfd.datadictionary.NOT;
 import org.dataflowanalysis.dfd.datadictionary.OR;
 import org.dataflowanalysis.dfd.datadictionary.Pin;
@@ -71,7 +71,7 @@ public class DFDSimpleVertex extends AbstractVertex<Node> {
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
 
-        Map<Pin, Set<Label>> outgoingLabelPerPin = new HashMap<>();
+        Map<Pin, Set<AbstractLabel>> outgoingLabelPerPin = new HashMap<>();
         referencedElement.getBehavior()
                 .getAssignment()
                 .forEach(it -> handleOutgoingAssignments(it, incomingCharacteristics, outgoingLabelPerPin));
@@ -89,7 +89,7 @@ public class DFDSimpleVertex extends AbstractVertex<Node> {
         List<CharacteristicValue> nodeCharacteristics = new ArrayList<>();
         this.getReferencedElement()
                 .getProperties()
-                .forEach(label -> nodeCharacteristics.add(new DFDCharacteristicValue((LabelType) label.eContainer(), label)));
+                .forEach(label -> nodeCharacteristics.add(new DFDCharacteristicValue((AbstractLabelType) label.eContainer(), label)));
         return nodeCharacteristics;
     }
 
@@ -100,7 +100,7 @@ public class DFDSimpleVertex extends AbstractVertex<Node> {
      * @param outgoingLabelPerPin Maps Output Pins to Outgoing Labels, to be filled by method
      */
     private void handleOutgoingAssignments(AbstractAssignment abstractAssignment, List<DataCharacteristic> incomingDataCharacteristics,
-            Map<Pin, Set<Label>> outgoingLabelPerPin) {
+            Map<Pin, Set<AbstractLabel>> outgoingLabelPerPin) {
         // Takes the labels of all incoming Characteristics whos names match the flows arriving on all input pins of the
         // assignment
         var incomingLabels = incomingDataCharacteristics.stream()
@@ -162,7 +162,7 @@ public class DFDSimpleVertex extends AbstractVertex<Node> {
      * @param pinToLabelMap Map mapping Input/Output Pin to labels
      * @return List of created data characteristics
      */
-    private List<DataCharacteristic> createDataCharacteristicsFromLabels(Map<Pin, Set<Label>> pinToLabelMap) {
+    private List<DataCharacteristic> createDataCharacteristicsFromLabels(Map<Pin, Set<AbstractLabel>> pinToLabelMap) {
         return pinToLabelMap.keySet()
                 .stream()
                 .map(pin -> new DataCharacteristic(mapPinToFlow.get(pin)
@@ -178,10 +178,10 @@ public class DFDSimpleVertex extends AbstractVertex<Node> {
      * @param pinToLabelMap Mapping of a pin to the assigned labels
      * @return Returns a list of characteristic values assigned to the given pin
      */
-    private List<CharacteristicValue> getCharacteristicValuesForPin(Pin pin, Map<Pin, Set<Label>> pinToLabelMap) {
+    private List<CharacteristicValue> getCharacteristicValuesForPin(Pin pin, Map<Pin, Set<AbstractLabel>> pinToLabelMap) {
         return pinToLabelMap.get(pin)
                 .stream()
-                .map(label -> new DFDCharacteristicValue((LabelType) label.eContainer(), label))
+                .map(label -> new DFDCharacteristicValue((AbstractLabelType) label.eContainer(), label))
                 .filter(distinctByKey(CharacteristicValue::getValueId))
                 .collect(Collectors.toList());
     }
@@ -203,7 +203,7 @@ public class DFDSimpleVertex extends AbstractVertex<Node> {
      * @param inputLabel Incoming Label
      * @return Evaluation
      */
-    private static boolean evaluateTerm(Term term, Set<Label> inputLabel) {
+    private static boolean evaluateTerm(Term term, Set<AbstractLabel> inputLabel) {
         if (term instanceof TRUE) {
             return true;
         } else if (term instanceof NOT notTerm) {

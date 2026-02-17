@@ -186,9 +186,9 @@ public class DFD2WebConverter extends Converter {
     }
 
     private void createLabelTypesAndValues(List<WebEditorLabelType> labelTypes, DataDictionary dataDictionary) {
-        for (BasicLabelType labelType : dataDictionary.getLabelTypes()) {
+        for (LabelType labelType : dataDictionary.getLabelTypes()) {
             List<Value> values = new ArrayList<>();
-            for (BasicLabel label : labelType.getLabels()) {
+            for (Label label : labelType.getLabel()) {
                 values.add(new Value(label.getId(), label.getEntityName()));
             }
             labelTypes.add(new WebEditorLabelType(labelType.getId(), labelType.getEntityName(), values));
@@ -228,7 +228,7 @@ public class DFD2WebConverter extends Converter {
             }
 
             List<WebEditorLabel> labels = new ArrayList<>();
-            for (Label label : node.getProperties()) {
+            for (AbstractLabel label : node.getProperties()) {
                 String labelId = label.getId();
                 String labelTypeId = ((LabelType) label.eContainer()).getId();
 
@@ -358,7 +358,7 @@ public class DFD2WebConverter extends Converter {
         return String.join(DELIMITER_MULTI_PIN, pinNamesAsString);
     }
 
-    private String getStringFromOutLabels(List<Label> outLabels) {
+    private String getStringFromOutLabels(List<AbstractLabel> outLabels) {
         List<String> outLabelsAsStrings = new ArrayList<>();
 
         outLabels.forEach(label -> outLabelsAsStrings.add(((LabelType) label.eContainer()).getEntityName() + "." + label.getEntityName()));

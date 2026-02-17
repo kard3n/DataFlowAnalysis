@@ -223,14 +223,14 @@ public interface Consent_modelPackage extends EPackage {
 	int USER_DATA_COMBINATION_OPERATION_COUNT = IdentifierPackage.ENTITY_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consent_model.impl.ConsentedFunctionalityImpl <em>Consented Functionality</em>}' class.
+	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consent_model.impl.ConsentOptionImpl <em>Consent Option</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.dataflowanalysis.privacy.consent_model.impl.ConsentedFunctionalityImpl
-	 * @see org.dataflowanalysis.privacy.consent_model.impl.Consent_modelPackageImpl#getConsentedFunctionality()
+	 * @see org.dataflowanalysis.privacy.consent_model.impl.ConsentOptionImpl
+	 * @see org.dataflowanalysis.privacy.consent_model.impl.Consent_modelPackageImpl#getConsentOption()
 	 * @generated
 	 */
-	int CONSENTED_FUNCTIONALITY = 3;
+	int CONSENT_OPTION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -239,7 +239,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENTED_FUNCTIONALITY__ID = IdentifierPackage.ENTITY__ID;
+	int CONSENT_OPTION__ID = IdentifierPackage.ENTITY__ID;
 
 	/**
 	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
@@ -248,7 +248,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENTED_FUNCTIONALITY__ENTITY_NAME = IdentifierPackage.ENTITY__ENTITY_NAME;
+	int CONSENT_OPTION__ENTITY_NAME = IdentifierPackage.ENTITY__ENTITY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Requires</b></em>' reference list.
@@ -257,7 +257,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENTED_FUNCTIONALITY__REQUIRES = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
+	int CONSENT_OPTION__REQUIRES = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Excludes</b></em>' reference list.
@@ -266,7 +266,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENTED_FUNCTIONALITY__EXCLUDES = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
+	int CONSENT_OPTION__EXCLUDES = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Allows For</b></em>' containment reference list.
@@ -275,25 +275,25 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENTED_FUNCTIONALITY__ALLOWS_FOR = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
+	int CONSENT_OPTION__ALLOWS_FOR = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Consented Functionality</em>' class.
+	 * The number of structural features of the '<em>Consent Option</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENTED_FUNCTIONALITY_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
+	int CONSENT_OPTION_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of operations of the '<em>Consented Functionality</em>' class.
+	 * The number of operations of the '<em>Consent Option</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENTED_FUNCTIONALITY_OPERATION_COUNT = IdentifierPackage.ENTITY_OPERATION_COUNT + 0;
+	int CONSENT_OPTION_OPERATION_COUNT = IdentifierPackage.ENTITY_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consent_model.impl.RoleImpl <em>Role</em>}' class.
@@ -388,22 +388,13 @@ public interface Consent_modelPackage extends EPackage {
 	int CONSENT_MODEL__ENTITY_NAME = IdentifierPackage.ENTITY__ENTITY_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Roles</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSENT_MODEL__ROLES = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Functionalities</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_MODEL__FUNCTIONALITIES = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
+	int CONSENT_MODEL__FUNCTIONALITIES = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Data states</b></em>' containment reference list.
@@ -412,7 +403,25 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_MODEL__DATA_STATES = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
+	int CONSENT_MODEL__DATA_STATES = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Role Label Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSENT_MODEL__ROLE_LABEL_TYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Consent Label Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSENT_MODEL__CONSENT_LABEL_TYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Consent Model</em>' class.
@@ -421,7 +430,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_MODEL_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
+	int CONSENT_MODEL_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Consent Model</em>' class.
@@ -449,7 +458,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_LABEL_TYPE__ID = datadictionaryPackage.LABEL_TYPE__ID;
+	int ROLE_LABEL_TYPE__ID = datadictionaryPackage.ABSTRACT_LABEL_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
@@ -458,7 +467,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_LABEL_TYPE__ENTITY_NAME = datadictionaryPackage.LABEL_TYPE__ENTITY_NAME;
+	int ROLE_LABEL_TYPE__ENTITY_NAME = datadictionaryPackage.ABSTRACT_LABEL_TYPE__ENTITY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -467,7 +476,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_LABEL_TYPE__LABELS = datadictionaryPackage.LABEL_TYPE_FEATURE_COUNT + 0;
+	int ROLE_LABEL_TYPE__LABELS = datadictionaryPackage.ABSTRACT_LABEL_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Role Label Type</em>' class.
@@ -476,7 +485,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_LABEL_TYPE_FEATURE_COUNT = datadictionaryPackage.LABEL_TYPE_FEATURE_COUNT + 1;
+	int ROLE_LABEL_TYPE_FEATURE_COUNT = datadictionaryPackage.ABSTRACT_LABEL_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Role Label Type</em>' class.
@@ -485,7 +494,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_LABEL_TYPE_OPERATION_COUNT = datadictionaryPackage.LABEL_TYPE_OPERATION_COUNT + 0;
+	int ROLE_LABEL_TYPE_OPERATION_COUNT = datadictionaryPackage.ABSTRACT_LABEL_TYPE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consent_model.impl.RoleLabelImpl <em>Role Label</em>}' class.
@@ -498,31 +507,13 @@ public interface Consent_modelPackage extends EPackage {
 	int ROLE_LABEL = 7;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Role</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_LABEL__ID = datadictionaryPackage.LABEL__ID;
-
-	/**
-	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_LABEL__ENTITY_NAME = datadictionaryPackage.LABEL__ENTITY_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_LABEL__ROLE = datadictionaryPackage.LABEL_FEATURE_COUNT + 0;
+	int ROLE_LABEL__ROLE = 0;
 
 	/**
 	 * The number of structural features of the '<em>Role Label</em>' class.
@@ -531,7 +522,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_LABEL_FEATURE_COUNT = datadictionaryPackage.LABEL_FEATURE_COUNT + 1;
+	int ROLE_LABEL_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Role Label</em>' class.
@@ -540,7 +531,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_LABEL_OPERATION_COUNT = datadictionaryPackage.LABEL_OPERATION_COUNT + 0;
+	int ROLE_LABEL_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consent_model.impl.ConsentLabelTypeImpl <em>Consent Label Type</em>}' class.
@@ -559,7 +550,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_LABEL_TYPE__ID = datadictionaryPackage.LABEL_TYPE__ID;
+	int CONSENT_LABEL_TYPE__ID = datadictionaryPackage.ABSTRACT_LABEL_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
@@ -568,7 +559,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_LABEL_TYPE__ENTITY_NAME = datadictionaryPackage.LABEL_TYPE__ENTITY_NAME;
+	int CONSENT_LABEL_TYPE__ENTITY_NAME = datadictionaryPackage.ABSTRACT_LABEL_TYPE__ENTITY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -577,7 +568,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_LABEL_TYPE__LABELS = datadictionaryPackage.LABEL_TYPE_FEATURE_COUNT + 0;
+	int CONSENT_LABEL_TYPE__LABELS = datadictionaryPackage.ABSTRACT_LABEL_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Consent Label Type</em>' class.
@@ -586,7 +577,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_LABEL_TYPE_FEATURE_COUNT = datadictionaryPackage.LABEL_TYPE_FEATURE_COUNT + 1;
+	int CONSENT_LABEL_TYPE_FEATURE_COUNT = datadictionaryPackage.ABSTRACT_LABEL_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Consent Label Type</em>' class.
@@ -595,7 +586,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_LABEL_TYPE_OPERATION_COUNT = datadictionaryPackage.LABEL_TYPE_OPERATION_COUNT + 0;
+	int CONSENT_LABEL_TYPE_OPERATION_COUNT = datadictionaryPackage.ABSTRACT_LABEL_TYPE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consent_model.impl.ConsentLabelImpl <em>Consent Label</em>}' class.
@@ -608,31 +599,13 @@ public interface Consent_modelPackage extends EPackage {
 	int CONSENT_LABEL = 9;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Consented Functionality</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_LABEL__ID = datadictionaryPackage.LABEL__ID;
-
-	/**
-	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSENT_LABEL__ENTITY_NAME = datadictionaryPackage.LABEL__ENTITY_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Consented Functionality</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSENT_LABEL__CONSENTED_FUNCTIONALITY = datadictionaryPackage.LABEL_FEATURE_COUNT + 0;
+	int CONSENT_LABEL__CONSENTED_FUNCTIONALITY = 0;
 
 	/**
 	 * The number of structural features of the '<em>Consent Label</em>' class.
@@ -641,7 +614,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_LABEL_FEATURE_COUNT = datadictionaryPackage.LABEL_FEATURE_COUNT + 1;
+	int CONSENT_LABEL_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Consent Label</em>' class.
@@ -650,7 +623,7 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_LABEL_OPERATION_COUNT = datadictionaryPackage.LABEL_OPERATION_COUNT + 0;
+	int CONSENT_LABEL_OPERATION_COUNT = 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consent_model.DataItem <em>Data Item</em>}'.
@@ -716,47 +689,47 @@ public interface Consent_modelPackage extends EPackage {
 	EReference getUserDataCombination_Members();
 
 	/**
-	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality <em>Consented Functionality</em>}'.
+	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consent_model.ConsentOption <em>Consent Option</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Consented Functionality</em>'.
-	 * @see org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality
+	 * @return the meta object for class '<em>Consent Option</em>'.
+	 * @see org.dataflowanalysis.privacy.consent_model.ConsentOption
 	 * @generated
 	 */
-	EClass getConsentedFunctionality();
+	EClass getConsentOption();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality#getRequires <em>Requires</em>}'.
+	 * Returns the meta object for the reference list '{@link org.dataflowanalysis.privacy.consent_model.ConsentOption#getRequires <em>Requires</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Requires</em>'.
-	 * @see org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality#getRequires()
-	 * @see #getConsentedFunctionality()
+	 * @see org.dataflowanalysis.privacy.consent_model.ConsentOption#getRequires()
+	 * @see #getConsentOption()
 	 * @generated
 	 */
-	EReference getConsentedFunctionality_Requires();
+	EReference getConsentOption_Requires();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality#getExcludes <em>Excludes</em>}'.
+	 * Returns the meta object for the reference list '{@link org.dataflowanalysis.privacy.consent_model.ConsentOption#getExcludes <em>Excludes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Excludes</em>'.
-	 * @see org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality#getExcludes()
-	 * @see #getConsentedFunctionality()
+	 * @see org.dataflowanalysis.privacy.consent_model.ConsentOption#getExcludes()
+	 * @see #getConsentOption()
 	 * @generated
 	 */
-	EReference getConsentedFunctionality_Excludes();
+	EReference getConsentOption_Excludes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality#getAllowsFor <em>Allows For</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consent_model.ConsentOption#getAllowsFor <em>Allows For</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Allows For</em>'.
-	 * @see org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality#getAllowsFor()
-	 * @see #getConsentedFunctionality()
+	 * @see org.dataflowanalysis.privacy.consent_model.ConsentOption#getAllowsFor()
+	 * @see #getConsentOption()
 	 * @generated
 	 */
-	EReference getConsentedFunctionality_AllowsFor();
+	EReference getConsentOption_AllowsFor();
 
 	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consent_model.Role <em>Role</em>}'.
@@ -801,17 +774,6 @@ public interface Consent_modelPackage extends EPackage {
 	EClass getConsentModel();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consent_model.ConsentModel#getRoles <em>Roles</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Roles</em>'.
-	 * @see org.dataflowanalysis.privacy.consent_model.ConsentModel#getRoles()
-	 * @see #getConsentModel()
-	 * @generated
-	 */
-	EReference getConsentModel_Roles();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consent_model.ConsentModel#getFunctionalities <em>Functionalities</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -832,6 +794,28 @@ public interface Consent_modelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getConsentModel_Data_states();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.dataflowanalysis.privacy.consent_model.ConsentModel#getRoleLabelType <em>Role Label Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Role Label Type</em>'.
+	 * @see org.dataflowanalysis.privacy.consent_model.ConsentModel#getRoleLabelType()
+	 * @see #getConsentModel()
+	 * @generated
+	 */
+	EReference getConsentModel_RoleLabelType();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.dataflowanalysis.privacy.consent_model.ConsentModel#getConsentLabelType <em>Consent Label Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Consent Label Type</em>'.
+	 * @see org.dataflowanalysis.privacy.consent_model.ConsentModel#getConsentLabelType()
+	 * @see #getConsentModel()
+	 * @generated
+	 */
+	EReference getConsentModel_ConsentLabelType();
 
 	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consent_model.RoleLabelType <em>Role Label Type</em>}'.
@@ -865,10 +849,10 @@ public interface Consent_modelPackage extends EPackage {
 	EClass getRoleLabel();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.dataflowanalysis.privacy.consent_model.RoleLabel#getRole <em>Role</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dataflowanalysis.privacy.consent_model.RoleLabel#getRole <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Role</em>'.
+	 * @return the meta object for the containment reference '<em>Role</em>'.
 	 * @see org.dataflowanalysis.privacy.consent_model.RoleLabel#getRole()
 	 * @see #getRoleLabel()
 	 * @generated
@@ -907,10 +891,10 @@ public interface Consent_modelPackage extends EPackage {
 	EClass getConsentLabel();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.dataflowanalysis.privacy.consent_model.ConsentLabel#getConsentedFunctionality <em>Consented Functionality</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dataflowanalysis.privacy.consent_model.ConsentLabel#getConsentedFunctionality <em>Consented Functionality</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Consented Functionality</em>'.
+	 * @return the meta object for the containment reference '<em>Consented Functionality</em>'.
 	 * @see org.dataflowanalysis.privacy.consent_model.ConsentLabel#getConsentedFunctionality()
 	 * @see #getConsentLabel()
 	 * @generated
@@ -995,14 +979,14 @@ public interface Consent_modelPackage extends EPackage {
 		EReference USER_DATA_COMBINATION__MEMBERS = eINSTANCE.getUserDataCombination_Members();
 
 		/**
-		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consent_model.impl.ConsentedFunctionalityImpl <em>Consented Functionality</em>}' class.
+		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consent_model.impl.ConsentOptionImpl <em>Consent Option</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.dataflowanalysis.privacy.consent_model.impl.ConsentedFunctionalityImpl
-		 * @see org.dataflowanalysis.privacy.consent_model.impl.Consent_modelPackageImpl#getConsentedFunctionality()
+		 * @see org.dataflowanalysis.privacy.consent_model.impl.ConsentOptionImpl
+		 * @see org.dataflowanalysis.privacy.consent_model.impl.Consent_modelPackageImpl#getConsentOption()
 		 * @generated
 		 */
-		EClass CONSENTED_FUNCTIONALITY = eINSTANCE.getConsentedFunctionality();
+		EClass CONSENT_OPTION = eINSTANCE.getConsentOption();
 
 		/**
 		 * The meta object literal for the '<em><b>Requires</b></em>' reference list feature.
@@ -1010,7 +994,7 @@ public interface Consent_modelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSENTED_FUNCTIONALITY__REQUIRES = eINSTANCE.getConsentedFunctionality_Requires();
+		EReference CONSENT_OPTION__REQUIRES = eINSTANCE.getConsentOption_Requires();
 
 		/**
 		 * The meta object literal for the '<em><b>Excludes</b></em>' reference list feature.
@@ -1018,7 +1002,7 @@ public interface Consent_modelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSENTED_FUNCTIONALITY__EXCLUDES = eINSTANCE.getConsentedFunctionality_Excludes();
+		EReference CONSENT_OPTION__EXCLUDES = eINSTANCE.getConsentOption_Excludes();
 
 		/**
 		 * The meta object literal for the '<em><b>Allows For</b></em>' containment reference list feature.
@@ -1026,7 +1010,7 @@ public interface Consent_modelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSENTED_FUNCTIONALITY__ALLOWS_FOR = eINSTANCE.getConsentedFunctionality_AllowsFor();
+		EReference CONSENT_OPTION__ALLOWS_FOR = eINSTANCE.getConsentOption_AllowsFor();
 
 		/**
 		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consent_model.impl.RoleImpl <em>Role</em>}' class.
@@ -1065,14 +1049,6 @@ public interface Consent_modelPackage extends EPackage {
 		EClass CONSENT_MODEL = eINSTANCE.getConsentModel();
 
 		/**
-		 * The meta object literal for the '<em><b>Roles</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONSENT_MODEL__ROLES = eINSTANCE.getConsentModel_Roles();
-
-		/**
 		 * The meta object literal for the '<em><b>Functionalities</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1087,6 +1063,22 @@ public interface Consent_modelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONSENT_MODEL__DATA_STATES = eINSTANCE.getConsentModel_Data_states();
+
+		/**
+		 * The meta object literal for the '<em><b>Role Label Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSENT_MODEL__ROLE_LABEL_TYPE = eINSTANCE.getConsentModel_RoleLabelType();
+
+		/**
+		 * The meta object literal for the '<em><b>Consent Label Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSENT_MODEL__CONSENT_LABEL_TYPE = eINSTANCE.getConsentModel_ConsentLabelType();
 
 		/**
 		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consent_model.impl.RoleLabelTypeImpl <em>Role Label Type</em>}' class.
@@ -1117,7 +1109,7 @@ public interface Consent_modelPackage extends EPackage {
 		EClass ROLE_LABEL = eINSTANCE.getRoleLabel();
 
 		/**
-		 * The meta object literal for the '<em><b>Role</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Role</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1153,7 +1145,7 @@ public interface Consent_modelPackage extends EPackage {
 		EClass CONSENT_LABEL = eINSTANCE.getConsentLabel();
 
 		/**
-		 * The meta object literal for the '<em><b>Consented Functionality</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Consented Functionality</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

@@ -21,31 +21,32 @@
     <genClasses ecoreClass="consent_model.ecore#//UserDataCombination">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consent_model.ecore#//UserDataCombination/members"/>
     </genClasses>
-    <genClasses ecoreClass="consent_model.ecore#//ConsentedFunctionality">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentedFunctionality/requires"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentedFunctionality/excludes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentedFunctionality/allowsFor"/>
+    <genClasses ecoreClass="consent_model.ecore#//ConsentOption">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentOption/requires"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentOption/excludes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentOption/allowsFor"/>
     </genClasses>
     <genClasses ecoreClass="consent_model.ecore#//Role">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consent_model.ecore#//Role/requires"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consent_model.ecore#//Role/allows"/>
     </genClasses>
     <genClasses ecoreClass="consent_model.ecore#//ConsentModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentModel/roles"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentModel/functionalities"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentModel/data_states"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentModel/roleLabelType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentModel/consentLabelType"/>
     </genClasses>
     <genClasses ecoreClass="consent_model.ecore#//RoleLabelType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consent_model.ecore#//RoleLabelType/labels"/>
     </genClasses>
     <genClasses ecoreClass="consent_model.ecore#//RoleLabel">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consent_model.ecore#//RoleLabel/role"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference consent_model.ecore#//RoleLabel/role"/>
     </genClasses>
     <genClasses ecoreClass="consent_model.ecore#//ConsentLabelType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentLabelType/labels"/>
     </genClasses>
     <genClasses ecoreClass="consent_model.ecore#//ConsentLabel">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentLabel/consentedFunctionality"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference consent_model.ecore#//ConsentLabel/consentedFunctionality"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Identifier" ecorePackage="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#/">

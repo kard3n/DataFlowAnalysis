@@ -338,7 +338,7 @@ public class PCMTest extends ConverterTest {
         Map<String, List<String>> labelMap = new HashMap<>();
         for (var labelType : dd.getLabelTypes()) {
             labelMap.put(labelType.getEntityName(), new ArrayList<>());
-            for (var label : labelType.getLabels()) {
+            for (var label : labelType.getLabel()) {
                 var labels = labelMap.get(labelType.getEntityName());
                 // prevent duplicate labels
                 assertTrue(!labels.contains(label.getEntityName()));

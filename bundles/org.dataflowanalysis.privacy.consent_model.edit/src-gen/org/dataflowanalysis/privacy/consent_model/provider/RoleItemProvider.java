@@ -1,36 +1,37 @@
 /**
  */
-package org.dataflowanalysis.dfd.datadictionary.provider;
+package org.dataflowanalysis.privacy.consent_model.provider;
+
+import identifier.provider.EntityItemProvider;
 
 import java.util.Collection;
 import java.util.List;
 
-import org.dataflowanalysis.dfd.datadictionary.BasicLabelType;
-import org.dataflowanalysis.dfd.datadictionary.datadictionaryFactory;
-import org.dataflowanalysis.dfd.datadictionary.datadictionaryPackage;
+import org.dataflowanalysis.privacy.consent_model.Consent_modelPackage;
+import org.dataflowanalysis.privacy.consent_model.Role;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link org.dataflowanalysis.dfd.datadictionary.BasicLabelType} object.
+ * This is the item provider adapter for a {@link org.dataflowanalysis.privacy.consent_model.Role} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class BasicLabelTypeItemProvider extends LabelTypeItemProvider {
+public class RoleItemProvider extends EntityItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BasicLabelTypeItemProvider(AdapterFactory adapterFactory) {
+	public RoleItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -45,49 +46,49 @@ public class BasicLabelTypeItemProvider extends LabelTypeItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addRequiresPropertyDescriptor(object);
+			addAllowsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the Requires feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(datadictionaryPackage.Literals.BASIC_LABEL_TYPE__LABELS);
-		}
-		return childrenFeatures;
+	protected void addRequiresPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Role_requires_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Role_requires_feature", "_UI_Role_type"),
+						Consent_modelPackage.Literals.ROLE__REQUIRES, true, false, true, null, null, null));
 	}
 
 	/**
+	 * This adds a property descriptor for the Allows feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+	protected void addAllowsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Role_allows_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Role_allows_feature", "_UI_Role_type"),
+						Consent_modelPackage.Literals.ROLE__ALLOWS, true, false, true, null, null, null));
 	}
 
 	/**
-	 * This returns BasicLabelType.gif.
+	 * This returns Role.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BasicLabelType"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Role"));
 	}
 
 	/**
@@ -108,9 +109,9 @@ public class BasicLabelTypeItemProvider extends LabelTypeItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((BasicLabelType) object).getId();
-		return label == null || label.length() == 0 ? getString("_UI_BasicLabelType_type")
-				: getString("_UI_BasicLabelType_type") + " " + label;
+		String label = ((Role) object).getId();
+		return label == null || label.length() == 0 ? getString("_UI_Role_type")
+				: getString("_UI_Role_type") + " " + label;
 	}
 
 	/**
@@ -123,12 +124,6 @@ public class BasicLabelTypeItemProvider extends LabelTypeItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(BasicLabelType.class)) {
-		case datadictionaryPackage.BASIC_LABEL_TYPE__LABELS:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-			return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -142,9 +137,17 @@ public class BasicLabelTypeItemProvider extends LabelTypeItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
-		newChildDescriptors.add(createChildParameter(datadictionaryPackage.Literals.BASIC_LABEL_TYPE__LABELS,
-				datadictionaryFactory.eINSTANCE.createBasicLabel()));
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return consent_modelEditPlugin.INSTANCE;
 	}
 
 }

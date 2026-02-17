@@ -7,9 +7,8 @@ import org.dataflowanalysis.analysis.core.AbstractVertex;
 import org.dataflowanalysis.analysis.dfd.core.DFDCharacteristicValue;
 import org.dataflowanalysis.dfd.datadictionary.AND;
 import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
-import org.dataflowanalysis.dfd.datadictionary.BasicLabel;
-import org.dataflowanalysis.dfd.datadictionary.BasicLabelType;
 import org.dataflowanalysis.dfd.datadictionary.Behavior;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
@@ -81,17 +80,17 @@ public class DFDTestUtil {
 
         dataDictionary.getLabelTypes()
                 .stream()
-                .flatMap(type -> type.getLabels()
+                .flatMap(type -> type.getLabel()
                         .stream())
                 .forEach(it -> mapNameToEntity.put(it.getEntityName(), it));
 
-        BasicLabel label1 = dataDictionary.getLabelTypes()
+        Label label1 = dataDictionary.getLabelTypes()
                 .get(0)
-                .getLabels()
+                .getLabel()
                 .get(0);
-        BasicLabel label2 = dataDictionary.getLabelTypes()
+        Label label2 = dataDictionary.getLabelTypes()
                 .get(1)
-                .getLabels()
+                .getLabel()
                 .get(0);
 
         createAndAddAssignment(a, null, null, List.of(label1, label2), null, SetAssignment.class);
@@ -142,16 +141,16 @@ public class DFDTestUtil {
      * @param valueName Name of the new label, or null for valueX
      */
     public static void createAndAddLabelTypeAndLabel(DataDictionary dataDictionary, String typeName, String valueName) {
-    	BasicLabelType type = ddFactory.createBasicLabelType();
+    	LabelType type = ddFactory.createLabelType();
         type.setEntityName(typeName == null ? "type" + dataDictionary.getLabelTypes()
                 .size() : typeName);
         dataDictionary.getLabelTypes()
                 .add(type);
 
-        BasicLabel label = ddFactory.createBasicLabel();
+        Label label = ddFactory.createLabel();
         label.setEntityName(valueName == null ? "label" + dataDictionary.getLabelTypes()
                 .size() : valueName);
-        type.getLabels()
+        type.getLabel()
                 .add(label);
     }
 
@@ -164,7 +163,7 @@ public class DFDTestUtil {
      * @param term Term for Assignment (non abstract) if required
      * @param assignmentType Type of assignment to be created
      */
-    public static void createAndAddAssignment(Node node, List<Pin> inPins, Pin outPin, List<BasicLabel> label, Term term,
+    public static void createAndAddAssignment(Node node, List<Pin> inPins, Pin outPin, List<Label> label, Term term,
             Class<? extends AbstractAssignment> assignmentType) {
         AbstractAssignment assignment;
 
@@ -265,7 +264,7 @@ public class DFDTestUtil {
      * @param vertex DFDVertex or DFDSimpleVertex
      * @return all incoming Labels
      */
-    public static List<Label> getAllIncomingLabel(AbstractVertex<?> vertex) {
+    public static List<AbstractLabel> getAllIncomingLabel(AbstractVertex<?> vertex) {
         return vertex.getAllIncomingDataCharacteristics()
                 .stream()
                 .flatMap(it -> it.getAllCharacteristics()
@@ -280,7 +279,7 @@ public class DFDTestUtil {
      * @param vertex DFDVertex or DFDSimpleVertex
      * @return all outgoing Labels
      */
-    public static List<Label> getAllOutgoingLabel(AbstractVertex<?> vertex) {
+    public static List<AbstractLabel> getAllOutgoingLabel(AbstractVertex<?> vertex) {
         return vertex.getAllOutgoingDataCharacteristics()
                 .stream()
                 .flatMap(it -> it.getAllCharacteristics()

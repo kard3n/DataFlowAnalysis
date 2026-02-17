@@ -8,14 +8,13 @@ import org.dataflowanalysis.dfd.datadictionary.Label;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
 
 /**
  * This is the item provider adapter for a {@link org.dataflowanalysis.dfd.datadictionary.Label} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class LabelItemProvider extends EntityItemProvider {
+public class LabelItemProvider extends AbstractLabelItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

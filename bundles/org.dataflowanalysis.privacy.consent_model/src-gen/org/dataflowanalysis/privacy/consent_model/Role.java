@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
 public interface Role extends Entity {
 	/**
 	 * Returns the value of the '<em><b>Requires</b></em>' reference list.
-	 * The list contents are of type {@link org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality}.
+	 * The list contents are of type {@link org.dataflowanalysis.privacy.consent_model.ConsentOption}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Requires</em>' reference list.
@@ -33,11 +33,11 @@ public interface Role extends Entity {
 	 * @model
 	 * @generated
 	 */
-	EList<ConsentedFunctionality> getRequires();
+	EList<ConsentOption> getRequires();
 
 	/**
 	 * Returns the value of the '<em><b>Allows</b></em>' reference list.
-	 * The list contents are of type {@link org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality}.
+	 * The list contents are of type {@link org.dataflowanalysis.privacy.consent_model.ConsentOption}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Allows</em>' reference list.
@@ -45,6 +45,6 @@ public interface Role extends Entity {
 	 * @model
 	 * @generated
 	 */
-	EList<ConsentedFunctionality> getAllows();
+	EList<ConsentOption> getAllows();
 
 } // Role

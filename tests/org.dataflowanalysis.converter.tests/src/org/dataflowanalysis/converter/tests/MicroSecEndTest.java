@@ -24,6 +24,7 @@ import org.dataflowanalysis.converter.micro2dfd.model.Service;
 import org.dataflowanalysis.converter.plant2micro.Plant2MicroConverter;
 import org.dataflowanalysis.converter.web2dfd.Web2DFDConverter;
 import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.Label;
@@ -242,7 +243,7 @@ public class MicroSecEndTest extends ConverterTest {
         ensureCorrectDFDConversion(complete);
     }
 
-    private String computeCompleteLabel(Label label) {
+    private String computeCompleteLabel(AbstractLabel label) {
         var labelName = label.getEntityName();
         var labelType = (LabelType) label.eContainer();
         var labelTypeName = labelType.getEntityName();
@@ -281,7 +282,7 @@ public class MicroSecEndTest extends ConverterTest {
 
                 Set<String> stereotypeNames = node.getProperties()
                         .stream()
-                        .map(Label::getEntityName)
+                        .map(AbstractLabel::getEntityName)
                         .collect(Collectors.toSet());
 
                 assertTrue(process.stereotypes()

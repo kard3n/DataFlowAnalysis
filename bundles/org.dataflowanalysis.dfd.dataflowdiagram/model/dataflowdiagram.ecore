@@ -22,6 +22,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" eType="ecore:EClass ../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//Behavior"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="ecore:EClass ../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//Label"/>
+        eType="ecore:EClass ../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabel"/>
   </eClassifiers>
 </ecore:EPackage>

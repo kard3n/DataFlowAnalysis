@@ -133,7 +133,7 @@ public class DataDictionaryItemProvider extends EntityItemProvider {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(datadictionaryPackage.Literals.DATA_DICTIONARY__LABEL_TYPES,
-				datadictionaryFactory.eINSTANCE.createBasicLabelType()));
+				datadictionaryFactory.eINSTANCE.createLabelType()));
 
 		newChildDescriptors.add(createChildParameter(datadictionaryPackage.Literals.DATA_DICTIONARY__BEHAVIOR,
 				datadictionaryFactory.eINSTANCE.createBehavior()));

@@ -5,8 +5,7 @@ package org.dataflowanalysis.privacy.consent_model.util;
 import identifier.Entity;
 import identifier.Identifier;
 import identifier.NamedElement;
-import org.dataflowanalysis.dfd.datadictionary.Label;
-import org.dataflowanalysis.dfd.datadictionary.LabelType;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabelType;
 import org.dataflowanalysis.privacy.consent_model.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -87,8 +86,8 @@ public class Consent_modelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseConsentedFunctionality(ConsentedFunctionality object) {
-			return createConsentedFunctionalityAdapter();
+		public Adapter caseConsentOption(ConsentOption object) {
+			return createConsentOptionAdapter();
 		}
 
 		@Override
@@ -137,13 +136,8 @@ public class Consent_modelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseLabelType(LabelType object) {
-			return createLabelTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseLabel(Label object) {
-			return createLabelAdapter();
+		public Adapter caseAbstractLabelType(AbstractLabelType object) {
+			return createAbstractLabelTypeAdapter();
 		}
 
 		@Override
@@ -208,16 +202,16 @@ public class Consent_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality <em>Consented Functionality</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.privacy.consent_model.ConsentOption <em>Consent Option</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality
+	 * @see org.dataflowanalysis.privacy.consent_model.ConsentOption
 	 * @generated
 	 */
-	public Adapter createConsentedFunctionalityAdapter() {
+	public Adapter createConsentOptionAdapter() {
 		return null;
 	}
 
@@ -348,30 +342,16 @@ public class Consent_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.dfd.datadictionary.LabelType <em>Label Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.dfd.datadictionary.AbstractLabelType <em>Abstract Label Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.dataflowanalysis.dfd.datadictionary.LabelType
+	 * @see org.dataflowanalysis.dfd.datadictionary.AbstractLabelType
 	 * @generated
 	 */
-	public Adapter createLabelTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.dfd.datadictionary.Label <em>Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.dataflowanalysis.dfd.datadictionary.Label
-	 * @generated
-	 */
-	public Adapter createLabelAdapter() {
+	public Adapter createAbstractLabelTypeAdapter() {
 		return null;
 	}
 

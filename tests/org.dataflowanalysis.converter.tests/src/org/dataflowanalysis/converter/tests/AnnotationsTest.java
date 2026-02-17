@@ -11,8 +11,6 @@ import org.dataflowanalysis.converter.dfd2web.DFD2WebConverter;
 import org.dataflowanalysis.converter.dfd2web.DataFlowDiagramAndDictionary;
 import org.dataflowanalysis.converter.web2dfd.model.Annotation;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
-import org.dataflowanalysis.dfd.datadictionary.BasicLabel;
-import org.dataflowanalysis.dfd.datadictionary.BasicLabelType;
 import org.dataflowanalysis.dfd.datadictionary.Behavior;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
@@ -34,7 +32,7 @@ public class AnnotationsTest {
     private DataFlowDiagram dataFlowDiagram;
     private DataDictionary dataDictionary;
     private Node b;
-    private BasicLabelType type;
+    private LabelType type;
 
     private final AnalysisConstraint constraint = AnalysisConstraint
             .fromString(new StringView("- Name: data type.value neverFlows vertex type.violation"))
@@ -52,11 +50,11 @@ public class AnnotationsTest {
         createFlow(a, b, null, null, "a2b");
         createFlow(b, c, null, null, "b2c");
 
-        type = ddFactory.createBasicLabelType();
+        type = ddFactory.createLabelType();
         type.setEntityName("type");
-        BasicLabel label = ddFactory.createBasicLabel();
+        Label label = ddFactory.createLabel();
         label.setEntityName("value");
-        type.getLabels()
+        type.getLabel()
                 .add(label);
         dataDictionary.getLabelTypes()
                 .add(type);
@@ -125,9 +123,9 @@ public class AnnotationsTest {
 
     @Test
     public void testViolationsAnnotation() {
-    	BasicLabel label = ddFactory.createBasicLabel();
+    	Label label = ddFactory.createLabel();
         label.setEntityName("violation");
-        type.getLabels()
+        type.getLabel()
                 .add(label);
 
         b.getProperties()

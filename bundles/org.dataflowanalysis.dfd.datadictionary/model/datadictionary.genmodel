@@ -39,7 +39,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//ForwardingAssignment/inputPins"/>
     </genClasses>
     <genClasses ecoreClass="datadictionary.ecore#//Label" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
-    <genClasses ecoreClass="datadictionary.ecore#//LabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
+    <genClasses ecoreClass="datadictionary.ecore#//LabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//LabelType/label"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="datadictionary.ecore#//Term" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
     <genClasses ecoreClass="datadictionary.ecore#//TRUE" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
     <genClasses ecoreClass="datadictionary.ecore#//BinaryOperator" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
@@ -59,9 +61,7 @@
     <genClasses ecoreClass="datadictionary.ecore#//UnsetAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//UnsetAssignment/outputLabels"/>
     </genClasses>
-    <genClasses ecoreClass="datadictionary.ecore#//BasicLabelType">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//BasicLabelType/labels"/>
-    </genClasses>
-    <genClasses ecoreClass="datadictionary.ecore#//BasicLabel"/>
+    <genClasses image="false" ecoreClass="datadictionary.ecore#//AbstractLabelType"/>
+    <genClasses image="false" ecoreClass="datadictionary.ecore#//AbstractLabel"/>
   </genPackages>
 </genmodel:GenModel>

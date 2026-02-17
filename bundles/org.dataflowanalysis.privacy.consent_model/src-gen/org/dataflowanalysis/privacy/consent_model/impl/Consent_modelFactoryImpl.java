@@ -62,8 +62,8 @@ public class Consent_modelFactoryImpl extends EFactoryImpl implements Consent_mo
 			return createDataState();
 		case Consent_modelPackage.USER_DATA_COMBINATION:
 			return createUserDataCombination();
-		case Consent_modelPackage.CONSENTED_FUNCTIONALITY:
-			return createConsentedFunctionality();
+		case Consent_modelPackage.CONSENT_OPTION:
+			return createConsentOption();
 		case Consent_modelPackage.ROLE:
 			return createRole();
 		case Consent_modelPackage.CONSENT_MODEL:
@@ -120,9 +120,9 @@ public class Consent_modelFactoryImpl extends EFactoryImpl implements Consent_mo
 	 * @generated
 	 */
 	@Override
-	public ConsentedFunctionality createConsentedFunctionality() {
-		ConsentedFunctionalityImpl consentedFunctionality = new ConsentedFunctionalityImpl();
-		return consentedFunctionality;
+	public ConsentOption createConsentOption() {
+		ConsentOptionImpl consentOption = new ConsentOptionImpl();
+		return consentOption;
 	}
 
 	/**

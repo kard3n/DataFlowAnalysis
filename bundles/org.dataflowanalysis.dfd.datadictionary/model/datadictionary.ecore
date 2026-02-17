@@ -4,7 +4,7 @@
     nsPrefix="datadictionary">
   <eClassifiers xsi:type="ecore:EClass" name="DataDictionary" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="labelTypes" upperBound="-1"
-        eType="#//BasicLabelType" containment="true"/>
+        eType="#//LabelType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" upperBound="-1"
         eType="#//Behavior" containment="true"/>
   </eClassifiers>
@@ -26,7 +26,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="term" lowerBound="1" eType="#//Term"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputLabels" upperBound="-1"
-        eType="#//Label"/>
+        eType="#//AbstractLabel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputPins" upperBound="-1"
         eType="#//Pin"/>
   </eClassifiers>
@@ -34,8 +34,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputPins" upperBound="-1"
         eType="#//Pin"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Label" abstract="true" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LabelType" abstract="true" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Label" eSuperTypes="#//AbstractLabel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LabelType" eSuperTypes="#//AbstractLabelType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="label" lowerBound="1" upperBound="-1"
+        eType="#//Label" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Term" abstract="true" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
   <eClassifiers xsi:type="ecore:EClass" name="TRUE" eSuperTypes="#//Term"/>
   <eClassifiers xsi:type="ecore:EClass" name="BinaryOperator" abstract="true" eSuperTypes="#//Term">
@@ -49,19 +52,16 @@
         eType="#//Term" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LabelReference" eSuperTypes="#//Term">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="label" lowerBound="1" eType="#//Label"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="label" lowerBound="1" eType="#//AbstractLabel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SetAssignment" eSuperTypes="#//AbstractAssignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputLabels" upperBound="-1"
-        eType="#//Label"/>
+        eType="#//AbstractLabel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnsetAssignment" eSuperTypes="#//AbstractAssignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputLabels" upperBound="-1"
-        eType="#//Label"/>
+        eType="#//AbstractLabel"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BasicLabelType" eSuperTypes="#//LabelType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" lowerBound="1"
-        upperBound="-1" eType="#//BasicLabel" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BasicLabel" eSuperTypes="#//Label"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractLabelType" abstract="true" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractLabel" abstract="true" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
 </ecore:EPackage>

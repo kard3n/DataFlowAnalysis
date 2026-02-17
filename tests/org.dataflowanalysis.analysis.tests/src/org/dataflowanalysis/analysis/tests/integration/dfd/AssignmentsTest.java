@@ -9,8 +9,6 @@ import org.dataflowanalysis.analysis.dfd.DFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
 import org.dataflowanalysis.analysis.dfd.resource.DFDModelResourceProvider;
 import org.dataflowanalysis.analysis.tests.integration.dfd.util.DFDTestUtil;
-import org.dataflowanalysis.dfd.datadictionary.BasicLabel;
-import org.dataflowanalysis.dfd.datadictionary.BasicLabelType;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.Label;
@@ -33,11 +31,11 @@ public class AssignmentsTest {
         dataFlowDiagram = DFDTestUtil.createDataFlowDiagram();
         dataDictionary = DFDTestUtil.createDataDictionary();
 
-        BasicLabelType type = datadictionaryFactory.eINSTANCE.createBasicLabelType();
+        LabelType type = datadictionaryFactory.eINSTANCE.createLabelType();
         type.setEntityName("type");
-        BasicLabel label = datadictionaryFactory.eINSTANCE.createBasicLabel();
+        Label label = datadictionaryFactory.eINSTANCE.createLabel();
         label.setEntityName("value");
-        type.getLabels()
+        type.getLabel()
                 .add(label);
         dataDictionary.getLabelTypes()
                 .add(type);
@@ -53,7 +51,7 @@ public class AssignmentsTest {
         DFDTestUtil.createAndAddLabelTypeAndLabel(dataDictionary, "type", "value");
         DFDTestUtil.createAndAddAssignment(a, null, null, dataDictionary.getLabelTypes()
                 .get(0)
-                .getLabels(), null, SetAssignment.class);
+                .getLabel(), null, SetAssignment.class);
 
         var analysis = new DFDDataFlowAnalysisBuilder().standalone()
                 .useCustomResourceProvider(new DFDModelResourceProvider(dataDictionary, dataFlowDiagram))
@@ -74,7 +72,7 @@ public class AssignmentsTest {
 
         DFDTestUtil.createAndAddAssignment(c, null, null, dataDictionary.getLabelTypes()
                 .get(0)
-                .getLabels(), null, SetAssignment.class);
+                .getLabel(), null, SetAssignment.class);
 
         analysis = new DFDDataFlowAnalysisBuilder().standalone()
                 .useCustomResourceProvider(new DFDModelResourceProvider(dataDictionary, dataFlowDiagram))
@@ -108,7 +106,7 @@ public class AssignmentsTest {
         DFDTestUtil.createAndAddLabelTypeAndLabel(dataDictionary, "type", "value");
         DFDTestUtil.createAndAddAssignment(a, null, null, dataDictionary.getLabelTypes()
                 .get(0)
-                .getLabels(), null, SetAssignment.class);
+                .getLabel(), null, SetAssignment.class);
 
         var analysis = new DFDDataFlowAnalysisBuilder().standalone()
                 .useCustomResourceProvider(new DFDModelResourceProvider(dataDictionary, dataFlowDiagram))
@@ -130,7 +128,7 @@ public class AssignmentsTest {
         // Test whether Unset Assignment removes Label
         DFDTestUtil.createAndAddAssignment(a, null, null, dataDictionary.getLabelTypes()
                 .get(0)
-                .getLabels(), null, UnsetAssignment.class);
+                .getLabel(), null, UnsetAssignment.class);
 
         analysis = new DFDDataFlowAnalysisBuilder().standalone()
                 .useCustomResourceProvider(new DFDModelResourceProvider(dataDictionary, dataFlowDiagram))
@@ -168,7 +166,7 @@ public class AssignmentsTest {
 
         DFDTestUtil.createAndAddAssignment(b, null, null, dataDictionary.getLabelTypes()
                 .get(0)
-                .getLabels(), null, UnsetAssignment.class);
+                .getLabel(), null, UnsetAssignment.class);
 
         analysis = new DFDDataFlowAnalysisBuilder().standalone()
                 .useCustomResourceProvider(new DFDModelResourceProvider(dataDictionary, dataFlowDiagram))

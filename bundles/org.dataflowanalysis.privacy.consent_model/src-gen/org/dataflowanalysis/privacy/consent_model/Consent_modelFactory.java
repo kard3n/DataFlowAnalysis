@@ -49,13 +49,13 @@ public interface Consent_modelFactory extends EFactory {
 	UserDataCombination createUserDataCombination();
 
 	/**
-	 * Returns a new object of class '<em>Consented Functionality</em>'.
+	 * Returns a new object of class '<em>Consent Option</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Consented Functionality</em>'.
+	 * @return a new object of class '<em>Consent Option</em>'.
 	 * @generated
 	 */
-	ConsentedFunctionality createConsentedFunctionality();
+	ConsentOption createConsentOption();
 
 	/**
 	 * Returns a new object of class '<em>Role</em>'.

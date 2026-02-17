@@ -5,27 +5,29 @@ package org.dataflowanalysis.dfd.datadictionary.provider;
 import java.util.Collection;
 import java.util.List;
 
-import org.dataflowanalysis.dfd.datadictionary.BasicLabel;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabelType;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
+import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
+
 /**
- * This is the item provider adapter for a {@link org.dataflowanalysis.dfd.datadictionary.BasicLabel} object.
+ * This is the item provider adapter for a {@link org.dataflowanalysis.dfd.datadictionary.AbstractLabelType} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class BasicLabelItemProvider extends LabelItemProvider {
+public class AbstractLabelTypeItemProvider extends EntityItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BasicLabelItemProvider(AdapterFactory adapterFactory) {
+	public AbstractLabelTypeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -42,17 +44,6 @@ public class BasicLabelItemProvider extends LabelItemProvider {
 
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This returns BasicLabel.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BasicLabel"));
 	}
 
 	/**
@@ -73,9 +64,9 @@ public class BasicLabelItemProvider extends LabelItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((BasicLabel) object).getId();
-		return label == null || label.length() == 0 ? getString("_UI_BasicLabel_type")
-				: getString("_UI_BasicLabel_type") + " " + label;
+		String label = ((AbstractLabelType) object).getId();
+		return label == null || label.length() == 0 ? getString("_UI_AbstractLabelType_type")
+				: getString("_UI_AbstractLabelType_type") + " " + label;
 	}
 
 	/**

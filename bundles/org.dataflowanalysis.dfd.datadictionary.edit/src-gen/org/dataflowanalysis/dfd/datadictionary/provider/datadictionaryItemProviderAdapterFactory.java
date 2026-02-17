@@ -189,6 +189,50 @@ public class datadictionaryItemProviderAdapterFactory extends datadictionaryAdap
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.Label} instances.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LabelItemProvider labelItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.Label}.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLabelAdapter() {
+		if (labelItemProvider == null) {
+			labelItemProvider = new LabelItemProvider(this);
+		}
+
+		return labelItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.LabelType} instances.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LabelTypeItemProvider labelTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.LabelType}.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLabelTypeAdapter() {
+		if (labelTypeItemProvider == null) {
+			labelTypeItemProvider = new LabelTypeItemProvider(this);
+		}
+
+		return labelTypeItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.TRUE} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -343,52 +387,6 @@ public class datadictionaryItemProviderAdapterFactory extends datadictionaryAdap
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.BasicLabelType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BasicLabelTypeItemProvider basicLabelTypeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.BasicLabelType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBasicLabelTypeAdapter() {
-		if (basicLabelTypeItemProvider == null) {
-			basicLabelTypeItemProvider = new BasicLabelTypeItemProvider(this);
-		}
-
-		return basicLabelTypeItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.BasicLabel} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BasicLabelItemProvider basicLabelItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.BasicLabel}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBasicLabelAdapter() {
-		if (basicLabelItemProvider == null) {
-			basicLabelItemProvider = new BasicLabelItemProvider(this);
-		}
-
-		return basicLabelItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -514,6 +512,10 @@ public class datadictionaryItemProviderAdapterFactory extends datadictionaryAdap
 			assignmentItemProvider.dispose();
 		if (forwardingAssignmentItemProvider != null)
 			forwardingAssignmentItemProvider.dispose();
+		if (labelItemProvider != null)
+			labelItemProvider.dispose();
+		if (labelTypeItemProvider != null)
+			labelTypeItemProvider.dispose();
 		if (trueItemProvider != null)
 			trueItemProvider.dispose();
 		if (andItemProvider != null)
@@ -528,10 +530,6 @@ public class datadictionaryItemProviderAdapterFactory extends datadictionaryAdap
 			setAssignmentItemProvider.dispose();
 		if (unsetAssignmentItemProvider != null)
 			unsetAssignmentItemProvider.dispose();
-		if (basicLabelTypeItemProvider != null)
-			basicLabelTypeItemProvider.dispose();
-		if (basicLabelItemProvider != null)
-			basicLabelItemProvider.dispose();
 	}
 
 }

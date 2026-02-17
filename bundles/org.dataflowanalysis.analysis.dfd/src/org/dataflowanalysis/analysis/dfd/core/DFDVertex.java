@@ -17,12 +17,12 @@ import org.dataflowanalysis.analysis.core.CharacteristicValue;
 import org.dataflowanalysis.analysis.core.DataCharacteristic;
 import org.dataflowanalysis.dfd.datadictionary.AND;
 import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabelType;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
 import org.dataflowanalysis.dfd.datadictionary.BinaryOperator;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
-import org.dataflowanalysis.dfd.datadictionary.Label;
 import org.dataflowanalysis.dfd.datadictionary.LabelReference;
-import org.dataflowanalysis.dfd.datadictionary.LabelType;
 import org.dataflowanalysis.dfd.datadictionary.NOT;
 import org.dataflowanalysis.dfd.datadictionary.OR;
 import org.dataflowanalysis.dfd.datadictionary.Pin;
@@ -66,7 +66,7 @@ public class DFDVertex extends AbstractVertex<Node> {
 
         List<CharacteristicValue> vertexCharacteristics = determineNodeCharacteristics();
 
-        Map<Pin, List<Label>> inputPinsIncomingLabelMap = new HashMap<>();
+        Map<Pin, List<AbstractLabel>> inputPinsIncomingLabelMap = new HashMap<>();
         this.getPinFlowMap()
                 .keySet()
                 .forEach(pin -> this.fillMapOfIncomingLabelsPerPin(pin, inputPinsIncomingLabelMap));
@@ -82,11 +82,11 @@ public class DFDVertex extends AbstractVertex<Node> {
     public void evaluateDataFlow(List<Pin> outPinsForOutgoing) {
         if (super.isEvaluated()) {
             if (!evaluatedOutPins.containsAll(outPinsForOutgoing)) {
-                Map<Pin, List<Label>> inputPinsIncomingLabelMap = new HashMap<>();
+                Map<Pin, List<AbstractLabel>> inputPinsIncomingLabelMap = new HashMap<>();
                 this.getPinFlowMap()
                         .keySet()
                         .forEach(pin -> this.fillMapOfIncomingLabelsPerPin(pin, inputPinsIncomingLabelMap));
-                Map<Pin, List<Label>> outputPinsOutgoingLabelMap = determineOutputPinOutgoingLabelMap(inputPinsIncomingLabelMap);
+                Map<Pin, List<AbstractLabel>> outputPinsOutgoingLabelMap = determineOutputPinOutgoingLabelMap(inputPinsIncomingLabelMap);
 
                 outputPinsOutgoingLabelMap.entrySet()
                         .removeIf(e -> !outPinsForOutgoing.contains(e.getKey()));
@@ -106,14 +106,14 @@ public class DFDVertex extends AbstractVertex<Node> {
 
         List<CharacteristicValue> vertexCharacteristics = determineNodeCharacteristics();
 
-        Map<Pin, List<Label>> inputPinsIncomingLabelMap = new HashMap<>();
+        Map<Pin, List<AbstractLabel>> inputPinsIncomingLabelMap = new HashMap<>();
         this.getPinFlowMap()
                 .keySet()
                 .forEach(pin -> this.fillMapOfIncomingLabelsPerPin(pin, inputPinsIncomingLabelMap));
 
         List<DataCharacteristic> dataCharacteristics = new ArrayList<>(this.createDataCharacteristicsFromLabels(inputPinsIncomingLabelMap));
 
-        Map<Pin, List<Label>> outputPinsOutgoingLabelMap = determineOutputPinOutgoingLabelMap(inputPinsIncomingLabelMap);
+        Map<Pin, List<AbstractLabel>> outputPinsOutgoingLabelMap = determineOutputPinOutgoingLabelMap(inputPinsIncomingLabelMap);
 
         outputPinsOutgoingLabelMap.entrySet()
                 .removeIf(e -> !outPinsForOutgoing.contains(e.getKey()));
@@ -128,8 +128,8 @@ public class DFDVertex extends AbstractVertex<Node> {
      * @param inputPinsIncomingLabelMap Map containing each input pin with their corresponding labels
      * @return Returns the map of output pins with their labels
      */
-    private Map<Pin, List<Label>> determineOutputPinOutgoingLabelMap(Map<Pin, List<Label>> inputPinsIncomingLabelMap) {
-        Map<Pin, List<Label>> outputPinsOutgoingLabelMap = new LinkedHashMap<>();
+    private Map<Pin, List<AbstractLabel>> determineOutputPinOutgoingLabelMap(Map<Pin, List<AbstractLabel>> inputPinsIncomingLabelMap) {
+        Map<Pin, List<AbstractLabel>> outputPinsOutgoingLabelMap = new LinkedHashMap<>();
         var assignments = this.getReferencedElement()
                 .getBehavior()
                 .getAssignment();
@@ -146,7 +146,7 @@ public class DFDVertex extends AbstractVertex<Node> {
         List<CharacteristicValue> nodeCharacteristics = new ArrayList<>();
         this.getReferencedElement()
                 .getProperties()
-                .forEach(label -> nodeCharacteristics.add(new DFDCharacteristicValue((LabelType) label.eContainer(), label)));
+                .forEach(label -> nodeCharacteristics.add(new DFDCharacteristicValue((AbstractLabelType) label.eContainer(), label)));
         return nodeCharacteristics;
     }
 
@@ -180,7 +180,7 @@ public class DFDVertex extends AbstractVertex<Node> {
      * @param pin Pin to be evaluated
      * @param inputPinsIncomingLabelMap Map to be filled with incoming labels on pin
      */
-    private void fillMapOfIncomingLabelsPerPin(Pin pin, Map<Pin, List<Label>> inputPinsIncomingLabelMap) {
+    private void fillMapOfIncomingLabelsPerPin(Pin pin, Map<Pin, List<AbstractLabel>> inputPinsIncomingLabelMap) {
         for (var previousVertex : this.getPinDFDVertexMap()
                 .values()) {
             for (var dataFlowCharacteristics : previousVertex.getAllOutgoingDataCharacteristics()) {
@@ -205,9 +205,9 @@ public class DFDVertex extends AbstractVertex<Node> {
      * @param inputPinsIncomingLabelMap Maps Input Pins to Incoming Labels
      * @param outputPinsOutgoingLabelMap Maps Output Pins to Outgoing Labels, to be filled by method
      */
-    private void handleOutgoingAssignments(AbstractAssignment abstractAssignment, Map<Pin, List<Label>> inputPinsIncomingLabelMap,
-            Map<Pin, List<Label>> outputPinsOutgoingLabelMap) {
-        List<Label> incomingLabels = combineLabelsOnAllInputPins(abstractAssignment, inputPinsIncomingLabelMap);
+    private void handleOutgoingAssignments(AbstractAssignment abstractAssignment, Map<Pin, List<AbstractLabel>> inputPinsIncomingLabelMap,
+            Map<Pin, List<AbstractLabel>> outputPinsOutgoingLabelMap) {
+        List<AbstractLabel> incomingLabels = combineLabelsOnAllInputPins(abstractAssignment, inputPinsIncomingLabelMap);
 
         if (abstractAssignment instanceof ForwardingAssignment forwardingAssignment) {
             outputPinsOutgoingLabelMap.get(forwardingAssignment.getOutputPin())
@@ -239,7 +239,7 @@ public class DFDVertex extends AbstractVertex<Node> {
      * @param pinToLabelMap Map mapping Input/Output Pin to labels
      * @return List of created data characteristics
      */
-    private List<DataCharacteristic> createDataCharacteristicsFromLabels(Map<Pin, List<Label>> pinToLabelMap) {
+    private List<DataCharacteristic> createDataCharacteristicsFromLabels(Map<Pin, List<AbstractLabel>> pinToLabelMap) {
         return pinToLabelMap.keySet()
                 .stream()
                 .map(pin -> new DataCharacteristic(pin.getId(), this.getCharacteristicValuesForPin(pin, pinToLabelMap)))
@@ -252,10 +252,10 @@ public class DFDVertex extends AbstractVertex<Node> {
      * @param pinToLabelMap Mapping of a pin to the assigned labels
      * @return Returns a list of characteristic values assigned to the given pin
      */
-    private List<CharacteristicValue> getCharacteristicValuesForPin(Pin pin, Map<Pin, List<Label>> pinToLabelMap) {
+    private List<CharacteristicValue> getCharacteristicValuesForPin(Pin pin, Map<Pin, List<AbstractLabel>> pinToLabelMap) {
         return pinToLabelMap.get(pin)
                 .stream()
-                .map(label -> new DFDCharacteristicValue((LabelType) label.eContainer(), label))
+                .map(label -> new DFDCharacteristicValue((AbstractLabelType) label.eContainer(), label))
                 .filter(distinctByKey(CharacteristicValue::getValueId))
                 .collect(Collectors.toList());
     }
@@ -266,8 +266,8 @@ public class DFDVertex extends AbstractVertex<Node> {
      * @param inputPinsIncomingLabelMap Maps all input pins to all incoming labels
      * @return List of relevant labels
      */
-    private static List<Label> combineLabelsOnAllInputPins(AbstractAssignment abstractAssignment, Map<Pin, List<Label>> inputPinsIncomingLabelMap) {
-        List<Label> allLabel = new ArrayList<>();
+    private static List<AbstractLabel> combineLabelsOnAllInputPins(AbstractAssignment abstractAssignment, Map<Pin, List<AbstractLabel>> inputPinsIncomingLabelMap) {
+        List<AbstractLabel> allLabel = new ArrayList<>();
         if (abstractAssignment instanceof SetAssignment || abstractAssignment instanceof UnsetAssignment)
             return allLabel;
         else if (abstractAssignment instanceof Assignment assignment) {
@@ -300,7 +300,7 @@ public class DFDVertex extends AbstractVertex<Node> {
      * @param inputLabel Incoming Label
      * @return Evaluation
      */
-    private static boolean evaluateTerm(Term term, List<Label> inputLabel) {
+    private static boolean evaluateTerm(Term term, List<AbstractLabel> inputLabel) {
         if (term instanceof TRUE) {
             return true;
         } else if (term instanceof NOT notTerm) {

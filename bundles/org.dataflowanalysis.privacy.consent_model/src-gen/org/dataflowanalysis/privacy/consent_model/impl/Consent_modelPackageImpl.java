@@ -8,9 +8,9 @@ import org.dataflowanalysis.dfd.datadictionary.datadictionaryPackage;
 import org.dataflowanalysis.privacy.consent_model.ConsentLabel;
 import org.dataflowanalysis.privacy.consent_model.ConsentLabelType;
 import org.dataflowanalysis.privacy.consent_model.ConsentModel;
+import org.dataflowanalysis.privacy.consent_model.ConsentOption;
 import org.dataflowanalysis.privacy.consent_model.Consent_modelFactory;
 import org.dataflowanalysis.privacy.consent_model.Consent_modelPackage;
-import org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality;
 import org.dataflowanalysis.privacy.consent_model.DataItem;
 import org.dataflowanalysis.privacy.consent_model.DataState;
 import org.dataflowanalysis.privacy.consent_model.Role;
@@ -56,7 +56,7 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass consentedFunctionalityEClass = null;
+	private EClass consentOptionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -242,8 +242,8 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 	 * @generated
 	 */
 	@Override
-	public EClass getConsentedFunctionality() {
-		return consentedFunctionalityEClass;
+	public EClass getConsentOption() {
+		return consentOptionEClass;
 	}
 
 	/**
@@ -252,8 +252,8 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 	 * @generated
 	 */
 	@Override
-	public EReference getConsentedFunctionality_Requires() {
-		return (EReference) consentedFunctionalityEClass.getEStructuralFeatures().get(0);
+	public EReference getConsentOption_Requires() {
+		return (EReference) consentOptionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -262,8 +262,8 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 	 * @generated
 	 */
 	@Override
-	public EReference getConsentedFunctionality_Excludes() {
-		return (EReference) consentedFunctionalityEClass.getEStructuralFeatures().get(1);
+	public EReference getConsentOption_Excludes() {
+		return (EReference) consentOptionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -272,8 +272,8 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 	 * @generated
 	 */
 	@Override
-	public EReference getConsentedFunctionality_AllowsFor() {
-		return (EReference) consentedFunctionalityEClass.getEStructuralFeatures().get(2);
+	public EReference getConsentOption_AllowsFor() {
+		return (EReference) consentOptionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -322,7 +322,7 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 	 * @generated
 	 */
 	@Override
-	public EReference getConsentModel_Roles() {
+	public EReference getConsentModel_Functionalities() {
 		return (EReference) consentModelEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -332,7 +332,7 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 	 * @generated
 	 */
 	@Override
-	public EReference getConsentModel_Functionalities() {
+	public EReference getConsentModel_Data_states() {
 		return (EReference) consentModelEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -342,8 +342,18 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 	 * @generated
 	 */
 	@Override
-	public EReference getConsentModel_Data_states() {
+	public EReference getConsentModel_RoleLabelType() {
 		return (EReference) consentModelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConsentModel_ConsentLabelType() {
+		return (EReference) consentModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -465,19 +475,20 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 		userDataCombinationEClass = createEClass(USER_DATA_COMBINATION);
 		createEReference(userDataCombinationEClass, USER_DATA_COMBINATION__MEMBERS);
 
-		consentedFunctionalityEClass = createEClass(CONSENTED_FUNCTIONALITY);
-		createEReference(consentedFunctionalityEClass, CONSENTED_FUNCTIONALITY__REQUIRES);
-		createEReference(consentedFunctionalityEClass, CONSENTED_FUNCTIONALITY__EXCLUDES);
-		createEReference(consentedFunctionalityEClass, CONSENTED_FUNCTIONALITY__ALLOWS_FOR);
+		consentOptionEClass = createEClass(CONSENT_OPTION);
+		createEReference(consentOptionEClass, CONSENT_OPTION__REQUIRES);
+		createEReference(consentOptionEClass, CONSENT_OPTION__EXCLUDES);
+		createEReference(consentOptionEClass, CONSENT_OPTION__ALLOWS_FOR);
 
 		roleEClass = createEClass(ROLE);
 		createEReference(roleEClass, ROLE__REQUIRES);
 		createEReference(roleEClass, ROLE__ALLOWS);
 
 		consentModelEClass = createEClass(CONSENT_MODEL);
-		createEReference(consentModelEClass, CONSENT_MODEL__ROLES);
 		createEReference(consentModelEClass, CONSENT_MODEL__FUNCTIONALITIES);
 		createEReference(consentModelEClass, CONSENT_MODEL__DATA_STATES);
+		createEReference(consentModelEClass, CONSENT_MODEL__ROLE_LABEL_TYPE);
+		createEReference(consentModelEClass, CONSENT_MODEL__CONSENT_LABEL_TYPE);
 
 		roleLabelTypeEClass = createEClass(ROLE_LABEL_TYPE);
 		createEReference(roleLabelTypeEClass, ROLE_LABEL_TYPE__LABELS);
@@ -530,13 +541,11 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 		dataItemEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
 		dataStateEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
 		userDataCombinationEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
-		consentedFunctionalityEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
+		consentOptionEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
 		roleEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
 		consentModelEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
-		roleLabelTypeEClass.getESuperTypes().add(thedatadictionaryPackage.getLabelType());
-		roleLabelEClass.getESuperTypes().add(thedatadictionaryPackage.getLabel());
-		consentLabelTypeEClass.getESuperTypes().add(thedatadictionaryPackage.getLabelType());
-		consentLabelEClass.getESuperTypes().add(thedatadictionaryPackage.getLabel());
+		roleLabelTypeEClass.getESuperTypes().add(thedatadictionaryPackage.getAbstractLabelType());
+		consentLabelTypeEClass.getESuperTypes().add(thedatadictionaryPackage.getAbstractLabelType());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(dataItemEClass, DataItem.class, "DataItem", !IS_ABSTRACT, !IS_INTERFACE,
@@ -557,36 +566,39 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 				UserDataCombination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(consentedFunctionalityEClass, ConsentedFunctionality.class, "ConsentedFunctionality", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConsentedFunctionality_Requires(), this.getConsentedFunctionality(), null, "requires", null,
-				0, -1, ConsentedFunctionality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConsentedFunctionality_Excludes(), this.getConsentedFunctionality(), null, "excludes", null,
-				0, -1, ConsentedFunctionality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConsentedFunctionality_AllowsFor(), this.getUserDataCombination(), null, "allowsFor", null, 0,
-				-1, ConsentedFunctionality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(consentOptionEClass, ConsentOption.class, "ConsentOption", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConsentOption_Requires(), this.getConsentOption(), null, "requires", null, 0, -1,
+				ConsentOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConsentOption_Excludes(), this.getConsentOption(), null, "excludes", null, 0, -1,
+				ConsentOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConsentOption_AllowsFor(), this.getUserDataCombination(), null, "allowsFor", null, 0, -1,
+				ConsentOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRole_Requires(), this.getConsentedFunctionality(), null, "requires", null, 0, -1, Role.class,
+		initEReference(getRole_Requires(), this.getConsentOption(), null, "requires", null, 0, -1, Role.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRole_Allows(), this.getConsentedFunctionality(), null, "allows", null, 0, -1, Role.class,
+		initEReference(getRole_Allows(), this.getConsentOption(), null, "allows", null, 0, -1, Role.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(consentModelEClass, ConsentModel.class, "ConsentModel", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConsentModel_Roles(), this.getRole(), null, "roles", null, 0, -1, ConsentModel.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConsentModel_Functionalities(), this.getConsentedFunctionality(), null, "functionalities",
-				null, 0, -1, ConsentModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConsentModel_Functionalities(), this.getConsentOption(), null, "functionalities", null, 0, -1,
+				ConsentModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConsentModel_Data_states(), this.getDataState(), null, "data_states", null, 0, -1,
 				ConsentModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConsentModel_RoleLabelType(), this.getRoleLabelType(), null, "roleLabelType", null, 1, 1,
+				ConsentModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConsentModel_ConsentLabelType(), this.getConsentLabelType(), null, "consentLabelType", null,
+				1, 1, ConsentModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roleLabelTypeEClass, RoleLabelType.class, "RoleLabelType", !IS_ABSTRACT, !IS_INTERFACE,
@@ -598,7 +610,7 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 		initEClass(roleLabelEClass, RoleLabel.class, "RoleLabel", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRoleLabel_Role(), this.getRole(), null, "role", null, 1, 1, RoleLabel.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
 		initEClass(consentLabelTypeEClass, ConsentLabelType.class, "ConsentLabelType", !IS_ABSTRACT, !IS_INTERFACE,
@@ -609,9 +621,9 @@ public class Consent_modelPackageImpl extends EPackageImpl implements Consent_mo
 
 		initEClass(consentLabelEClass, ConsentLabel.class, "ConsentLabel", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConsentLabel_ConsentedFunctionality(), this.getConsentedFunctionality(), null,
+		initEReference(getConsentLabel_ConsentedFunctionality(), this.getConsentOption(), null,
 				"consentedFunctionality", null, 1, 1, ConsentLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

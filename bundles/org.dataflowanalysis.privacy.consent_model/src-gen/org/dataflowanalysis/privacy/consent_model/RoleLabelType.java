@@ -2,8 +2,7 @@
  */
 package org.dataflowanalysis.privacy.consent_model;
 
-import org.dataflowanalysis.dfd.datadictionary.LabelType;
-
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabelType;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -22,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface RoleLabelType extends LabelType {
+public interface RoleLabelType extends AbstractLabelType {
 	/**
 	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
 	 * The list contents are of type {@link org.dataflowanalysis.privacy.consent_model.RoleLabel}.

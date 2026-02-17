@@ -5,8 +5,7 @@ package org.dataflowanalysis.privacy.consent_model.util;
 import identifier.Entity;
 import identifier.Identifier;
 import identifier.NamedElement;
-import org.dataflowanalysis.dfd.datadictionary.Label;
-import org.dataflowanalysis.dfd.datadictionary.LabelType;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabelType;
 import org.dataflowanalysis.privacy.consent_model.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -110,15 +109,15 @@ public class Consent_modelSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case Consent_modelPackage.CONSENTED_FUNCTIONALITY: {
-			ConsentedFunctionality consentedFunctionality = (ConsentedFunctionality) theEObject;
-			T result = caseConsentedFunctionality(consentedFunctionality);
+		case Consent_modelPackage.CONSENT_OPTION: {
+			ConsentOption consentOption = (ConsentOption) theEObject;
+			T result = caseConsentOption(consentOption);
 			if (result == null)
-				result = caseEntity(consentedFunctionality);
+				result = caseEntity(consentOption);
 			if (result == null)
-				result = caseIdentifier(consentedFunctionality);
+				result = caseIdentifier(consentOption);
 			if (result == null)
-				result = caseNamedElement(consentedFunctionality);
+				result = caseNamedElement(consentOption);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -153,7 +152,7 @@ public class Consent_modelSwitch<T> extends Switch<T> {
 			RoleLabelType roleLabelType = (RoleLabelType) theEObject;
 			T result = caseRoleLabelType(roleLabelType);
 			if (result == null)
-				result = caseLabelType(roleLabelType);
+				result = caseAbstractLabelType(roleLabelType);
 			if (result == null)
 				result = caseEntity(roleLabelType);
 			if (result == null)
@@ -168,14 +167,6 @@ public class Consent_modelSwitch<T> extends Switch<T> {
 			RoleLabel roleLabel = (RoleLabel) theEObject;
 			T result = caseRoleLabel(roleLabel);
 			if (result == null)
-				result = caseLabel(roleLabel);
-			if (result == null)
-				result = caseEntity(roleLabel);
-			if (result == null)
-				result = caseIdentifier(roleLabel);
-			if (result == null)
-				result = caseNamedElement(roleLabel);
-			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
@@ -183,7 +174,7 @@ public class Consent_modelSwitch<T> extends Switch<T> {
 			ConsentLabelType consentLabelType = (ConsentLabelType) theEObject;
 			T result = caseConsentLabelType(consentLabelType);
 			if (result == null)
-				result = caseLabelType(consentLabelType);
+				result = caseAbstractLabelType(consentLabelType);
 			if (result == null)
 				result = caseEntity(consentLabelType);
 			if (result == null)
@@ -197,14 +188,6 @@ public class Consent_modelSwitch<T> extends Switch<T> {
 		case Consent_modelPackage.CONSENT_LABEL: {
 			ConsentLabel consentLabel = (ConsentLabel) theEObject;
 			T result = caseConsentLabel(consentLabel);
-			if (result == null)
-				result = caseLabel(consentLabel);
-			if (result == null)
-				result = caseEntity(consentLabel);
-			if (result == null)
-				result = caseIdentifier(consentLabel);
-			if (result == null)
-				result = caseNamedElement(consentLabel);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -260,17 +243,17 @@ public class Consent_modelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Consented Functionality</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Consent Option</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Consented Functionality</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Consent Option</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConsentedFunctionality(ConsentedFunctionality object) {
+	public T caseConsentOption(ConsentOption object) {
 		return null;
 	}
 
@@ -410,32 +393,17 @@ public class Consent_modelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Label Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Label Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Label Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Label Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLabelType(LabelType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Label</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Label</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLabel(Label object) {
+	public T caseAbstractLabelType(AbstractLabelType object) {
 		return null;
 	}
 

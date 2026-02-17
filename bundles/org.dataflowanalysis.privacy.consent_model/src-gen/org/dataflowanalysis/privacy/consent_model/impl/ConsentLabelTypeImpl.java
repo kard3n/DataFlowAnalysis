@@ -3,9 +3,7 @@
 package org.dataflowanalysis.privacy.consent_model.impl;
 
 import java.util.Collection;
-
-import org.dataflowanalysis.dfd.datadictionary.impl.LabelTypeImpl;
-
+import org.dataflowanalysis.dfd.datadictionary.impl.AbstractLabelTypeImpl;
 import org.dataflowanalysis.privacy.consent_model.ConsentLabel;
 import org.dataflowanalysis.privacy.consent_model.ConsentLabelType;
 import org.dataflowanalysis.privacy.consent_model.Consent_modelPackage;
@@ -16,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -33,7 +30,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class ConsentLabelTypeImpl extends LabelTypeImpl implements ConsentLabelType {
+public class ConsentLabelTypeImpl extends AbstractLabelTypeImpl implements ConsentLabelType {
 	/**
 	 * The cached value of the '{@link #getLabels() <em>Labels</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

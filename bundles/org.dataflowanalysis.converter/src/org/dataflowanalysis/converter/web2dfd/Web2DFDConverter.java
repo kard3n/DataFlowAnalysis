@@ -19,8 +19,6 @@ import org.dataflowanalysis.converter.web2dfd.model.Value;
 import org.dataflowanalysis.converter.web2dfd.model.WebEditorDfd;
 import org.dataflowanalysis.converter.web2dfd.model.WebEditorLabelType;
 import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
-import org.dataflowanalysis.dfd.datadictionary.BasicLabel;
-import org.dataflowanalysis.dfd.datadictionary.BasicLabelType;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.Label;
 import org.dataflowanalysis.dfd.datadictionary.LabelType;
@@ -206,7 +204,7 @@ public class Web2DFDConverter extends Converter {
 
     private void createLabelTypes(WebEditorDfd webdfd, Map<String, Label> idToLabelMap, DataDictionary dataDictionary) {
         for (WebEditorLabelType webLabelType : webdfd.labelTypes()) {
-        	BasicLabelType labelType = ddFactory.createBasicLabelType();
+            LabelType labelType = ddFactory.createLabelType();
             labelType.setEntityName(webLabelType.name());
             labelType.setId(webLabelType.id());
             for (Value value : webLabelType.values()) {
@@ -217,11 +215,11 @@ public class Web2DFDConverter extends Converter {
         }
     }
 
-    private void createLabel(Map<String, Label> idToLabelMap, BasicLabelType labelType, Value value) {
-    	BasicLabel label = ddFactory.createBasicLabel();
+    private void createLabel(Map<String, Label> idToLabelMap, LabelType labelType, Value value) {
+        Label label = ddFactory.createLabel();
         label.setEntityName(value.text());
         label.setId(value.id());
-        labelType.getLabels()
+        labelType.getLabel()
                 .add(label);
         idToLabelMap.put(label.getId(), label);
     }
@@ -298,7 +296,7 @@ public class Web2DFDConverter extends Converter {
                             .stream()
                             .filter(labelType -> labelType.getEntityName()
                                     .equals(typeName))
-                            .flatMap(labelType -> labelType.getLabels()
+                            .flatMap(labelType -> labelType.getLabel()
                                     .stream())
                             .filter(label -> label.getEntityName()
                                     .equals(valueName))

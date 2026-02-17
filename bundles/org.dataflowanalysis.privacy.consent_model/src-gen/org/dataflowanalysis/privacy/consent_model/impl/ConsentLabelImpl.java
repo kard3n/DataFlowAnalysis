@@ -2,18 +2,17 @@
  */
 package org.dataflowanalysis.privacy.consent_model.impl;
 
-import org.dataflowanalysis.dfd.datadictionary.impl.LabelImpl;
-
 import org.dataflowanalysis.privacy.consent_model.ConsentLabel;
+import org.dataflowanalysis.privacy.consent_model.ConsentOption;
 import org.dataflowanalysis.privacy.consent_model.Consent_modelPackage;
-import org.dataflowanalysis.privacy.consent_model.ConsentedFunctionality;
-
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,16 +27,16 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ConsentLabelImpl extends LabelImpl implements ConsentLabel {
+public class ConsentLabelImpl extends MinimalEObjectImpl.Container implements ConsentLabel {
 	/**
-	 * The cached value of the '{@link #getConsentedFunctionality() <em>Consented Functionality</em>}' reference.
+	 * The cached value of the '{@link #getConsentedFunctionality() <em>Consented Functionality</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getConsentedFunctionality()
 	 * @generated
 	 * @ordered
 	 */
-	protected ConsentedFunctionality consentedFunctionality;
+	protected ConsentOption consentedFunctionality;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -64,17 +63,7 @@ public class ConsentLabelImpl extends LabelImpl implements ConsentLabel {
 	 * @generated
 	 */
 	@Override
-	public ConsentedFunctionality getConsentedFunctionality() {
-		if (consentedFunctionality != null && consentedFunctionality.eIsProxy()) {
-			InternalEObject oldConsentedFunctionality = (InternalEObject) consentedFunctionality;
-			consentedFunctionality = (ConsentedFunctionality) eResolveProxy(oldConsentedFunctionality);
-			if (consentedFunctionality != oldConsentedFunctionality) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							Consent_modelPackage.CONSENT_LABEL__CONSENTED_FUNCTIONALITY, oldConsentedFunctionality,
-							consentedFunctionality));
-			}
-		}
+	public ConsentOption getConsentedFunctionality() {
 		return consentedFunctionality;
 	}
 
@@ -83,8 +72,20 @@ public class ConsentLabelImpl extends LabelImpl implements ConsentLabel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConsentedFunctionality basicGetConsentedFunctionality() {
-		return consentedFunctionality;
+	public NotificationChain basicSetConsentedFunctionality(ConsentOption newConsentedFunctionality,
+			NotificationChain msgs) {
+		ConsentOption oldConsentedFunctionality = consentedFunctionality;
+		consentedFunctionality = newConsentedFunctionality;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					Consent_modelPackage.CONSENT_LABEL__CONSENTED_FUNCTIONALITY, oldConsentedFunctionality,
+					newConsentedFunctionality);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -93,13 +94,38 @@ public class ConsentLabelImpl extends LabelImpl implements ConsentLabel {
 	 * @generated
 	 */
 	@Override
-	public void setConsentedFunctionality(ConsentedFunctionality newConsentedFunctionality) {
-		ConsentedFunctionality oldConsentedFunctionality = consentedFunctionality;
-		consentedFunctionality = newConsentedFunctionality;
-		if (eNotificationRequired())
+	public void setConsentedFunctionality(ConsentOption newConsentedFunctionality) {
+		if (newConsentedFunctionality != consentedFunctionality) {
+			NotificationChain msgs = null;
+			if (consentedFunctionality != null)
+				msgs = ((InternalEObject) consentedFunctionality).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - Consent_modelPackage.CONSENT_LABEL__CONSENTED_FUNCTIONALITY, null,
+						msgs);
+			if (newConsentedFunctionality != null)
+				msgs = ((InternalEObject) newConsentedFunctionality).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - Consent_modelPackage.CONSENT_LABEL__CONSENTED_FUNCTIONALITY, null,
+						msgs);
+			msgs = basicSetConsentedFunctionality(newConsentedFunctionality, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					Consent_modelPackage.CONSENT_LABEL__CONSENTED_FUNCTIONALITY, oldConsentedFunctionality,
-					consentedFunctionality));
+					Consent_modelPackage.CONSENT_LABEL__CONSENTED_FUNCTIONALITY, newConsentedFunctionality,
+					newConsentedFunctionality));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case Consent_modelPackage.CONSENT_LABEL__CONSENTED_FUNCTIONALITY:
+			return basicSetConsentedFunctionality(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -111,9 +137,7 @@ public class ConsentLabelImpl extends LabelImpl implements ConsentLabel {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case Consent_modelPackage.CONSENT_LABEL__CONSENTED_FUNCTIONALITY:
-			if (resolve)
-				return getConsentedFunctionality();
-			return basicGetConsentedFunctionality();
+			return getConsentedFunctionality();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -127,7 +151,7 @@ public class ConsentLabelImpl extends LabelImpl implements ConsentLabel {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case Consent_modelPackage.CONSENT_LABEL__CONSENTED_FUNCTIONALITY:
-			setConsentedFunctionality((ConsentedFunctionality) newValue);
+			setConsentedFunctionality((ConsentOption) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -142,7 +166,7 @@ public class ConsentLabelImpl extends LabelImpl implements ConsentLabel {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case Consent_modelPackage.CONSENT_LABEL__CONSENTED_FUNCTIONALITY:
-			setConsentedFunctionality((ConsentedFunctionality) null);
+			setConsentedFunctionality((ConsentOption) null);
 			return;
 		}
 		super.eUnset(featureID);

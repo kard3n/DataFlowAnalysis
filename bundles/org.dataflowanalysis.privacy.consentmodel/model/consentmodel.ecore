@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="consentmodel" nsURI="http://www.dataflowanalysis.org/consentmodel"
+    nsPrefix="consentmodel">
+  <eClassifiers xsi:type="ecore:EClass" name="DataItem" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" upperBound="-1"
+        eType="#//DataState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataState" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notRelatableWith" upperBound="-1"
+        eType="#//DataState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UserDataCombination" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//DataItem" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConsentOption" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requires" upperBound="-1"
+        eType="#//ConsentOption"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="excludes" upperBound="-1"
+        eType="#//ConsentOption"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allowsFor" upperBound="-1"
+        eType="#//UserDataCombination" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requires" upperBound="-1"
+        eType="#//ConsentOption"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allows" upperBound="-1"
+        eType="#//ConsentOption"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConsentModel" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data_states" upperBound="-1"
+        eType="#//DataState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleLabelType" lowerBound="1"
+        eType="#//RoleLabelType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consentLabelType" lowerBound="1"
+        eType="#//ConsentLabelType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoleLabelType" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabelType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" lowerBound="1"
+        upperBound="-1" eType="#//RoleLabel" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConsentLabelType" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabelType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" lowerBound="1"
+        upperBound="-1" eType="#//ConsentLabel" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoleLabel" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="#//Role"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConsentLabel" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consentOption" lowerBound="1"
+        eType="#//ConsentOption" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

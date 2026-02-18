@@ -61,7 +61,7 @@
     <genClasses ecoreClass="datadictionary.ecore#//UnsetAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//UnsetAssignment/outputLabels"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="datadictionary.ecore#//AbstractLabelType"/>
     <genClasses image="false" ecoreClass="datadictionary.ecore#//AbstractLabel"/>
+    <genClasses image="false" ecoreClass="datadictionary.ecore#//AbstractLabelType"/>
   </genPackages>
 </genmodel:GenModel>

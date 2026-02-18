@@ -62,6 +62,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputLabels" upperBound="-1"
         eType="#//AbstractLabel"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractLabelType" abstract="true" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractLabel" abstract="true" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractLabelType" abstract="true" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
 </ecore:EPackage>

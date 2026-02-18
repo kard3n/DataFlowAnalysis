@@ -2,7 +2,7 @@ package org.dataflowanalysis.privacy.resource;
 
 import org.dataflowanalysis.analysis.dfd.resource.DFDResourceProvider;
 import org.dataflowanalysis.privacy.consent_model.ConsentModel;
-import org.dataflowanalysis.privacy.consent_model.Consent_modelPackage;
+import org.dataflowanalysis.privacy.consent_model.consentmodelPackage;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 /**
@@ -13,10 +13,10 @@ public abstract class PrivacyDFDResourceProvider extends DFDResourceProvider {
     public void setupResources() {
         super.setupResources();
         this.resources.getPackageRegistry()
-        		.put(Consent_modelPackage.eNS_URI, Consent_modelPackage.eINSTANCE);
+        		.put(consentmodelPackage.eNS_URI, consentmodelPackage.eINSTANCE);
         this.resources.getResourceFactoryRegistry()
 		        .getExtensionToFactoryMap()
-		        .put(Consent_modelPackage.eNAME, new XMIResourceFactoryImpl());
+		        .put(consentmodelPackage.eNAME, new XMIResourceFactoryImpl());
     }
     
     /**

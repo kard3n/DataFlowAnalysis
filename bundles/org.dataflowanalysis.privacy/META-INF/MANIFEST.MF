@@ -11,6 +11,6 @@ Require-Bundle: org.dataflowanalysis.dfd.datadictionary;bundle-version="4.0.0",
  org.dataflowanalysis.dfd.dataflowdiagram,
  org.dataflowanalysis.analysis,
  org.eclipse.emf.ecore.xmi,
- org.dataflowanalysis.privacy.consent_model
+ org.dataflowanalysis.privacy.consentmodel
 Automatic-Module-Name: org.dataflowanalysis.privacy
 Bundle-RequiredExecutionEnvironment: JavaSE-17

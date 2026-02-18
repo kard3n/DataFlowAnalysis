@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated consentmodel -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.dataflowanalysis.privacy.consentmodel.presentation.consentmodelModelWizardID"
+            name="%_UI_consentmodelModelWizard_label"
+            class="org.dataflowanalysis.privacy.consentmodel.presentation.consentmodelModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/consentmodelModelFile.gif">
+         <description>%_UI_consentmodelModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated consentmodel -->
+      <editor
+            id="org.dataflowanalysis.privacy.consentmodel.presentation.consentmodelEditorID"
+            name="%_UI_consentmodelEditor_label"
+            icon="icons/full/obj16/consentmodelModelFile.gif"
+            extensions="consentmodel"
+            class="org.dataflowanalysis.privacy.consentmodel.presentation.consentmodelEditor"
+            contributorClass="org.dataflowanalysis.privacy.consentmodel.presentation.consentmodelActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

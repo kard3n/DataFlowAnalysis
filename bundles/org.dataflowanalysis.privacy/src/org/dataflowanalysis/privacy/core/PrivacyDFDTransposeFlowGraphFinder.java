@@ -13,7 +13,7 @@ import org.dataflowanalysis.dfd.datadictionary.*;
 import org.dataflowanalysis.dfd.dataflowdiagram.*;
 import org.dataflowanalysis.privacy.consent_model.ConsentModel;
 import org.dataflowanalysis.privacy.consent_model.ConsentOption;
-import org.dataflowanalysis.privacy.consent_model.Consent_modelFactory;
+import org.dataflowanalysis.privacy.consent_model.consentmodelFactory;
 import org.dataflowanalysis.privacy.consent_model.Role;
 import org.dataflowanalysis.privacy.resource.PrivacyDFDResourceProvider;
 
@@ -30,7 +30,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	private final DataDictionary dataDictionary;
 	private static final datadictionaryFactory ddFactory = datadictionaryFactory.eINSTANCE;
 	private static final dataflowdiagramFactory dfFactory = dataflowdiagramFactory.eINSTANCE;
-	private static final Consent_modelFactory cmFactory = Consent_modelFactory.eINSTANCE;
+	private static final consentmodelFactory cmFactory = consentmodelFactory.eINSTANCE;
 
 	private Map<Pin, DFDVertex> mapOutPinToExistingVertex = new HashMap<>();
 
@@ -81,7 +81,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 				// Make a list of all labels that should be added to each data item for the
 				// current consent combination
 				List<AbstractLabel> labelsToAdd = this.consentModel.getConsentLabelType().getLabels().stream()
-						.filter(label -> combination.contains(label.getConsentedFunctionality()))
+						.filter(label -> combination.contains(label.getConsentOption()))
 						.map(label -> (AbstractLabel) label).toList();
 				labelsToAdd.add((AbstractLabel) roleLabel);
 

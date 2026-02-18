@@ -8,9 +8,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Export-Package: identifier,
- identifier.impl,
- identifier.util,
+Export-Package: 
  org.dataflowanalysis.privacy.consent_model,
  org.dataflowanalysis.privacy.consent_model.impl,
  org.dataflowanalysis.privacy.consent_model.util

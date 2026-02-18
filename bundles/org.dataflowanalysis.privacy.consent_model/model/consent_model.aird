@@ -4,6 +4,9 @@
     <semanticResources>consent_model.ecore</semanticResources>
     <semanticResources>consent_model.genmodel</semanticResources>
     <semanticResources>platform:/resource/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore</semanticResources>
+    <semanticResources>platform:/resource/org.dataflowanalysis.dfd.datadictionary/model/datadictionary.genmodel</semanticResources>
+    <semanticResources>platform:/resource/tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel</semanticResources>
+    <semanticResources>platform:/resource/org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_gIDioAEUEfGvZ5xBXtZ_Cg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_gISzMAEUEfGvZ5xBXtZ_Cg" name="consent_model" repPath="#_gIQ-AAEUEfGvZ5xBXtZ_Cg" changeId="1771432638512">

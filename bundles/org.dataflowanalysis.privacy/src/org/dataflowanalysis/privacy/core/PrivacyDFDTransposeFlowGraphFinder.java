@@ -21,6 +21,7 @@ import org.dataflowanalysis.privacy.resource.PrivacyDFDResourceProvider;
  * The DFDTransposeFlowGraphFinder determines all transpose flow graphs
  * contained in a model
  */
+// TODO: inherit from DFDTransposeFlowGraphFinder
 public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFinder {
 	private final Logger logger = LoggerManager.getLogger(TransposeFlowGraphFinder.class);
 	protected final DataFlowDiagram dataFlowDiagram;
@@ -67,20 +68,15 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 		List<Node> sources = sourceNodes.stream().filter(Node.class::isInstance).map(Node.class::cast).toList();
 
-		// Go over all roles, and calculate all consent combinations for each
+		// Go over all roles
 		this.consentModel.getRoleLabelType().getLabels().forEach(roleLabel -> {
 			Role role = roleLabel.getRole();
-			Set<ConsentOption> required = calculateRequiredFunctionalities(role);
-
-			// Calculate all combinations taking into account optional consent options
-			List<Set<ConsentOption>> combinations = new ArrayList<>();
-			combinations.add(required);
-			this.createOptionalCombinations(required, combinations, role.getAllows());
+			// calculate all consent combinations for the current role
+			List<Set<ConsentOption>> combinations = this.calculateRoleConsentOptions(role);
 
 			// Adapt source nodes
 			combinations.forEach(combination -> {
-				List<Node> sourceCopy = new ArrayList<>();
-				// TODO: deep copy of all elements than can be changed
+				List<AbstractAssignment> modifiedAssignments = new LinkedList<>(); // Holds all assignments we added labels to
 
 				// Make a list of all labels that should be added to each data item for the
 				// current consent combination
@@ -89,31 +85,51 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 						.map(label -> (AbstractLabel) label).toList();
 				labelsToAdd.add((AbstractLabel) roleLabel);
 
-				sourceCopy.forEach(source -> {
+				// Add new labels to the behavior
+				sources.forEach(source -> {
 					// Skip all sources without the current role(label)
 					if (source.getProperties().contains((AbstractLabel) roleLabel)) {
-						SetAssignment newAssignment = ddFactory.createSetAssignment();
-						newAssignment.getOutputLabels().addAll(labelsToAdd);
-						source.getBehavior().getAssignment().add(newAssignment);
+						source.getBehavior().getAssignment().forEach(assignment -> {
+							if (assignment instanceof Assignment) {
+								((Assignment) assignment).getOutputLabels().addAll(labelsToAdd);
+								modifiedAssignments.add(assignment);
+							}
+							// TODO what about the other types? Necessary?
+						});
 					}
 				});
-				
-				// Add new DFDs
+
+				// Compute and add new DFDs.
+				// findTransposeFlowGraphs() should create copies, including of the behavior and
+				// assignments
 				DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(this.dataDictionary,
 						this.dataFlowDiagram);
 				transposeFlowGraphs.addAll(finder.findTransposeFlowGraphs(sinkNodes, sources).stream()
 						.filter(DFDTransposeFlowGraph.class::isInstance).map(DFDTransposeFlowGraph.class::cast)
 						.toList());
+
+				// Remove labels from the behavior (or to be exact, its assignments)
+				modifiedAssignments.forEach(assignment -> {
+					if (assignment instanceof Assignment) {
+						((Assignment) assignment).getOutputLabels().removeAll(labelsToAdd);
+					}
+				});
 			});
-
-			if (true) {// TODO: only add labels if the Source has the current role attached to it
-				// Create TFG for every combination
-
-			}
 
 		});
 
 		return transposeFlowGraphs;
+	}
+
+	protected List<Set<ConsentOption>> calculateRoleConsentOptions(Role role) {
+		Set<ConsentOption> required = calculateRequiredFunctionalities(role);
+
+		// Calculate all combinations taking into account optional consent options
+		List<Set<ConsentOption>> combinations = new ArrayList<>();
+		combinations.add(required);
+		this.createOptionalCombinations(required, combinations, role.getAllows());
+
+		return combinations;
 	}
 
 	/**
@@ -209,15 +225,6 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 		});
 
 		return result;
-	}
-	
-	protected List<Node> cloneNodeList(List<Node> input){
-		List<Node> copy = new ArrayList<>(input.size());
-		input.forEach(node -> {
-			if(node instanceof External) {
-				External newNode = dfFactory.createExternal();
-			}
-		});
 	}
 
 	// TODO inherit for better code reuse

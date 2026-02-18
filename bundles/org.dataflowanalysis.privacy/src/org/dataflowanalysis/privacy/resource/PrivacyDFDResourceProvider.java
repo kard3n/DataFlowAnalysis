@@ -1,8 +1,8 @@
 package org.dataflowanalysis.privacy.resource;
 
 import org.dataflowanalysis.analysis.dfd.resource.DFDResourceProvider;
-import org.dataflowanalysis.privacy.consent_model.ConsentModel;
-import org.dataflowanalysis.privacy.consent_model.consentmodelPackage;
+import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
+import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 /**

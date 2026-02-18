@@ -7,14 +7,13 @@ import org.dataflowanalysis.analysis.core.TransposeFlowGraphFinder;
 import org.dataflowanalysis.analysis.dfd.core.DFDTransposeFlowGraph;
 import org.dataflowanalysis.analysis.dfd.core.DFDTransposeFlowGraphFinder;
 import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
-import org.dataflowanalysis.analysis.dfd.resource.DFDResourceProvider;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.dfd.datadictionary.*;
 import org.dataflowanalysis.dfd.dataflowdiagram.*;
-import org.dataflowanalysis.privacy.consent_model.ConsentModel;
-import org.dataflowanalysis.privacy.consent_model.ConsentOption;
-import org.dataflowanalysis.privacy.consent_model.consentmodelFactory;
-import org.dataflowanalysis.privacy.consent_model.Role;
+import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
+import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
+import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
+import org.dataflowanalysis.privacy.consentmodel.Role;
 import org.dataflowanalysis.privacy.resource.PrivacyDFDResourceProvider;
 
 /**

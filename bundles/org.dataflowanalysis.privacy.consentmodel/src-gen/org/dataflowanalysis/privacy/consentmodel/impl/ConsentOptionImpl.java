@@ -7,17 +7,12 @@ import java.util.Collection;
 import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
 import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
-
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -34,7 +29,6 @@ import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
  * <ul>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentOptionImpl#getRequires <em>Requires</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentOptionImpl#getExcludes <em>Excludes</em>}</li>
- *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentOptionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentOptionImpl#getAllowsFor <em>Allows For</em>}</li>
  * </ul>
  *
@@ -60,26 +54,6 @@ public class ConsentOptionImpl extends EntityImpl implements ConsentOption {
 	 * @ordered
 	 */
 	protected EList<ConsentOption> excludes;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getAllowsFor() <em>Allows For</em>}' containment reference list.
@@ -144,30 +118,6 @@ public class ConsentOptionImpl extends EntityImpl implements ConsentOption {
 	 * @generated
 	 */
 	@Override
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, consentmodelPackage.CONSENT_OPTION__NAME, oldName,
-					name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<UserDataCombination> getAllowsFor() {
 		if (allowsFor == null) {
 			allowsFor = new EObjectContainmentEList<UserDataCombination>(UserDataCombination.class, this,
@@ -202,8 +152,6 @@ public class ConsentOptionImpl extends EntityImpl implements ConsentOption {
 			return getRequires();
 		case consentmodelPackage.CONSENT_OPTION__EXCLUDES:
 			return getExcludes();
-		case consentmodelPackage.CONSENT_OPTION__NAME:
-			return getName();
 		case consentmodelPackage.CONSENT_OPTION__ALLOWS_FOR:
 			return getAllowsFor();
 		}
@@ -227,9 +175,6 @@ public class ConsentOptionImpl extends EntityImpl implements ConsentOption {
 			getExcludes().clear();
 			getExcludes().addAll((Collection<? extends ConsentOption>) newValue);
 			return;
-		case consentmodelPackage.CONSENT_OPTION__NAME:
-			setName((String) newValue);
-			return;
 		case consentmodelPackage.CONSENT_OPTION__ALLOWS_FOR:
 			getAllowsFor().clear();
 			getAllowsFor().addAll((Collection<? extends UserDataCombination>) newValue);
@@ -252,9 +197,6 @@ public class ConsentOptionImpl extends EntityImpl implements ConsentOption {
 		case consentmodelPackage.CONSENT_OPTION__EXCLUDES:
 			getExcludes().clear();
 			return;
-		case consentmodelPackage.CONSENT_OPTION__NAME:
-			setName(NAME_EDEFAULT);
-			return;
 		case consentmodelPackage.CONSENT_OPTION__ALLOWS_FOR:
 			getAllowsFor().clear();
 			return;
@@ -274,29 +216,10 @@ public class ConsentOptionImpl extends EntityImpl implements ConsentOption {
 			return requires != null && !requires.isEmpty();
 		case consentmodelPackage.CONSENT_OPTION__EXCLUDES:
 			return excludes != null && !excludes.isEmpty();
-		case consentmodelPackage.CONSENT_OPTION__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case consentmodelPackage.CONSENT_OPTION__ALLOWS_FOR:
 			return allowsFor != null && !allowsFor.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ConsentOptionImpl

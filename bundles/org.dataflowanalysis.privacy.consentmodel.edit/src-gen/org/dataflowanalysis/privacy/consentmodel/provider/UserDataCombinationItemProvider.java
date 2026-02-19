@@ -112,7 +112,7 @@ public class UserDataCombinationItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((UserDataCombination) object).getId();
+		String label = ((UserDataCombination) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_UserDataCombination_type")
 				: getString("_UI_UserDataCombination_type") + " " + label;
 	}

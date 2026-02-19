@@ -17,7 +17,6 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  * <ul>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.Role#getRequires <em>Requires</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.Role#getAllows <em>Allows</em>}</li>
- *   <li>{@link org.dataflowanalysis.privacy.consentmodel.Role#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getRole()
@@ -48,27 +47,5 @@ public interface Role extends Entity {
 	 * @generated
 	 */
 	EList<ConsentOption> getAllows();
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getRole_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.dataflowanalysis.privacy.consentmodel.Role#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
 
 } // Role

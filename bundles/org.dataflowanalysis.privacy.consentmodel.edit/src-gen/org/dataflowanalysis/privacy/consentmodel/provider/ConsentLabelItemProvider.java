@@ -112,7 +112,7 @@ public class ConsentLabelItemProvider extends AbstractLabelItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ConsentLabel) object).getId();
+		String label = ((ConsentLabel) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_ConsentLabel_type")
 				: getString("_UI_ConsentLabel_type") + " " + label;
 	}

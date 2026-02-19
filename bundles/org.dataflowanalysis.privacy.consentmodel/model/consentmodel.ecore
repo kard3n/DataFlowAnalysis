@@ -5,10 +5,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="DataItem" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" upperBound="-1"
         eType="#//DataState"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataState" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="notRelatableWith" upperBound="-1"
         eType="#//DataState"/>
   </eClassifiers>
@@ -21,7 +19,6 @@
         eType="#//ConsentOption"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="excludes" upperBound="-1"
         eType="#//ConsentOption"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="allowsFor" upperBound="-1"
         eType="#//UserDataCombination" containment="true"/>
   </eClassifiers>
@@ -30,7 +27,6 @@
         eType="#//ConsentOption"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="allows" upperBound="-1"
         eType="#//ConsentOption"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConsentModel" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="data_states" upperBound="-1"

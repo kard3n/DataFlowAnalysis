@@ -16,8 +16,6 @@ import org.dataflowanalysis.privacy.consentmodel.RoleLabelType;
 import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
-
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -197,16 +195,6 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDataItem_Name() {
-		return (EAttribute) dataItemEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getDataState() {
 		return dataStateEClass;
 	}
@@ -217,18 +205,8 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDataState_Name() {
-		return (EAttribute) dataStateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getDataState_NotRelatableWith() {
-		return (EReference) dataStateEClass.getEStructuralFeatures().get(1);
+		return (EReference) dataStateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -287,18 +265,8 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 	 * @generated
 	 */
 	@Override
-	public EAttribute getConsentOption_Name() {
-		return (EAttribute) consentOptionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getConsentOption_AllowsFor() {
-		return (EReference) consentOptionEClass.getEStructuralFeatures().get(3);
+		return (EReference) consentOptionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -329,16 +297,6 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 	@Override
 	public EReference getRole_Allows() {
 		return (EReference) roleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getRole_Name() {
-		return (EAttribute) roleEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -493,10 +451,8 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		// Create classes and their features
 		dataItemEClass = createEClass(DATA_ITEM);
 		createEReference(dataItemEClass, DATA_ITEM__STATE);
-		createEAttribute(dataItemEClass, DATA_ITEM__NAME);
 
 		dataStateEClass = createEClass(DATA_STATE);
-		createEAttribute(dataStateEClass, DATA_STATE__NAME);
 		createEReference(dataStateEClass, DATA_STATE__NOT_RELATABLE_WITH);
 
 		userDataCombinationEClass = createEClass(USER_DATA_COMBINATION);
@@ -505,13 +461,11 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		consentOptionEClass = createEClass(CONSENT_OPTION);
 		createEReference(consentOptionEClass, CONSENT_OPTION__REQUIRES);
 		createEReference(consentOptionEClass, CONSENT_OPTION__EXCLUDES);
-		createEAttribute(consentOptionEClass, CONSENT_OPTION__NAME);
 		createEReference(consentOptionEClass, CONSENT_OPTION__ALLOWS_FOR);
 
 		roleEClass = createEClass(ROLE);
 		createEReference(roleEClass, ROLE__REQUIRES);
 		createEReference(roleEClass, ROLE__ALLOWS);
-		createEAttribute(roleEClass, ROLE__NAME);
 
 		consentModelEClass = createEClass(CONSENT_MODEL);
 		createEReference(consentModelEClass, CONSENT_MODEL__DATA_STATES);
@@ -583,13 +537,9 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		initEReference(getDataItem_State(), this.getDataState(), null, "state", null, 0, -1, DataItem.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDataItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, DataItem.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataStateEClass, DataState.class, "DataState", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDataState_Name(), ecorePackage.getEString(), "name", null, 0, 1, DataState.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataState_NotRelatableWith(), this.getDataState(), null, "notRelatableWith", null, 0, -1,
 				DataState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -608,8 +558,6 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		initEReference(getConsentOption_Excludes(), this.getConsentOption(), null, "excludes", null, 0, -1,
 				ConsentOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getConsentOption_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConsentOption.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConsentOption_AllowsFor(), this.getUserDataCombination(), null, "allowsFor", null, 0, -1,
 				ConsentOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -621,8 +569,6 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		initEReference(getRole_Allows(), this.getConsentOption(), null, "allows", null, 0, -1, Role.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRole_Name(), ecorePackage.getEString(), "name", null, 0, 1, Role.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(consentModelEClass, ConsentModel.class, "ConsentModel", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);

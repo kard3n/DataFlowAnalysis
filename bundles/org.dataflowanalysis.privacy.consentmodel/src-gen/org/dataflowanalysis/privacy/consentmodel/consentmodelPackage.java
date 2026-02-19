@@ -3,8 +3,6 @@
 package org.dataflowanalysis.privacy.consentmodel;
 
 import org.dataflowanalysis.dfd.datadictionary.datadictionaryPackage;
-
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -98,22 +96,13 @@ public interface consentmodelPackage extends EPackage {
 	int DATA_ITEM__STATE = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_ITEM__NAME = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Data Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_ITEM_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
+	int DATA_ITEM_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Data Item</em>' class.
@@ -153,22 +142,13 @@ public interface consentmodelPackage extends EPackage {
 	int DATA_STATE__ENTITY_NAME = IdentifierPackage.ENTITY__ENTITY_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_STATE__NAME = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Not Relatable With</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_STATE__NOT_RELATABLE_WITH = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
+	int DATA_STATE__NOT_RELATABLE_WITH = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Data State</em>' class.
@@ -177,7 +157,7 @@ public interface consentmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_STATE_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
+	int DATA_STATE_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Data State</em>' class.
@@ -290,22 +270,13 @@ public interface consentmodelPackage extends EPackage {
 	int CONSENT_OPTION__EXCLUDES = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSENT_OPTION__NAME = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Allows For</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_OPTION__ALLOWS_FOR = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
+	int CONSENT_OPTION__ALLOWS_FOR = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Consent Option</em>' class.
@@ -314,7 +285,7 @@ public interface consentmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_OPTION_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 4;
+	int CONSENT_OPTION_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Consent Option</em>' class.
@@ -372,22 +343,13 @@ public interface consentmodelPackage extends EPackage {
 	int ROLE__ALLOWS = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__NAME = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Role</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
+	int ROLE_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Role</em>' class.
@@ -713,17 +675,6 @@ public interface consentmodelPackage extends EPackage {
 	EReference getDataItem_State();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.dataflowanalysis.privacy.consentmodel.DataItem#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.dataflowanalysis.privacy.consentmodel.DataItem#getName()
-	 * @see #getDataItem()
-	 * @generated
-	 */
-	EAttribute getDataItem_Name();
-
-	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.DataState <em>Data State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -732,17 +683,6 @@ public interface consentmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDataState();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.dataflowanalysis.privacy.consentmodel.DataState#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.dataflowanalysis.privacy.consentmodel.DataState#getName()
-	 * @see #getDataState()
-	 * @generated
-	 */
-	EAttribute getDataState_Name();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.dataflowanalysis.privacy.consentmodel.DataState#getNotRelatableWith <em>Not Relatable With</em>}'.
@@ -809,17 +749,6 @@ public interface consentmodelPackage extends EPackage {
 	EReference getConsentOption_Excludes();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.dataflowanalysis.privacy.consentmodel.ConsentOption#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.dataflowanalysis.privacy.consentmodel.ConsentOption#getName()
-	 * @see #getConsentOption()
-	 * @generated
-	 */
-	EAttribute getConsentOption_Name();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consentmodel.ConsentOption#getAllowsFor <em>Allows For</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -861,17 +790,6 @@ public interface consentmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRole_Allows();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.dataflowanalysis.privacy.consentmodel.Role#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.dataflowanalysis.privacy.consentmodel.Role#getName()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Name();
 
 	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel <em>Consent Model</em>}'.
@@ -1042,14 +960,6 @@ public interface consentmodelPackage extends EPackage {
 		EReference DATA_ITEM__STATE = eINSTANCE.getDataItem_State();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DATA_ITEM__NAME = eINSTANCE.getDataItem_Name();
-
-		/**
 		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataStateImpl <em>Data State</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1058,14 +968,6 @@ public interface consentmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DATA_STATE = eINSTANCE.getDataState();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DATA_STATE__NAME = eINSTANCE.getDataState_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Not Relatable With</b></em>' reference list feature.
@@ -1120,14 +1022,6 @@ public interface consentmodelPackage extends EPackage {
 		EReference CONSENT_OPTION__EXCLUDES = eINSTANCE.getConsentOption_Excludes();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONSENT_OPTION__NAME = eINSTANCE.getConsentOption_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Allows For</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1160,14 +1054,6 @@ public interface consentmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROLE__ALLOWS = eINSTANCE.getRole_Allows();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__NAME = eINSTANCE.getRole_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentModelImpl <em>Consent Model</em>}' class.

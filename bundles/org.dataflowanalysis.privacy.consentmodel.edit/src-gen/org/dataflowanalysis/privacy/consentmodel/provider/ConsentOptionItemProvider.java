@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
@@ -53,7 +52,6 @@ public class ConsentOptionItemProvider extends EntityItemProvider {
 
 			addRequiresPropertyDescriptor(object);
 			addExcludesPropertyDescriptor(object);
-			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -86,22 +84,6 @@ public class ConsentOptionItemProvider extends EntityItemProvider {
 						getString("_UI_PropertyDescriptor_description", "_UI_ConsentOption_excludes_feature",
 								"_UI_ConsentOption_type"),
 						consentmodelPackage.Literals.CONSENT_OPTION__EXCLUDES, true, false, true, null, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_ConsentOption_name_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_ConsentOption_name_feature",
-								"_UI_ConsentOption_type"),
-						consentmodelPackage.Literals.CONSENT_OPTION__NAME, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -163,7 +145,7 @@ public class ConsentOptionItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ConsentOption) object).getName();
+		String label = ((ConsentOption) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_ConsentOption_type")
 				: getString("_UI_ConsentOption_type") + " " + label;
 	}
@@ -180,9 +162,6 @@ public class ConsentOptionItemProvider extends EntityItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ConsentOption.class)) {
-		case consentmodelPackage.CONSENT_OPTION__NAME:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-			return;
 		case consentmodelPackage.CONSENT_OPTION__ALLOWS_FOR:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;

@@ -12,43 +12,39 @@
   <testsDirectory xsi:nil="true"/>
   <genPackages prefix="consentmodel" basePackage="org.dataflowanalysis.privacy" disposableProviderFactory="true"
       ecorePackage="consentmodel.ecore#/">
-    <genClasses ecoreClass="consentmodel.ecore#//DataItem">
+    <genClasses ecoreClass="consentmodel.ecore#//DataItem" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//DataItem/state"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute consentmodel.ecore#//DataItem/name"/>
     </genClasses>
-    <genClasses ecoreClass="consentmodel.ecore#//DataState">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute consentmodel.ecore#//DataState/name"/>
+    <genClasses ecoreClass="consentmodel.ecore#//DataState" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//DataState/notRelatableWith"/>
     </genClasses>
-    <genClasses ecoreClass="consentmodel.ecore#//UserDataCombination">
+    <genClasses ecoreClass="consentmodel.ecore#//UserDataCombination" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//UserDataCombination/members"/>
     </genClasses>
-    <genClasses ecoreClass="consentmodel.ecore#//ConsentOption">
+    <genClasses ecoreClass="consentmodel.ecore#//ConsentOption" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentOption/requires"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentOption/excludes"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute consentmodel.ecore#//ConsentOption/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentOption/allowsFor"/>
     </genClasses>
-    <genClasses ecoreClass="consentmodel.ecore#//Role">
+    <genClasses ecoreClass="consentmodel.ecore#//Role" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//Role/requires"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//Role/allows"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute consentmodel.ecore#//Role/name"/>
     </genClasses>
-    <genClasses ecoreClass="consentmodel.ecore#//ConsentModel">
+    <genClasses ecoreClass="consentmodel.ecore#//ConsentModel" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/data_states"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/roleLabelType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/consentLabelType"/>
     </genClasses>
-    <genClasses ecoreClass="consentmodel.ecore#//RoleLabelType">
+    <genClasses ecoreClass="consentmodel.ecore#//RoleLabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//RoleLabelType/labels"/>
     </genClasses>
-    <genClasses ecoreClass="consentmodel.ecore#//ConsentLabelType">
+    <genClasses ecoreClass="consentmodel.ecore#//ConsentLabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentLabelType/labels"/>
     </genClasses>
-    <genClasses ecoreClass="consentmodel.ecore#//RoleLabel">
+    <genClasses ecoreClass="consentmodel.ecore#//RoleLabel" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//RoleLabel/role"/>
     </genClasses>
-    <genClasses ecoreClass="consentmodel.ecore#//ConsentLabel">
+    <genClasses ecoreClass="consentmodel.ecore#//ConsentLabel" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentLabel/consentOption"/>
     </genClasses>
   </genPackages>

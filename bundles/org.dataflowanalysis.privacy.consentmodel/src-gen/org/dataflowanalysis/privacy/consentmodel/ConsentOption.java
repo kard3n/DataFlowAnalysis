@@ -17,7 +17,6 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  * <ul>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentOption#getRequires <em>Requires</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentOption#getExcludes <em>Excludes</em>}</li>
- *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentOption#getName <em>Name</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentOption#getAllowsFor <em>Allows For</em>}</li>
  * </ul>
  *
@@ -49,28 +48,6 @@ public interface ConsentOption extends Entity {
 	 * @generated
 	 */
 	EList<ConsentOption> getExcludes();
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getConsentOption_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.dataflowanalysis.privacy.consentmodel.ConsentOption#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Allows For</b></em>' containment reference list.

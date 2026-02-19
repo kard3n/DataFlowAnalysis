@@ -7,15 +7,9 @@ import java.util.Collection;
 import org.dataflowanalysis.privacy.consentmodel.DataItem;
 import org.dataflowanalysis.privacy.consentmodel.DataState;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
-
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
@@ -29,7 +23,6 @@ import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
  * </p>
  * <ul>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.DataItemImpl#getState <em>State</em>}</li>
- *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.DataItemImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -44,26 +37,6 @@ public class DataItemImpl extends EntityImpl implements DataItem {
 	 * @ordered
 	 */
 	protected EList<DataState> state;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,35 +76,10 @@ public class DataItemImpl extends EntityImpl implements DataItem {
 	 * @generated
 	 */
 	@Override
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, consentmodelPackage.DATA_ITEM__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case consentmodelPackage.DATA_ITEM__STATE:
 			return getState();
-		case consentmodelPackage.DATA_ITEM__NAME:
-			return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -149,9 +97,6 @@ public class DataItemImpl extends EntityImpl implements DataItem {
 			getState().clear();
 			getState().addAll((Collection<? extends DataState>) newValue);
 			return;
-		case consentmodelPackage.DATA_ITEM__NAME:
-			setName((String) newValue);
-			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -167,9 +112,6 @@ public class DataItemImpl extends EntityImpl implements DataItem {
 		case consentmodelPackage.DATA_ITEM__STATE:
 			getState().clear();
 			return;
-		case consentmodelPackage.DATA_ITEM__NAME:
-			setName(NAME_EDEFAULT);
-			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -184,27 +126,8 @@ public class DataItemImpl extends EntityImpl implements DataItem {
 		switch (featureID) {
 		case consentmodelPackage.DATA_ITEM__STATE:
 			return state != null && !state.isEmpty();
-		case consentmodelPackage.DATA_ITEM__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //DataItemImpl

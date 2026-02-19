@@ -16,7 +16,6 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  * </p>
  * <ul>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.DataItem#getState <em>State</em>}</li>
- *   <li>{@link org.dataflowanalysis.privacy.consentmodel.DataItem#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getDataItem()
@@ -35,27 +34,5 @@ public interface DataItem extends Entity {
 	 * @generated
 	 */
 	EList<DataState> getState();
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getDataItem_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.dataflowanalysis.privacy.consentmodel.DataItem#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
 
 } // DataItem

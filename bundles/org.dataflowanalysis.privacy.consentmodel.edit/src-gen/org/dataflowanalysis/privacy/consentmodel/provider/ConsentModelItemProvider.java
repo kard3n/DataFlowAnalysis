@@ -114,7 +114,7 @@ public class ConsentModelItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ConsentModel) object).getId();
+		String label = ((ConsentModel) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_ConsentModel_type")
 				: getString("_UI_ConsentModel_type") + " " + label;
 	}

@@ -112,7 +112,7 @@ public class RoleLabelTypeItemProvider extends AbstractLabelTypeItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RoleLabelType) object).getId();
+		String label = ((RoleLabelType) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_RoleLabelType_type")
 				: getString("_UI_RoleLabelType_type") + " " + label;
 	}

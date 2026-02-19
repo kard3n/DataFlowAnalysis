@@ -73,8 +73,16 @@ public class DFDFlowGraphCollection extends FlowGraphCollection {
 
         if (transposeFlowGraphFinderClass.equals(DFDSimpleTransposeFlowGraphFinder.class))
             this.transposeFlowGraphFinder = new DFDSimpleTransposeFlowGraphFinder(dfdResourceProvider);
-        else
-            this.transposeFlowGraphFinder = new DFDTransposeFlowGraphFinder(dfdResourceProvider);
+        else {
+        	try {
+                this.transposeFlowGraphFinder = transposeFlowGraphFinderClass
+                        .getConstructor(DFDResourceProvider.class)
+                        .newInstance(dfdResourceProvider);
+            } catch (Exception e) {
+                logger.error("Failed to instantiate the transpose flow graph finder class", e);
+                throw new RuntimeException("Could not instantiate " + transposeFlowGraphFinderClass.getSimpleName(), e);
+            }
+        }
 
         return transposeFlowGraphFinder.findTransposeFlowGraphs();
     }

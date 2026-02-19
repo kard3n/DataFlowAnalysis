@@ -18,6 +18,7 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getData_states <em>Data states</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getRoleLabelType <em>Role Label Type</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getConsentLabelType <em>Consent Label Type</em>}</li>
+ *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItems <em>Data Items</em>}</li>
  * </ul>
  *
  * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getConsentModel()
@@ -80,5 +81,17 @@ public interface ConsentModel extends Entity {
 	 * @generated
 	 */
 	void setConsentLabelType(ConsentLabelType value);
+
+	/**
+	 * Returns the value of the '<em><b>Data Items</b></em>' containment reference list.
+	 * The list contents are of type {@link org.dataflowanalysis.privacy.consentmodel.DataItem}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Data Items</em>' containment reference list.
+	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getConsentModel_DataItems()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<DataItem> getDataItems();
 
 } // ConsentModel

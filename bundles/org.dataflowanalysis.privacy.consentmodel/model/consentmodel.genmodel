@@ -19,7 +19,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//DataState/notRelatableWith"/>
     </genClasses>
     <genClasses ecoreClass="consentmodel.ecore#//UserDataCombination" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//UserDataCombination/members"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference consentmodel.ecore#//UserDataCombination/members"/>
     </genClasses>
     <genClasses ecoreClass="consentmodel.ecore#//ConsentOption" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentOption/requires"/>
@@ -34,6 +34,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/data_states"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/roleLabelType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/consentLabelType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/dataItems"/>
     </genClasses>
     <genClasses ecoreClass="consentmodel.ecore#//RoleLabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//RoleLabelType/labels"/>

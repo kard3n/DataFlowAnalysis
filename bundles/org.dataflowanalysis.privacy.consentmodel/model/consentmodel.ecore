@@ -12,7 +12,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UserDataCombination" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-        eType="#//DataItem" containment="true"/>
+        eType="#//DataItem"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConsentOption" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requires" upperBound="-1"
@@ -35,6 +35,8 @@
         eType="#//RoleLabelType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="consentLabelType" lowerBound="1"
         eType="#//ConsentLabelType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataItems" upperBound="-1"
+        eType="#//DataItem" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleLabelType" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabelType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="labels" lowerBound="1"

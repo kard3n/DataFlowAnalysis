@@ -68,6 +68,7 @@ public class ConsentModelItemProvider extends EntityItemProvider {
 			childrenFeatures.add(consentmodelPackage.Literals.CONSENT_MODEL__DATA_STATES);
 			childrenFeatures.add(consentmodelPackage.Literals.CONSENT_MODEL__ROLE_LABEL_TYPE);
 			childrenFeatures.add(consentmodelPackage.Literals.CONSENT_MODEL__CONSENT_LABEL_TYPE);
+			childrenFeatures.add(consentmodelPackage.Literals.CONSENT_MODEL__DATA_ITEMS);
 		}
 		return childrenFeatures;
 	}
@@ -134,6 +135,7 @@ public class ConsentModelItemProvider extends EntityItemProvider {
 		case consentmodelPackage.CONSENT_MODEL__DATA_STATES:
 		case consentmodelPackage.CONSENT_MODEL__ROLE_LABEL_TYPE:
 		case consentmodelPackage.CONSENT_MODEL__CONSENT_LABEL_TYPE:
+		case consentmodelPackage.CONSENT_MODEL__DATA_ITEMS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -159,6 +161,9 @@ public class ConsentModelItemProvider extends EntityItemProvider {
 
 		newChildDescriptors.add(createChildParameter(consentmodelPackage.Literals.CONSENT_MODEL__CONSENT_LABEL_TYPE,
 				consentmodelFactory.eINSTANCE.createConsentLabelType()));
+
+		newChildDescriptors.add(createChildParameter(consentmodelPackage.Literals.CONSENT_MODEL__DATA_ITEMS,
+				consentmodelFactory.eINSTANCE.createDataItem()));
 	}
 
 	/**

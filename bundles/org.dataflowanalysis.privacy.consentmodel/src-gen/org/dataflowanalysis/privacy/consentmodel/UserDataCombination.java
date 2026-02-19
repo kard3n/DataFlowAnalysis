@@ -24,13 +24,13 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  */
 public interface UserDataCombination extends Entity {
 	/**
-	 * Returns the value of the '<em><b>Members</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Members</b></em>' reference list.
 	 * The list contents are of type {@link org.dataflowanalysis.privacy.consentmodel.DataItem}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Members</em>' containment reference list.
+	 * @return the value of the '<em>Members</em>' reference list.
 	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getUserDataCombination_Members()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
 	EList<DataItem> getMembers();

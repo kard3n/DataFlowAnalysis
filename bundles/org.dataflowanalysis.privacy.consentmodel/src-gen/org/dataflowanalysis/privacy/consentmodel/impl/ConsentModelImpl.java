@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.dataflowanalysis.privacy.consentmodel.ConsentLabelType;
 import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
+import org.dataflowanalysis.privacy.consentmodel.DataItem;
 import org.dataflowanalysis.privacy.consentmodel.DataState;
 import org.dataflowanalysis.privacy.consentmodel.RoleLabelType;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
@@ -36,6 +37,7 @@ import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentModelImpl#getData_states <em>Data states</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentModelImpl#getRoleLabelType <em>Role Label Type</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentModelImpl#getConsentLabelType <em>Consent Label Type</em>}</li>
+ *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentModelImpl#getDataItems <em>Data Items</em>}</li>
  * </ul>
  *
  * @generated
@@ -70,6 +72,16 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 	 * @ordered
 	 */
 	protected ConsentLabelType consentLabelType;
+
+	/**
+	 * The cached value of the '{@link #getDataItems() <em>Data Items</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataItems()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DataItem> dataItems;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -214,6 +226,20 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 	 * @generated
 	 */
 	@Override
+	public EList<DataItem> getDataItems() {
+		if (dataItems == null) {
+			dataItems = new EObjectContainmentEList<DataItem>(DataItem.class, this,
+					consentmodelPackage.CONSENT_MODEL__DATA_ITEMS);
+		}
+		return dataItems;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case consentmodelPackage.CONSENT_MODEL__DATA_STATES:
@@ -222,6 +248,8 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 			return basicSetRoleLabelType(null, msgs);
 		case consentmodelPackage.CONSENT_MODEL__CONSENT_LABEL_TYPE:
 			return basicSetConsentLabelType(null, msgs);
+		case consentmodelPackage.CONSENT_MODEL__DATA_ITEMS:
+			return ((InternalEList<?>) getDataItems()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -240,6 +268,8 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 			return getRoleLabelType();
 		case consentmodelPackage.CONSENT_MODEL__CONSENT_LABEL_TYPE:
 			return getConsentLabelType();
+		case consentmodelPackage.CONSENT_MODEL__DATA_ITEMS:
+			return getDataItems();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -263,6 +293,10 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 		case consentmodelPackage.CONSENT_MODEL__CONSENT_LABEL_TYPE:
 			setConsentLabelType((ConsentLabelType) newValue);
 			return;
+		case consentmodelPackage.CONSENT_MODEL__DATA_ITEMS:
+			getDataItems().clear();
+			getDataItems().addAll((Collection<? extends DataItem>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -284,6 +318,9 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 		case consentmodelPackage.CONSENT_MODEL__CONSENT_LABEL_TYPE:
 			setConsentLabelType((ConsentLabelType) null);
 			return;
+		case consentmodelPackage.CONSENT_MODEL__DATA_ITEMS:
+			getDataItems().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -302,6 +339,8 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 			return roleLabelType != null;
 		case consentmodelPackage.CONSENT_MODEL__CONSENT_LABEL_TYPE:
 			return consentLabelType != null;
+		case consentmodelPackage.CONSENT_MODEL__DATA_ITEMS:
+			return dataItems != null && !dataItems.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -7,17 +7,10 @@ import java.util.Collection;
 import org.dataflowanalysis.privacy.consentmodel.DataItem;
 import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
 
 /**
@@ -35,7 +28,7 @@ import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
  */
 public class UserDataCombinationImpl extends EntityImpl implements UserDataCombination {
 	/**
-	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
+	 * The cached value of the '{@link #getMembers() <em>Members</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getMembers()
@@ -71,24 +64,10 @@ public class UserDataCombinationImpl extends EntityImpl implements UserDataCombi
 	@Override
 	public EList<DataItem> getMembers() {
 		if (members == null) {
-			members = new EObjectContainmentEList<DataItem>(DataItem.class, this,
+			members = new EObjectResolvingEList<DataItem>(DataItem.class, this,
 					consentmodelPackage.USER_DATA_COMBINATION__MEMBERS);
 		}
 		return members;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-		case consentmodelPackage.USER_DATA_COMBINATION__MEMBERS:
-			return ((InternalEList<?>) getMembers()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

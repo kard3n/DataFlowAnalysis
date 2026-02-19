@@ -6,13 +6,12 @@ import org.dataflowanalysis.analysis.core.AbstractTransposeFlowGraph;
 import org.dataflowanalysis.analysis.core.TransposeFlowGraphFinder;
 import org.dataflowanalysis.analysis.dfd.core.DFDTransposeFlowGraph;
 import org.dataflowanalysis.analysis.dfd.core.DFDTransposeFlowGraphFinder;
-import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
+import org.dataflowanalysis.analysis.dfd.resource.DFDResourceProvider;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.dfd.datadictionary.*;
 import org.dataflowanalysis.dfd.dataflowdiagram.*;
 import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
 import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
-import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
 import org.dataflowanalysis.privacy.consentmodel.Role;
 import org.dataflowanalysis.privacy.resource.PrivacyDFDResourceProvider;
 
@@ -22,25 +21,26 @@ import org.dataflowanalysis.privacy.resource.PrivacyDFDResourceProvider;
  */
 // TODO: inherit from DFDTransposeFlowGraphFinder
 public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFinder {
-	private final Logger logger = LoggerManager.getLogger(TransposeFlowGraphFinder.class);
+	private final Logger logger = LoggerManager.getLogger(PrivacyDFDTransposeFlowGraphFinder.class);
 	protected final DataFlowDiagram dataFlowDiagram;
 	protected final ConsentModel consentModel;
 	private boolean hasCycles = false;
 	private final DataDictionary dataDictionary;
-	private static final datadictionaryFactory ddFactory = datadictionaryFactory.eINSTANCE;
-	private static final dataflowdiagramFactory dfFactory = dataflowdiagramFactory.eINSTANCE;
-	private static final consentmodelFactory cmFactory = consentmodelFactory.eINSTANCE;
 
-	private Map<Pin, DFDVertex> mapOutPinToExistingVertex = new HashMap<>();
-
-	public PrivacyDFDTransposeFlowGraphFinder(PrivacyDFDResourceProvider resourceProvider) {
-		this.dataFlowDiagram = resourceProvider.getDataFlowDiagram();
-		this.consentModel = resourceProvider.getConsentModel();
-		this.dataDictionary = resourceProvider.getDataDictionary();
+	public PrivacyDFDTransposeFlowGraphFinder(DFDResourceProvider resourceProvider) {
+		if (!(resourceProvider instanceof PrivacyDFDResourceProvider)) {
+			logger.error("Received wrong type of resource provider.");
+			throw new RuntimeException("");
+		}
+		
+		this.dataFlowDiagram = ((PrivacyDFDResourceProvider) resourceProvider).getDataFlowDiagram();
+		this.consentModel = ((PrivacyDFDResourceProvider) resourceProvider).getConsentModel();
+		this.dataDictionary = ((PrivacyDFDResourceProvider) resourceProvider).getDataDictionary();
 	}
 
 	public PrivacyDFDTransposeFlowGraphFinder(DataDictionary dataDictionary, DataFlowDiagram dataFlowDiagram,
 			ConsentModel consentModel) {
+		
 		this.dataDictionary = dataDictionary;
 		this.dataFlowDiagram = dataFlowDiagram;
 		this.consentModel = consentModel;
@@ -72,6 +72,8 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 			Role role = roleLabel.getRole();
 			// calculate all consent combinations for the current role
 			List<Set<ConsentOption>> combinations = this.calculateRoleConsentOptions(role);
+			
+			logger.info("Final amount of consent combinations for role "+  role.getEntityName() + " : " + combinations.size());
 
 			// Adapt source nodes
 			combinations.forEach(combination -> {
@@ -79,11 +81,10 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 				// Make a list of all labels that should be added to each data item for the
 				// current consent combination
-				List<AbstractLabel> labelsToAdd = this.consentModel.getConsentLabelType().getLabels().stream()
+				ArrayList<AbstractLabel> labelsToAdd = new ArrayList<>(this.consentModel.getConsentLabelType().getLabels().stream()
 						.filter(label -> combination.contains(label.getConsentOption()))
-						.map(label -> (AbstractLabel) label).toList();
+						.map(label -> (AbstractLabel) label).toList());
 				labelsToAdd.add((AbstractLabel) roleLabel);
-
 				// Add new labels to the behavior
 				sources.forEach(source -> {
 					// Skip all sources without the current role(label)

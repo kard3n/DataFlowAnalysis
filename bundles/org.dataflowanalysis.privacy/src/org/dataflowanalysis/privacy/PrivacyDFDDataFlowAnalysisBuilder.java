@@ -1,52 +1,63 @@
-package org.dataflowanalysis.analysis.dfd;
+package org.dataflowanalysis.privacy;
 
 import java.nio.file.Paths;
 import java.util.Optional;
 import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.DataFlowAnalysisBuilder;
-import org.dataflowanalysis.analysis.core.TransposeFlowGraphFinder;
-import org.dataflowanalysis.analysis.dfd.resource.DFDModelResourceProvider;
-import org.dataflowanalysis.analysis.dfd.resource.DFDResourceProvider;
-import org.dataflowanalysis.analysis.dfd.resource.DFDURIResourceProvider;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.analysis.utils.ResourceUtils;
+import org.dataflowanalysis.privacy.core.PrivacyDFDTransposeFlowGraphFinder;
+import org.dataflowanalysis.privacy.resource.PrivacyDFDModelResourceProvider;
+import org.dataflowanalysis.privacy.resource.PrivacyDFDResourceProvider;
+import org.dataflowanalysis.privacy.resource.PrivacyDFDURIResourceProvider;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.common.util.URI;
 
 /**
- * This class is used to build an instance of {@link DFDConfidentialityAnalysis}. The data contained in this class is
- * validated, when calling {@link DFDDataFlowAnalysisBuilder#build()} before an analysis object is returned
+ * This class is used to build an instance of {@link PrivacyDFDConfidentialityAnalysis}. The data contained in this class is
+ * validated, when calling {@link PrivacyDFDDataFlowAnalysisBuilder#build()} before an analysis object is returned
  */
-public class DFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
-    protected final Logger logger = LoggerManager.getLogger(DFDDataFlowAnalysisBuilder.class);
+public class PrivacyDFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
 
+	protected final Logger logger = LoggerManager.getLogger(PrivacyDFDDataFlowAnalysisBuilder.class);
+	
     protected String dataFlowDiagramPath;
     protected String dataDictionaryPath;
-    protected Optional<DFDResourceProvider> customResourceProvider;
-    protected Class<? extends TransposeFlowGraphFinder> customTransposeFlowGraphFinderClass;
+    protected String consentModelPath;
+    protected Optional<PrivacyDFDResourceProvider> customResourceProvider;
+    protected Class<? extends PrivacyDFDTransposeFlowGraphFinder> customTransposeFlowGraphFinderClass;
 
     /**
-     * Constructs a dfd analysis builder with empty values
+     * Constructs a privacy DFD analysis builder with empty values
      */
-    public DFDDataFlowAnalysisBuilder() {
+    public PrivacyDFDDataFlowAnalysisBuilder() {
         this.customResourceProvider = Optional.empty();
         this.customTransposeFlowGraphFinderClass = null;
     }
-
+    
     /**
      * Sets standalone mode of the analysis
      * @return Builder of the analysis
      */
-    public DFDDataFlowAnalysisBuilder standalone() {
+    public PrivacyDFDDataFlowAnalysisBuilder standalone() {
         super.standalone();
         return this;
     }
 
     /**
+     * Sets the data dictionary used by the analysis
+     * @return Builder of the analysis
+     */
+    public PrivacyDFDDataFlowAnalysisBuilder useConsentModel(String consentModelPath) {
+        this.consentModelPath = consentModelPath;
+        return this;
+    }
+    
+    /**
      * Sets the modeling project name of the analysis
      * @return Builder of the analysis
      */
-    public DFDDataFlowAnalysisBuilder modelProjectName(String modelProjectName) {
+    public PrivacyDFDDataFlowAnalysisBuilder modelProjectName(String modelProjectName) {
         super.modelProjectName(modelProjectName);
         return this;
     }
@@ -56,7 +67,7 @@ public class DFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
      * @param pluginActivator Plugin activator class of the modeling project
      * @return Returns builder object of the analysis
      */
-    public DFDDataFlowAnalysisBuilder usePluginActivator(Class<? extends Plugin> pluginActivator) {
+    public PrivacyDFDDataFlowAnalysisBuilder usePluginActivator(Class<? extends Plugin> pluginActivator) {
         super.usePluginActivator(pluginActivator);
         return this;
     }
@@ -65,7 +76,7 @@ public class DFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
      * Sets the data dictionary used by the analysis
      * @return Builder of the analysis
      */
-    public DFDDataFlowAnalysisBuilder useDataDictionary(String dataDictionaryPath) {
+    public PrivacyDFDDataFlowAnalysisBuilder useDataDictionary(String dataDictionaryPath) {
         this.dataDictionaryPath = dataDictionaryPath;
         return this;
     }
@@ -74,7 +85,7 @@ public class DFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
      * Sets the data dictionary used by the analysis
      * @return Builder of the analysis
      */
-    public DFDDataFlowAnalysisBuilder useDataFlowDiagram(String dataFlowDiagramPath) {
+    public PrivacyDFDDataFlowAnalysisBuilder useDataFlowDiagram(String dataFlowDiagramPath) {
         this.dataFlowDiagramPath = dataFlowDiagramPath;
         return this;
     }
@@ -83,9 +94,9 @@ public class DFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
      * Registers a custom resource provider for the analysis
      * @param resourceProvider Custom resource provider of the analysis
      */
-    public DFDDataFlowAnalysisBuilder useCustomResourceProvider(DFDResourceProvider resourceProvider) {
+    public PrivacyDFDDataFlowAnalysisBuilder useCustomResourceProvider(PrivacyDFDResourceProvider resourceProvider) {
         this.customResourceProvider = Optional.of(resourceProvider);
-        if (resourceProvider instanceof DFDModelResourceProvider)
+        if (resourceProvider instanceof PrivacyDFDModelResourceProvider)
             customResourceProviderIsLoaded = true;
         return this;
     }
@@ -94,15 +105,16 @@ public class DFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
      * Registers a custom TransposeFlowGraphFinder for the analysis
      * @param transposeFlowGraphFinderClass Custom TransposeFlowGraphFinder of the analysis
      */
-    public DFDDataFlowAnalysisBuilder useTransposeFlowGraphFinder(Class<? extends TransposeFlowGraphFinder> transposeFlowGraphFinderClass) {
+    public PrivacyDFDDataFlowAnalysisBuilder useTransposeFlowGraphFinder(Class<? extends PrivacyDFDTransposeFlowGraphFinder> transposeFlowGraphFinderClass) {
         this.customTransposeFlowGraphFinderClass = transposeFlowGraphFinderClass;
         return this;
     }
 
+
     /**
      * Determines the effective resource provider that should be used by the analysis
      */
-    private DFDResourceProvider getEffectiveResourceProvider() {
+    private PrivacyDFDResourceProvider getEffectiveResourceProvider() {
         if (this.customResourceProvider.isEmpty()) {
             URI dataDictionaryUri = this.modelProjectName.isEmpty() ? URI.createFileURI(Paths.get(this.dataDictionaryPath)
                     .toAbsolutePath()
@@ -110,8 +122,11 @@ public class DFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
             URI dataFlowDiagramUri = this.modelProjectName.isEmpty() ? URI.createFileURI(Paths.get(this.dataFlowDiagramPath)
                     .toAbsolutePath()
                     .toString()) : ResourceUtils.createRelativePluginURI(this.dataFlowDiagramPath, this.modelProjectName);
+            URI consentModelUri = this.modelProjectName.isEmpty() ? URI.createFileURI(Paths.get(this.consentModelPath)
+                    .toAbsolutePath()
+                    .toString()) : ResourceUtils.createRelativePluginURI(this.consentModelPath, this.modelProjectName);
 
-            return new DFDURIResourceProvider(dataFlowDiagramUri, dataDictionaryUri);
+            return new PrivacyDFDURIResourceProvider(dataFlowDiagramUri, dataDictionaryUri, consentModelUri);
         }
         return this.customResourceProvider.get();
     }
@@ -119,6 +134,7 @@ public class DFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
     /**
      * Validates the stored data
      */
+    @Override
     protected void validate() {
         super.validate();
         if (this.customResourceProvider.isEmpty() && (this.dataDictionaryPath == null || this.dataDictionaryPath.isEmpty())) {
@@ -134,15 +150,15 @@ public class DFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
     /**
      * Builds a new analysis from the given data
      */
-    public DFDConfidentialityAnalysis build() {
+    public PrivacyDFDConfidentialityAnalysis build() {
         this.validate();
-        DFDResourceProvider resourceProvider = this.getEffectiveResourceProvider();
+        PrivacyDFDResourceProvider resourceProvider = this.getEffectiveResourceProvider();
         resourceProvider.validate();
 
         if (customTransposeFlowGraphFinderClass == null)
-            return new DFDConfidentialityAnalysis(resourceProvider, this.pluginActivator, this.modelProjectName);
+            return new PrivacyDFDConfidentialityAnalysis(resourceProvider, this.pluginActivator, this.modelProjectName);
         else
-            return new DFDConfidentialityAnalysis(resourceProvider, this.pluginActivator, this.modelProjectName,
+            return new PrivacyDFDConfidentialityAnalysis(resourceProvider, this.pluginActivator, this.modelProjectName,
                     this.customTransposeFlowGraphFinderClass);
     }
 }

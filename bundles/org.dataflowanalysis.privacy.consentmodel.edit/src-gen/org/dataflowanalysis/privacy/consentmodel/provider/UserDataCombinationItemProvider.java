@@ -6,10 +6,12 @@ import java.util.Collection;
 import java.util.List;
 
 import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
+import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
 
@@ -41,8 +43,24 @@ public class UserDataCombinationItemProvider extends EntityItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addMembersPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Members feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMembersPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_UserDataCombination_members_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_UserDataCombination_members_feature",
+						"_UI_UserDataCombination_type"),
+				consentmodelPackage.Literals.USER_DATA_COMBINATION__MEMBERS, true, false, true, null, null, null));
 	}
 
 	/**

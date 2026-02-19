@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.URI;
  * validated, when calling {@link DFDDataFlowAnalysisBuilder#build()} before an analysis object is returned
  */
 public class DFDDataFlowAnalysisBuilder extends DataFlowAnalysisBuilder {
-    private final Logger logger = LoggerManager.getLogger(DFDDataFlowAnalysisBuilder.class);
+    protected final Logger logger = LoggerManager.getLogger(DFDDataFlowAnalysisBuilder.class);
 
     protected String dataFlowDiagramPath;
     protected String dataDictionaryPath;

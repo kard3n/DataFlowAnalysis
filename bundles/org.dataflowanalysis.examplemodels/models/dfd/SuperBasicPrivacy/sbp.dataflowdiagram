@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_zmjukA5NEfGPjL6qQZv--g">
+  <flows id="_A8Ch8A5OEfGPjL6qQZv--g" entityName="sourceToMiddle" sourceNode="_0GSXgQ5NEfGPjL6qQZv--g" destinationNode="_ogjiIw5bEfGdzZwkavR8kQ">
+    <destinationPin href="sbp.datadictionary#_VYeeAA5bEfGdzZwkavR8kQ"/>
+    <sourcePin href="sbp.datadictionary#_K6AcYQ5NEfGPjL6qQZv--g"/>
+  </flows>
+  <flows id="_CGF1EA5gEfGhwZsbNAhjKg" entityName="middleToSink" sourceNode="_ogjiIw5bEfGdzZwkavR8kQ" destinationNode="_quUaMg5bEfGdzZwkavR8kQ">
+    <destinationPin href="sbp.datadictionary#_TAW4cA5NEfGPjL6qQZv--g"/>
+    <sourcePin href="sbp.datadictionary#_XifegQ5bEfGdzZwkavR8kQ"/>
+  </flows>
+  <nodes xsi:type="dataflowdiagram:External" id="_0GSXgQ5NEfGPjL6qQZv--g" entityName="source">
+    <behavior href="sbp.datadictionary#_I_WGgQ5NEfGPjL6qQZv--g"/>
+    <properties xsi:type="consentmodel:RoleLabel" href="sbp.consentmodel#_ZeBqAA5OEfGPjL6qQZv--g"/>
+    <properties xsi:type="datadictionary:Label" href="sbp.datadictionary#_HkX9UA5NEfGPjL6qQZv--g"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Process" id="_ogjiIw5bEfGdzZwkavR8kQ" entityName="middleProcess">
+    <behavior href="sbp.datadictionary#_TsW6cQ5bEfGdzZwkavR8kQ"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_quUaMg5bEfGdzZwkavR8kQ" entityName="store">
+    <behavior href="sbp.datadictionary#_Qm8xEQ5NEfGPjL6qQZv--g"/>
+  </nodes>
+</dataflowdiagram:DataFlowDiagram>

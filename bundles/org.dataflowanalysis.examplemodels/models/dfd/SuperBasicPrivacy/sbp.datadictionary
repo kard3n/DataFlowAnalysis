@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_YKRDcA5LEfGPjL6qQZv--g">
+  <labelTypes id="_FCvHAA5NEfGPjL6qQZv--g" entityName="exampleLabelType">
+    <label id="_HkX9UA5NEfGPjL6qQZv--g" entityName="exampleLabel"/>
+  </labelTypes>
+  <behavior id="_I_WGgQ5NEfGPjL6qQZv--g" entityName="sourceSend">
+    <outPin id="_K6AcYQ5NEfGPjL6qQZv--g" entityName="sourcePinOut"/>
+    <assignment xsi:type="datadictionary:Assignment" id="_Mc2vMg5NEfGPjL6qQZv--g" outputPin="_K6AcYQ5NEfGPjL6qQZv--g" outputLabels="_HkX9UA5NEfGPjL6qQZv--g">
+      <term xsi:type="datadictionary:TRUE" id="_mLwWUA5NEfGPjL6qQZv--g"/>
+    </assignment>
+  </behavior>
+  <behavior id="_Qm8xEQ5NEfGPjL6qQZv--g" entityName="sinkReceive">
+    <inPin id="_TAW4cA5NEfGPjL6qQZv--g" entityName="sinkPinIn"/>
+  </behavior>
+  <behavior id="_TsW6cQ5bEfGdzZwkavR8kQ" entityName="middleForward">
+    <inPin id="_VYeeAA5bEfGdzZwkavR8kQ" entityName="middleInPin"/>
+    <outPin id="_XifegQ5bEfGdzZwkavR8kQ" entityName="middleOutPin"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Y59Asw5bEfGdzZwkavR8kQ" outputPin="_XifegQ5bEfGdzZwkavR8kQ" inputPins="_VYeeAA5bEfGdzZwkavR8kQ"/>
+  </behavior>
+</datadictionary:DataDictionary>

@@ -3,29 +3,17 @@ package org.dataflowanalysis.privacy.test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import org.apache.log4j.Logger;
-import org.dataflowanalysis.analysis.dfd.DFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.analysis.dfd.core.DFDFlowGraphCollection;
-import org.dataflowanalysis.analysis.utils.LoggerManager;
-import org.dataflowanalysis.dfd.datadictionary.Assignment;
 import org.dataflowanalysis.examplemodels.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
 import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
-import org.dataflowanalysis.privacy.core.PrivacyDFDTransposeFlowGraphFinder;
-import org.dataflowanalysis.privacy.resource.PrivacyDFDResourceProvider;
-import org.dataflowanalysis.privacy.resource.PrivacyDFDURIResourceProvider;
-import org.eclipse.core.runtime.Plugin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TransposeFinderTest {
 	public static final String TEST_MODEL_PROJECT_NAME = "org.dataflowanalysis.examplemodels";
-
-	private final Logger logger = LoggerManager.getLogger(PrivacyDFDConfidentialityAnalysis.class);
 
 	PrivacyDFDConfidentialityAnalysis analysis;
 

@@ -381,21 +381,6 @@ public class DFDVertex extends AbstractVertex<Node> {
     	
     	clone = EcoreUtil.copy(input);
     	
-    	// switch depending on type
-    	if(input instanceof Store) {
-    		clone = dfFactory.createStore();
-    	}
-    	else if(input instanceof org.dataflowanalysis.dfd.dataflowdiagram.Process) {
-    		clone = dfFactory.createProcess();
-    	}
-    	else if(input instanceof External) {
-    		clone = dfFactory.createExternal();
-    	}
-    	else {
-    		System.out.println(input.getClass());
-    		return null; // This should never happen
-    	}
-    	
     	clone.setId(input.getId());
     	clone.setEntityName(input.getEntityName());
     	

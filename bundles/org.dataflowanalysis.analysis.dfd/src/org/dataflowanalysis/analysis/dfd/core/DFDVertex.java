@@ -370,31 +370,7 @@ public class DFDVertex extends AbstractVertex<Node> {
                     copiedPinDFDVertexMap.put(key, newVertice);
                     mapping.putIfAbsent(oldVertex, newVertice);
                 });
-        return new DFDVertex(cloneNode(this.referencedElement), copiedPinDFDVertexMap, new HashMap<>(this.pinFlowMap));
-    }
-    
-    /**
-     * Creates a clone of a node. Behavior is also cloned (but not their contents)
-     */
-    public static Node cloneNode(Node input) {
-    	Node clone;
-    	
-    	clone = EcoreUtil.copy(input);
-    	
-    	clone.setId(input.getId());
-    	clone.setEntityName(input.getEntityName());
-    	
-    	clone.setBehavior(cloneBehavior(input.getBehavior()));
-    	
-    	return clone;
-    	
-    	
-    }
-    
-    public static Behavior cloneBehavior(Behavior input) {
-    	Behavior clone = EcoreUtil.copy(input);
-    	
-    	return clone;
+        return new DFDVertex(this.referencedElement, copiedPinDFDVertexMap, new HashMap<>(this.pinFlowMap));
     }
 
     @Override

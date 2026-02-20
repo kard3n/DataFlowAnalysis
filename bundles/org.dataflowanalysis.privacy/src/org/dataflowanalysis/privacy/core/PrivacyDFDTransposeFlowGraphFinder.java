@@ -15,6 +15,7 @@ import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
 import org.dataflowanalysis.privacy.consentmodel.Role;
 import org.dataflowanalysis.privacy.consentmodel.RoleLabel;
 import org.dataflowanalysis.privacy.resource.PrivacyDFDResourceProvider;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
 /**
  * The DFDTransposeFlowGraphFinder determines all transpose flow graphs
@@ -80,8 +81,20 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 			// Adapt source nodes
 			combinations.forEach(combination -> {
-				List<AbstractAssignment> modifiedAssignments = new LinkedList<>(); // Holds all assignments we added
-																					// labels to
+				// Clone the diagram
+				Copier copier = new Copier();
+			    DataFlowDiagram clonedDiagram = (DataFlowDiagram) copier.copy(this.dataFlowDiagram);
+			    DataDictionary clonedDictionary = (DataDictionary) copier.copy(this.dataDictionary);
+			    copier.copyReferences();
+			    
+			    List<Node> clonedSources = sources.stream()
+			            .map(n -> (Node) copier.get(n))
+			            .toList();
+			            
+			    List<Node> clonedSinks = sinkNodes.stream()
+			            .filter(Node.class::isInstance)
+			            .map(n -> (Node) copier.get(n))
+			            .toList();
 
 				// Make a list of all labels that should be added to each data item for the
 				// current consent combination
@@ -89,13 +102,13 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 						.getLabels().stream().filter(label -> combination.contains(label.getConsentOption()))
 						.map(label -> (AbstractLabel) label).toList());
 				labelsToAdd.add((AbstractLabel) roleLabel);
+				
 
 				// Add new labels to the behavior
-				sources.forEach(source -> {
+				clonedSources.forEach(source -> {
 					source.getBehavior().getAssignment().forEach(assignment -> {
 						if (assignment instanceof Assignment) {
 							((Assignment) assignment).getOutputLabels().addAll(labelsToAdd);
-							modifiedAssignments.add(assignment);
 						}
 						// TODO what about the other types? Necessary?
 					});
@@ -104,18 +117,12 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 				// Compute and add new DFDs.
 				// findTransposeFlowGraphs() should create copies, including of the behavior and
 				// assignments
-				DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(this.dataDictionary,
-						this.dataFlowDiagram);
-				transposeFlowGraphs.addAll(finder.findTransposeFlowGraphs(sinkNodes, sources).stream()
+				DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(clonedDictionary,
+						clonedDiagram);
+				transposeFlowGraphs.addAll(finder.findTransposeFlowGraphs(clonedSinks, clonedSources).stream()
 						.filter(DFDTransposeFlowGraph.class::isInstance).map(DFDTransposeFlowGraph.class::cast)
 						.toList());
 
-				// Remove labels from the behavior (or to be exact, its assignments)
-				modifiedAssignments.forEach(assignment -> {
-					if (assignment instanceof Assignment) {
-						((Assignment) assignment).getOutputLabels().removeAll(labelsToAdd);
-					}
-				});
 			});
 
 		});

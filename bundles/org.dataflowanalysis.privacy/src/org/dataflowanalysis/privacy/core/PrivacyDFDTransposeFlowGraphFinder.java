@@ -110,13 +110,10 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 						if (assignment instanceof Assignment) {
 							((Assignment) assignment).getOutputLabels().addAll(labelsToAdd);
 						}
-						// TODO what about the other types? Necessary?
 					});
 				});
 
 				// Compute and add new DFDs.
-				// findTransposeFlowGraphs() should create copies, including of the behavior and
-				// assignments
 				DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(clonedDictionary,
 						clonedDiagram);
 				transposeFlowGraphs.addAll(finder.findTransposeFlowGraphs(clonedSinks, clonedSources).stream()

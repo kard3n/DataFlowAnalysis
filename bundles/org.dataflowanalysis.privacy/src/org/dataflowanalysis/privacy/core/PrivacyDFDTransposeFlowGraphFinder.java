@@ -71,8 +71,12 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 		List<Node> sources = sourceNodes.stream().filter(Node.class::isInstance).map(Node.class::cast).toList();
 
 		// Go over all roles
-		this.consentModel.getRoleLabelType().getLabels().forEach(roleLabel -> {
+		for (RoleLabel roleLabel : this.consentModel.getRoleLabelType().getLabels()) {
 			Role role = roleLabel.getRole();
+
+			// Skip the role if no source node with the role exists
+			if (sources.stream().filter(node -> node.getProperties().contains(roleLabel)).count() == 0) continue;
+
 			// calculate all consent combinations for the current role
 			List<Set<ConsentOption>> combinations = this.calculateRoleConsentOptions(role);
 
@@ -83,18 +87,14 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 			combinations.forEach(combination -> {
 				// Clone the diagram
 				Copier copier = new Copier();
-			    DataFlowDiagram clonedDiagram = (DataFlowDiagram) copier.copy(this.dataFlowDiagram);
-			    DataDictionary clonedDictionary = (DataDictionary) copier.copy(this.dataDictionary);
-			    copier.copyReferences();
-			    
-			    List<Node> clonedSources = sources.stream()
-			            .map(n -> (Node) copier.get(n))
-			            .toList();
-			            
-			    List<Node> clonedSinks = sinkNodes.stream()
-			            .filter(Node.class::isInstance)
-			            .map(n -> (Node) copier.get(n))
-			            .toList();
+				DataFlowDiagram clonedDiagram = (DataFlowDiagram) copier.copy(this.dataFlowDiagram);
+				DataDictionary clonedDictionary = (DataDictionary) copier.copy(this.dataDictionary);
+				copier.copyReferences();
+
+				List<Node> clonedSources = sources.stream().map(n -> (Node) copier.get(n)).toList();
+
+				List<Node> clonedSinks = sinkNodes.stream().filter(Node.class::isInstance)
+						.map(n -> (Node) copier.get(n)).toList();
 
 				// Make a list of all labels that should be added to each data item for the
 				// current consent combination
@@ -102,7 +102,6 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 						.getLabels().stream().filter(label -> combination.contains(label.getConsentOption()))
 						.map(label -> (AbstractLabel) label).toList());
 				labelsToAdd.add((AbstractLabel) roleLabel);
-				
 
 				// Add new labels to the behavior
 				clonedSources.forEach(source -> {
@@ -114,15 +113,14 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 				});
 
 				// Compute and add new DFDs.
-				DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(clonedDictionary,
-						clonedDiagram);
+				DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(clonedDictionary, clonedDiagram);
 				transposeFlowGraphs.addAll(finder.findTransposeFlowGraphs(clonedSinks, clonedSources).stream()
 						.filter(DFDTransposeFlowGraph.class::isInstance).map(DFDTransposeFlowGraph.class::cast)
 						.toList());
 
 			});
 
-		});
+		}
 
 		return transposeFlowGraphs;
 	}

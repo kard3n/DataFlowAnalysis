@@ -13,6 +13,7 @@ import org.dataflowanalysis.dfd.dataflowdiagram.*;
 import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
 import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
 import org.dataflowanalysis.privacy.consentmodel.Role;
+import org.dataflowanalysis.privacy.consentmodel.RoleLabel;
 import org.dataflowanalysis.privacy.resource.PrivacyDFDResourceProvider;
 
 /**
@@ -32,7 +33,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 			logger.error("Received wrong type of resource provider.");
 			throw new RuntimeException("");
 		}
-		
+
 		this.dataFlowDiagram = ((PrivacyDFDResourceProvider) resourceProvider).getDataFlowDiagram();
 		this.consentModel = ((PrivacyDFDResourceProvider) resourceProvider).getConsentModel();
 		this.dataDictionary = ((PrivacyDFDResourceProvider) resourceProvider).getDataDictionary();
@@ -40,7 +41,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 	public PrivacyDFDTransposeFlowGraphFinder(DataDictionary dataDictionary, DataFlowDiagram dataFlowDiagram,
 			ConsentModel consentModel) {
-		
+
 		this.dataDictionary = dataDictionary;
 		this.dataFlowDiagram = dataFlowDiagram;
 		this.consentModel = consentModel;
@@ -53,7 +54,8 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 */
 	@Override
 	public List<? extends AbstractTransposeFlowGraph> findTransposeFlowGraphs() {
-		return this.findTransposeFlowGraphs(getEndNodes(dataFlowDiagram.getNodes()), List.of());
+		return this.findTransposeFlowGraphs(getEndNodes(dataFlowDiagram.getNodes()),
+				getSourceNodes(dataFlowDiagram.getNodes()));
 	}
 
 	@Override
@@ -72,31 +74,31 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 			Role role = roleLabel.getRole();
 			// calculate all consent combinations for the current role
 			List<Set<ConsentOption>> combinations = this.calculateRoleConsentOptions(role);
-			
-			logger.info("Final amount of consent combinations for role "+  role.getEntityName() + " : " + combinations.size());
+
+			logger.info("Final amount of consent combinations for role " + role.getEntityName() + " : "
+					+ combinations.size());
 
 			// Adapt source nodes
 			combinations.forEach(combination -> {
-				List<AbstractAssignment> modifiedAssignments = new LinkedList<>(); // Holds all assignments we added labels to
+				List<AbstractAssignment> modifiedAssignments = new LinkedList<>(); // Holds all assignments we added
+																					// labels to
 
 				// Make a list of all labels that should be added to each data item for the
 				// current consent combination
-				ArrayList<AbstractLabel> labelsToAdd = new ArrayList<>(this.consentModel.getConsentLabelType().getLabels().stream()
-						.filter(label -> combination.contains(label.getConsentOption()))
+				ArrayList<AbstractLabel> labelsToAdd = new ArrayList<>(this.consentModel.getConsentLabelType()
+						.getLabels().stream().filter(label -> combination.contains(label.getConsentOption()))
 						.map(label -> (AbstractLabel) label).toList());
 				labelsToAdd.add((AbstractLabel) roleLabel);
+
 				// Add new labels to the behavior
 				sources.forEach(source -> {
-					// Skip all sources without the current role(label)
-					if (source.getProperties().contains((AbstractLabel) roleLabel)) {
-						source.getBehavior().getAssignment().forEach(assignment -> {
-							if (assignment instanceof Assignment) {
-								((Assignment) assignment).getOutputLabels().addAll(labelsToAdd);
-								modifiedAssignments.add(assignment);
-							}
-							// TODO what about the other types? Necessary?
-						});
-					}
+					source.getBehavior().getAssignment().forEach(assignment -> {
+						if (assignment instanceof Assignment) {
+							((Assignment) assignment).getOutputLabels().addAll(labelsToAdd);
+							modifiedAssignments.add(assignment);
+						}
+						// TODO what about the other types? Necessary?
+					});
 				});
 
 				// Compute and add new DFDs.
@@ -245,6 +247,29 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 			throw new IllegalArgumentException("Error, sink cannot be identified!");
 
 		return endNodes;
+	}
+
+	/**
+	 * Gets a list of nodes that are sources . A node is a source node if it has an
+	 * output pin and a role
+	 * 
+	 * @param nodes A list of all nodes, whose sources should be determined
+	 * @return List of source nodes
+	 */
+	protected List<Node> getSourceNodes(List<Node> nodes) {
+		var sourceNodes = nodes.stream().filter(node -> {
+
+			return node.getBehavior().getOutPin().size() > 0 && node.getProperties().stream().filter(label -> {
+				if (label instanceof RoleLabel)
+					return true;
+				return false;
+			}).count() > 0;
+		}).toList();
+
+		if (sourceNodes.isEmpty())
+			throw new IllegalArgumentException("Error, no source nodes could be identified!");
+
+		return sourceNodes;
 	}
 
 	/**

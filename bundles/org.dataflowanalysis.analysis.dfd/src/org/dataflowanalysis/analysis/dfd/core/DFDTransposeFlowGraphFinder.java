@@ -82,7 +82,7 @@ public class DFDTransposeFlowGraphFinder implements TransposeFlowGraphFinder {
     /**
      * Builds a list of sink vertices with previous vertices for the creation of transpose flow graphs.
      * <p/>
-     * This method preforms the determination of sinks recursively
+     * This method performs the determination of sinks recursively
      * @param sink Single sink vertex without previous vertices calculated
      * @param inputPins Relevant input pins on the given vertex
      * @return List of sinks created from the initial sink with previous vertices calculated

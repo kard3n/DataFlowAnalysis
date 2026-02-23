@@ -20,7 +20,6 @@ import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
 import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
 import org.dataflowanalysis.dfd.datadictionary.AbstractLabelType;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
-import org.dataflowanalysis.dfd.datadictionary.Behavior;
 import org.dataflowanalysis.dfd.datadictionary.BinaryOperator;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.LabelReference;
@@ -31,13 +30,8 @@ import org.dataflowanalysis.dfd.datadictionary.SetAssignment;
 import org.dataflowanalysis.dfd.datadictionary.TRUE;
 import org.dataflowanalysis.dfd.datadictionary.Term;
 import org.dataflowanalysis.dfd.datadictionary.UnsetAssignment;
-import org.dataflowanalysis.dfd.datadictionary.datadictionaryFactory;
-import org.dataflowanalysis.dfd.dataflowdiagram.External;
 import org.dataflowanalysis.dfd.dataflowdiagram.Flow;
 import org.dataflowanalysis.dfd.dataflowdiagram.Node;
-import org.dataflowanalysis.dfd.dataflowdiagram.Store;
-import org.dataflowanalysis.dfd.dataflowdiagram.dataflowdiagramFactory;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * This class represents a vertex references a node in the dfd model. Multiple dfd vertices may reference the same node
@@ -45,11 +39,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 public class DFDVertex extends AbstractVertex<Node> {
     protected final Map<Pin, DFDVertex> pinDFDVertexMap;
     protected final Map<Pin, Flow> pinFlowMap;
-    protected final List<Pin> evaluatedOutPins = new ArrayList<>();
-    
-    private static final datadictionaryFactory ddFactory = datadictionaryFactory.eINSTANCE;
-	private static final dataflowdiagramFactory dfFactory = dataflowdiagramFactory.eINSTANCE;
-    
+    protected final List<Pin> evaluatedOutPins = new ArrayList<>();    
 
     /**
      * Creates a new vertex with the given referenced node and pin mappings

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.dataflowanalysis.analysis.core.AbstractTransposeFlowGraph;
 import org.dataflowanalysis.analysis.core.AbstractVertex;
@@ -15,38 +16,49 @@ import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
 import org.dataflowanalysis.dfd.dataflowdiagram.Node;
 import org.dataflowanalysis.privacy.consentmodel.ConsentLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataItem;
+import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataState;
+import org.dataflowanalysis.privacy.consentmodel.DataStateLabel;
 
 public class PrivacyDataFlowConstraint {
-	public HashSet<PrivacyConstraintViolation> findViolations(FlowGraphCollection flowGraphs){
+	public HashSet<PrivacyConstraintViolation> findViolations(FlowGraphCollection flowGraphs) {
 		HashSet<PrivacyConstraintViolation> violations = new HashSet<>();
-		
-		//# Step 1: determine all vertices (by their ID) of the flow graphs
-		// Map ID of the vertex (ID of the referenced element), with the versions that exist in the flowgraphs
-		HashMap<String, LinkedList<AbstractVertex>> vertexInstances = this.computeVertices(flowGraphs.getTransposeFlowGraphs());
-		
+
+		// # Step 1: determine all vertices (by their ID) of the flow graphs
+		// Map ID of the vertex (ID of the referenced element), with the versions that
+		// exist in the flowgraphs
+		HashMap<String, LinkedList<AbstractVertex>> vertexInstances = this
+				.computeVertices(flowGraphs.getTransposeFlowGraphs());
+
 		// Step two: calculate worst-case scenarios for every pin
-		for(var entry: vertexInstances.entrySet()) { // go over vertices
+		for (var entry : vertexInstances.entrySet()) { // go over vertices
 			// group CharacteristicValue lists by pin (DataCharacteristic.variableName)
 			entry.getValue().forEach(vert -> {
-				var pinToCharacteristics = this.groupIncomingCharacteristicsByPin(((DFDVertex)vert));
-				
-				// Evaluate every pin by itself: check that only data from users who have consented to this node's functionalities reached this pin,
-				// and that the data combinations are allowed as part of this node's functionalities
-				for(var pin: pinToCharacteristics.entrySet()) {
-					// Go through the lists of CharacteristicValues, and check that all functionalities of the node (in form of ConsentOptions)
-					// are present in it -> check that the user has consented to all functionalities of this node
-					violations.addAll(this.allFunctionalitiesConsentedTo(pin.getValue(), ((DFDVertex)vert)));
-					
-					// Create worst-case scenarios for this pin by creating the smallest subset of DataStates possible for each data item, using the following rule:
-					// Two DataState sets can be combined to their intersection, if their intersection is not empty.
-					// If two sets contain DataStates that can not be related to each other, those sets can not be unified
+				var pinToCharacteristics = this.groupIncomingCharacteristicsByPin(((DFDVertex) vert));
+
+				// Evaluate every pin by itself: check that only data from users who have
+				// consented to this node's functionalities reached this pin,
+				// and that the data combinations are allowed as part of this node's
+				// functionalities
+				for (var pin : pinToCharacteristics.entrySet()) {
+					// Go through the lists of CharacteristicValues, and check that all
+					// functionalities of the node (in form of ConsentOptions)
+					// are present in it -> check that the user has consented to all functionalities
+					// of this node
+					violations.addAll(this.allFunctionalitiesConsentedTo(pin.getValue(), ((DFDVertex) vert)));
+
+					// Create worst-case scenarios for this pin by creating the smallest subset of
+					// DataStates possible for each data item, using the following rule:
+					// Two DataState sets can be combined to their intersection, if their
+					// intersection is not empty.
+					// If two sets contain DataStates that can not be related to each other, those
+					// sets can not be unified
 					var dataItemToDataState = this.groupDataStateByItem(pin.getValue());
 				}
-				
+
 			});
 		}
-		
+
 		return violations;
 	}
 
@@ -119,16 +131,139 @@ public class PrivacyDataFlowConstraint {
 			return cv.getLabel() instanceof ConsentLabel;
 		}).map(cv -> ((ConsentLabel) cv.getLabel())).toList();
 	}
-	
+
 	/**
-	 * Taking a set of sets of CharacteristicValues, extracts the data items for each, and associates them with that sets DataStates
+	 * Taking a set of sets of CharacteristicValues, extracts the data items for
+	 * each, and associates them with that set's DataStates.
+	 * 
 	 * @param values
 	 * @return
 	 */
-	private HashMap<DataItem, HashSet<DataState>> groupDataStateByItem(HashSet<HashSet<CharacteristicValue>> values){
-		HashMap<DataItem, HashSet<DataState>> itemToStates = new HashMap<>();
-		
+	private HashMap<DataItem, List<List<DataState>>> groupDataStateByItem(
+			HashSet<HashSet<CharacteristicValue>> values) {
+		HashMap<DataItem, List<List<DataState>>> itemToStates = new HashMap<>();
+		for (var characSet : values) {
+			var dataStates = extractDataStates(characSet);
+			var dataItems = extractDataItems(characSet);
+
+			dataItems.forEach(item -> {
+				itemToStates.computeIfAbsent(item, k -> new LinkedList<>()).add(dataStates);
+			});
+		}
+
 		return itemToStates;
+	}
+
+	/**
+	 * From the given list of CharacteristicValues, extract all DataStates
+	 * associated with its DataStateLabels
+	 * 
+	 * @param labels list of CharacteristicValue whose DataStates to extract
+	 * @return A list of DataStates
+	 */
+	private List<DataState> extractDataStates(Collection<CharacteristicValue> labels) {
+		return labels.stream().map(cv -> ((DFDCharacteristicValue) cv)).filter(cv -> {
+			return cv.getLabel() instanceof DataStateLabel;
+		}).map(cv -> ((DataStateLabel) cv.getLabel()).getDataState()).toList();
+	}
+
+	/**
+	 * From the given list of CharacteristicValues, extract all DataItems associated
+	 * with its DataItemLabels
+	 * 
+	 * @param labels list of CharacteristicValue whose DataItems to extract
+	 * @return A list of DataItems
+	 */
+	private List<DataItem> extractDataItems(Collection<CharacteristicValue> labels) {
+		return labels.stream().map(cv -> ((DFDCharacteristicValue) cv)).filter(cv -> {
+			return cv.getLabel() instanceof DataItemLabel;
+		}).map(cv -> ((DataItemLabel) cv.getLabel()).getDataItem()).toList();
+	}
+
+	/**
+	 * Constructs the largest possible sets of the given data states by creating
+	 * their intersection. If two sets contain a DataState that can not be
+	 * associated to a DataState of the other set, the intersection of those two
+	 * sets can not be created in that iteration as their data can not be related
+	 * 
+	 * @param states
+	 * @return
+	 */
+	private List<Set<DataState>> reduceDataStateSets(List<List<DataState>> states) {
+		// If less than two, we can't do intersections
+		if (states.size() < 2)
+			return states.stream().map(i -> ((Set<DataState>) new HashSet<>(i))).toList();
+
+		List<Set<DataState>> currentState = new LinkedList<>();
+		states.forEach(stateList -> {
+			currentState.add(new HashSet<>(stateList));
+		});
+
+		boolean stateChanged = false;
+		while (stateChanged) {
+			stateChanged = false;
+			if (currentState.size() < 2)
+				break;
+			for (var stateList : currentState) {
+				// Try to intersect with this set with each other of the sets
+				// If possible, the original sets are removed and the intersection added
+				if (stateChanged)
+					break;
+
+				for (var otherStateList : currentState) {
+					if (stateList == otherStateList)
+						continue;
+					if (this.stateSetsCanBeIntersected(stateList, otherStateList)) {
+						var intersection = new HashSet<>(stateList);
+						intersection.retainAll(otherStateList);
+						currentState.remove(stateList);
+						currentState.remove(otherStateList);
+						// Add to the beginning. This set is reduced and therewith more likely to be
+						// able to intersect with other entries
+						currentState.add(0, intersection);
+						stateChanged = true;
+						break;
+					}
+				}
+			}
+		}
+
+		return currentState;
+	}
+
+	/**
+	 * Checks if the intersection of both sets is not empty, and that both sets
+	 * don't contain a DataState that is can not related with a DataState of the
+	 * other set
+	 * 
+	 * @param setOne   The first set
+	 * @param stateTwo The second set
+	 * @return True if the sets may be intersected to create a worse-case set
+	 */
+	private boolean stateSetsCanBeIntersected(Set<DataState> setOne, Set<DataState> setTwo) {
+		var intersection = new HashSet<>(setOne);
+		intersection.retainAll(setTwo);
+		if (intersection.size() < 1)
+			return false;
+
+		// Check for DataState non-relatability
+		boolean setOneUnrelatable = false;
+		boolean setTwoUnrelatable = false;
+		for (var stateOne : setOne) {
+			if (setOneUnrelatable && setTwoUnrelatable)
+				break;
+
+			for (var stateTwo : setTwo) {
+				if (stateOne.getNotRelatableWith().contains(stateTwo)) {
+					setTwoUnrelatable = true;
+				}
+				if (stateTwo.getNotRelatableWith().contains(stateOne)) {
+					setOneUnrelatable = true;
+				}
+			}
+		}
+
+		return !(setOneUnrelatable && setTwoUnrelatable);
 	}
 }
 

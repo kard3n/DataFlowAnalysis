@@ -139,6 +139,24 @@ public interface consentmodelFactory extends EFactory {
 	StatefulItem createStatefulItem();
 
 	/**
+	 * Returns a new object of class '<em>Data State Label Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data State Label Type</em>'.
+	 * @generated
+	 */
+	DataStateLabelType createDataStateLabelType();
+
+	/**
+	 * Returns a new object of class '<em>Data State Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data State Label</em>'.
+	 * @generated
+	 */
+	DataStateLabel createDataStateLabel();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

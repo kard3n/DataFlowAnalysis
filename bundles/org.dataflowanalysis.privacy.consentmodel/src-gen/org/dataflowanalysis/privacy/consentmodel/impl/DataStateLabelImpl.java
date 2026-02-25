@@ -4,12 +4,13 @@ package org.dataflowanalysis.privacy.consentmodel.impl;
 
 import org.dataflowanalysis.dfd.datadictionary.impl.AbstractLabelImpl;
 
-import org.dataflowanalysis.privacy.consentmodel.DataItem;
-import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
+import org.dataflowanalysis.privacy.consentmodel.DataState;
+import org.dataflowanalysis.privacy.consentmodel.DataStateLabel;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -17,34 +18,34 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Data Item Label</b></em>'.
+ * An implementation of the model object '<em><b>Data State Label</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.DataItemLabelImpl#getDataItem <em>Data Item</em>}</li>
+ *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.DataStateLabelImpl#getDataState <em>Data State</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabel {
+public class DataStateLabelImpl extends AbstractLabelImpl implements DataStateLabel {
 	/**
-	 * The cached value of the '{@link #getDataItem() <em>Data Item</em>}' containment reference.
+	 * The cached value of the '{@link #getDataState() <em>Data State</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDataItem()
+	 * @see #getDataState()
 	 * @generated
 	 * @ordered
 	 */
-	protected DataItem dataItem;
+	protected DataState dataState;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DataItemLabelImpl() {
+	protected DataStateLabelImpl() {
 		super();
 	}
 
@@ -55,7 +56,7 @@ public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabe
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return consentmodelPackage.Literals.DATA_ITEM_LABEL;
+		return consentmodelPackage.Literals.DATA_STATE_LABEL;
 	}
 
 	/**
@@ -64,8 +65,8 @@ public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabe
 	 * @generated
 	 */
 	@Override
-	public DataItem getDataItem() {
-		return dataItem;
+	public DataState getDataState() {
+		return dataState;
 	}
 
 	/**
@@ -73,12 +74,12 @@ public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDataItem(DataItem newDataItem, NotificationChain msgs) {
-		DataItem oldDataItem = dataItem;
-		dataItem = newDataItem;
+	public NotificationChain basicSetDataState(DataState newDataState, NotificationChain msgs) {
+		DataState oldDataState = dataState;
+		dataState = newDataState;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM, oldDataItem, newDataItem);
+					consentmodelPackage.DATA_STATE_LABEL__DATA_STATE, oldDataState, newDataState);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -93,21 +94,21 @@ public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabe
 	 * @generated
 	 */
 	@Override
-	public void setDataItem(DataItem newDataItem) {
-		if (newDataItem != dataItem) {
+	public void setDataState(DataState newDataState) {
+		if (newDataState != dataState) {
 			NotificationChain msgs = null;
-			if (dataItem != null)
-				msgs = ((InternalEObject) dataItem).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM, null, msgs);
-			if (newDataItem != null)
-				msgs = ((InternalEObject) newDataItem).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM, null, msgs);
-			msgs = basicSetDataItem(newDataItem, msgs);
+			if (dataState != null)
+				msgs = ((InternalEObject) dataState).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - consentmodelPackage.DATA_STATE_LABEL__DATA_STATE, null, msgs);
+			if (newDataState != null)
+				msgs = ((InternalEObject) newDataState).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - consentmodelPackage.DATA_STATE_LABEL__DATA_STATE, null, msgs);
+			msgs = basicSetDataState(newDataState, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM,
-					newDataItem, newDataItem));
+			eNotify(new ENotificationImpl(this, Notification.SET, consentmodelPackage.DATA_STATE_LABEL__DATA_STATE,
+					newDataState, newDataState));
 	}
 
 	/**
@@ -118,8 +119,8 @@ public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabe
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM:
-			return basicSetDataItem(null, msgs);
+		case consentmodelPackage.DATA_STATE_LABEL__DATA_STATE:
+			return basicSetDataState(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -132,8 +133,8 @@ public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabe
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM:
-			return getDataItem();
+		case consentmodelPackage.DATA_STATE_LABEL__DATA_STATE:
+			return getDataState();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -143,12 +144,11 @@ public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM:
-			setDataItem((DataItem) newValue);
+		case consentmodelPackage.DATA_STATE_LABEL__DATA_STATE:
+			setDataState((DataState) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -162,8 +162,8 @@ public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabe
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM:
-			setDataItem((DataItem) null);
+		case consentmodelPackage.DATA_STATE_LABEL__DATA_STATE:
+			setDataState((DataState) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -177,10 +177,10 @@ public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabe
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM:
-			return dataItem != null;
+		case consentmodelPackage.DATA_STATE_LABEL__DATA_STATE:
+			return dataState != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //DataItemLabelImpl
+} //DataStateLabelImpl

@@ -372,6 +372,52 @@ public class consentmodelItemProviderAdapterFactory extends consentmodelAdapterF
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.privacy.consentmodel.DataStateLabelType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataStateLabelTypeItemProvider dataStateLabelTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.privacy.consentmodel.DataStateLabelType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataStateLabelTypeAdapter() {
+		if (dataStateLabelTypeItemProvider == null) {
+			dataStateLabelTypeItemProvider = new DataStateLabelTypeItemProvider(this);
+		}
+
+		return dataStateLabelTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.privacy.consentmodel.DataStateLabel} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataStateLabelItemProvider dataStateLabelItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.privacy.consentmodel.DataStateLabel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataStateLabelAdapter() {
+		if (dataStateLabelItemProvider == null) {
+			dataStateLabelItemProvider = new DataStateLabelItemProvider(this);
+		}
+
+		return dataStateLabelItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -502,6 +548,10 @@ public class consentmodelItemProviderAdapterFactory extends consentmodelAdapterF
 			dataItemLabelItemProvider.dispose();
 		if (statefulItemItemProvider != null)
 			statefulItemItemProvider.dispose();
+		if (dataStateLabelTypeItemProvider != null)
+			dataStateLabelTypeItemProvider.dispose();
+		if (dataStateLabelItemProvider != null)
+			dataStateLabelItemProvider.dispose();
 	}
 
 }

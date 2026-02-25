@@ -26,14 +26,14 @@
         eType="#//ConsentOption"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConsentModel" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="data_states" upperBound="-1"
-        eType="#//DataState" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleLabelType" lowerBound="1"
         eType="#//RoleLabelType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="consentLabelType" lowerBound="1"
         eType="#//ConsentLabelType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataItemLabelType" lowerBound="1"
         eType="#//DataItemLabelType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataStateLabelType" lowerBound="1"
+        eType="#//DataStateLabelType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleLabelType" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabelType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="labels" lowerBound="1"
@@ -56,12 +56,20 @@
         upperBound="-1" eType="#//DataItemLabel" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataItemLabel" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabel">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataItem" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataItem" lowerBound="1"
         eType="#//DataItem" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatefulItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" upperBound="-1"
         eType="#//DataState"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="item" lowerBound="1" eType="#//DataItem"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataStateLabelType" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabelType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
+        eType="#//DataStateLabel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataStateLabel" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataState" lowerBound="1"
+        eType="#//DataState" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

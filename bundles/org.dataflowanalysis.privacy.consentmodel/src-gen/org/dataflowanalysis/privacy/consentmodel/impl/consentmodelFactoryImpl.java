@@ -82,6 +82,10 @@ public class consentmodelFactoryImpl extends EFactoryImpl implements consentmode
 			return createDataItemLabel();
 		case consentmodelPackage.STATEFUL_ITEM:
 			return createStatefulItem();
+		case consentmodelPackage.DATA_STATE_LABEL_TYPE:
+			return createDataStateLabelType();
+		case consentmodelPackage.DATA_STATE_LABEL:
+			return createDataStateLabel();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -228,6 +232,28 @@ public class consentmodelFactoryImpl extends EFactoryImpl implements consentmode
 	public StatefulItem createStatefulItem() {
 		StatefulItemImpl statefulItem = new StatefulItemImpl();
 		return statefulItem;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataStateLabelType createDataStateLabelType() {
+		DataStateLabelTypeImpl dataStateLabelType = new DataStateLabelTypeImpl();
+		return dataStateLabelType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataStateLabel createDataStateLabel() {
+		DataStateLabelImpl dataStateLabel = new DataStateLabelImpl();
+		return dataStateLabel;
 	}
 
 	/**

@@ -139,6 +139,16 @@ public class consentmodelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseDataStateLabelType(DataStateLabelType object) {
+			return createDataStateLabelTypeAdapter();
+		}
+
+		@Override
+		public Adapter caseDataStateLabel(DataStateLabel object) {
+			return createDataStateLabelAdapter();
+		}
+
+		@Override
 		public Adapter caseIdentifier(Identifier object) {
 			return createIdentifierAdapter();
 		}
@@ -361,6 +371,34 @@ public class consentmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStatefulItemAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.privacy.consentmodel.DataStateLabelType <em>Data State Label Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataStateLabelType
+	 * @generated
+	 */
+	public Adapter createDataStateLabelTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.privacy.consentmodel.DataStateLabel <em>Data State Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataStateLabel
+	 * @generated
+	 */
+	public Adapter createDataStateLabelAdapter() {
 		return null;
 	}
 

@@ -248,6 +248,36 @@ public class consentmodelSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case consentmodelPackage.DATA_STATE_LABEL_TYPE: {
+			DataStateLabelType dataStateLabelType = (DataStateLabelType) theEObject;
+			T result = caseDataStateLabelType(dataStateLabelType);
+			if (result == null)
+				result = caseAbstractLabelType(dataStateLabelType);
+			if (result == null)
+				result = caseEntity(dataStateLabelType);
+			if (result == null)
+				result = caseIdentifier(dataStateLabelType);
+			if (result == null)
+				result = caseNamedElement(dataStateLabelType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case consentmodelPackage.DATA_STATE_LABEL: {
+			DataStateLabel dataStateLabel = (DataStateLabel) theEObject;
+			T result = caseDataStateLabel(dataStateLabel);
+			if (result == null)
+				result = caseAbstractLabel(dataStateLabel);
+			if (result == null)
+				result = caseEntity(dataStateLabel);
+			if (result == null)
+				result = caseIdentifier(dataStateLabel);
+			if (result == null)
+				result = caseNamedElement(dataStateLabel);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -445,6 +475,36 @@ public class consentmodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStatefulItem(StatefulItem object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data State Label Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data State Label Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataStateLabelType(DataStateLabelType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data State Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data State Label</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataStateLabel(DataStateLabel object) {
 		return null;
 	}
 

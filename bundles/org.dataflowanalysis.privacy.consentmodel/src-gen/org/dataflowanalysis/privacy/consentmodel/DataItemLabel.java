@@ -4,8 +4,6 @@ package org.dataflowanalysis.privacy.consentmodel;
 
 import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
 
-import org.eclipse.emf.common.util.EList;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Data Item Label</b></em>'.
@@ -24,15 +22,25 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface DataItemLabel extends AbstractLabel {
 	/**
-	 * Returns the value of the '<em><b>Data Item</b></em>' containment reference list.
-	 * The list contents are of type {@link org.dataflowanalysis.privacy.consentmodel.DataItem}.
+	 * Returns the value of the '<em><b>Data Item</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Item</em>' containment reference list.
+	 * @return the value of the '<em>Data Item</em>' containment reference.
+	 * @see #setDataItem(DataItem)
 	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getDataItemLabel_DataItem()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<DataItem> getDataItem();
+	DataItem getDataItem();
+
+	/**
+	 * Sets the value of the '{@link org.dataflowanalysis.privacy.consentmodel.DataItemLabel#getDataItem <em>Data Item</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Data Item</em>' containment reference.
+	 * @see #getDataItem()
+	 * @generated
+	 */
+	void setDataItem(DataItem value);
 
 } // DataItemLabel

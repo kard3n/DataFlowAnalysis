@@ -211,6 +211,43 @@ public class consentmodelSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case consentmodelPackage.DATA_ITEM_LABEL_TYPE: {
+			DataItemLabelType dataItemLabelType = (DataItemLabelType) theEObject;
+			T result = caseDataItemLabelType(dataItemLabelType);
+			if (result == null)
+				result = caseAbstractLabelType(dataItemLabelType);
+			if (result == null)
+				result = caseEntity(dataItemLabelType);
+			if (result == null)
+				result = caseIdentifier(dataItemLabelType);
+			if (result == null)
+				result = caseNamedElement(dataItemLabelType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case consentmodelPackage.DATA_ITEM_LABEL: {
+			DataItemLabel dataItemLabel = (DataItemLabel) theEObject;
+			T result = caseDataItemLabel(dataItemLabel);
+			if (result == null)
+				result = caseAbstractLabel(dataItemLabel);
+			if (result == null)
+				result = caseEntity(dataItemLabel);
+			if (result == null)
+				result = caseIdentifier(dataItemLabel);
+			if (result == null)
+				result = caseNamedElement(dataItemLabel);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case consentmodelPackage.STATEFUL_ITEM: {
+			StatefulItem statefulItem = (StatefulItem) theEObject;
+			T result = caseStatefulItem(statefulItem);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -363,6 +400,51 @@ public class consentmodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConsentLabel(ConsentLabel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Item Label Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Item Label Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataItemLabelType(DataItemLabelType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Item Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Item Label</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataItemLabel(DataItemLabel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stateful Item</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stateful Item</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStatefulItem(StatefulItem object) {
 		return null;
 	}
 

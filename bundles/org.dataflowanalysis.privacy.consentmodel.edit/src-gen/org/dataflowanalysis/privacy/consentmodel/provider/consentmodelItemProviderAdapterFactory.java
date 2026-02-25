@@ -303,6 +303,75 @@ public class consentmodelItemProviderAdapterFactory extends consentmodelAdapterF
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.privacy.consentmodel.DataItemLabelType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataItemLabelTypeItemProvider dataItemLabelTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.privacy.consentmodel.DataItemLabelType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataItemLabelTypeAdapter() {
+		if (dataItemLabelTypeItemProvider == null) {
+			dataItemLabelTypeItemProvider = new DataItemLabelTypeItemProvider(this);
+		}
+
+		return dataItemLabelTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.privacy.consentmodel.DataItemLabel} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataItemLabelItemProvider dataItemLabelItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.privacy.consentmodel.DataItemLabel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataItemLabelAdapter() {
+		if (dataItemLabelItemProvider == null) {
+			dataItemLabelItemProvider = new DataItemLabelItemProvider(this);
+		}
+
+		return dataItemLabelItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.privacy.consentmodel.StatefulItem} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StatefulItemItemProvider statefulItemItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.privacy.consentmodel.StatefulItem}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStatefulItemAdapter() {
+		if (statefulItemItemProvider == null) {
+			statefulItemItemProvider = new StatefulItemItemProvider(this);
+		}
+
+		return statefulItemItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -427,6 +496,12 @@ public class consentmodelItemProviderAdapterFactory extends consentmodelAdapterF
 			roleLabelItemProvider.dispose();
 		if (consentLabelItemProvider != null)
 			consentLabelItemProvider.dispose();
+		if (dataItemLabelTypeItemProvider != null)
+			dataItemLabelTypeItemProvider.dispose();
+		if (dataItemLabelItemProvider != null)
+			dataItemLabelItemProvider.dispose();
+		if (statefulItemItemProvider != null)
+			statefulItemItemProvider.dispose();
 	}
 
 }

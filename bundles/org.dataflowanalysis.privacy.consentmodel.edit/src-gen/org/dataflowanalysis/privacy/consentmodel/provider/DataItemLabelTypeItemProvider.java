@@ -5,28 +5,36 @@ package org.dataflowanalysis.privacy.consentmodel.provider;
 import java.util.Collection;
 import java.util.List;
 
-import org.dataflowanalysis.privacy.consentmodel.DataItem;
+import org.dataflowanalysis.dfd.datadictionary.provider.AbstractLabelTypeItemProvider;
+
+import org.dataflowanalysis.privacy.consentmodel.DataItemLabelType;
+import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
+import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link org.dataflowanalysis.privacy.consentmodel.DataItem} object.
+ * This is the item provider adapter for a {@link org.dataflowanalysis.privacy.consentmodel.DataItemLabelType} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DataItemItemProvider extends EntityItemProvider {
+public class DataItemLabelTypeItemProvider extends AbstractLabelTypeItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataItemItemProvider(AdapterFactory adapterFactory) {
+	public DataItemLabelTypeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -46,14 +54,44 @@ public class DataItemItemProvider extends EntityItemProvider {
 	}
 
 	/**
-	 * This returns DataItem.gif.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(consentmodelPackage.Literals.DATA_ITEM_LABEL_TYPE__LABELS);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
+	 * This returns DataItemLabelType.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DataItem"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DataItemLabelType"));
 	}
 
 	/**
@@ -74,9 +112,9 @@ public class DataItemItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DataItem) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_DataItem_type")
-				: getString("_UI_DataItem_type") + " " + label;
+		String label = ((DataItemLabelType) object).getId();
+		return label == null || label.length() == 0 ? getString("_UI_DataItemLabelType_type")
+				: getString("_UI_DataItemLabelType_type") + " " + label;
 	}
 
 	/**
@@ -89,6 +127,12 @@ public class DataItemItemProvider extends EntityItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(DataItemLabelType.class)) {
+		case consentmodelPackage.DATA_ITEM_LABEL_TYPE__LABELS:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+			return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -102,6 +146,9 @@ public class DataItemItemProvider extends EntityItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add(createChildParameter(consentmodelPackage.Literals.DATA_ITEM_LABEL_TYPE__LABELS,
+				consentmodelFactory.eINSTANCE.createDataItemLabel()));
 	}
 
 	/**

@@ -3,48 +3,53 @@
 package org.dataflowanalysis.privacy.consentmodel.impl;
 
 import java.util.Collection;
-import org.dataflowanalysis.privacy.consentmodel.StatefulItem;
-import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
+
+import org.dataflowanalysis.dfd.datadictionary.impl.AbstractLabelImpl;
+
+import org.dataflowanalysis.privacy.consentmodel.DataItem;
+import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>User Data Combination</b></em>'.
+ * An implementation of the model object '<em><b>Data Item Label</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.UserDataCombinationImpl#getMembers <em>Members</em>}</li>
+ *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.DataItemLabelImpl#getDataItem <em>Data Item</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class UserDataCombinationImpl extends EntityImpl implements UserDataCombination {
+public class DataItemLabelImpl extends AbstractLabelImpl implements DataItemLabel {
 	/**
-	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
+	 * The cached value of the '{@link #getDataItem() <em>Data Item</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMembers()
+	 * @see #getDataItem()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<StatefulItem> members;
+	protected EList<DataItem> dataItem;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UserDataCombinationImpl() {
+	protected DataItemLabelImpl() {
 		super();
 	}
 
@@ -55,7 +60,7 @@ public class UserDataCombinationImpl extends EntityImpl implements UserDataCombi
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return consentmodelPackage.Literals.USER_DATA_COMBINATION;
+		return consentmodelPackage.Literals.DATA_ITEM_LABEL;
 	}
 
 	/**
@@ -64,12 +69,12 @@ public class UserDataCombinationImpl extends EntityImpl implements UserDataCombi
 	 * @generated
 	 */
 	@Override
-	public EList<StatefulItem> getMembers() {
-		if (members == null) {
-			members = new EObjectContainmentEList<StatefulItem>(StatefulItem.class, this,
-					consentmodelPackage.USER_DATA_COMBINATION__MEMBERS);
+	public EList<DataItem> getDataItem() {
+		if (dataItem == null) {
+			dataItem = new EObjectContainmentEList<DataItem>(DataItem.class, this,
+					consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM);
 		}
-		return members;
+		return dataItem;
 	}
 
 	/**
@@ -80,8 +85,8 @@ public class UserDataCombinationImpl extends EntityImpl implements UserDataCombi
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case consentmodelPackage.USER_DATA_COMBINATION__MEMBERS:
-			return ((InternalEList<?>) getMembers()).basicRemove(otherEnd, msgs);
+		case consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM:
+			return ((InternalEList<?>) getDataItem()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -94,8 +99,8 @@ public class UserDataCombinationImpl extends EntityImpl implements UserDataCombi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case consentmodelPackage.USER_DATA_COMBINATION__MEMBERS:
-			return getMembers();
+		case consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM:
+			return getDataItem();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,9 +114,9 @@ public class UserDataCombinationImpl extends EntityImpl implements UserDataCombi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case consentmodelPackage.USER_DATA_COMBINATION__MEMBERS:
-			getMembers().clear();
-			getMembers().addAll((Collection<? extends StatefulItem>) newValue);
+		case consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM:
+			getDataItem().clear();
+			getDataItem().addAll((Collection<? extends DataItem>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +130,8 @@ public class UserDataCombinationImpl extends EntityImpl implements UserDataCombi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case consentmodelPackage.USER_DATA_COMBINATION__MEMBERS:
-			getMembers().clear();
+		case consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM:
+			getDataItem().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -140,10 +145,10 @@ public class UserDataCombinationImpl extends EntityImpl implements UserDataCombi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case consentmodelPackage.USER_DATA_COMBINATION__MEMBERS:
-			return members != null && !members.isEmpty();
+		case consentmodelPackage.DATA_ITEM_LABEL__DATA_ITEM:
+			return dataItem != null && !dataItem.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //UserDataCombinationImpl
+} //DataItemLabelImpl

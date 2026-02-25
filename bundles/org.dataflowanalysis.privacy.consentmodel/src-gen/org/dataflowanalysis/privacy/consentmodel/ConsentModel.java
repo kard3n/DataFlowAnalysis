@@ -18,7 +18,7 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getData_states <em>Data states</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getRoleLabelType <em>Role Label Type</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getConsentLabelType <em>Consent Label Type</em>}</li>
- *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItems <em>Data Items</em>}</li>
+ *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItemLabelType <em>Data Item Label Type</em>}</li>
  * </ul>
  *
  * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getConsentModel()
@@ -83,15 +83,25 @@ public interface ConsentModel extends Entity {
 	void setConsentLabelType(ConsentLabelType value);
 
 	/**
-	 * Returns the value of the '<em><b>Data Items</b></em>' containment reference list.
-	 * The list contents are of type {@link org.dataflowanalysis.privacy.consentmodel.DataItem}.
+	 * Returns the value of the '<em><b>Data Item Label Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Items</em>' containment reference list.
-	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getConsentModel_DataItems()
-	 * @model containment="true"
+	 * @return the value of the '<em>Data Item Label Type</em>' containment reference.
+	 * @see #setDataItemLabelType(DataItemLabelType)
+	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getConsentModel_DataItemLabelType()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<DataItem> getDataItems();
+	DataItemLabelType getDataItemLabelType();
+
+	/**
+	 * Sets the value of the '{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItemLabelType <em>Data Item Label Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Data Item Label Type</em>' containment reference.
+	 * @see #getDataItemLabelType()
+	 * @generated
+	 */
+	void setDataItemLabelType(DataItemLabelType value);
 
 } // ConsentModel

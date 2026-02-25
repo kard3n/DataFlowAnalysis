@@ -87,22 +87,13 @@ public interface consentmodelPackage extends EPackage {
 	int DATA_ITEM__ENTITY_NAME = IdentifierPackage.ENTITY__ENTITY_NAME;
 
 	/**
-	 * The feature id for the '<em><b>State</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_ITEM__STATE = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Data Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_ITEM_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
+	int DATA_ITEM_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Data Item</em>' class.
@@ -197,7 +188,7 @@ public interface consentmodelPackage extends EPackage {
 	int USER_DATA_COMBINATION__ENTITY_NAME = IdentifierPackage.ENTITY__ENTITY_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Members</b></em>' reference list.
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -416,13 +407,13 @@ public interface consentmodelPackage extends EPackage {
 	int CONSENT_MODEL__CONSENT_LABEL_TYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Data Items</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Data Item Label Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_MODEL__DATA_ITEMS = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
+	int CONSENT_MODEL__DATA_ITEM_LABEL_TYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Consent Model</em>' class.
@@ -663,6 +654,162 @@ public interface consentmodelPackage extends EPackage {
 	int CONSENT_LABEL_OPERATION_COUNT = datadictionaryPackage.ABSTRACT_LABEL_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataItemLabelTypeImpl <em>Data Item Label Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.DataItemLabelTypeImpl
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getDataItemLabelType()
+	 * @generated
+	 */
+	int DATA_ITEM_LABEL_TYPE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ITEM_LABEL_TYPE__ID = datadictionaryPackage.ABSTRACT_LABEL_TYPE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ITEM_LABEL_TYPE__ENTITY_NAME = datadictionaryPackage.ABSTRACT_LABEL_TYPE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ITEM_LABEL_TYPE__LABELS = datadictionaryPackage.ABSTRACT_LABEL_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Data Item Label Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ITEM_LABEL_TYPE_FEATURE_COUNT = datadictionaryPackage.ABSTRACT_LABEL_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Data Item Label Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ITEM_LABEL_TYPE_OPERATION_COUNT = datadictionaryPackage.ABSTRACT_LABEL_TYPE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataItemLabelImpl <em>Data Item Label</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.DataItemLabelImpl
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getDataItemLabel()
+	 * @generated
+	 */
+	int DATA_ITEM_LABEL = 11;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ITEM_LABEL__ID = datadictionaryPackage.ABSTRACT_LABEL__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ITEM_LABEL__ENTITY_NAME = datadictionaryPackage.ABSTRACT_LABEL__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Data Item</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ITEM_LABEL__DATA_ITEM = datadictionaryPackage.ABSTRACT_LABEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Data Item Label</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ITEM_LABEL_FEATURE_COUNT = datadictionaryPackage.ABSTRACT_LABEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Data Item Label</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ITEM_LABEL_OPERATION_COUNT = datadictionaryPackage.ABSTRACT_LABEL_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.StatefulItemImpl <em>Stateful Item</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.StatefulItemImpl
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getStatefulItem()
+	 * @generated
+	 */
+	int STATEFUL_ITEM = 12;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEFUL_ITEM__STATE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Item</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEFUL_ITEM__ITEM = 1;
+
+	/**
+	 * The number of structural features of the '<em>Stateful Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEFUL_ITEM_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Stateful Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEFUL_ITEM_OPERATION_COUNT = 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.DataItem <em>Data Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -671,17 +818,6 @@ public interface consentmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDataItem();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.dataflowanalysis.privacy.consentmodel.DataItem#getState <em>State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>State</em>'.
-	 * @see org.dataflowanalysis.privacy.consentmodel.DataItem#getState()
-	 * @see #getDataItem()
-	 * @generated
-	 */
-	EReference getDataItem_State();
 
 	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.DataState <em>Data State</em>}'.
@@ -715,10 +851,10 @@ public interface consentmodelPackage extends EPackage {
 	EClass getUserDataCombination();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.dataflowanalysis.privacy.consentmodel.UserDataCombination#getMembers <em>Members</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consentmodel.UserDataCombination#getMembers <em>Members</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Members</em>'.
+	 * @return the meta object for the containment reference list '<em>Members</em>'.
 	 * @see org.dataflowanalysis.privacy.consentmodel.UserDataCombination#getMembers()
 	 * @see #getUserDataCombination()
 	 * @generated
@@ -844,15 +980,15 @@ public interface consentmodelPackage extends EPackage {
 	EReference getConsentModel_ConsentLabelType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItems <em>Data Items</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItemLabelType <em>Data Item Label Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Data Items</em>'.
-	 * @see org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItems()
+	 * @return the meta object for the containment reference '<em>Data Item Label Type</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItemLabelType()
 	 * @see #getConsentModel()
 	 * @generated
 	 */
-	EReference getConsentModel_DataItems();
+	EReference getConsentModel_DataItemLabelType();
 
 	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.RoleLabelType <em>Role Label Type</em>}'.
@@ -939,6 +1075,80 @@ public interface consentmodelPackage extends EPackage {
 	EReference getConsentLabel_ConsentOption();
 
 	/**
+	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.DataItemLabelType <em>Data Item Label Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Item Label Type</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataItemLabelType
+	 * @generated
+	 */
+	EClass getDataItemLabelType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consentmodel.DataItemLabelType#getLabels <em>Labels</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Labels</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataItemLabelType#getLabels()
+	 * @see #getDataItemLabelType()
+	 * @generated
+	 */
+	EReference getDataItemLabelType_Labels();
+
+	/**
+	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.DataItemLabel <em>Data Item Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Item Label</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataItemLabel
+	 * @generated
+	 */
+	EClass getDataItemLabel();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consentmodel.DataItemLabel#getDataItem <em>Data Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Data Item</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataItemLabel#getDataItem()
+	 * @see #getDataItemLabel()
+	 * @generated
+	 */
+	EReference getDataItemLabel_DataItem();
+
+	/**
+	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.StatefulItem <em>Stateful Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Stateful Item</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.StatefulItem
+	 * @generated
+	 */
+	EClass getStatefulItem();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.dataflowanalysis.privacy.consentmodel.StatefulItem#getState <em>State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>State</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.StatefulItem#getState()
+	 * @see #getStatefulItem()
+	 * @generated
+	 */
+	EReference getStatefulItem_State();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.dataflowanalysis.privacy.consentmodel.StatefulItem#getItem <em>Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Item</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.StatefulItem#getItem()
+	 * @see #getStatefulItem()
+	 * @generated
+	 */
+	EReference getStatefulItem_Item();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -972,14 +1182,6 @@ public interface consentmodelPackage extends EPackage {
 		EClass DATA_ITEM = eINSTANCE.getDataItem();
 
 		/**
-		 * The meta object literal for the '<em><b>State</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_ITEM__STATE = eINSTANCE.getDataItem_State();
-
-		/**
 		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataStateImpl <em>Data State</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1008,7 +1210,7 @@ public interface consentmodelPackage extends EPackage {
 		EClass USER_DATA_COMBINATION = eINSTANCE.getUserDataCombination();
 
 		/**
-		 * The meta object literal for the '<em><b>Members</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1110,12 +1312,12 @@ public interface consentmodelPackage extends EPackage {
 		EReference CONSENT_MODEL__CONSENT_LABEL_TYPE = eINSTANCE.getConsentModel_ConsentLabelType();
 
 		/**
-		 * The meta object literal for the '<em><b>Data Items</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Data Item Label Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSENT_MODEL__DATA_ITEMS = eINSTANCE.getConsentModel_DataItems();
+		EReference CONSENT_MODEL__DATA_ITEM_LABEL_TYPE = eINSTANCE.getConsentModel_DataItemLabelType();
 
 		/**
 		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.RoleLabelTypeImpl <em>Role Label Type</em>}' class.
@@ -1188,6 +1390,68 @@ public interface consentmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONSENT_LABEL__CONSENT_OPTION = eINSTANCE.getConsentLabel_ConsentOption();
+
+		/**
+		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataItemLabelTypeImpl <em>Data Item Label Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.DataItemLabelTypeImpl
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getDataItemLabelType()
+		 * @generated
+		 */
+		EClass DATA_ITEM_LABEL_TYPE = eINSTANCE.getDataItemLabelType();
+
+		/**
+		 * The meta object literal for the '<em><b>Labels</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_ITEM_LABEL_TYPE__LABELS = eINSTANCE.getDataItemLabelType_Labels();
+
+		/**
+		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataItemLabelImpl <em>Data Item Label</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.DataItemLabelImpl
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getDataItemLabel()
+		 * @generated
+		 */
+		EClass DATA_ITEM_LABEL = eINSTANCE.getDataItemLabel();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Item</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_ITEM_LABEL__DATA_ITEM = eINSTANCE.getDataItemLabel_DataItem();
+
+		/**
+		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.StatefulItemImpl <em>Stateful Item</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.StatefulItemImpl
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getStatefulItem()
+		 * @generated
+		 */
+		EClass STATEFUL_ITEM = eINSTANCE.getStatefulItem();
+
+		/**
+		 * The meta object literal for the '<em><b>State</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATEFUL_ITEM__STATE = eINSTANCE.getStatefulItem_State();
+
+		/**
+		 * The meta object literal for the '<em><b>Item</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATEFUL_ITEM__ITEM = eINSTANCE.getStatefulItem_Item();
 
 	}
 

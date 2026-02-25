@@ -112,6 +112,33 @@ public interface consentmodelFactory extends EFactory {
 	ConsentLabel createConsentLabel();
 
 	/**
+	 * Returns a new object of class '<em>Data Item Label Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Item Label Type</em>'.
+	 * @generated
+	 */
+	DataItemLabelType createDataItemLabelType();
+
+	/**
+	 * Returns a new object of class '<em>Data Item Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Item Label</em>'.
+	 * @generated
+	 */
+	DataItemLabel createDataItemLabel();
+
+	/**
+	 * Returns a new object of class '<em>Stateful Item</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stateful Item</em>'.
+	 * @generated
+	 */
+	StatefulItem createStatefulItem();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

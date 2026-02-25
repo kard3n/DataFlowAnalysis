@@ -124,6 +124,21 @@ public class consentmodelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseDataItemLabelType(DataItemLabelType object) {
+			return createDataItemLabelTypeAdapter();
+		}
+
+		@Override
+		public Adapter caseDataItemLabel(DataItemLabel object) {
+			return createDataItemLabelAdapter();
+		}
+
+		@Override
+		public Adapter caseStatefulItem(StatefulItem object) {
+			return createStatefulItemAdapter();
+		}
+
+		@Override
 		public Adapter caseIdentifier(Identifier object) {
 			return createIdentifierAdapter();
 		}
@@ -304,6 +319,48 @@ public class consentmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConsentLabelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.privacy.consentmodel.DataItemLabelType <em>Data Item Label Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataItemLabelType
+	 * @generated
+	 */
+	public Adapter createDataItemLabelTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.privacy.consentmodel.DataItemLabel <em>Data Item Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataItemLabel
+	 * @generated
+	 */
+	public Adapter createDataItemLabelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.privacy.consentmodel.StatefulItem <em>Stateful Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.dataflowanalysis.privacy.consentmodel.StatefulItem
+	 * @generated
+	 */
+	public Adapter createStatefulItemAdapter() {
 		return null;
 	}
 

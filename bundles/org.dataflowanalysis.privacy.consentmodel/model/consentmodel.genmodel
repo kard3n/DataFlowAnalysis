@@ -12,14 +12,12 @@
   <testsDirectory xsi:nil="true"/>
   <genPackages prefix="consentmodel" basePackage="org.dataflowanalysis.privacy" disposableProviderFactory="true"
       ecorePackage="consentmodel.ecore#/">
-    <genClasses ecoreClass="consentmodel.ecore#//DataItem" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//DataItem/state"/>
-    </genClasses>
+    <genClasses ecoreClass="consentmodel.ecore#//DataItem" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
     <genClasses ecoreClass="consentmodel.ecore#//DataState" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//DataState/notRelatableWith"/>
     </genClasses>
     <genClasses ecoreClass="consentmodel.ecore#//UserDataCombination" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//UserDataCombination/members"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//UserDataCombination/members"/>
     </genClasses>
     <genClasses ecoreClass="consentmodel.ecore#//ConsentOption" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentOption/requires"/>
@@ -34,7 +32,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/data_states"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/roleLabelType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/consentLabelType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/dataItems"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentModel/dataItemLabelType"/>
     </genClasses>
     <genClasses ecoreClass="consentmodel.ecore#//RoleLabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//RoleLabelType/labels"/>
@@ -47,6 +45,16 @@
     </genClasses>
     <genClasses ecoreClass="consentmodel.ecore#//ConsentLabel" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//ConsentLabel/consentOption"/>
+    </genClasses>
+    <genClasses ecoreClass="consentmodel.ecore#//DataItemLabelType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//DataItemLabelType/labels"/>
+    </genClasses>
+    <genClasses ecoreClass="consentmodel.ecore#//DataItemLabel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//DataItemLabel/dataItem"/>
+    </genClasses>
+    <genClasses ecoreClass="consentmodel.ecore#//StatefulItem">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//StatefulItem/state"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//StatefulItem/item"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

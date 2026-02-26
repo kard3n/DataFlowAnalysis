@@ -5,19 +5,26 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.core.CharacteristicValue;
+import org.dataflowanalysis.analysis.core.DataCharacteristic;
 import org.dataflowanalysis.analysis.dfd.core.DFDCharacteristicValue;
+import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
+import org.dataflowanalysis.privacy.consentmodel.ConsentLabel;
+import org.dataflowanalysis.privacy.consentmodel.ConsentLabelType;
+import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
 import org.dataflowanalysis.privacy.consentmodel.DataItem;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabelType;
 import org.dataflowanalysis.privacy.consentmodel.DataState;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
+import org.dataflowanalysis.privacy.constraint.PrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,13 +42,22 @@ public class PrivacyDataFlowConstrainTest {
 	private DataState dataStateTwo;
 	private DataState dataStateThree;
 	private DataState dataStateFour;
+	// Consent options
+	private ConsentOption consentOptionOne;
+	private ConsentOption consentOptionTwo;
+	private ConsentOption consentOptionThree;
 	// Label types
 	private DataItemLabelType dataItemLabelType;
-	// Labels
+	private ConsentLabelType consentLabelType;
+	// Item labels
 	private DataItemLabel dataItemLabelOne;
 	private DataItemLabel dataItemLabelTwo;
 	private DataItemLabel dataItemLabelThree;
 	private DataItemLabel dataItemLabelFour;
+	// Consent labels
+	private ConsentLabel consentLabelOne;
+	private ConsentLabel consentLabelTwo;
+	private ConsentLabel consentLabelThree;
 
 	@BeforeEach
 	public void setup() {
@@ -65,11 +81,21 @@ public class PrivacyDataFlowConstrainTest {
 		dataStateFour = consentmodelFactory.eINSTANCE.createDataState();
 		dataStateFour.setEntityName("sFour");
 
+		// Consent options
+		consentOptionOne = consentmodelFactory.eINSTANCE.createConsentOption();
+		consentOptionOne.setEntityName("consentOptionOne");
+		consentOptionTwo = consentmodelFactory.eINSTANCE.createConsentOption();
+		consentOptionTwo.setEntityName("consentOptionTwo");
+		consentOptionThree = consentmodelFactory.eINSTANCE.createConsentOption();
+		consentOptionThree.setEntityName("consentOptionThree");
+
 		// Label types
 		dataItemLabelType = consentmodelFactory.eINSTANCE.createDataItemLabelType();
 		dataItemLabelType.setEntityName("DataItemLabelType");
+		consentLabelType = consentmodelFactory.eINSTANCE.createConsentLabelType();
+		consentLabelType.setEntityName("ConsentLabelType");
 
-		// Labels
+		// Item labels
 		dataItemLabelOne = consentmodelFactory.eINSTANCE.createDataItemLabel();
 		dataItemLabelOne.setEntityName("dataItemLabelOne");
 		dataItemLabelOne.setDataItem(dataItemOne);
@@ -86,6 +112,17 @@ public class PrivacyDataFlowConstrainTest {
 		dataItemLabelFour.setEntityName("dataItemLabelFour");
 		dataItemLabelFour.setDataItem(dataItemFour);
 		dataItemLabelType.getLabels().add(dataItemLabelFour);
+
+		// Consent labels
+		consentLabelOne = consentmodelFactory.eINSTANCE.createConsentLabel();
+		consentLabelOne.setEntityName("consentLabelOne");
+		consentLabelOne.setConsentOption(consentOptionOne);
+		consentLabelTwo = consentmodelFactory.eINSTANCE.createConsentLabel();
+		consentLabelTwo.setEntityName("consentLabelTwo");
+		consentLabelTwo.setConsentOption(consentOptionTwo);
+		consentLabelThree = consentmodelFactory.eINSTANCE.createConsentLabel();
+		consentLabelThree.setEntityName("consentLabelThree");
+		consentLabelThree.setConsentOption(consentOptionThree);
 
 	}
 
@@ -193,5 +230,54 @@ public class PrivacyDataFlowConstrainTest {
 
 		assertEquals(List.of(dataItemOne, dataItemTwo), PrivacyDataFlowConstraint
 				.extractDataItems(input.stream().map(label -> (CharacteristicValue) label).toList()));
+	}
+
+	@Test
+	public void testAllFunctionalitiesConsentedTo() {
+		// Scenario one: all consent options met
+		Set<Set<CharacteristicValue>> pinIncoming = Set.of(
+				Set.of(new DFDCharacteristicValue(consentLabelType, consentLabelOne),
+						new DFDCharacteristicValue(consentLabelType, consentLabelTwo)),
+				Set.of(new DFDCharacteristicValue(consentLabelType, consentLabelTwo)));
+
+		HashSet<HashSet<CharacteristicValue>> pinIncomingHashSet = new HashSet<>();
+		pinIncoming.forEach(incoming -> {
+			pinIncomingHashSet.add(new HashSet<>(incoming));
+		});
+
+		var vertexCharacteristicsOne = List
+				.of(((CharacteristicValue) new DFDCharacteristicValue(consentLabelType, consentLabelTwo)));
+
+		assertEquals(Set.of(), PrivacyDataFlowConstraint.allFunctionalitiesConsentedTo(pinIncomingHashSet,
+				vertexCharacteristicsOne, "testVertex"));
+
+		// Scenario two: one consent option is not met
+		var vertexCharacteristicsTwo = List.of(
+				((CharacteristicValue) new DFDCharacteristicValue(consentLabelType, consentLabelTwo)),
+				((CharacteristicValue) new DFDCharacteristicValue(consentLabelType, consentLabelThree)));
+
+		// One error for each of the sets
+		assertEquals(2, PrivacyDataFlowConstraint
+				.allFunctionalitiesConsentedTo(pinIncomingHashSet, vertexCharacteristicsTwo, "testVertex").size());
+	}
+
+	@Test
+	public void testGroupIncomingCharacteristicsByPin() {
+		List<DataCharacteristic> incomingCharacteristics = List.of(
+				new DataCharacteristic("pinOne",
+						List.of(new DFDCharacteristicValue(consentLabelType, consentLabelOne),
+								new DFDCharacteristicValue(consentLabelType, consentLabelTwo))),
+				new DataCharacteristic("pinOne",
+						List.of(new DFDCharacteristicValue(consentLabelType, consentLabelThree))),
+				new DataCharacteristic("pinTwo",
+						List.of(new DFDCharacteristicValue(consentLabelType, consentLabelThree))));
+
+		HashMap<String, Set<HashSet<CharacteristicValue>>> expectedResult = new HashMap<>();
+		expectedResult.put("pinOne", Set.of(new HashSet<>(incomingCharacteristics.get(0).getAllCharacteristics()),
+				new HashSet<>(incomingCharacteristics.get(1).getAllCharacteristics())));
+		expectedResult.put("pinTwo", Set.of(new HashSet<>(incomingCharacteristics.get(2).getAllCharacteristics())));
+
+		assertEquals(expectedResult,
+				PrivacyDataFlowConstraint.groupIncomingCharacteristicsByPin(incomingCharacteristics));
 	}
 }

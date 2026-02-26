@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.core.AbstractTransposeFlowGraph;
 import org.dataflowanalysis.analysis.core.AbstractVertex;
 import org.dataflowanalysis.analysis.core.CharacteristicValue;
+import org.dataflowanalysis.analysis.core.DataCharacteristic;
 import org.dataflowanalysis.analysis.core.FlowGraphCollection;
 import org.dataflowanalysis.analysis.dfd.core.DFDCharacteristicValue;
 import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
@@ -43,7 +44,8 @@ public class PrivacyDataFlowConstraint {
 		for (var entry : vertexInstances.entrySet()) { // go over vertices
 			// group CharacteristicValue lists by pin (DataCharacteristic.variableName)
 			entry.getValue().forEach(vert -> {
-				var pinToCharacteristics = groupIncomingCharacteristicsByPin(((DFDVertex) vert));
+				var pinToCharacteristics = groupIncomingCharacteristicsByPin(
+						((DFDVertex) vert).getAllIncomingDataCharacteristics());
 
 				// Evaluate every pin by itself: check that only data from users who have
 				// consented to this node's functionalities reached this pin,
@@ -54,7 +56,8 @@ public class PrivacyDataFlowConstraint {
 					// functionalities of the node (in form of ConsentOptions)
 					// are present in it -> check that the user has consented to all functionalities
 					// of this node
-					violations.addAll(allFunctionalitiesConsentedTo(pin.getValue(), ((DFDVertex) vert)));
+					violations.addAll(allFunctionalitiesConsentedTo(pin.getValue(),
+							((DFDVertex) vert).getAllVertexCharacteristics(), ((DFDVertex) vert).getName()));
 
 					// Create worst-case scenarios for this pin by creating the smallest subset of
 					// DataStates possible for each data item, using the following rule:
@@ -108,29 +111,41 @@ public class PrivacyDataFlowConstraint {
 	 * @return A HashMap whose key is the ID of a pin, and the value the set of
 	 *         different lists of CharacteristicValues that can reach said pin
 	 */
-	private static HashMap<String, HashSet<HashSet<CharacteristicValue>>> groupIncomingCharacteristicsByPin(
-			DFDVertex vertex) {
+	public static HashMap<String, HashSet<HashSet<CharacteristicValue>>> groupIncomingCharacteristicsByPin(
+			List<DataCharacteristic> incomingCharacteristics) {
 		HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToIncomingCharacteristics = new HashMap<>();
-		vertex.getAllIncomingDataCharacteristics().forEach(incoming -> {
+		incomingCharacteristics.forEach(incoming -> {
 			pinToIncomingCharacteristics.computeIfAbsent(incoming.getVariableName(), k -> new HashSet<>())
 					.add(new HashSet<CharacteristicValue>(incoming.getAllCharacteristics()));
-			;
 		});
 
 		return pinToIncomingCharacteristics;
 	}
 
-	private static HashSet<PrivacyConstraintViolation> allFunctionalitiesConsentedTo(
-			HashSet<HashSet<CharacteristicValue>> pinIncomingCharacteristics, DFDVertex vertex) {
+	/**
+	 * Given a list of a pin's incoming characteristics, checks that the passed
+	 * Node's consent options are included for each of the incoming items.
+	 * 
+	 * @param pinIncomingCharacteristics The incoming characteristics of a pin
+	 * @param vertexCharacteristics      The characteristics of the vertex
+	 * @param vertex                     The name of the vertex (for including it in
+	 *                                   the violations)
+	 * @return A list of all violations found
+	 */
+	public static HashSet<PrivacyConstraintViolation> allFunctionalitiesConsentedTo(
+			HashSet<HashSet<CharacteristicValue>> pinIncomingCharacteristics,
+			List<CharacteristicValue> vertexCharacteristics, String vertexName) {
 		HashSet<PrivacyConstraintViolation> violations = new HashSet<>();
-		List<ConsentLabel> vertexFunctionalities = extractConsentLabels(vertex.getAllVertexCharacteristics());
+		List<ConsentLabel> vertexFunctionalities = extractConsentLabels(vertexCharacteristics);
 		for (var incoming : pinIncomingCharacteristics) {
 			if (!extractConsentLabels(incoming).containsAll(vertexFunctionalities)) {
 				// TODO: maybe include more information such as role, ...
-				violations.add(new PrivacyConstraintViolation(vertex.getName(),
-						"The vertex can receive data from user which have not consented to its functionalities. \nFunctionalities consentet to by user: "
-								+ extractConsentLabels(incoming) + "\nFunctionalities of the vertex: "
-								+ vertexFunctionalities));
+				violations.add(new PrivacyConstraintViolation(vertexName,
+						"The vertex can receive data from user which have not consented to its functionalities. \nFunctionalities consented to by user: "
+								+ extractConsentLabels(incoming).stream()
+										.map(label -> label.getConsentOption().getEntityName()).toList()
+								+ "\nFunctionalities of the vertex: " + vertexFunctionalities.stream()
+										.map(label -> label.getConsentOption().getEntityName()).toList()));
 			}
 		}
 
@@ -224,8 +239,9 @@ public class PrivacyDataFlowConstraint {
 				break;
 			for (int i = 0; i < reducedState.size() && !stateChanged; i++) {
 				// Try to intersect with this set with each other of the sets
-				// If the intersection possible, the original sets are removed and the intersection added
-				
+				// If the intersection possible, the original sets are removed and the
+				// intersection added
+
 				var stateList = reducedState.get(i);
 				for (var otherStateList : reducedState) {
 					if (stateList == otherStateList)
@@ -258,8 +274,9 @@ public class PrivacyDataFlowConstraint {
 	 * @return True if the sets may be intersected to create a worse-case set
 	 */
 	public static boolean stateSetsCanBeIntersected(Set<DataState> setOne, Set<DataState> setTwo) {
-		if(setOne.equals(setTwo)) return true; // Quick check: if equal, they can be intersected
-		
+		if (setOne.equals(setTwo))
+			return true; // Quick check: if equal, they can be intersected
+
 		var intersection = new HashSet<>(setOne);
 		intersection.retainAll(setTwo);
 		if (intersection.size() < 1)

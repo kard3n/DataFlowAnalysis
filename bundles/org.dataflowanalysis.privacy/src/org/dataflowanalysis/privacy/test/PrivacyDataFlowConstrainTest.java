@@ -280,4 +280,6 @@ public class PrivacyDataFlowConstrainTest {
 		assertEquals(expectedResult,
 				PrivacyDataFlowConstraint.groupIncomingCharacteristicsByPin(incomingCharacteristics));
 	}
+	
+	// TODO test combinationAllowedByConsentOptions, combinationAllowsItem and findViolations
 }

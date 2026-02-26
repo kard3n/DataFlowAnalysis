@@ -19,10 +19,12 @@ import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.dfd.dataflowdiagram.Node;
 import org.dataflowanalysis.privacy.consentmodel.ConsentLabel;
+import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
 import org.dataflowanalysis.privacy.consentmodel.DataItem;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataState;
 import org.dataflowanalysis.privacy.consentmodel.DataStateLabel;
+import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
 
 public class PrivacyDataFlowConstraint {
 	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstraint.class);
@@ -43,9 +45,9 @@ public class PrivacyDataFlowConstraint {
 		// Step two: calculate worst-case scenarios for every pin
 		for (var entry : vertexInstances.entrySet()) { // go over vertices
 			// group CharacteristicValue lists by pin (DataCharacteristic.variableName)
-			entry.getValue().forEach(vert -> {
-				var pinToCharacteristics = groupIncomingCharacteristicsByPin(
-						((DFDVertex) vert).getAllIncomingDataCharacteristics());
+			entry.getValue().forEach(vertBase -> {
+				DFDVertex vert = (DFDVertex) vertBase;
+				var pinToCharacteristics = groupIncomingCharacteristicsByPin(vert.getAllIncomingDataCharacteristics());
 
 				// Evaluate every pin by itself: check that only data from users who have
 				// consented to this node's functionalities reached this pin,
@@ -56,8 +58,8 @@ public class PrivacyDataFlowConstraint {
 					// functionalities of the node (in form of ConsentOptions)
 					// are present in it -> check that the user has consented to all functionalities
 					// of this node
-					violations.addAll(allFunctionalitiesConsentedTo(pin.getValue(),
-							((DFDVertex) vert).getAllVertexCharacteristics(), ((DFDVertex) vert).getName()));
+					violations.addAll(allFunctionalitiesConsentedTo(pin.getValue(), vert.getAllVertexCharacteristics(),
+							vert.getName()));
 
 					// Create worst-case scenarios for this pin by creating the smallest subset of
 					// DataStates possible for each data item, using the following rule:
@@ -71,8 +73,16 @@ public class PrivacyDataFlowConstraint {
 					});
 
 					var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
-					// Check that every possible combination is allowed
-					// TODO
+					List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics())
+							.stream().map(label -> label.getConsentOption()).toList();
+					// Check that each of the possible combination is allowed
+					for (var combination : possibleCombinations) {
+						if (combinationAllowedByConsentOptions(combination, consentOptions)) {
+							violations.add(new PrivacyConstraintViolation(vert.getName(),
+									"The vertex has received a data combination or could infere one not allowed by any of its consent option. \nReceived combination: "
+											+ combination + "\nConsent options of the vertex: " + consentOptions));
+						}
+					}
 
 				}
 
@@ -351,5 +361,62 @@ public class PrivacyDataFlowConstraint {
 
 		result.add(startingResult);
 		return result;
+	}
+
+	/**
+	 * Checks that the dataCombination is compatible with at least one of the
+	 * consentOptions
+	 * 
+	 * @param dataCombination    The combination that should be checked for
+	 *                           compatibility
+	 * @param nodeConsentOptions The consent options, with which the combination
+	 *                           should be compatible with
+	 * @return True is the combination is allowed by the consent options
+	 */
+	public static boolean combinationAllowedByConsentOptions(HashMap<DataItem, Set<DataState>> dataCombination,
+			List<ConsentOption> nodeConsentOptions) {
+		var consentOptionCopy = (List<ConsentOption>) new LinkedList<>(nodeConsentOptions);
+
+		// Go through all data items, and delete every consent option that is not
+		// compatible with it.
+		// If no consent options are left, the data combinations is compatible with none
+		// and therewith violates the privacy contract
+		for (var entry : dataCombination.entrySet()) {
+			consentOptionCopy = consentOptionCopy.stream().filter(option -> {
+				for (var combination : option.getAllowsFor()) {
+					if (combinationAllowsItem(combination, entry.getKey(), entry.getValue()))
+						return true;
+				}
+				return false;
+			}).toList();
+			if (consentOptionCopy.isEmpty())
+				return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Checks that the passed data item is compatible with the data combination.
+	 * This means that itself must included in the combination, and that the
+	 * combinations list of state for the item must be a sublist of the item's
+	 * states
+	 * 
+	 * @param combination A data combination of the consent model
+	 * @param item        The item to check for
+	 * @param itemState   The state the item has
+	 * @return
+	 */
+	public static boolean combinationAllowsItem(UserDataCombination combination, DataItem item,
+			Set<DataState> itemState) {
+		var combinationMembersOfItem = combination.getMembers().stream().filter(member -> member.getItem().equals(item))
+				.toList();
+		if (combinationMembersOfItem.size() < 1)
+			return false;
+		for (var member : combinationMembersOfItem) {
+			if (itemState.containsAll(member.getState()))
+				return true;
+		}
+		return false;
 	}
 }

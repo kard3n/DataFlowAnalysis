@@ -179,7 +179,7 @@ public class PrivacyDataFlowConstraint {
 	 * @param labels list of CharacteristicValue whose DataStates to extract
 	 * @return A list of DataStates
 	 */
-	private static List<DataState> extractDataStates(Collection<CharacteristicValue> labels) {
+	public static List<DataState> extractDataStates(Collection<CharacteristicValue> labels) {
 		return labels.stream().map(cv -> ((DFDCharacteristicValue) cv)).filter(cv -> {
 			return cv.getLabel() instanceof DataStateLabel;
 		}).map(cv -> ((DataStateLabel) cv.getLabel()).getDataState()).toList();
@@ -192,7 +192,7 @@ public class PrivacyDataFlowConstraint {
 	 * @param labels list of CharacteristicValue whose DataItems to extract
 	 * @return A list of DataItems
 	 */
-	private static List<DataItem> extractDataItems(Collection<CharacteristicValue> labels) {
+	public static List<DataItem> extractDataItems(Collection<CharacteristicValue> labels) {
 		return labels.stream().map(cv -> ((DFDCharacteristicValue) cv)).filter(cv -> {
 			return cv.getLabel() instanceof DataItemLabel;
 		}).map(cv -> ((DataItemLabel) cv.getLabel()).getDataItem()).toList();
@@ -207,38 +207,37 @@ public class PrivacyDataFlowConstraint {
 	 * @param states
 	 * @return
 	 */
-	private static List<Set<DataState>> reduceDataStateSets(List<Set<DataState>> states) {
+	public static List<Set<DataState>> reduceDataStateSets(List<Set<DataState>> states) {
 		// If less than two, we can't do intersections
 		if (states.size() < 2)
 			return states.stream().map(i -> ((Set<DataState>) new HashSet<>(i))).toList();
 
-		List<Set<DataState>> currentState = new LinkedList<>();
+		List<Set<DataState>> reducedState = new LinkedList<>();
 		states.forEach(stateList -> {
-			currentState.add(new HashSet<>(stateList));
+			reducedState.add(new HashSet<>(stateList));
 		});
 
-		boolean stateChanged = false;
+		boolean stateChanged = true;
 		while (stateChanged) {
 			stateChanged = false;
-			if (currentState.size() < 2)
+			if (reducedState.size() < 2)
 				break;
-			for (var stateList : currentState) {
+			for (int i = 0; i < reducedState.size() && !stateChanged; i++) {
 				// Try to intersect with this set with each other of the sets
-				// If possible, the original sets are removed and the intersection added
-				if (stateChanged)
-					break;
-
-				for (var otherStateList : currentState) {
+				// If the intersection possible, the original sets are removed and the intersection added
+				
+				var stateList = reducedState.get(i);
+				for (var otherStateList : reducedState) {
 					if (stateList == otherStateList)
 						continue;
 					if (stateSetsCanBeIntersected(stateList, otherStateList)) {
 						var intersection = new HashSet<>(stateList);
 						intersection.retainAll(otherStateList);
-						currentState.remove(stateList);
-						currentState.remove(otherStateList);
+						reducedState.remove(stateList);
+						reducedState.remove(otherStateList);
 						// Add to the beginning. This set is reduced and therewith more likely to be
 						// able to intersect with other entries
-						currentState.add(0, intersection);
+						reducedState.add(0, intersection);
 						stateChanged = true;
 						break;
 					}
@@ -246,7 +245,7 @@ public class PrivacyDataFlowConstraint {
 			}
 		}
 
-		return currentState;
+		return reducedState;
 	}
 
 	/**
@@ -258,7 +257,9 @@ public class PrivacyDataFlowConstraint {
 	 * @param stateTwo The second set
 	 * @return True if the sets may be intersected to create a worse-case set
 	 */
-	private static boolean stateSetsCanBeIntersected(Set<DataState> setOne, Set<DataState> setTwo) {
+	public static boolean stateSetsCanBeIntersected(Set<DataState> setOne, Set<DataState> setTwo) {
+		if(setOne.equals(setTwo)) return true; // Quick check: if equal, they can be intersected
+		
 		var intersection = new HashSet<>(setOne);
 		intersection.retainAll(setTwo);
 		if (intersection.size() < 1)

@@ -29,12 +29,13 @@ import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
 public class PrivacyDataFlowConstraint {
 	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstraint.class);
 
-	public static HashSet<PrivacyConstraintViolation> findViolations(FlowGraphCollection flowGraphs) {
-		return findViolations(flowGraphs.getTransposeFlowGraphs());
+	public static HashSet<PrivacyConstraintViolation> findViolations(FlowGraphCollection flowGraphs,
+			boolean checkNodeLevelInference) {
+		return findViolations(flowGraphs.getTransposeFlowGraphs(), checkNodeLevelInference);
 	}
 
 	public static HashSet<PrivacyConstraintViolation> findViolations(
-			List<? extends AbstractTransposeFlowGraph> flowGraphs) {
+			List<? extends AbstractTransposeFlowGraph> flowGraphs, boolean checkNodeLevelInference) {
 		HashSet<PrivacyConstraintViolation> violations = new HashSet<>();
 
 		// # Step 1: determine all vertices (by their ID) of the flow graphs
@@ -79,7 +80,7 @@ public class PrivacyDataFlowConstraint {
 					for (var combination : possibleCombinations) {
 						if (combinationAllowedByConsentOptions(combination, consentOptions)) {
 							violations.add(new PrivacyConstraintViolation(vert.getName(),
-									"The vertex has received a data combination or could infere one not allowed by any of its consent option. \nReceived combination: "
+									"The vertex has received a data combination in pin " + pin.getKey() + " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
 											+ combination + "\nConsent options of the vertex: " + consentOptions));
 						}
 					}

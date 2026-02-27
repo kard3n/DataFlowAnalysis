@@ -10,11 +10,14 @@ import org.dataflowanalysis.privacy.consentmodel.DataStateLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataStateLabelType;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +34,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class DataStateLabelTypeImpl extends AbstractLabelTypeImpl implements DataStateLabelType {
 	/**
-	 * The cached value of the '{@link #getLabels() <em>Labels</em>}' reference list.
+	 * The cached value of the '{@link #getLabels() <em>Labels</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLabels()
@@ -67,10 +70,24 @@ public class DataStateLabelTypeImpl extends AbstractLabelTypeImpl implements Dat
 	@Override
 	public EList<DataStateLabel> getLabels() {
 		if (labels == null) {
-			labels = new EObjectResolvingEList<DataStateLabel>(DataStateLabel.class, this,
+			labels = new EObjectContainmentEList<DataStateLabel>(DataStateLabel.class, this,
 					consentmodelPackage.DATA_STATE_LABEL_TYPE__LABELS);
 		}
 		return labels;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case consentmodelPackage.DATA_STATE_LABEL_TYPE__LABELS:
+			return ((InternalEList<?>) getLabels()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

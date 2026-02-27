@@ -24,13 +24,13 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface DataStateLabelType extends AbstractLabelType {
 	/**
-	 * Returns the value of the '<em><b>Labels</b></em>' reference list.
+	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
 	 * The list contents are of type {@link org.dataflowanalysis.privacy.consentmodel.DataStateLabel}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Labels</em>' reference list.
+	 * @return the value of the '<em>Labels</em>' containment reference list.
 	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getDataStateLabelType_Labels()
-	 * @model
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	EList<DataStateLabel> getLabels();

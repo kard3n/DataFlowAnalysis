@@ -65,8 +65,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="item" lowerBound="1" eType="#//DataItem"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataStateLabelType" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabelType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
-        eType="#//DataStateLabel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" lowerBound="1"
+        upperBound="-1" eType="#//DataStateLabel" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataStateLabel" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataState" lowerBound="1"

@@ -384,7 +384,6 @@ public class PrivacyDataFlowConstraint {
 		for (var entry : dataCombination.entrySet()) {
 			consentOptionCopy = consentOptionCopy.stream().filter(option -> {
 				for (var combination : option.getAllowsFor()) {
-					logger.info(combination.getMembers());
 					if (combinationAllowsItem(combination, entry.getKey(), entry.getValue()))
 						return true;
 				}

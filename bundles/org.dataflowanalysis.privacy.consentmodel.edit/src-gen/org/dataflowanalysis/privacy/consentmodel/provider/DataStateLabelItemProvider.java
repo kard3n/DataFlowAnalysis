@@ -112,7 +112,7 @@ public class DataStateLabelItemProvider extends AbstractLabelItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DataStateLabel) object).getId();
+		String label = ((DataStateLabel) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_DataStateLabel_type")
 				: getString("_UI_DataStateLabel_type") + " " + label;
 	}

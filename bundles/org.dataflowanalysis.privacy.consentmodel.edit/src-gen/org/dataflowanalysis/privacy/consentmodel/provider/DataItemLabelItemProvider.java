@@ -112,7 +112,7 @@ public class DataItemLabelItemProvider extends AbstractLabelItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DataItemLabel) object).getId();
+		String label = ((DataItemLabel) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_DataItemLabel_type")
 				: getString("_UI_DataItemLabel_type") + " " + label;
 	}

@@ -23,6 +23,8 @@ import org.dataflowanalysis.privacy.consentmodel.DataItem;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabelType;
 import org.dataflowanalysis.privacy.consentmodel.DataState;
+import org.dataflowanalysis.privacy.consentmodel.StatefulItem;
+import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
 import org.dataflowanalysis.privacy.constraint.PrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
@@ -194,8 +196,7 @@ public class PrivacyDataFlowConstrainTest {
 		// have an overlap with either (but the data state is relatable to the others)
 		List<Set<DataState>> states = List.of(Set.of(dataStateOne, dataStateTwo), Set.of(dataStateTwo, dataStateThree),
 				Set.of(dataStateFour));
-		assertEquals(List.of(Set.of()),
-				PrivacyDataFlowConstraint.reduceDataStateSets(states));
+		assertEquals(List.of(Set.of()), PrivacyDataFlowConstraint.reduceDataStateSets(states));
 
 		// Scenario two: Two sets have an overlap of more than one element
 		states = List.of(Set.of(dataStateOne, dataStateTwo), Set.of(dataStateTwo, dataStateOne, dataStateThree));
@@ -280,6 +281,53 @@ public class PrivacyDataFlowConstrainTest {
 		assertEquals(expectedResult,
 				PrivacyDataFlowConstraint.groupIncomingCharacteristicsByPin(incomingCharacteristics));
 	}
-	
-	// TODO test combinationAllowedByConsentOptions, combinationAllowsItem and findViolations
+
+	// TODO test findViolations
+
+	@Test
+	public void testCombinationAllowsItem() {
+		UserDataCombination combination = consentmodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemOne.setItem(dataItemOne);
+		itemOne.getState().add(dataStateOne);
+		combination.getMembers().add(itemOne);
+		// Scenario one: combination allows for the item
+		assertTrue(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
+				Set.of(dataStateOne, dataStateTwo)));
+		// Scenario two: the passed item doesn't have the required state
+		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne, Set.of(dataStateTwo)));
+		// Scenario three: the passed item lacks one of the required states
+		itemOne.getState().add(dataStateTwo);
+		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne, Set.of(dataStateOne)));
+	}
+
+	@Test
+	public void testCombinationAllowedByConsentOptions() {
+		// Passed combination (received data)
+		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>(
+				Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of()));
+		// Consent combination
+		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemOne.setItem(dataItemOne);
+		consentCombination.getMembers().add(itemOne);
+		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
+		consentOption.getAllowsFor().add(consentCombination);
+
+		// Scenario one: neither passed combination nor consent option have state
+		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
+				List.of(consentOption)));
+
+		// Scenario 3: consent option dictates state, passed item has another one
+		itemOne.getState().add(dataStateOne);
+		assertFalse(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
+				List.of(consentOption)));
+
+		// Scenario 4: passed item has more states than required by the consent option.
+		// Consent option requires two states simultaneously
+		itemOne.getState().add(dataStateTwo);
+		dataCombinationOne.put(dataItemOne, Set.of(dataStateOne, dataStateTwo, dataStateThree));
+		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
+				List.of(consentOption)));
+	}
 }

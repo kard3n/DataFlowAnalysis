@@ -160,12 +160,12 @@ public class PrivacyDataFlowConstrainTest {
 				Set.of(dataStateOne, dataStateThree)));
 
 		// No exclusion, but no overlap
-		assertFalse(PrivacyDataFlowConstraint.stateSetsCanBeIntersected(Set.of(dataStateOne, dataStateTwo),
+		assertTrue(PrivacyDataFlowConstraint.stateSetsCanBeIntersected(Set.of(dataStateOne, dataStateTwo),
 				Set.of(dataStateThree, dataStateFour)));
 
 		// One set empty
-		assertFalse(PrivacyDataFlowConstraint.stateSetsCanBeIntersected(Set.of(dataStateOne, dataStateTwo), Set.of()));
-		assertFalse(PrivacyDataFlowConstraint.stateSetsCanBeIntersected(Set.of(), Set.of(dataStateThree)));
+		assertTrue(PrivacyDataFlowConstraint.stateSetsCanBeIntersected(Set.of(dataStateOne, dataStateTwo), Set.of()));
+		assertTrue(PrivacyDataFlowConstraint.stateSetsCanBeIntersected(Set.of(), Set.of(dataStateThree)));
 
 		// both sets empty
 		assertTrue(PrivacyDataFlowConstraint.stateSetsCanBeIntersected(Set.of(), Set.of()));
@@ -191,10 +191,10 @@ public class PrivacyDataFlowConstrainTest {
 	@Test
 	public void testReduceDataStateSets() {
 		// Scenario one: reduction can be done immediately for two sets, third does not
-		// have an overlap with either
+		// have an overlap with either (but the data state is relatable to the others)
 		List<Set<DataState>> states = List.of(Set.of(dataStateOne, dataStateTwo), Set.of(dataStateTwo, dataStateThree),
 				Set.of(dataStateFour));
-		assertEquals(List.of(Set.of(dataStateTwo), Set.of(dataStateFour)),
+		assertEquals(List.of(Set.of()),
 				PrivacyDataFlowConstraint.reduceDataStateSets(states));
 
 		// Scenario two: Two sets have an overlap of more than one element

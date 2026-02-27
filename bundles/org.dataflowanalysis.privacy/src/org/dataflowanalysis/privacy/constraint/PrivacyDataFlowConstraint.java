@@ -249,7 +249,7 @@ public class PrivacyDataFlowConstraint {
 				break;
 			for (int i = 0; i < reducedState.size() && !stateChanged; i++) {
 				// Try to intersect with this set with each other of the sets
-				// If the intersection possible, the original sets are removed and the
+				// If the intersection is possible, the original sets are removed and the
 				// intersection added
 
 				var stateList = reducedState.get(i);
@@ -289,8 +289,6 @@ public class PrivacyDataFlowConstraint {
 
 		var intersection = new HashSet<>(setOne);
 		intersection.retainAll(setTwo);
-		if (intersection.size() < 1)
-			return false;
 
 		// Check for DataState non-relatability
 		boolean setOneUnrelatable = false;

@@ -80,7 +80,8 @@ public class PrivacyDataFlowConstraint {
 					for (var combination : possibleCombinations) {
 						if (combinationAllowedByConsentOptions(combination, consentOptions)) {
 							violations.add(new PrivacyConstraintViolation(vert.getName(),
-									"The vertex has received a data combination in pin " + pin.getKey() + " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
+									"The vertex has received a data combination in pin " + pin.getKey()
+											+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
 											+ combination + "\nConsent options of the vertex: " + consentOptions));
 						}
 					}
@@ -383,16 +384,17 @@ public class PrivacyDataFlowConstraint {
 		for (var entry : dataCombination.entrySet()) {
 			consentOptionCopy = consentOptionCopy.stream().filter(option -> {
 				for (var combination : option.getAllowsFor()) {
+					logger.info(combination.getMembers());
 					if (combinationAllowsItem(combination, entry.getKey(), entry.getValue()))
 						return true;
 				}
 				return false;
 			}).toList();
-			if (consentOptionCopy.isEmpty())
-				return false;
+			if (!consentOptionCopy.isEmpty())
+				return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	/**

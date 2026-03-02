@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+
 import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
 
 /**

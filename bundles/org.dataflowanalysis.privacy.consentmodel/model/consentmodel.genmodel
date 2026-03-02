@@ -57,7 +57,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//StatefulItem/item"/>
     </genClasses>
     <genClasses ecoreClass="consentmodel.ecore#//DataStateLabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference consentmodel.ecore#//DataStateLabelType/labels"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//DataStateLabelType/labels"/>
     </genClasses>
     <genClasses ecoreClass="consentmodel.ecore#//DataStateLabel" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference consentmodel.ecore#//DataStateLabel/dataState"/>

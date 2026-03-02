@@ -6,11 +6,14 @@ import java.util.Collection;
 import java.util.List;
 
 import org.dataflowanalysis.privacy.consentmodel.DataItem;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+
 import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
 
 /**

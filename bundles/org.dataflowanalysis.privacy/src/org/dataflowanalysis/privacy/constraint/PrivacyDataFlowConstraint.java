@@ -78,7 +78,7 @@ public class PrivacyDataFlowConstraint {
 							.stream().map(label -> label.getConsentOption()).toList();
 					// Check that each of the possible combination is allowed
 					for (var combination : possibleCombinations) {
-						if (combinationAllowedByConsentOptions(combination, consentOptions)) {
+						if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
 							violations.add(new PrivacyConstraintViolation(vert.getName(),
 									"The vertex has received a data combination in pin " + pin.getKey()
 											+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
@@ -153,7 +153,7 @@ public class PrivacyDataFlowConstraint {
 			if (!extractConsentLabels(incoming).containsAll(vertexFunctionalities)) {
 				// TODO: maybe include more information such as role, ...
 				violations.add(new PrivacyConstraintViolation(vertexName,
-						"The vertex can receive data from user which have not consented to its functionalities. \nFunctionalities consented to by user: "
+						"The vertex can receive data from a user which has not consented to its functionalities. \nFunctionalities consented to by user: "
 								+ extractConsentLabels(incoming).stream()
 										.map(label -> label.getConsentOption().getEntityName()).toList()
 								+ "\nFunctionalities of the vertex: " + vertexFunctionalities.stream()

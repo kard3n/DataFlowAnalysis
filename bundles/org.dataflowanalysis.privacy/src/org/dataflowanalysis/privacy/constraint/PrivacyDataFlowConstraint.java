@@ -389,11 +389,10 @@ public class PrivacyDataFlowConstraint {
 				}
 				return false;
 			}).toList();
-			if (!consentOptionCopy.isEmpty())
-				return true;
+			
 		}
-
-		return false;
+		
+		return !consentOptionCopy.isEmpty();
 	}
 
 	/**

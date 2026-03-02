@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,8 +15,12 @@ import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.core.CharacteristicValue;
 import org.dataflowanalysis.analysis.core.DataCharacteristic;
 import org.dataflowanalysis.analysis.dfd.core.DFDCharacteristicValue;
+import org.dataflowanalysis.analysis.dfd.core.DFDFlowGraphCollection;
 import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
+import org.dataflowanalysis.examplemodels.Activator;
+import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
+import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.privacy.consentmodel.ConsentLabel;
 import org.dataflowanalysis.privacy.consentmodel.ConsentLabelType;
 import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
@@ -302,7 +307,7 @@ public class PrivacyDataFlowConstrainTest {
 	}
 
 	@Test
-	public void testCombinationAllowedByConsentOptions() {
+	public void testCombinationAllowedByConsentOptionsNoStateNonAllowedItem() {
 		// Passed combination (received data)
 		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>(
 				Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of()));
@@ -314,14 +319,75 @@ public class PrivacyDataFlowConstrainTest {
 		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
 		consentOption.getAllowsFor().add(consentCombination);
 
-		// Scenario one: neither passed combination nor consent option have state
+		// Scenario one: neither passed combination nor consent option have state.
+		// Consent options not allow for dataItemTwo
+		assertFalse(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
+				List.of(consentOption)));
+
+	}
+
+	@Test
+	public void testCombinationAllowedByConsentOptionsTwoNoStateItemsAllowed() {
+		// Passed combination (received data)
+		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>(
+				Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of()));
+		// Consent combination
+		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemOne.setItem(dataItemOne);
+		consentCombination.getMembers().add(itemOne);
+		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
+		consentOption.getAllowsFor().add(consentCombination);
+
+		// Scenario two: neither passed combination nor consent option have state. Data
+		// combination allows for both items
+		StatefulItem itemTwo = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemTwo.setItem(dataItemTwo);
+		consentCombination.getMembers().add(itemTwo);
 		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
 				List.of(consentOption)));
+	}
+
+	@Test
+	public void testCombinationAllowedByConsentOptionsStateIncorrect() {
+		// Passed combination (received data)
+		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>(
+				Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of()));
+		// Consent combination
+		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemOne.setItem(dataItemOne);
+		consentCombination.getMembers().add(itemOne);
+		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
+		consentOption.getAllowsFor().add(consentCombination);
+
+		StatefulItem itemTwo = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemTwo.setItem(dataItemTwo);
+		consentCombination.getMembers().add(itemTwo);
 
 		// Scenario 3: consent option dictates state, passed item has another one
 		itemOne.getState().add(dataStateOne);
 		assertFalse(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
 				List.of(consentOption)));
+	}
+
+	@Test
+	public void testCombinationAllowedByConsentOptionsStateAdditionalButCorrect() {
+		// Passed combination (received data)
+		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>(
+				Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of()));
+		// Consent combination
+		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemOne.setItem(dataItemOne);
+		consentCombination.getMembers().add(itemOne);
+		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
+		consentOption.getAllowsFor().add(consentCombination);
+
+		StatefulItem itemTwo = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemTwo.setItem(dataItemTwo);
+		consentCombination.getMembers().add(itemTwo);
+		itemOne.getState().add(dataStateOne);
 
 		// Scenario 4: passed item has more states than required by the consent option.
 		// Consent option requires two states simultaneously
@@ -329,5 +395,46 @@ public class PrivacyDataFlowConstrainTest {
 		dataCombinationOne.put(dataItemOne, Set.of(dataStateOne, dataStateTwo, dataStateThree));
 		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
 				List.of(consentOption)));
+	}
+	
+	@Test
+	public void testEmptyCombinationAllowedByConsentOptions() {
+		// Passed combination (received data)
+		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>();
+		// Consent combination
+		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemOne.setItem(dataItemOne);
+		consentCombination.getMembers().add(itemOne);
+		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
+		consentOption.getAllowsFor().add(consentCombination);
+
+		// Scenario The passed item combination is empty
+		itemOne.getState().add(dataStateTwo);
+		dataCombinationOne.put(dataItemOne, Set.of(dataStateOne, dataStateTwo, dataStateThree));
+		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
+				List.of(consentOption)));
+	}
+
+	@Test
+	public void testFindViolationBasic() {
+		final var basicDataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels", "TestOne.dataflowdiagram");
+		final var basicDataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels", "TestOne.datadictionary");
+		final var basicConsentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"BaseConsentModel.consentmodel");
+
+		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
+				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
+				.useDataFlowDiagram(basicDataFlowDiagramPath.toString())
+				.useDataDictionary(basicDataDictionaryPath.toString()).useConsentModel(basicConsentModelPath.toString())
+				.build();
+		analysis.initializeAnalysis();
+		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
+		flowGraphCollection.evaluate();
+
+		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
+		for(var violation: result) {
+			logger.info(violation.message());
+		}
 	}
 }

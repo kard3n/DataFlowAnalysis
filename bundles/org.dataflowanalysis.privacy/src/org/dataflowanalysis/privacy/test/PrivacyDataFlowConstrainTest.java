@@ -396,7 +396,7 @@ public class PrivacyDataFlowConstrainTest {
 		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
 				List.of(consentOption)));
 	}
-	
+
 	@Test
 	public void testEmptyCombinationAllowedByConsentOptions() {
 		// Passed combination (received data)
@@ -418,10 +418,12 @@ public class PrivacyDataFlowConstrainTest {
 
 	@Test
 	public void testFindViolationBasic() {
-		final var basicDataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels", "TestOne.dataflowdiagram");
-		final var basicDataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels", "TestOne.datadictionary");
+		final var basicDataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"SimpleSourceSink.dataflowdiagram");
+		final var basicDataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"SimpleSourceSink.datadictionary");
 		final var basicConsentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"BaseConsentModel.consentmodel");
+				"SimpleSourceSink.consentmodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
@@ -433,8 +435,22 @@ public class PrivacyDataFlowConstrainTest {
 		flowGraphCollection.evaluate();
 
 		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
-		for(var violation: result) {
-			logger.info(violation.message());
+		assertEquals(3, result.size());
+		boolean foundCOne = false;
+		boolean foundCTwo = false;
+		boolean foundCEmpty = false;
+		for (var violation : result) {
+			assertEquals("Sink", violation.vertexID());
+			if (violation.message().contains("user: [ConsentOptionOne]")) {
+				foundCOne = true;
+			}
+			if (violation.message().contains("user: [ConsentOptionTwo]")) {
+				foundCTwo = true;
+			}
+			if (violation.message().contains("user: []")) {
+				foundCEmpty = true;
+			}
 		}
+		assertTrue(foundCOne && foundCTwo && foundCEmpty);
 	}
 }

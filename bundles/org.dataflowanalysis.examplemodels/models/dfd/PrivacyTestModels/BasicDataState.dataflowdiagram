@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_YEzO8BbuEfGwgKscrQsGUg">
+  <flows id="_RkYZcBbvEfGwgKscrQsGUg" entityName="SourceToSinkOne" sourceNode="_YgfFYRbuEfGwgKscrQsGUg" destinationNode="_usmiQhbuEfGwgKscrQsGUg">
+    <destinationPin href="BasicDataState.datadictionary#_9rNPkBbuEfGwgKscrQsGUg"/>
+    <sourcePin href="BasicDataState.datadictionary#_3npnIRbtEfGwgKscrQsGUg"/>
+  </flows>
+  <flows id="_YhWyoBbvEfGwgKscrQsGUg" entityName="SourceToSinkTwo" sourceNode="_YgfFYRbuEfGwgKscrQsGUg" destinationNode="_0NKAwhbuEfGwgKscrQsGUg">
+    <destinationPin href="BasicDataState.datadictionary#_C-ypEBbvEfGwgKscrQsGUg"/>
+    <sourcePin href="BasicDataState.datadictionary#_gEozURbuEfGwgKscrQsGUg"/>
+  </flows>
+  <nodes xsi:type="dataflowdiagram:External" id="_YgfFYRbuEfGwgKscrQsGUg" entityName="Source">
+    <behavior href="BasicDataState.datadictionary#_i7uxsRbtEfGwgKscrQsGUg"/>
+    <properties xsi:type="consentmodel:RoleLabel" href="BasicDataState.consentmodel#_e1M2oBbsEfGwgKscrQsGUg"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_usmiQhbuEfGwgKscrQsGUg" entityName="sinkOne">
+    <behavior href="BasicDataState.datadictionary#_7xdfsRbuEfGwgKscrQsGUg"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="BasicDataState.consentmodel#_layqkBbsEfGwgKscrQsGUg"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_0NKAwhbuEfGwgKscrQsGUg" entityName="sinkTwo">
+    <behavior href="BasicDataState.datadictionary#_BS3SwRbvEfGwgKscrQsGUg"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="BasicDataState.consentmodel#_layqkBbsEfGwgKscrQsGUg"/>
+  </nodes>
+</dataflowdiagram:DataFlowDiagram>

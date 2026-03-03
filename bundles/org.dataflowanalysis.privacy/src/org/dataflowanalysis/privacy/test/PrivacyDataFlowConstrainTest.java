@@ -418,17 +418,17 @@ public class PrivacyDataFlowConstrainTest {
 
 	@Test
 	public void testFindViolationBasic() {
-		final var basicDataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"SimpleSourceSink.dataflowdiagram");
-		final var basicDataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"SimpleSourceSink.datadictionary");
-		final var basicConsentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"SimpleSourceSink.consentmodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
-				.useDataFlowDiagram(basicDataFlowDiagramPath.toString())
-				.useDataDictionary(basicDataDictionaryPath.toString()).useConsentModel(basicConsentModelPath.toString())
+				.useDataFlowDiagram(dataFlowDiagramPath.toString())
+				.useDataDictionary(dataDictionaryPath.toString()).useConsentModel(consentModelPath.toString())
 				.build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
@@ -440,6 +440,7 @@ public class PrivacyDataFlowConstrainTest {
 		boolean foundCTwo = false;
 		boolean foundCEmpty = false;
 		for (var violation : result) {
+			logger.debug(violation.message());
 			assertEquals("Sink", violation.vertexID());
 			if (violation.message().contains("user: [ConsentOptionOne]")) {
 				foundCOne = true;
@@ -452,5 +453,31 @@ public class PrivacyDataFlowConstrainTest {
 			}
 		}
 		assertTrue(foundCOne && foundCTwo && foundCEmpty);
+	}
+	
+	@Test
+	public void testMissingAndCorrectDataState() {
+		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"BasicDataState.dataflowdiagram");
+		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"BasicDataState.datadictionary");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"BasicDataState.consentmodel");
+
+		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
+				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
+				.useDataFlowDiagram(dataFlowDiagramPath.toString())
+				.useDataDictionary(dataDictionaryPath.toString()).useConsentModel(consentModelPath.toString())
+				.build();
+		analysis.initializeAnalysis();
+		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
+		flowGraphCollection.evaluate();
+		
+		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
+		assertEquals(1, result.size());
+		for(var violation: result) {
+			assertTrue(violation.message().contains("The vertex has received a data combination in pin _C-ypEBbvEfGwgKscrQsGUg or could infere one not allowed for any of its consent options/functionalities."));
+			logger.debug(violation.message());
+		}
 	}
 }

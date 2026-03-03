@@ -44,23 +44,6 @@ public class TransposeFinderTest {
 		
 		var flowGraphs = flowGraphCollection.getTransposeFlowGraphs();
 		
-		Logger logger = LoggerManager.getLogger(TransposeFinderTest.class);
-		flowGraphs.forEach(fg -> {
-			fg.getVertices().forEach(vertex -> {
-				logger.warn("Current vertex: " + vertex + ". Previous Vertexes: " + vertex.getPreviousElements());
-				//if(vertex.getReferencedElement() instanceof Node node) {
-				//	logger.warn(node.getBehavior().getAssignment());
-				//}
-				//logger.warn("Vertex characteristics: " + vertex.getAllVertexCharacteristics());
-				//logger.warn(vertex.getAllIncomingDataCharacteristics());
-				logger.warn("Data charcteristics VariableName: " + vertex.getAllDataCharacteristics().stream().map(charact -> charact.getVariableName()).toList());
-				if(vertex instanceof DFDVertex dfdv) {
-					dfdv.getPinDFDVertexMap();
-					//dfdv.get
-				}
-			});
-		});
-		
 		assertEquals(2, flowGraphs.size());
 
 		

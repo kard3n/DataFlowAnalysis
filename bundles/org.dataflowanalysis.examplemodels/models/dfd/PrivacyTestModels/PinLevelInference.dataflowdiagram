@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_8szPIBcFEfGz3ruJdcnl1A">
+  <flows id="_s8Ig0BcHEfGz3ruJdcnl1A" entityName="SourceOutOneToSinkOneIn" sourceNode="_9UhWcRcFEfGz3ruJdcnl1A" destinationNode="_F5S-chcHEfGz3ruJdcnl1A">
+    <destinationPin href="PinLevelInference.datadictionary#_IDjMUBcDEfGz3ruJdcnl1A"/>
+    <sourcePin href="PinLevelInference.datadictionary#_iTfD8RcDEfGz3ruJdcnl1A"/>
+  </flows>
+  <flows id="_0Ch7wBcHEfGz3ruJdcnl1A" entityName="SourceOutTwoToSinkTwoIn" sourceNode="_9UhWcRcFEfGz3ruJdcnl1A" destinationNode="_faL-whcHEfGz3ruJdcnl1A">
+    <destinationPin href="PinLevelInference.datadictionary#_MYqLYBcDEfGz3ruJdcnl1A"/>
+    <sourcePin href="PinLevelInference.datadictionary#_kaeloRcDEfGz3ruJdcnl1A"/>
+  </flows>
+  <flows id="_-xA3sBcHEfGz3ruJdcnl1A" entityName="SourceOutThreeToSinkTwoIn" sourceNode="_9UhWcRcFEfGz3ruJdcnl1A" destinationNode="_faL-whcHEfGz3ruJdcnl1A">
+    <destinationPin href="PinLevelInference.datadictionary#_MYqLYBcDEfGz3ruJdcnl1A"/>
+    <sourcePin href="PinLevelInference.datadictionary#_HVS30RcGEfGz3ruJdcnl1A"/>
+  </flows>
+  <nodes xsi:type="dataflowdiagram:External" id="_9UhWcRcFEfGz3ruJdcnl1A" entityName="Source">
+    <behavior href="PinLevelInference.datadictionary#_DvA1ARcDEfGz3ruJdcnl1A"/>
+    <properties xsi:type="consentmodel:RoleLabel" href="PinLevelInference.consentmodel#_Pb9ngBcHEfGz3ruJdcnl1A"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_F5S-chcHEfGz3ruJdcnl1A" entityName="SinkOne">
+    <behavior href="PinLevelInference.datadictionary#_GsvKYRcDEfGz3ruJdcnl1A"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="PinLevelInference.consentmodel#_onnmYBcBEfGz3ruJdcnl1A"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_faL-whcHEfGz3ruJdcnl1A" entityName="SinkTwo">
+    <behavior href="PinLevelInference.datadictionary#_Kw8msRcDEfGz3ruJdcnl1A"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="PinLevelInference.consentmodel#_onnmYBcBEfGz3ruJdcnl1A"/>
+  </nodes>
+</dataflowdiagram:DataFlowDiagram>

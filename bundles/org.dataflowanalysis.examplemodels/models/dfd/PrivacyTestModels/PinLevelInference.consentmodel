@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<consentmodel:ConsentModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" id="_uLbfIBb_EfGz3ruJdcnl1A">
+  <roleLabelType id="_NichIBcHEfGz3ruJdcnl1A" entityName="RoleLabelType">
+    <labels id="_Pb9ngBcHEfGz3ruJdcnl1A" entityName="RoleLabelOne">
+      <role id="_RLMwgBcHEfGz3ruJdcnl1A" entityName="RoleOne" requires="_q_juIBcBEfGz3ruJdcnl1A"/>
+    </labels>
+  </roleLabelType>
+  <consentLabelType id="_l5hocRcBEfGz3ruJdcnl1A" entityName="ConsentLabelType">
+    <labels id="_onnmYBcBEfGz3ruJdcnl1A" entityName="ConsentLabelOne">
+      <consentOption id="_q_juIBcBEfGz3ruJdcnl1A" entityName="ConsentOptionOne">
+        <allowsFor id="_s6zS0BcBEfGz3ruJdcnl1A" entityName="UserDataCombinationOne">
+          <members state="_fnv90BcAEfGz3ruJdcnl1A" item="_Y17EsBcAEfGz3ruJdcnl1A"/>
+          <members state="_lHPFUBcAEfGz3ruJdcnl1A" item="_Y17EsBcAEfGz3ruJdcnl1A"/>
+          <members state="_rnJIABcAEfGz3ruJdcnl1A" item="_Y17EsBcAEfGz3ruJdcnl1A"/>
+        </allowsFor>
+      </consentOption>
+    </labels>
+  </consentLabelType>
+  <dataItemLabelType id="_T073EhcAEfGz3ruJdcnl1A" entityName="DataItemLabelType">
+    <labels id="_W8VF0BcAEfGz3ruJdcnl1A" entityName="DataItemLabelOne">
+      <dataItem id="_Y17EsBcAEfGz3ruJdcnl1A" entityName="DataItemOne"/>
+    </labels>
+  </dataItemLabelType>
+  <dataStateLabelType id="_awKj0xcAEfGz3ruJdcnl1A" entityName="DataStateLabelType">
+    <labels id="_dqkfcBcAEfGz3ruJdcnl1A" entityName="DataStateLabelOne">
+      <dataState id="_fnv90BcAEfGz3ruJdcnl1A" entityName="DataStateOne" notRelatableWith="_lHPFUBcAEfGz3ruJdcnl1A"/>
+    </labels>
+    <labels id="_h2yoQBcAEfGz3ruJdcnl1A" entityName="DataStateLabelTwo">
+      <dataState id="_lHPFUBcAEfGz3ruJdcnl1A" entityName="DataStateTwo" notRelatableWith="_fnv90BcAEfGz3ruJdcnl1A"/>
+    </labels>
+    <labels id="_p_LEoBcAEfGz3ruJdcnl1A" entityName="DataStateLabelThree">
+      <dataState id="_rnJIABcAEfGz3ruJdcnl1A" entityName="DataStateThree"/>
+    </labels>
+  </dataStateLabelType>
+</consentmodel:ConsentModel>

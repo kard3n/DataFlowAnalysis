@@ -417,7 +417,7 @@ public class PrivacyDataFlowConstrainTest {
 	}
 
 	@Test
-	public void testFindViolationBasic() {
+	public void testPinLevelFindViolationBasic() {
 		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"SimpleSourceSink.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
@@ -456,7 +456,7 @@ public class PrivacyDataFlowConstrainTest {
 	}
 	
 	@Test
-	public void testMissingAndCorrectDataState() {
+	public void testPinLevelMissingAndCorrectDataState() {
 		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"BasicDataState.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
@@ -477,6 +477,33 @@ public class PrivacyDataFlowConstrainTest {
 		assertEquals(1, result.size());
 		for(var violation: result) {
 			assertTrue(violation.message().contains("The vertex has received a data combination in pin _C-ypEBbvEfGwgKscrQsGUg or could infere one not allowed for any of its consent options/functionalities."));
+			logger.debug(violation.message());
+		}
+	}
+	
+	@Test
+	public void testPinLevelInference() {
+		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"PinLevelInference.dataflowdiagram");
+		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"PinLevelInference.datadictionary");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"PinLevelInference.consentmodel");
+
+		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
+				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
+				.useDataFlowDiagram(dataFlowDiagramPath.toString())
+				.useDataDictionary(dataDictionaryPath.toString()).useConsentModel(consentModelPath.toString())
+				.build();
+		analysis.initializeAnalysis();
+		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
+		flowGraphCollection.evaluate();
+		
+		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
+		assertEquals(1, result.size());
+		for(var violation: result) {
+			assertTrue(violation.message().contains("The vertex has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its consent options/functionalities."));
+			assertTrue(violation.message().contains("=[]}")); // State has been reduced to the empty set
 			logger.debug(violation.message());
 		}
 	}

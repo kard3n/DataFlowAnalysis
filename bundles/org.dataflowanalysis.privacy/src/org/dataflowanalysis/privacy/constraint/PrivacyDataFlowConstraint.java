@@ -46,49 +46,58 @@ public class PrivacyDataFlowConstraint {
 		// Step two: calculate worst-case scenarios for every pin
 		for (var entry : vertexInstances.entrySet()) { // go over vertices
 			// group CharacteristicValue lists by pin (DataCharacteristic.variableName)
-			entry.getValue().forEach(vertBase -> {
-				DFDVertex vert = (DFDVertex) vertBase;
-				var pinToCharacteristics = groupIncomingCharacteristicsByPin(vert.getAllIncomingDataCharacteristics());
-
-				// Evaluate every pin by itself: check that only data from users who have
-				// consented to this node's functionalities reached this pin,
-				// and that the data combinations are allowed as part of this node's
-				// functionalities
-				for (var pin : pinToCharacteristics.entrySet()) {
-					// Go through the lists of CharacteristicValues, and check that all
-					// functionalities of the node (in form of ConsentOptions)
-					// are present in it -> check that the user has consented to all functionalities
-					// of this node
-					violations.addAll(allFunctionalitiesConsentedTo(pin.getValue(), vert.getAllVertexCharacteristics(),
-							vert.getName()));
-
-					// Create worst-case scenarios for this pin by creating the smallest subset of
-					// DataStates possible for each data item, using the following rule:
-					// Two DataState sets can be combined to their intersection, if their
-					// intersection is not empty.
-					// If two sets contain DataStates that can not be related to each other, those
-					// sets can not be unified
-					var dataItemToDataState = groupDataStateByItem(pin.getValue());
-					dataItemToDataState.keySet().forEach(pinName -> {
-						dataItemToDataState.put(pinName, reduceDataStateSets(dataItemToDataState.get(pinName)));
-					});
-
-					var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
-					List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics())
-							.stream().map(label -> label.getConsentOption()).toList();
-					// Check that each of the possible combination is allowed
-					for (var combination : possibleCombinations) {
-						if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
-							violations.add(new PrivacyConstraintViolation(vert.getName(),
-									"The vertex has received a data combination in pin " + pin.getKey()
-											+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
-											+ combination + "\nConsent options of the vertex: " + consentOptions));
-						}
+			DFDVertex vert = null;
+			HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToCharacteristics = new HashMap<>();
+			for(var vertBase: entry.getValue()) {
+				// Go through the instances of the vertex from every TFG, and add the grouped information of their pins
+				if(vert == null) vert = (DFDVertex) vertBase;
+				var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(((DFDVertex) vertBase).getAllIncomingDataCharacteristics());
+				for(var newCharacteristics: newCharacteristicsPerPin.entrySet()) {
+					pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(), k -> new HashSet<HashSet<CharacteristicValue>>());
+					for(var newChar: newCharacteristics.getValue()) {
+						pinToCharacteristics.get(newCharacteristics.getKey()).add(newChar);
 					}
+					
+				}
+			}
+			
+			// Evaluate every pin by itself: check that only data from users who have
+			// consented to this node's functionalities reached this pin,
+			// and that the data combinations are allowed as part of this node's
+			// functionalities
+			for (var pin : pinToCharacteristics.entrySet()) {
+				// Go through the lists of CharacteristicValues, and check that all
+				// functionalities of the node (in form of ConsentOptions)
+				// are present in it -> check that the user has consented to all functionalities
+				// of this node
+				violations.addAll(allFunctionalitiesConsentedTo(pin.getValue(), vert.getAllVertexCharacteristics(),
+						vert.getName()));
 
+				// Create worst-case scenarios for this pin by creating the smallest subset of
+				// DataStates possible for each data item, using the following rule:
+				// Two DataState sets can be combined to their intersection, if their
+				// intersection is not empty.
+				// If two sets contain DataStates that can not be related to each other, those
+				// sets can not be unified
+				var dataItemToDataState = groupDataStateByItem(pin.getValue());
+				dataItemToDataState.keySet().forEach(pinName -> {
+					dataItemToDataState.put(pinName, reduceDataStateSets(dataItemToDataState.get(pinName)));
+				});
+
+				var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
+				List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics())
+						.stream().map(label -> label.getConsentOption()).toList();
+				// Check that each of the possible combination is allowed
+				for (var combination : possibleCombinations) {
+					if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
+						violations.add(new PrivacyConstraintViolation(vert.getName(),
+								"The vertex has received a data combination in pin " + pin.getKey()
+										+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
+										+ combination + "\nConsent options of the vertex: " + consentOptions));
+					}
 				}
 
-			});
+			}
 		}
 
 		return violations;
@@ -389,9 +398,9 @@ public class PrivacyDataFlowConstraint {
 				}
 				return false;
 			}).toList();
-			
+
 		}
-		
+
 		return !consentOptionCopy.isEmpty();
 	}
 

@@ -48,19 +48,23 @@ public class PrivacyDataFlowConstraint {
 			// group CharacteristicValue lists by pin (DataCharacteristic.variableName)
 			DFDVertex vert = null;
 			HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToCharacteristics = new HashMap<>();
-			for(var vertBase: entry.getValue()) {
-				// Go through the instances of the vertex from every TFG, and add the grouped information of their pins
-				if(vert == null) vert = (DFDVertex) vertBase;
-				var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(((DFDVertex) vertBase).getAllIncomingDataCharacteristics());
-				for(var newCharacteristics: newCharacteristicsPerPin.entrySet()) {
-					pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(), k -> new HashSet<HashSet<CharacteristicValue>>());
-					for(var newChar: newCharacteristics.getValue()) {
+			for (var vertBase : entry.getValue()) {
+				// Go through the instances of the vertex from every TFG, and add the grouped
+				// information of their pins
+				if (vert == null)
+					vert = (DFDVertex) vertBase;
+				var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(
+						((DFDVertex) vertBase).getAllIncomingDataCharacteristics());
+				for (var newCharacteristics : newCharacteristicsPerPin.entrySet()) {
+					pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(),
+							k -> new HashSet<HashSet<CharacteristicValue>>());
+					for (var newChar : newCharacteristics.getValue()) {
 						pinToCharacteristics.get(newCharacteristics.getKey()).add(newChar);
 					}
-					
+
 				}
 			}
-			
+
 			// Evaluate every pin by itself: check that only data from users who have
 			// consented to this node's functionalities reached this pin,
 			// and that the data combinations are allowed as part of this node's
@@ -85,8 +89,8 @@ public class PrivacyDataFlowConstraint {
 				});
 
 				var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
-				List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics())
-						.stream().map(label -> label.getConsentOption()).toList();
+				List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics()).stream()
+						.map(label -> label.getConsentOption()).toList();
 				// Check that each of the possible combination is allowed
 				for (var combination : possibleCombinations) {
 					if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
@@ -286,12 +290,11 @@ public class PrivacyDataFlowConstraint {
 	}
 
 	/**
-	 * Checks if the intersection of both sets is not empty, and that both sets
-	 * don't contain a DataState that is can not related with a DataState of the
-	 * other set
+	 * Checks that both sets don't contain a DataState that can not be related with
+	 * a DataState of the other set
 	 * 
-	 * @param setOne   The first set
-	 * @param stateTwo The second set
+	 * @param setOne The first set
+	 * @param setTwo The second set
 	 * @return True if the sets may be intersected to create a worse-case set
 	 */
 	public static boolean stateSetsCanBeIntersected(Set<DataState> setOne, Set<DataState> setTwo) {
@@ -426,5 +429,111 @@ public class PrivacyDataFlowConstraint {
 				return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Given the combinations, creates the biggest sets possible by checking for
+	 * inference through overlaps
+	 * 
+	 * @param combinations The input sets
+	 * @return The expanded sets
+	 */
+	public static List<HashMap<DataItem, Set<DataState>>> uniteItemTuples(
+			List<HashMap<DataItem, Set<DataState>>> inputCombinations) {
+		List<HashMap<DataItem, Set<DataState>>> result = new ArrayList<>(inputCombinations);
+
+		boolean stateChanged = true;
+		while (stateChanged) {
+			stateChanged = false;
+			for (int x = 0; x < result.size(); x++) {
+				for (int y = 0; y < result.size(); y++) {
+					if (x == y)
+						continue;
+					// Get intersection of items (ignoring state)
+					var combinationOne = result.get(x);
+					var combinationTwo = result.get(y);
+					Set<DataItem> intersection = new HashSet<>(combinationOne.keySet());
+					intersection.retainAll(combinationTwo.keySet());
+					if (intersection.size() == 0)
+						continue; // Empty intersection: sets can't be combined
+
+					// Check which of the items of the intersection cannot be related
+					List<DataItem> nonRelatable = intersection.stream().filter(
+							item -> !stateSetsCanBeIntersected(combinationOne.get(item), combinationTwo.get(item)))
+							.toList();
+
+					// If all items of the intersection are unrelatable: cannot do intersection
+					// (inference)
+					if (intersection.size() == nonRelatable.size())
+						continue;
+
+					// Create a new base combination, including all items that were both not in the
+					// intersection and are unrelatable
+					HashMap<DataItem, Set<DataState>> baseNewCombination = new HashMap<>();
+					for (var item : combinationOne.entrySet()) {
+						if (!nonRelatable.contains(item.getKey()))
+							baseNewCombination.put(item.getKey(), new HashSet<>(item.getValue()));
+					}
+
+					boolean stateWasReduced = false;
+					for (var item : combinationTwo.entrySet()) {
+						if (!nonRelatable.contains(item.getKey())) {
+							if (!baseNewCombination.containsKey(item.getKey())) {
+								baseNewCombination.put(item.getKey(), new HashSet<>(item.getValue()));
+							} else {
+								if (baseNewCombination.get(item.getKey()).retainAll(item.getValue())) {
+									stateWasReduced = true;
+								}
+							}
+						}
+					}
+					
+					// Intersection has the same elements as both combinations and no state was reduced: no reduction can be done
+					if(!stateWasReduced && intersection.equals(combinationOne.keySet()) && intersection.equals(combinationTwo.keySet())) {
+						continue;
+					}
+
+					List<HashMap<DataItem, Set<DataState>>> newCombinations = new LinkedList<>();
+					newCombinations.add(baseNewCombination);
+
+					// Add non-relatable entries of the intersection to the new combinations
+					// For every one, duplicate the old set: one for item one, and one for item two
+					for (var item : nonRelatable) {
+						List<HashMap<DataItem, Set<DataState>>> secondStateNewCombinations = new LinkedList<>();
+						// Create copy of new combinations, and add the item with the second state set
+						// to it
+						for (var entry : newCombinations) {
+							HashMap<DataItem, Set<DataState>> newMap = new HashMap<>();
+							for (var itemEntry : entry.entrySet()) {
+								newMap.put(itemEntry.getKey(), new HashSet<DataState>(itemEntry.getValue()));
+							}
+							newMap.put(item, combinationTwo.get(item));
+							secondStateNewCombinations.add(newMap);
+						}
+						// Add the item with the first state set to the new combinations
+						for (var entry : newCombinations) {
+							entry.put(item, combinationOne.get(item));
+						}
+
+						// Add the secondStateNewCombinations to newCombinations
+						newCombinations.addAll(secondStateNewCombinations);
+					}
+
+					// Remove old and add new
+					result.remove(combinationOne);
+					result.remove(combinationTwo);
+					result.addAll(newCombinations);
+
+					stateChanged = true;
+					break;
+
+				}
+
+				if (stateChanged)
+					break;
+			}
+		}
+
+		return result;
 	}
 }

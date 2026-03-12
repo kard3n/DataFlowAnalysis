@@ -422,14 +422,12 @@ public class PrivacyDataFlowConstrainTest {
 				"SimpleSourceSink.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"SimpleSourceSink.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"SimpleSourceSink.consentmodel");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "SimpleSourceSink.consentmodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
-				.useDataFlowDiagram(dataFlowDiagramPath.toString())
-				.useDataDictionary(dataDictionaryPath.toString()).useConsentModel(consentModelPath.toString())
-				.build();
+				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
+				.useConsentModel(consentModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
@@ -454,57 +452,101 @@ public class PrivacyDataFlowConstrainTest {
 		}
 		assertTrue(foundCOne && foundCTwo && foundCEmpty);
 	}
-	
+
 	@Test
 	public void testPinLevelMissingAndCorrectDataState() {
 		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"BasicDataState.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"BasicDataState.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"BasicDataState.consentmodel");
+		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels", "BasicDataState.datadictionary");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "BasicDataState.consentmodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
-				.useDataFlowDiagram(dataFlowDiagramPath.toString())
-				.useDataDictionary(dataDictionaryPath.toString()).useConsentModel(consentModelPath.toString())
-				.build();
+				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
+				.useConsentModel(consentModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
-		
+
 		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
 		assertEquals(1, result.size());
-		for(var violation: result) {
-			assertTrue(violation.message().contains("The vertex has received a data combination in pin _C-ypEBbvEfGwgKscrQsGUg or could infere one not allowed for any of its consent options/functionalities."));
+		for (var violation : result) {
+			assertTrue(violation.message().contains(
+					"The vertex has received a data combination in pin _C-ypEBbvEfGwgKscrQsGUg or could infere one not allowed for any of its consent options/functionalities."));
 			logger.debug(violation.message());
 		}
 	}
-	
+
 	@Test
 	public void testPinLevelInference() {
 		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"PinLevelInference.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"PinLevelInference.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"PinLevelInference.consentmodel");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "PinLevelInference.consentmodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
-				.useDataFlowDiagram(dataFlowDiagramPath.toString())
-				.useDataDictionary(dataDictionaryPath.toString()).useConsentModel(consentModelPath.toString())
-				.build();
+				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
+				.useConsentModel(consentModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
-		
+
 		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
 		assertEquals(1, result.size());
-		for(var violation: result) {
-			assertTrue(violation.message().contains("The vertex has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its consent options/functionalities."));
+		for (var violation : result) {
+			assertTrue(violation.message().contains(
+					"The vertex has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its consent options/functionalities."));
 			assertTrue(violation.message().contains("=[]}")); // State has been reduced to the empty set
 			logger.debug(violation.message());
 		}
+	}
+
+	@Test
+	public void testUniteItemTuples() {
+		Map<DataItem, Set<DataState>> mapOne = new HashMap<>(
+				Map.of(this.dataItemOne, new HashSet<>(), this.dataItemTwo, new HashSet<>()));
+		Map<DataItem, Set<DataState>> mapTwo = new HashMap<>(
+				Map.of(this.dataItemTwo, new HashSet<>(), this.dataItemThree, new HashSet<>()));
+
+		logger.debug("Result: "
+				+ PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo)))
+						.get(0).keySet().stream().map(item -> item.getEntityName()).toList());
+		// Scenario one: no state
+		assertEquals(
+				List.of(Map.of(this.dataItemOne, Set.of(), this.dataItemTwo, Set.of(), this.dataItemThree, Set.of())),
+				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
+
+		// Scenario two: state, but no incompatibilities
+		mapOne.get(this.dataItemTwo).add(this.dataStateOne);
+		mapOne.get(this.dataItemTwo).add(this.dataStateTwo);
+		mapTwo.get(this.dataItemTwo).add(this.dataStateOne);
+		mapTwo.get(this.dataItemTwo).add(this.dataStateThree);
+
+		assertEquals(
+				List.of(Map.of(this.dataItemOne, Set.of(), this.dataItemTwo, Set.of(this.dataStateOne),
+						this.dataItemThree, Set.of())),
+				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
+
+		// Scenario three: non-relatability resulting in the initial two sets, as the intersection is wholly unrelatable
+		
+		this.dataStateTwo.getNotRelatableWith().add(dataStateThree);
+		this.dataStateThree.getNotRelatableWith().add(dataStateTwo);
+		
+		assertEquals(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo)),
+				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
+
+		// Scenario four: non-relatability resulting in two sets, intersection has a relatable part
+		mapOne.put(dataItemFour, new HashSet<>());
+		mapTwo.put(dataItemFour, new HashSet<>());
+		
+		assertEquals(List.of(
+				Map.of(this.dataItemOne, Set.of(), this.dataItemTwo, Set.of(this.dataStateOne, this.dataStateTwo),
+						this.dataItemThree, Set.of(), this.dataItemFour, Set.of()),
+				Map.of(this.dataItemOne, Set.of(), this.dataItemTwo, Set.of(this.dataStateOne, this.dataStateThree),
+						this.dataItemThree, Set.of(), this.dataItemFour, Set.of())),
+				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
+
 	}
 }

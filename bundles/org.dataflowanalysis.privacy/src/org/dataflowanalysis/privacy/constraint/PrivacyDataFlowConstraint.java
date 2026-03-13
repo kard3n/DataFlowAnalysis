@@ -65,6 +65,13 @@ public class PrivacyDataFlowConstraint {
 				}
 			}
 
+			// Get all consent options
+			List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics()).stream()
+					.map(label -> label.getConsentOption()).toList();
+
+			// List of all combinations from the pins
+			List<HashMap<DataItem, Set<DataState>>> nodeLevelCombinations = new LinkedList<>();
+
 			// Evaluate every pin by itself: check that only data from users who have
 			// consented to this node's functionalities reached this pin,
 			// and that the data combinations are allowed as part of this node's
@@ -89,8 +96,7 @@ public class PrivacyDataFlowConstraint {
 				});
 
 				var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
-				List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics()).stream()
-						.map(label -> label.getConsentOption()).toList();
+				nodeLevelCombinations.addAll(possibleCombinations);
 				// Check that each of the possible combination is allowed
 				for (var combination : possibleCombinations) {
 					if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
@@ -101,6 +107,12 @@ public class PrivacyDataFlowConstraint {
 					}
 				}
 
+			}
+
+			// Evaluate inference at the node level
+			if (checkNodeLevelInference) {
+				violations.addAll(verifyDataTupleConformance(uniteItemTuples(nodeLevelCombinations), consentOptions,
+						vert.getName()));
 			}
 		}
 
@@ -389,27 +401,26 @@ public class PrivacyDataFlowConstraint {
 			List<ConsentOption> nodeConsentOptions) {
 		var consentOptionCopy = (List<ConsentOption>) new LinkedList<>(nodeConsentOptions);
 
-		// Go through all data items, and delete every consent option that is not
-		// compatible with it.
-		// If no consent options are left, the data combinations is compatible with none
-		// and therewith violates the privacy contract
-		for (var entry : dataCombination.entrySet()) {
-			consentOptionCopy = consentOptionCopy.stream().filter(option -> {
-				for (var combination : option.getAllowsFor()) {
-					if (combinationAllowsItem(combination, entry.getKey(), entry.getValue()))
-						return true;
+		// Filter all consent options, removing those that don't have a data combination
+		// that allows for all items of the received data combinations
+		consentOptionCopy = consentOptionCopy.stream().filter(co -> {
+			// Check that the CO has at least one permitted data combination that is
+			// compatible with the received one
+			return co.getAllowsFor().stream().filter(udc -> {
+				for (var receivedItem : dataCombination.entrySet()) {
+					if (!combinationAllowsItem(udc, receivedItem.getKey(), receivedItem.getValue()))
+						return false;
 				}
-				return false;
-			}).toList();
-
-		}
+				return true;
+			}).count() > 0;
+		}).toList();
 
 		return !consentOptionCopy.isEmpty();
 	}
 
 	/**
 	 * Checks that the passed data item is compatible with the data combination.
-	 * This means that itself must included in the combination, and that the
+	 * This means that it itself must included in the combination, and that the
 	 * combinations list of state for the item must be a sublist of the item's
 	 * states
 	 * 
@@ -422,7 +433,7 @@ public class PrivacyDataFlowConstraint {
 			Set<DataState> itemState) {
 		var combinationMembersOfItem = combination.getMembers().stream().filter(member -> member.getItem().equals(item))
 				.toList();
-		if (combinationMembersOfItem.size() < 1)
+		if (combinationMembersOfItem.size() == 0)
 			return false;
 		for (var member : combinationMembersOfItem) {
 			if (itemState.containsAll(member.getState()))
@@ -487,9 +498,11 @@ public class PrivacyDataFlowConstraint {
 							}
 						}
 					}
-					
-					// Intersection has the same elements as both combinations and no state was reduced: no reduction can be done
-					if(!stateWasReduced && intersection.equals(combinationOne.keySet()) && intersection.equals(combinationTwo.keySet())) {
+
+					// Intersection has the same elements as both combinations and no state was
+					// reduced: no reduction can be done
+					if (!stateWasReduced && intersection.equals(combinationOne.keySet())
+							&& intersection.equals(combinationTwo.keySet())) {
 						continue;
 					}
 
@@ -497,7 +510,7 @@ public class PrivacyDataFlowConstraint {
 					newCombinations.add(baseNewCombination);
 
 					// Add non-relatable entries of the intersection to the new combinations
-					// For every one, duplicate the old set: one for item one, and one for item two
+					// For each one, duplicate the old set: one for item one, and one for item two
 					for (var item : nonRelatable) {
 						List<HashMap<DataItem, Set<DataState>>> secondStateNewCombinations = new LinkedList<>();
 						// Create copy of new combinations, and add the item with the second state set
@@ -535,5 +548,30 @@ public class PrivacyDataFlowConstraint {
 		}
 
 		return result;
+	}
+
+	/**
+	 * Verifies that all data item tuples are allowed by the consent options
+	 * 
+	 * @param combinationTuples  The combination tuples as received or derived by
+	 *                           the node
+	 * @param nodeConsentOptions The consent options of the node
+	 * @return
+	 */
+	public static List<PrivacyConstraintViolation> verifyDataTupleConformance(
+			List<HashMap<DataItem, Set<DataState>>> combinationTuples, List<ConsentOption> nodeConsentOptions,
+			String vertexName) {
+		List<PrivacyConstraintViolation> detectedViolations = new LinkedList<>();
+
+		for (var combination : combinationTuples) {
+			if (!combinationAllowedByConsentOptions(combination, nodeConsentOptions)) {
+				detectedViolations.add(new PrivacyConstraintViolation(vertexName,
+						"The vertex/node \"" + vertexName
+								+ "\" could derive information not authorized by its consent options."
+								+ "\n\tDetected combination: " + combination + "\n\tVertex consent options: "
+								+ nodeConsentOptions));
+			}
+		}
+		return detectedViolations;
 	}
 }

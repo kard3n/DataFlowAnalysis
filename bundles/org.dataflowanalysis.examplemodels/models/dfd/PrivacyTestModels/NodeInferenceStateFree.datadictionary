@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_6M7bUB7EEfGbaP9QEy34OQ">
+  <behavior id="_6rsa8R7EEfGbaP9QEy34OQ" entityName="SourceSend">
+    <outPin id="_AuwwoR7FEfGbaP9QEy34OQ" entityName="SourceOutOne"/>
+    <outPin id="_PXQEAR7FEfGbaP9QEy34OQ" entityName="SourceOutTwo"/>
+    <assignment xsi:type="datadictionary:Assignment" id="_Dc5x4h7FEfGbaP9QEy34OQ" entityName="SourceSendOne" outputPin="_AuwwoR7FEfGbaP9QEy34OQ">
+      <term xsi:type="datadictionary:TRUE" id="_OroUIB7FEfGbaP9QEy34OQ"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="NodeInferenceStateFree.consentmodel#_KjQmAB7EEfGbaP9QEy34OQ"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="NodeInferenceStateFree.consentmodel#_NNia8B7EEfGbaP9QEy34OQ"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:Assignment" id="_SSBzEh7FEfGbaP9QEy34OQ" entityName="SourceSendTwo" outputPin="_PXQEAR7FEfGbaP9QEy34OQ">
+      <term xsi:type="datadictionary:TRUE" id="_X198wB7FEfGbaP9QEy34OQ"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="NodeInferenceStateFree.consentmodel#_OeTfQB7EEfGbaP9QEy34OQ"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="NodeInferenceStateFree.consentmodel#_NNia8B7EEfGbaP9QEy34OQ"/>
+    </assignment>
+  </behavior>
+  <behavior id="_cQ-vgR7FEfGbaP9QEy34OQ" entityName="SinkReceive">
+    <inPin id="_eFTz4B7FEfGbaP9QEy34OQ" entityName="SinkInOne"/>
+    <inPin id="_gjQdAB7FEfGbaP9QEy34OQ" entityName="SinkInTwo"/>
+  </behavior>
+</datadictionary:DataDictionary>

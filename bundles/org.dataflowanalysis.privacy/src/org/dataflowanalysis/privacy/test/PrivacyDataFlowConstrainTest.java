@@ -549,4 +549,30 @@ public class PrivacyDataFlowConstrainTest {
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
 
 	}
+	
+	@Test
+	public void testNodeInferenceStateFree() {
+		//NodeInferenceStateFree
+		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"NodeInferenceStateFree.dataflowdiagram");
+		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"NodeInferenceStateFree.datadictionary");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "NodeInferenceStateFree.consentmodel");
+
+		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
+				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
+				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
+				.useConsentModel(consentModelPath.toString()).build();
+		analysis.initializeAnalysis();
+		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
+		flowGraphCollection.evaluate();
+
+		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
+		
+		for(var violation: violations) {
+			logger.info(violation.message());
+		}
+		
+		assertEquals(1, violations.size());
+	}
 }

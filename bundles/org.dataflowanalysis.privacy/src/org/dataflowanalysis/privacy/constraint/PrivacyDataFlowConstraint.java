@@ -103,7 +103,8 @@ public class PrivacyDataFlowConstraint {
 						violations.add(new PrivacyConstraintViolation(vert.getName(),
 								"The vertex has received a data combination in pin " + pin.getKey()
 										+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
-										+ combination + "\nConsent options of the vertex: " + consentOptions));
+										+ dataCombinatioToString(combination) + "\nConsent options of the vertex: "
+										+ consentOptions.stream().map(co -> consentOptionToString(co)).toList()));
 					}
 				}
 
@@ -568,10 +569,31 @@ public class PrivacyDataFlowConstraint {
 				detectedViolations.add(new PrivacyConstraintViolation(vertexName,
 						"The vertex/node \"" + vertexName
 								+ "\" could derive information not authorized by its consent options."
-								+ "\n\tDetected combination: " + combination + "\n\tVertex consent options: "
-								+ nodeConsentOptions));
+								+ "\n\tDetected combination: " + dataCombinatioToString(combination)
+								+ "\n\tVertex consent options: "
+								+ nodeConsentOptions.stream().map(co -> consentOptionToString(co)).toList()));
 			}
 		}
 		return detectedViolations;
+	}
+
+	/**
+	 * Converts a data combination to a human-readable format
+	 */
+	public static String dataCombinatioToString(HashMap<DataItem, Set<DataState>> input) {
+		return input.entrySet().stream().map(entry -> entry.getKey().getEntityName() + ":"
+				+ entry.getValue().stream().map(state -> state.getEntityName()).toList()).toList().toString();
+	}
+
+	/**
+	 * Converts a consent option to a human-readable form
+	 */
+	public static String consentOptionToString(ConsentOption input) {
+		return "\n" + input.getEntityName() + ":\n\tAllowsFor: "
+				+ input.getAllowsFor().stream()
+						.map(af -> af.getEntityName() + ":"
+								+ af.getMembers().stream().map(member -> member.getItem().getEntityName() + ":"
+										+ member.getState().stream().map(state -> state.getEntityName()).toList()).toList())
+						.toList();
 	}
 }

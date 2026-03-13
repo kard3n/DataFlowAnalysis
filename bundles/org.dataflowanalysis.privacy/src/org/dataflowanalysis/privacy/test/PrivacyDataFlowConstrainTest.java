@@ -568,11 +568,9 @@ public class PrivacyDataFlowConstrainTest {
 		flowGraphCollection.evaluate();
 
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
-		
-		for(var violation: violations) {
-			logger.info(violation.message());
-		}
-		
 		assertEquals(1, violations.size());
+		for(var violation: violations) {
+			assertTrue(violation.message().contains("The vertex/node \"Sink\" could derive information not authorized by its consent options."));
+		}
 	}
 }

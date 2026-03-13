@@ -496,10 +496,10 @@ public class PrivacyDataFlowConstrainTest {
 		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
 		assertEquals(1, result.size());
 		for (var violation : result) {
+			logger.debug(violation.message());
 			assertTrue(violation.message().contains(
 					"The vertex has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its consent options/functionalities."));
-			assertTrue(violation.message().contains("=[]}")); // State has been reduced to the empty set
-			logger.debug(violation.message());
+			assertTrue(violation.message().contains("[DataItemOne:[]]")); // State has been reduced to the empty set
 		}
 	}
 
@@ -571,6 +571,31 @@ public class PrivacyDataFlowConstrainTest {
 		assertEquals(1, violations.size());
 		for(var violation: violations) {
 			assertTrue(violation.message().contains("The vertex/node \"Sink\" could derive information not authorized by its consent options."));
+		}
+	}
+	
+	@Test
+	public void testNodeInferenceStateful() {
+		//NodeInferenceStateFree
+		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"NodeInferenceStateful.dataflowdiagram");
+		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"NodeInferenceStateful.datadictionary");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "NodeInferenceStateful.consentmodel");
+
+		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
+				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
+				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
+				.useConsentModel(consentModelPath.toString()).build();
+		analysis.initializeAnalysis();
+		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
+		flowGraphCollection.evaluate();
+
+		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
+		assertEquals(1, violations.size());
+		for(var violation: violations) {
+			assertTrue(violation.message().contains("The vertex/node \"Sink\" could derive information not authorized by its consent options."));
+			assertTrue(violation.message().contains("ItemTwo:[]"));
 		}
 	}
 }

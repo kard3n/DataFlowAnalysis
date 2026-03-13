@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_Ylwp4B7kEfGPjLFNxG_peA">
+  <flows id="_llR0UB7kEfGPjLFNxG_peA" entityName="OneOne" sourceNode="_ZYVWUR7kEfGPjLFNxG_peA" destinationNode="_it8a0h7kEfGPjLFNxG_peA">
+    <destinationPin href="NodeInferenceStateful.datadictionary#__bbIYB7jEfGPjLFNxG_peA"/>
+    <sourcePin href="NodeInferenceStateful.datadictionary#_LEU6oR7jEfGPjLFNxG_peA"/>
+  </flows>
+  <flows id="_sc5MYB7kEfGPjLFNxG_peA" entityName="OneTwo" sourceNode="_ZYVWUR7kEfGPjLFNxG_peA" destinationNode="_it8a0h7kEfGPjLFNxG_peA">
+    <destinationPin href="NodeInferenceStateful.datadictionary#__bbIYB7jEfGPjLFNxG_peA"/>
+    <sourcePin href="NodeInferenceStateful.datadictionary#_g1JioR7jEfGPjLFNxG_peA"/>
+  </flows>
+  <flows id="_wTbZEB7kEfGPjLFNxG_peA" entityName="TwoOne" sourceNode="_ZYVWUR7kEfGPjLFNxG_peA" destinationNode="_it8a0h7kEfGPjLFNxG_peA">
+    <destinationPin href="NodeInferenceStateful.datadictionary#_Az9ooB7kEfGPjLFNxG_peA"/>
+    <sourcePin href="NodeInferenceStateful.datadictionary#_NLTOMR7jEfGPjLFNxG_peA"/>
+  </flows>
+  <flows id="_0EsrQB7kEfGPjLFNxG_peA" entityName="TwoTwo" sourceNode="_ZYVWUR7kEfGPjLFNxG_peA" destinationNode="_it8a0h7kEfGPjLFNxG_peA">
+    <destinationPin href="NodeInferenceStateful.datadictionary#_Az9ooB7kEfGPjLFNxG_peA"/>
+    <sourcePin href="NodeInferenceStateful.datadictionary#_izrE0R7jEfGPjLFNxG_peA"/>
+  </flows>
+  <nodes xsi:type="dataflowdiagram:External" id="_ZYVWUR7kEfGPjLFNxG_peA" entityName="Source">
+    <behavior href="NodeInferenceStateful.datadictionary#_JoE_ER7jEfGPjLFNxG_peA"/>
+    <properties xsi:type="consentmodel:RoleLabel" href="NodeInferenceStateful.consentmodel#_8xj_oB7iEfGPjLFNxG_peA"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_it8a0h7kEfGPjLFNxG_peA" entityName="Sink">
+    <behavior href="NodeInferenceStateful.datadictionary#_92kqcR7jEfGPjLFNxG_peA"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="NodeInferenceStateful.consentmodel#_pDJUQB7iEfGPjLFNxG_peA"/>
+  </nodes>
+</dataflowdiagram:DataFlowDiagram>

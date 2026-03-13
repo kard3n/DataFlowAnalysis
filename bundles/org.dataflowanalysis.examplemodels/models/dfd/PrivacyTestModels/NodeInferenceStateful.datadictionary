@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_JA-i0B7jEfGPjLFNxG_peA">
+  <behavior id="_JoE_ER7jEfGPjLFNxG_peA" entityName="Source">
+    <outPin id="_LEU6oR7jEfGPjLFNxG_peA" entityName="SourceOutOneOne"/>
+    <outPin id="_NLTOMR7jEfGPjLFNxG_peA" entityName="SourceOutTwoOne"/>
+    <outPin id="_g1JioR7jEfGPjLFNxG_peA" entityName="SourceOutOneTwo"/>
+    <outPin id="_izrE0R7jEfGPjLFNxG_peA" entityName="SourceOutTwoTwo"/>
+    <assignment xsi:type="datadictionary:Assignment" id="_Omc9kh7jEfGPjLFNxG_peA" entityName="SourceOneOne" outputPin="_LEU6oR7jEfGPjLFNxG_peA">
+      <term xsi:type="datadictionary:TRUE" id="_4tsFEB7jEfGPjLFNxG_peA"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="NodeInferenceStateful.consentmodel#_KtK0UB7iEfGPjLFNxG_peA"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:Assignment" id="_oxegAh7jEfGPjLFNxG_peA" entityName="SourceOneTwo" outputPin="_g1JioR7jEfGPjLFNxG_peA">
+      <term xsi:type="datadictionary:TRUE" id="_5eJ4sB7jEfGPjLFNxG_peA"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="NodeInferenceStateful.consentmodel#_OdwKAR7iEfGPjLFNxG_peA"/>
+      <outputLabels xsi:type="consentmodel:DataStateLabel" href="NodeInferenceStateful.consentmodel#_c6sUsB7iEfGPjLFNxG_peA"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:Assignment" id="_sbLKkh7jEfGPjLFNxG_peA" entityName="SourceTwoOne" outputPin="_NLTOMR7jEfGPjLFNxG_peA">
+      <term xsi:type="datadictionary:TRUE" id="_5_S24B7jEfGPjLFNxG_peA"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="NodeInferenceStateful.consentmodel#_OdwKAR7iEfGPjLFNxG_peA"/>
+      <outputLabels xsi:type="consentmodel:DataStateLabel" href="NodeInferenceStateful.consentmodel#_hOUGAB7iEfGPjLFNxG_peA"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:Assignment" id="_yqksEh7jEfGPjLFNxG_peA" entityName="SourceTwoTwo" outputPin="_izrE0R7jEfGPjLFNxG_peA">
+      <term xsi:type="datadictionary:TRUE" id="_6gffcB7jEfGPjLFNxG_peA"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="NodeInferenceStateful.consentmodel#_SPOQgB7iEfGPjLFNxG_peA"/>
+    </assignment>
+  </behavior>
+  <behavior id="_92kqcR7jEfGPjLFNxG_peA" entityName="Sink">
+    <inPin id="__bbIYB7jEfGPjLFNxG_peA" entityName="SinkInOne"/>
+    <inPin id="_Az9ooB7kEfGPjLFNxG_peA" entityName="SinkInTwo"/>
+  </behavior>
+</datadictionary:DataDictionary>

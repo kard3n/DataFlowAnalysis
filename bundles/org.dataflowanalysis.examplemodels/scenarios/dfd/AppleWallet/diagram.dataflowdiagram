@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<dataflowdiagram:DataFlowDiagram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_Ct0s0IMeEfCvx4l13OBupA">
+<dataflowdiagram:DataFlowDiagram xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_Ct0s0IMeEfCvx4l13OBupA">
   <flows id="vbbice" entityName="authorization" sourceNode="ipn4rq" destinationNode="3fed3n">
     <destinationPin href="diagram.datadictionary#41yehb"/>
     <sourcePin href="diagram.datadictionary#9y2ueq"/>
@@ -142,7 +142,7 @@
   </flows>
   <nodes xsi:type="dataflowdiagram:Process" id="dr4rla" entityName="Download Pass File">
     <behavior href="diagram.datadictionary#_Ct0s-oMeEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#dtoc3f"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#dtoc3f"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="rgtmof" entityName="Payment Network">
     <behavior href="diagram.datadictionary#_Ct0s_YMeEfCvx4l13OBupA"/>
@@ -155,38 +155,38 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="ipn4rq" entityName="User Identification">
     <behavior href="diagram.datadictionary#_Ct0tDoMeEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#950inv"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#950inv"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="6hagnuh" entityName="Apple Server">
     <behavior href="diagram.datadictionary#_Ct0tEoMeEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#dtoc3f"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#dtoc3f"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="kx5g9i" entityName="Check Card">
     <behavior href="diagram.datadictionary#_Ct0tG4MeEfCvx4l13OBupA"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="dwmpfo" entityName="NFC Controller">
     <behavior href="diagram.datadictionary#_Ct0tIIMeEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#sjnkmd"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#sjnkmd"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="escqi8" entityName="Payment App">
     <behavior href="diagram.datadictionary#_Ct0tJ4MeEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#xtevhg"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#xtevhg"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="2urax7" entityName="NFC Reader App">
     <behavior href="diagram.datadictionary#_Ct0tKoMeEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#o5y16e"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#o5y16e"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="13c25c" entityName="Show Payment Authorization">
     <behavior href="diagram.datadictionary#_Ct0tMIMeEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#o5y16e"/>
-    <properties href="diagram.datadictionary#ezo9u"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#o5y16e"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#ezo9u"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="ewbpv9" entityName="Payment Processor">
     <behavior href="diagram.datadictionary#_Ct0tM4MeEfCvx4l13OBupA"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="1c74g" entityName="Link &amp; Provision">
     <behavior href="diagram.datadictionary#_Ct0tPIMeEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#dtoc3f"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#dtoc3f"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="r6wdd9" entityName="Issuer Bank">
     <behavior href="diagram.datadictionary#_Ct0tQIMeEfCvx4l13OBupA"/>
@@ -196,12 +196,12 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="b1xbub" entityName="Terminal App">
     <behavior href="diagram.datadictionary#_Ct0tSIMeEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#o5y16e"/>
-    <properties href="diagram.datadictionary#ezo9u"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#o5y16e"/>
+    <properties xsi:type="datadictionary:Label"  href="diagram.datadictionary#ezo9u"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="ryp8gy" entityName="Apple Pay App">
     <behavior href="diagram.datadictionary#_Ct0tT4MeEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#xtevhg"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#xtevhg"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="n9cqib" entityName="Apple Wallet">
     <behavior href="diagram.datadictionary#_Ct0tVoMeEfCvx4l13OBupA"/>

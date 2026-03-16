@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<dataflowdiagram:DataFlowDiagram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_dGptIGcDEfCJkoMBjFpfFw">
+<dataflowdiagram:DataFlowDiagram xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_dGptIGcDEfCJkoMBjFpfFw">
   <flows id="vqufwd" entityName="teleTAN" sourceNode="y93s0q" destinationNode="gi8o3o">
     <destinationPin href="diagram.datadictionary#p8gisl"/>
     <sourcePin href="diagram.datadictionary#esuisu"/>
@@ -354,26 +354,26 @@
   </flows>
   <nodes xsi:type="dataflowdiagram:Process" id="fh6js" entityName="laboratory information system">
     <behavior href="diagram.datadictionary#_dGptWWcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#9sb4vk"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#9sb4vk"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="fgl1qm" entityName="Test Result Server">
     <behavior href="diagram.datadictionary#_dGptXWcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#9sb4vk"/>
-    <properties href="diagram.datadictionary#07rc8f"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#9sb4vk"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#07rc8f"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="tzz2z" entityName="CWA User Interface">
     <behavior href="diagram.datadictionary#_dGptYWcDEfCJkoMBjFpfFw"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="u0us6m" entityName="Corona Warn App">
     <behavior href="diagram.datadictionary#_dGptZGcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#a7f05k"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a7f05k"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="gi8o3o" entityName="public health officer">
     <behavior href="diagram.datadictionary#_dGptc2cDEfCJkoMBjFpfFw"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="y93s0q" entityName="Health Authority Portal">
     <behavior href="diagram.datadictionary#_dGptd2cDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#9sb4vk"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#9sb4vk"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="sa0x07" entityName="calculate CWA Test ID">
     <behavior href="diagram.datadictionary#_dGqUM2cDEfCJkoMBjFpfFw"/>
@@ -386,8 +386,8 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="oz1nrf" entityName="Verification Server">
     <behavior href="diagram.datadictionary#_dGqUPmcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#9sb4vk"/>
-    <properties href="diagram.datadictionary#a5yl5o"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#9sb4vk"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a5yl5o"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="kt5xfu" entityName="store_keys">
     <behavior href="diagram.datadictionary#_dGqUR2cDEfCJkoMBjFpfFw"/>
@@ -424,7 +424,7 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="s1jqh5" entityName="Distribution Server">
     <behavior href="diagram.datadictionary#_dGqUdmcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#9sb4vk"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#9sb4vk"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="p64x04" entityName="send Bluetooth Payload">
     <behavior href="diagram.datadictionary#_dGqUemcDEfCJkoMBjFpfFw"/>
@@ -461,12 +461,12 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="1sijr" entityName="Foreign Country Server">
     <behavior href="diagram.datadictionary#_dGqUp2cDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#gku0t5"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#gku0t5"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="3dwb" entityName="Corona Warn App Server">
     <behavior href="diagram.datadictionary#_dGqUqmcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#9sb4vk"/>
-    <properties href="diagram.datadictionary#t6bcm"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#9sb4vk"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#t6bcm"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="d567ng" entityName="get_foreign_keys">
     <behavior href="diagram.datadictionary#_dGqUsmcDEfCJkoMBjFpfFw"/>
@@ -479,93 +479,93 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="zh9ura" entityName="iOS token check">
     <behavior href="diagram.datadictionary#_dGqUvmcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#b33r97"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#b33r97"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="1d2u46" entityName="Apple Device Check Server">
     <behavior href="diagram.datadictionary#_dGqUwmcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#x4cg6c"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#x4cg6c"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="xokv7d" entityName="evaluate_risk">
     <behavior href="diagram.datadictionary#_dGqUxWcDEfCJkoMBjFpfFw"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="1gngx" entityName="generate API token">
     <behavior href="diagram.datadictionary#_dGqUyGcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#tbrsp"/>
-    <properties href="diagram.datadictionary#a7f05k"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#tbrsp"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a7f05k"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="2zivmc" entityName="send API token">
     <behavior href="diagram.datadictionary#_dGqUy2cDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#tbrsp"/>
-    <properties href="diagram.datadictionary#a7f05k"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#tbrsp"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a7f05k"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="0uz5li" entityName="generate otp">
     <behavior href="diagram.datadictionary#_dGqUz2cDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#a7f05k"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a7f05k"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="n2nyyj" entityName="collect analytic data">
     <behavior href="diagram.datadictionary#_dGqU0mcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#a7f05k"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a7f05k"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="t7g0gn" entityName="send attestation_token">
     <behavior href="diagram.datadictionary#_dGqU1WcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#rvy1rq"/>
-    <properties href="diagram.datadictionary#a7f05k"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#rvy1rq"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a7f05k"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="cwy8xs" entityName="send device_token">
     <behavior href="diagram.datadictionary#_dGqU2WcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#tbrsp"/>
-    <properties href="diagram.datadictionary#a7f05k"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#tbrsp"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a7f05k"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="s6z65q" entityName="Survey Answer Storage">
     <behavior href="diagram.datadictionary#_dGqU3WcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#e2p"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#e2p"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="m82wem" entityName="submit survey data">
     <behavior href="diagram.datadictionary#_dGqU4GcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#39dfsm"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#39dfsm"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="ys4vc" entityName="otp server interface">
     <behavior href="diagram.datadictionary#_dGqU5WcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#b33r97"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#b33r97"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="po3bmb" entityName="validate otp">
     <behavior href="diagram.datadictionary#_dGqU6WcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#b33r97"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#b33r97"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="c0fka9" entityName="OTP Storage">
     <behavior href="diagram.datadictionary#_dGqU7WcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#b33r97"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#b33r97"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="n0nuhe" entityName="API token storage">
     <behavior href="diagram.datadictionary#_dGqU8WcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#b33r97"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#b33r97"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="33hsn9" entityName="Salt Storage">
     <behavior href="diagram.datadictionary#_dGqU9GcDEfCJkoMBjFpfFw"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="obhmuh" entityName="send OTP for EDUS">
     <behavior href="diagram.datadictionary#_dGqU92cDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#a7f05k"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a7f05k"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="hxo2s" entityName="Android Check">
     <behavior href="diagram.datadictionary#_dGqU_WcDEfCJkoMBjFpfFw"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="lpeobq" entityName="Apple Device Check API">
     <behavior href="diagram.datadictionary#_dGqVAmcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#tbrsp"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#tbrsp"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="ed6zh" entityName="generate salt">
     <behavior href="diagram.datadictionary#_dGqVBWcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#rvy1rq"/>
-    <properties href="diagram.datadictionary#a7f05k"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#rvy1rq"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a7f05k"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="ulcevf" entityName="CWA Data Donation Server Interface">
     <behavior href="diagram.datadictionary#_dGqVCGcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#b33r97"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#b33r97"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="wdmlhl9" entityName="send PPA">
     <behavior href="diagram.datadictionary#_dGqVEWcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#a7f05k"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#a7f05k"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="k8jucr" entityName="send salt">
     <behavior href="diagram.datadictionary#_dGqVF2cDEfCJkoMBjFpfFw"/>
@@ -578,7 +578,7 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="qeve9e" entityName="Analytic Data Storage">
     <behavior href="diagram.datadictionary#_dGqVImcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#b33r97"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#b33r97"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="ooacpw" entityName="make statistics available">
     <behavior href="diagram.datadictionary#_dGqVJmcDEfCJkoMBjFpfFw"/>
@@ -594,11 +594,11 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="h30sii" entityName="Google Service">
     <behavior href="diagram.datadictionary#_dGqVM2cDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#t4f0jw"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#t4f0jw"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="yfdh1" entityName="Google Attestation API">
     <behavior href="diagram.datadictionary#_dGqVNmcDEfCJkoMBjFpfFw"/>
-    <properties href="diagram.datadictionary#rvy1rq"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#rvy1rq"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="i98tp" entityName="lab client">
     <behavior href="diagram.datadictionary#_dGqVOmcDEfCJkoMBjFpfFw"/>

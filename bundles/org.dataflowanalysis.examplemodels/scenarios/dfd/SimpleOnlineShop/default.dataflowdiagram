@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_8an00L6BEe6fAKdvyu1GEg"> 
+<dataflowdiagram:DataFlowDiagram xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_8an00L6BEe6fAKdvyu1GEg"> 
   <flows id="_fFgfgL6CEe6fAKdvyu1GEg" entityName="request" sourceNode="_LX33QL6CEe6fAKdvyu1GEg" destinationNode="_Q0i7U76CEe6fAKdvyu1GEg"> 
     <destinationPin href="default.datadictionary#_UQQ3cL6GEe6fAKdvyu1GEg"/> 
     <sourcePin href="default.datadictionary#_xDI30b6EEe6fAKdvyu1GEg"/> 
@@ -40,11 +40,11 @@
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Store" id="_U27Lor6CEe6fAKdvyu1GEg" entityName="DatabaseReceiving"> 
     <behavior href="default.datadictionary#_2pArgcBCEe62ZOq30ePU7Q"/> 
-    <properties href="default.datadictionary#_Zd8vML6EEe6fAKdvyu1GEg"/> 
+    <properties xsi:type="datadictionary:Label" href="default.datadictionary#_Zd8vML6EEe6fAKdvyu1GEg"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Store" id="_t70R4sBCEe62ZOq30ePU7Q" entityName="DatabaseSending"> 
     <behavior href="default.datadictionary#_xevj0b6GEe6fAKdvyu1GEg"/> 
-    <properties href="default.datadictionary#_Zd8vML6EEe6fAKdvyu1GEg"/> 
+    <properties xsi:type="datadictionary:Label" href="default.datadictionary#_Zd8vML6EEe6fAKdvyu1GEg"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="_Y50ZU76CEe6fAKdvyu1GEg" entityName="buy"> 
     <behavior href="default.datadictionary#_tf6hUb6HEe6fAKdvyu1GEg"/> 
@@ -57,14 +57,14 @@
   </nodes> 
   <nodes xsi:type="dataflowdiagram:External" id="_LX33QL6CEe6fAKdvyu1GEg" entityName="UserRequesting"> 
     <behavior href="default.datadictionary#_jsBswb6EEe6fAKdvyu1GEg"/> 
-    <properties href="default.datadictionary#_YruBAL6EEe6fAKdvyu1GEg"/> 
+    <properties xsi:type="datadictionary:Label" href="default.datadictionary#_YruBAL6EEe6fAKdvyu1GEg"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:External" id="_YRN4gb6TEe6fAKdvyu1GEg" entityName="UserReceiving"> 
     <behavior href="default.datadictionary#_sqEoBb6TEe6fAKdvyu1GEg"/> 
-    <properties href="default.datadictionary#_YruBAL6EEe6fAKdvyu1GEg"/> 
+    <properties xsi:type="datadictionary:Label" href="default.datadictionary#_YruBAL6EEe6fAKdvyu1GEg"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:External" id="_bmXPYb6TEe6fAKdvyu1GEg" entityName="UserBuying"> 
     <behavior href="default.datadictionary#_vdGJRb6TEe6fAKdvyu1GEg"/> 
-    <properties href="default.datadictionary#_YruBAL6EEe6fAKdvyu1GEg"/> 
+    <properties xsi:type="datadictionary:Label" href="default.datadictionary#_YruBAL6EEe6fAKdvyu1GEg"/> 
   </nodes> 
 </dataflowdiagram:DataFlowDiagram> 

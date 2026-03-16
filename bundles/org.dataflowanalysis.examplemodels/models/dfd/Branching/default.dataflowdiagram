@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_qEHQgKwKEe6UwqXXdLN7uw"> 
+<dataflowdiagram:DataFlowDiagram xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_qEHQgKwKEe6UwqXXdLN7uw"> 
   <flows id="_ToxPYKwLEe6UwqXXdLN7uw" entityName="in2branch1.1" sourceNode="_t3XfsawKEe6UwqXXdLN7uw" destinationNode="_8Jb3I6wKEe6UwqXXdLN7uw"> 
     <destinationPin href="default.datadictionary#_bwK-4KwMEe6UwqXXdLN7uw"/> 
     <sourcePin href="default.datadictionary#_IZmy0awMEe6UwqXXdLN7uw"/> 
@@ -26,22 +26,22 @@
   </flows> 
   <nodes xsi:type="dataflowdiagram:External" id="_t3XfsawKEe6UwqXXdLN7uw" entityName="in"> 
     <behavior href="default.datadictionary#_4Jbv8awLEe6UwqXXdLN7uw"/> 
-    <properties href="default.datadictionary#_RpAZsLCCEe6ZXOD4RpC-KQ"/> 
+    <properties xsi:type="datadictionary:Label" href="default.datadictionary#_RpAZsLCCEe6ZXOD4RpC-KQ"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="_8Jb3I6wKEe6UwqXXdLN7uw" entityName="branch1.1"> 
     <behavior href="default.datadictionary#_4rR4wawLEe6UwqXXdLN7uw"/> 
-    <properties href="default.datadictionary#_RpAZsLCCEe6ZXOD4RpC-KQ"/> 
+    <properties xsi:type="datadictionary:Label" href="default.datadictionary#_RpAZsLCCEe6ZXOD4RpC-KQ"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="_9l0Vk6wKEe6UwqXXdLN7uw" entityName="branch1.2"> 
     <behavior href="default.datadictionary#_5TfvUawLEe6UwqXXdLN7uw"/> 
-    <properties href="default.datadictionary#_RpAZsLCCEe6ZXOD4RpC-KQ"/> 
+    <properties xsi:type="datadictionary:Label" href="default.datadictionary#_RpAZsLCCEe6ZXOD4RpC-KQ"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="_-GvRU6wKEe6UwqXXdLN7uw" entityName="branchCombined"> 
     <behavior href="default.datadictionary#_59RsIawLEe6UwqXXdLN7uw"/> 
-    <properties href="default.datadictionary#_RpAZsLCCEe6ZXOD4RpC-KQ"/> 
+    <properties xsi:type="datadictionary:Label" href="default.datadictionary#_RpAZsLCCEe6ZXOD4RpC-KQ"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:External" id="_OEFe0awLEe6UwqXXdLN7uw" entityName="in2"> 
     <behavior href="default.datadictionary#_6ZSSsawLEe6UwqXXdLN7uw"/> 
-    <properties href="default.datadictionary#_RpAZsLCCEe6ZXOD4RpC-KQ"/> 
+    <properties xsi:type="datadictionary:Label" href="default.datadictionary#_RpAZsLCCEe6ZXOD4RpC-KQ"/> 
   </nodes> 
 </dataflowdiagram:DataFlowDiagram> 

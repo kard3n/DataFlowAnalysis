@@ -31,7 +31,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="consentLabelType" lowerBound="1"
         eType="#//ConsentLabelType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataItemLabelType" lowerBound="1"
-        eType="#//DataItemLabelType" containment="true"/>
+        upperBound="-1" eType="#//DataItemLabelType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataStateLabelType" lowerBound="1"
         eType="#//DataStateLabelType" containment="true"/>
   </eClassifiers>

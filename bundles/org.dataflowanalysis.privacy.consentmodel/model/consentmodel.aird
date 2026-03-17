@@ -9,7 +9,7 @@
     <semanticResources>consentmodel.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_gIDioAEUEfGvZ5xBXtZ_Cg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_gISzMAEUEfGvZ5xBXtZ_Cg" name="consentmodel" repPath="#_gIQ-AAEUEfGvZ5xBXtZ_Cg" changeId="1772187325986">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_gISzMAEUEfGvZ5xBXtZ_Cg" name="consentmodel" repPath="#_gIQ-AAEUEfGvZ5xBXtZ_Cg" changeId="1773750960460">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="consentmodel.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -801,7 +801,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_sZjURhGNEfGzasCh5ye7cA" name="[1..1] dataItemLabelType" sourceNode="_-V51wAEeEfG_g--6qtViKw" targetNode="_hOOEQBGNEfGzasCh5ye7cA">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_sZjURhGNEfGzasCh5ye7cA" name="[1..*] dataItemLabelType" sourceNode="_-V51wAEeEfG_g--6qtViKw" targetNode="_hOOEQBGNEfGzasCh5ye7cA">
       <target xmi:type="ecore:EReference" href="consentmodel.ecore#//ConsentModel/dataItemLabelType"/>
       <semanticElements xmi:type="ecore:EReference" href="consentmodel.ecore#//ConsentModel/dataItemLabelType"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_w3KvHBGNEfGzasCh5ye7cA" description="_iHy5YgznEfGNgNMVQhZtXA" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">

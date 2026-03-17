@@ -2,6 +2,7 @@
  */
 package org.dataflowanalysis.privacy.consentmodel;
 
+import org.eclipse.emf.common.util.EList;
 import tools.mdsd.modelingfoundations.identifier.Entity;
 
 /**
@@ -69,26 +70,16 @@ public interface ConsentModel extends Entity {
 	void setConsentLabelType(ConsentLabelType value);
 
 	/**
-	 * Returns the value of the '<em><b>Data Item Label Type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Data Item Label Type</b></em>' containment reference list.
+	 * The list contents are of type {@link org.dataflowanalysis.privacy.consentmodel.DataItemLabelType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Item Label Type</em>' containment reference.
-	 * @see #setDataItemLabelType(DataItemLabelType)
+	 * @return the value of the '<em>Data Item Label Type</em>' containment reference list.
 	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getConsentModel_DataItemLabelType()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	DataItemLabelType getDataItemLabelType();
-
-	/**
-	 * Sets the value of the '{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItemLabelType <em>Data Item Label Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Data Item Label Type</em>' containment reference.
-	 * @see #getDataItemLabelType()
-	 * @generated
-	 */
-	void setDataItemLabelType(DataItemLabelType value);
+	EList<DataItemLabelType> getDataItemLabelType();
 
 	/**
 	 * Returns the value of the '<em><b>Data State Label Type</b></em>' containment reference.

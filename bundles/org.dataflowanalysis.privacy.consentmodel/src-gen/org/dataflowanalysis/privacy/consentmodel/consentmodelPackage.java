@@ -398,7 +398,7 @@ public interface consentmodelPackage extends EPackage {
 	int CONSENT_MODEL__CONSENT_LABEL_TYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Data Item Label Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Data Item Label Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1079,10 +1079,10 @@ public interface consentmodelPackage extends EPackage {
 	EReference getConsentModel_ConsentLabelType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItemLabelType <em>Data Item Label Type</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItemLabelType <em>Data Item Label Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Data Item Label Type</em>'.
+	 * @return the meta object for the containment reference list '<em>Data Item Label Type</em>'.
 	 * @see org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItemLabelType()
 	 * @see #getConsentModel()
 	 * @generated
@@ -1456,7 +1456,7 @@ public interface consentmodelPackage extends EPackage {
 		EReference CONSENT_MODEL__CONSENT_LABEL_TYPE = eINSTANCE.getConsentModel_ConsentLabelType();
 
 		/**
-		 * The meta object literal for the '<em><b>Data Item Label Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Data Item Label Type</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

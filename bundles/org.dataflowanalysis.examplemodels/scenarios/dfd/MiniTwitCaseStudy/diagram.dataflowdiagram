@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<dataflowdiagram:DataFlowDiagram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_tSH9wHqtEfCvx4l13OBupA">
+<dataflowdiagram:DataFlowDiagram xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_tSH9wHqtEfCvx4l13OBupA">
   <flows id="f7k4em" entityName="follow_data" sourceNode="hjsnzr" destinationNode="e0p31">
     <destinationPin href="diagram.datadictionary#56o2e9"/>
     <sourcePin href="diagram.datadictionary#8amxr"/>
@@ -132,36 +132,36 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="i3197b" entityName="After Register Hook">
     <behavior href="diagram.datadictionary#_tSH95HqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#ps6emg"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#ps6emg"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="dmvk68" entityName="Generate Ad General">
     <behavior href="diagram.datadictionary#_tSH96HqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vu8tj"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vu8tj"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="egfmxn" entityName="Remove Consents">
     <behavior href="diagram.datadictionary#_tSH963qtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#1h60a"/>
-    <properties href="diagram.datadictionary#d1kqus"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#1h60a"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#d1kqus"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="hjsnzr" entityName="Follow User">
     <behavior href="diagram.datadictionary#_tSH973qtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#1h60a"/>
-    <properties href="diagram.datadictionary#d1kqus"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#1h60a"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#d1kqus"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="3jz4vs" entityName="Add Message">
     <behavior href="diagram.datadictionary#_tSH98nqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#1h60a"/>
-    <properties href="diagram.datadictionary#d1kqus"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#1h60a"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#d1kqus"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="e0p31" entityName="Save To DB">
     <behavior href="diagram.datadictionary#_tSH99XqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#1h60a"/>
-    <properties href="diagram.datadictionary#d1kqus"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#1h60a"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#d1kqus"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="xmd4q9" entityName="Unfollow User">
     <behavior href="diagram.datadictionary#_tSH9_HqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#1h60a"/>
-    <properties href="diagram.datadictionary#d1kqus"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#1h60a"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#d1kqus"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="z1n79o" entityName="Check Credentials">
     <behavior href="diagram.datadictionary#_tSH9_3qtEfCvx4l13OBupA"/>
@@ -174,8 +174,8 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="ixk4hi" entityName="Policy">
     <behavior href="diagram.datadictionary#_tSH-CnqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#1h60a"/>
-    <properties href="diagram.datadictionary#d1kqus"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#1h60a"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#d1kqus"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="thi6ip" entityName="Privacy Template">
     <behavior href="diagram.datadictionary#_tSH-DnqtEfCvx4l13OBupA"/>
@@ -185,30 +185,30 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="38qqij" entityName="Current User">
     <behavior href="diagram.datadictionary#_tSH-HHqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#jdohfp"/>
-    <properties href="diagram.datadictionary#r2qfjt"/>
-    <properties href="diagram.datadictionary#vu8tj"/>
-    <properties href="diagram.datadictionary#d1kqus"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#jdohfp"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#r2qfjt"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vu8tj"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#d1kqus"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="wm5ena" entityName="Add Consents">
     <behavior href="diagram.datadictionary#_tSH-LHqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#1h60a"/>
-    <properties href="diagram.datadictionary#d1kqus"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#1h60a"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#d1kqus"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="69dbss" entityName="Display Single User Timeline">
     <behavior href="diagram.datadictionary#_tSH-MHqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#r2qfjt"/>
-    <properties href="diagram.datadictionary#1h60a"/>
-    <properties href="diagram.datadictionary#d1kqus"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#r2qfjt"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#1h60a"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#d1kqus"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="xcfh3f" entityName="Display Public Timeline">
     <behavior href="diagram.datadictionary#_tSIk0XqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#jdohfp"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#jdohfp"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="w17b07" entityName="User Timeline Template">
     <behavior href="diagram.datadictionary#_tSIk1XqtEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#r2qfjt"/>
-    <properties href="diagram.datadictionary#1h60a"/>
-    <properties href="diagram.datadictionary#d1kqus"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#r2qfjt"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#1h60a"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#d1kqus"/>
   </nodes>
 </dataflowdiagram:DataFlowDiagram>

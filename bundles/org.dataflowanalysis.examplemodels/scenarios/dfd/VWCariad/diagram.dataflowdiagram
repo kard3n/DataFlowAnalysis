@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<dataflowdiagram:DataFlowDiagram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_K0g74HzjEfCvx4l13OBupA">
+<dataflowdiagram:DataFlowDiagram xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_K0g74HzjEfCvx4l13OBupA">
   <flows id="6qnfzs" entityName="fuel_data" sourceNode="jdbsk" destinationNode="0w3et16">
     <destinationPin href="diagram.datadictionary#cz5en4"/>
     <sourcePin href="diagram.datadictionary#u0nr2d"/>
@@ -282,7 +282,7 @@
   </flows>
   <nodes xsi:type="dataflowdiagram:Process" id="v6peil" entityName="SpringAppMemory">
     <behavior href="diagram.datadictionary#_K0g8AnzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#yneejw"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#yneejw"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="k18zxm" entityName="engine_actuator">
     <behavior href="diagram.datadictionary#_K0g8B3zjEfCvx4l13OBupA"/>
@@ -319,7 +319,7 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="1keyp8" entityName="Car Human Computer Interface">
     <behavior href="diagram.datadictionary#_K0g8LnzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#0icoa"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#0icoa"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="d7izz" entityName="Store Forward Buffer">
     <behavior href="diagram.datadictionary#_K0g8MXzjEfCvx4l13OBupA"/>
@@ -404,19 +404,19 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="8rrs1t" entityName="Battery Management System">
     <behavior href="diagram.datadictionary#_K0g8tnzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#puc8mm"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#puc8mm"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="zo75i" entityName="Body Control Module">
     <behavior href="diagram.datadictionary#_K0g8uXzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#puc8mm"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#puc8mm"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="hp3qg8" entityName="Powertrain Control Module">
     <behavior href="diagram.datadictionary#_K0g8vHzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#puc8mm"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#puc8mm"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="tv4k1e" entityName="Navigation ECU">
     <behavior href="diagram.datadictionary#_K0g8v3zjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#puc8mm"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#puc8mm"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="4o6jrl" entityName="Customer">
     <behavior href="diagram.datadictionary#_K0g8wnzjEfCvx4l13OBupA"/>
@@ -429,39 +429,39 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="e4bmp" entityName="Spring Actuator">
     <behavior href="diagram.datadictionary#_K0g8zXzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#0icoa"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#0icoa"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="ln36ri" entityName="Actuator Env">
     <behavior href="diagram.datadictionary#_K0g82HzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#0icoa"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#0icoa"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="muk1b" entityName="Auditevent Repository">
     <behavior href="diagram.datadictionary#_K0g83HzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#0icoa"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#0icoa"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="z4767c" entityName="Http Trace Endpoint">
     <behavior href="diagram.datadictionary#_K0g833zjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#0icoa"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#0icoa"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="z2e5q8" entityName="Climate Control Module">
     <behavior href="diagram.datadictionary#_K0g84nzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#puc8mm"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#puc8mm"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="14coqs" entityName="Azure Data Lake Storage">
     <behavior href="diagram.datadictionary#_K0g85XzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#6480elx"/>
-    <properties href="diagram.datadictionary#0icoa"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#6480elx"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#0icoa"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="34qi" entityName="Aws S3 Client">
     <behavior href="diagram.datadictionary#_K0g86HzjEfCvx4l13OBupA"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="8148ps" entityName="S3 Bucket">
     <behavior href="diagram.datadictionary#_K0g87HzjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vm4pt"/>
-    <properties href="diagram.datadictionary#0icoa"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vm4pt"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#0icoa"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="poscub" entityName="Heapdump">
     <behavior href="diagram.datadictionary#_K0g873zjEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#74s5kd"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#74s5kd"/>
   </nodes>
 </dataflowdiagram:DataFlowDiagram>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?> 
-<dataflowdiagram:DataFlowDiagram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="0"> 
+<dataflowdiagram:DataFlowDiagram xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="0"> 
   <flows id="69" entityName="eureka" sourceNode="3" destinationNode="4"> 
     <destinationPin href="ewolff_18.datadictionary#67"/> 
     <sourcePin href="ewolff_18.datadictionary#68"/> 
@@ -78,72 +78,72 @@
   </flows> 
   <nodes xsi:type="dataflowdiagram:External" id="2" entityName="user"> 
     <behavior href="ewolff_18.datadictionary#50"/> 
-    <properties href="ewolff_18.datadictionary#52"/> 
-    <properties href="ewolff_18.datadictionary#53"/> 
-    <properties href="ewolff_18.datadictionary#54"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#52"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#53"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#54"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="3" entityName="eureka"> 
     <behavior href="ewolff_18.datadictionary#22"/> 
-    <properties href="ewolff_18.datadictionary#24"/> 
-    <properties href="ewolff_18.datadictionary#15"/> 
-    <properties href="ewolff_18.datadictionary#25"/> 
-    <properties href="ewolff_18.datadictionary#27"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#24"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#15"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#25"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#27"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="4" entityName="zuul"> 
     <behavior href="ewolff_18.datadictionary#39"/> 
-    <properties href="ewolff_18.datadictionary#41"/> 
-    <properties href="ewolff_18.datadictionary#42"/> 
-    <properties href="ewolff_18.datadictionary#15"/> 
-    <properties href="ewolff_18.datadictionary#44"/> 
-    <properties href="ewolff_18.datadictionary#38"/> 
-    <properties href="ewolff_18.datadictionary#46"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#41"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#42"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#15"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#44"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#38"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#46"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="5" entityName="turbine"> 
     <behavior href="ewolff_18.datadictionary#11"/> 
-    <properties href="ewolff_18.datadictionary#13"/> 
-    <properties href="ewolff_18.datadictionary#14"/> 
-    <properties href="ewolff_18.datadictionary#15"/> 
-    <properties href="ewolff_18.datadictionary#17"/> 
-    <properties href="ewolff_18.datadictionary#19"/> 
-    <properties href="ewolff_18.datadictionary#21"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#13"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#14"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#15"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#17"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#19"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#21"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="6" entityName="catalog"> 
     <behavior href="ewolff_18.datadictionary#28"/> 
-    <properties href="ewolff_18.datadictionary#30"/> 
-    <properties href="ewolff_18.datadictionary#32"/> 
-    <properties href="ewolff_18.datadictionary#33"/> 
-    <properties href="ewolff_18.datadictionary#34"/> 
-    <properties href="ewolff_18.datadictionary#35"/> 
-    <properties href="ewolff_18.datadictionary#36"/> 
-    <properties href="ewolff_18.datadictionary#37"/> 
-    <properties href="ewolff_18.datadictionary#38"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#30"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#32"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#33"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#34"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#35"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#36"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#37"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#38"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="7" entityName="customer"> 
     <behavior href="ewolff_18.datadictionary#55"/> 
-    <properties href="ewolff_18.datadictionary#30"/> 
-    <properties href="ewolff_18.datadictionary#35"/> 
-    <properties href="ewolff_18.datadictionary#34"/> 
-    <properties href="ewolff_18.datadictionary#33"/> 
-    <properties href="ewolff_18.datadictionary#57"/> 
-    <properties href="ewolff_18.datadictionary#38"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#30"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#35"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#34"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#33"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#57"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#38"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="8" entityName="order"> 
     <behavior href="ewolff_18.datadictionary#58"/> 
-    <properties href="ewolff_18.datadictionary#30"/> 
-    <properties href="ewolff_18.datadictionary#42"/> 
-    <properties href="ewolff_18.datadictionary#60"/> 
-    <properties href="ewolff_18.datadictionary#61"/> 
-    <properties href="ewolff_18.datadictionary#35"/> 
-    <properties href="ewolff_18.datadictionary#62"/> 
-    <properties href="ewolff_18.datadictionary#63"/> 
-    <properties href="ewolff_18.datadictionary#64"/> 
-    <properties href="ewolff_18.datadictionary#66"/> 
-    <properties href="ewolff_18.datadictionary#38"/> 
-    <properties href="ewolff_18.datadictionary#46"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#30"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#42"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#60"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#61"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#35"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#62"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#63"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#64"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#66"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#38"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#46"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="9" entityName="secret_manager"> 
     <behavior href="ewolff_18.datadictionary#47"/> 
-    <properties href="ewolff_18.datadictionary#15"/> 
-    <properties href="ewolff_18.datadictionary#49"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#15"/> 
+    <properties xsi:type="datadictionary:Label" href="ewolff_18.datadictionary#49"/> 
   </nodes> 
 </dataflowdiagram:DataFlowDiagram> 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?> 
-<dataflowdiagram:DataFlowDiagram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="0"> 
+<dataflowdiagram:DataFlowDiagram xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="0"> 
   <flows id="73" entityName="github_repository" sourceNode="2" destinationNode="4"> 
     <destinationPin href="jferrater_5.datadictionary#71"/> 
     <sourcePin href="jferrater_5.datadictionary#72"/> 
@@ -98,78 +98,78 @@
   </flows> 
   <nodes xsi:type="dataflowdiagram:External" id="2" entityName="github_repository"> 
     <behavior href="jferrater_5.datadictionary#56"/> 
-    <properties href="jferrater_5.datadictionary#58"/> 
-    <properties href="jferrater_5.datadictionary#59"/> 
-    <properties href="jferrater_5.datadictionary#61"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#58"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#59"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#61"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="3" entityName="discovery_service"> 
     <behavior href="jferrater_5.datadictionary#17"/> 
-    <properties href="jferrater_5.datadictionary#19"/> 
-    <properties href="jferrater_5.datadictionary#15"/> 
-    <properties href="jferrater_5.datadictionary#20"/> 
-    <properties href="jferrater_5.datadictionary#22"/> 
-    <properties href="jferrater_5.datadictionary#24"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#19"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#15"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#20"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#22"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#24"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="4" entityName="config_service"> 
     <behavior href="jferrater_5.datadictionary#62"/> 
-    <properties href="jferrater_5.datadictionary#64"/> 
-    <properties href="jferrater_5.datadictionary#15"/> 
-    <properties href="jferrater_5.datadictionary#20"/> 
-    <properties href="jferrater_5.datadictionary#22"/> 
-    <properties href="jferrater_5.datadictionary#66"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#64"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#15"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#20"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#22"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#66"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="5" entityName="account_service"> 
     <behavior href="jferrater_5.datadictionary#25"/> 
-    <properties href="jferrater_5.datadictionary#27"/> 
-    <properties href="jferrater_5.datadictionary#20"/> 
-    <properties href="jferrater_5.datadictionary#29"/> 
-    <properties href="jferrater_5.datadictionary#30"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#27"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#20"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#29"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#30"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="6" entityName="customer_service"> 
     <behavior href="jferrater_5.datadictionary#35"/> 
-    <properties href="jferrater_5.datadictionary#27"/> 
-    <properties href="jferrater_5.datadictionary#20"/> 
-    <properties href="jferrater_5.datadictionary#37"/> 
-    <properties href="jferrater_5.datadictionary#38"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#27"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#20"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#37"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#38"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="7" entityName="store_service"> 
     <behavior href="jferrater_5.datadictionary#67"/> 
-    <properties href="jferrater_5.datadictionary#27"/> 
-    <properties href="jferrater_5.datadictionary#20"/> 
-    <properties href="jferrater_5.datadictionary#69"/> 
-    <properties href="jferrater_5.datadictionary#70"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#27"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#20"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#69"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#70"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="8" entityName="item_service"> 
     <behavior href="jferrater_5.datadictionary#31"/> 
-    <properties href="jferrater_5.datadictionary#27"/> 
-    <properties href="jferrater_5.datadictionary#20"/> 
-    <properties href="jferrater_5.datadictionary#33"/> 
-    <properties href="jferrater_5.datadictionary#34"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#27"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#20"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#33"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#34"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="9" entityName="price_service"> 
     <behavior href="jferrater_5.datadictionary#39"/> 
-    <properties href="jferrater_5.datadictionary#27"/> 
-    <properties href="jferrater_5.datadictionary#20"/> 
-    <properties href="jferrater_5.datadictionary#41"/> 
-    <properties href="jferrater_5.datadictionary#42"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#27"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#20"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#41"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#42"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="10" entityName="foodtray_service"> 
     <behavior href="jferrater_5.datadictionary#43"/> 
-    <properties href="jferrater_5.datadictionary#15"/> 
-    <properties href="jferrater_5.datadictionary#45"/> 
-    <properties href="jferrater_5.datadictionary#46"/> 
-    <properties href="jferrater_5.datadictionary#20"/> 
-    <properties href="jferrater_5.datadictionary#48"/> 
-    <properties href="jferrater_5.datadictionary#49"/> 
-    <properties href="jferrater_5.datadictionary#50"/> 
-    <properties href="jferrater_5.datadictionary#51"/> 
-    <properties href="jferrater_5.datadictionary#52"/> 
-    <properties href="jferrater_5.datadictionary#54"/> 
-    <properties href="jferrater_5.datadictionary#55"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#15"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#45"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#46"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#20"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#48"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#49"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#50"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#51"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#52"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#54"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#55"/> 
   </nodes> 
   <nodes xsi:type="dataflowdiagram:Process" id="11" entityName="authorization_server"> 
     <behavior href="jferrater_5.datadictionary#13"/> 
-    <properties href="jferrater_5.datadictionary#15"/> 
-    <properties href="jferrater_5.datadictionary#16"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#15"/> 
+    <properties xsi:type="datadictionary:Label" href="jferrater_5.datadictionary#16"/> 
   </nodes> 
 </dataflowdiagram:DataFlowDiagram> 

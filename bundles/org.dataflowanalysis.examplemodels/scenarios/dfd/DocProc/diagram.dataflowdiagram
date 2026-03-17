@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<dataflowdiagram:DataFlowDiagram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_PUb5IINMEfCvx4l13OBupA">
+<dataflowdiagram:DataFlowDiagram xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_PUb5IINMEfCvx4l13OBupA">
   <flows id="2nb2ov" entityName="document_templates" sourceNode="glpq5o" destinationNode="axdlgbp">
     <destinationPin href="diagram.datadictionary#ls36cn"/>
     <sourcePin href="diagram.datadictionary#24ysrr"/>
@@ -118,23 +118,23 @@
   </flows>
   <nodes xsi:type="dataflowdiagram:Process" id="w7alnb" entityName="Document Generation">
     <behavior href="diagram.datadictionary#_PUb5OoNMEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vni6b8"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vni6b8"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="v865vg" entityName="Generated PDFs Archive Storage">
     <behavior href="diagram.datadictionary#_PUcgM4NMEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vni6b8"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vni6b8"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="g9gm5h" entityName="Print Service">
     <behavior href="diagram.datadictionary#_PUcgN4NMEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vni6b8"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vni6b8"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="3c9kgp" entityName="Email">
     <behavior href="diagram.datadictionary#_PUcgOoNMEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vni6b8"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vni6b8"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="a8jlts" entityName="Check Delivery Status">
     <behavior href="diagram.datadictionary#_PUcgPoNMEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#gmx3zr"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#gmx3zr"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="glpq5o" entityName="Customer Organization Dashboard">
     <behavior href="diagram.datadictionary#_PUcgQYNMEfCvx4l13OBupA"/>
@@ -162,25 +162,25 @@
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="74hmw" entityName="Delivery Manager">
     <behavior href="diagram.datadictionary#_PUcgaYNMEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vni6b8"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vni6b8"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="hrbgt5" entityName="Delivery Scheduler">
     <behavior href="diagram.datadictionary#_PUcgb4NMEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vni6b8"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vni6b8"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="8jr7ja" entityName="Personal Document Store">
     <behavior href="diagram.datadictionary#_PUcgdoNMEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vni6b8"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vni6b8"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="bq2csn" entityName="Zoomit">
     <behavior href="diagram.datadictionary#_PUcgfINMEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vni6b8"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vni6b8"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="pgmss" entityName="Customer Admin">
     <behavior href="diagram.datadictionary#_PUcggINMEfCvx4l13OBupA"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:External" id="bvtc2o" entityName="Recipient">
     <behavior href="diagram.datadictionary#_PUcghoNMEfCvx4l13OBupA"/>
-    <properties href="diagram.datadictionary#vni6b8"/>
+    <properties xsi:type="datadictionary:Label" href="diagram.datadictionary#vni6b8"/>
   </nodes>
 </dataflowdiagram:DataFlowDiagram>

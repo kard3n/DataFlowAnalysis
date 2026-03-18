@@ -55,20 +55,20 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 */
 	@Override
 	public List<? extends AbstractTransposeFlowGraph> findTransposeFlowGraphs() {
-		return this.findTransposeFlowGraphs(getEndNodes(dataFlowDiagram.getNodes()),
-				getSourceNodes(dataFlowDiagram.getNodes()));
+		return this.findTransposeFlowGraphs(List.of(),
+				List.of());
 	}
 
 	@Override
 	public List<? extends AbstractTransposeFlowGraph> findTransposeFlowGraphs(List<?> sourceNodes) {
-		return this.findTransposeFlowGraphs(getEndNodes(dataFlowDiagram.getNodes()), sourceNodes);
+		return this.findTransposeFlowGraphs(List.of(), sourceNodes);
 	}
 
 	@Override
 	public List<? extends AbstractTransposeFlowGraph> findTransposeFlowGraphs(List<?> sinkNodes, List<?> sourceNodes) {
 		List<DFDTransposeFlowGraph> transposeFlowGraphs = new ArrayList<>();
 
-		List<Node> sources = sourceNodes.stream().filter(Node.class::isInstance).map(Node.class::cast).toList();
+		List<Node> sources = this.getSourceNodes(dataFlowDiagram.getNodes());
 
 		// Go over all roles
 		for (RoleLabel roleLabel : this.consentModel.getRoleLabelType().getLabels()) {
@@ -91,10 +91,8 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 				DataDictionary clonedDictionary = (DataDictionary) copier.copy(this.dataDictionary);
 				copier.copyReferences();
 
-				List<Node> clonedSources = sources.stream().map(n -> (Node) copier.get(n)).toList();
-
-				List<Node> clonedSinks = sinkNodes.stream().filter(Node.class::isInstance)
-						.map(n -> (Node) copier.get(n)).toList();
+				List<Node> clonedSources = this.getSourceNodes(clonedDiagram.getNodes());
+				List<Node> clonedSinks = this.getSinkNodes(clonedDiagram.getNodes());
 
 				// Make a list of all labels that should be added to each data item for the
 				// current consent combination
@@ -103,11 +101,20 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 						.map(label -> (AbstractLabel) label).toList());
 				labelsToAdd.add((AbstractLabel) roleLabel);
 
-				// Add new labels to the behavior
+				// Add new labels to the Assignment behaviors of source nodes
 				clonedSources.forEach(source -> {
 					source.getBehavior().getAssignment().forEach(assignment -> {
 						if (assignment instanceof Assignment) {
 							((Assignment) assignment).getOutputLabels().addAll(labelsToAdd);
+						}
+					});
+				});
+				
+				// Set assignments need to also set user data -> add all user labels to it
+				clonedDiagram.getNodes().forEach(node -> {
+					node.getBehavior().getAssignment().forEach(assignment -> {
+						if (assignment instanceof SetAssignment) {
+							((SetAssignment) assignment).getOutputLabels().addAll(labelsToAdd);
 						}
 					});
 				});
@@ -238,7 +245,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 * @param nodes A list of all nodes of which the sinks should be determined
 	 * @return List of sink nodes reachable by the given list of nodes
 	 */
-	protected List<Node> getEndNodes(List<Node> nodes) {
+	protected List<Node> getSinkNodes(List<Node> nodes) {
 		var endNodes = nodes.stream().filter(node -> {
 			return node.getBehavior().getInPin().stream().filter(pin -> {
 				return isInputPinUsed(pin, node);

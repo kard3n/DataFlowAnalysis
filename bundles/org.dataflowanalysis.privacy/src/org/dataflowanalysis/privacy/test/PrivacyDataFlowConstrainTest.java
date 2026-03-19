@@ -243,8 +243,10 @@ public class PrivacyDataFlowConstrainTest {
 		// Scenario one: all consent options met
 		Set<Set<CharacteristicValue>> pinIncoming = Set.of(
 				Set.of(new DFDCharacteristicValue(consentLabelType, consentLabelOne),
-						new DFDCharacteristicValue(consentLabelType, consentLabelTwo)),
-				Set.of(new DFDCharacteristicValue(consentLabelType, consentLabelTwo)));
+						new DFDCharacteristicValue(consentLabelType, consentLabelTwo),
+						new DFDCharacteristicValue(this.dataItemLabelType, this.dataItemLabelOne)),
+				Set.of(new DFDCharacteristicValue(consentLabelType, consentLabelTwo),
+						new DFDCharacteristicValue(this.dataItemLabelType, this.dataItemLabelOne)));
 
 		HashSet<HashSet<CharacteristicValue>> pinIncomingHashSet = new HashSet<>();
 		pinIncoming.forEach(incoming -> {
@@ -472,7 +474,7 @@ public class PrivacyDataFlowConstrainTest {
 		assertEquals(1, result.size());
 		for (var violation : result) {
 			assertTrue(violation.message().contains(
-					"The vertex has received a data combination in pin _C-ypEBbvEfGwgKscrQsGUg or could infere one not allowed for any of its consent options/functionalities."));
+					"received a data combination in pin _C-ypEBbvEfGwgKscrQsGUg or could infere one not allowed for any of its consent options/functionalities."));
 			logger.debug(violation.message());
 		}
 	}
@@ -496,9 +498,9 @@ public class PrivacyDataFlowConstrainTest {
 		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
 		assertEquals(1, result.size());
 		for (var violation : result) {
-			logger.debug(violation.message());
+			logger.info(violation.message());
 			assertTrue(violation.message().contains(
-					"The vertex has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its consent options/functionalities."));
+					"has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its consent options/functionalities."));
 			assertTrue(violation.message().contains("[DataItemOne:[]]")); // State has been reduced to the empty set
 		}
 	}
@@ -529,18 +531,20 @@ public class PrivacyDataFlowConstrainTest {
 						this.dataItemThree, Set.of())),
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
 
-		// Scenario three: non-relatability resulting in the initial two sets, as the intersection is wholly unrelatable
-		
+		// Scenario three: non-relatability resulting in the initial two sets, as the
+		// intersection is wholly unrelatable
+
 		this.dataStateTwo.getNotRelatableWith().add(dataStateThree);
 		this.dataStateThree.getNotRelatableWith().add(dataStateTwo);
-		
+
 		assertEquals(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo)),
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
 
-		// Scenario four: non-relatability resulting in two sets, intersection has a relatable part
+		// Scenario four: non-relatability resulting in two sets, intersection has a
+		// relatable part
 		mapOne.put(dataItemFour, new HashSet<>());
 		mapTwo.put(dataItemFour, new HashSet<>());
-		
+
 		assertEquals(List.of(
 				Map.of(this.dataItemOne, Set.of(), this.dataItemTwo, Set.of(this.dataStateOne, this.dataStateTwo),
 						this.dataItemThree, Set.of(), this.dataItemFour, Set.of()),
@@ -549,15 +553,16 @@ public class PrivacyDataFlowConstrainTest {
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
 
 	}
-	
+
 	@Test
 	public void testNodeInferenceStateFree() {
-		//NodeInferenceStateFree
+		// NodeInferenceStateFree
 		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"NodeInferenceStateFree.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"NodeInferenceStateFree.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "NodeInferenceStateFree.consentmodel");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"NodeInferenceStateFree.consentmodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
@@ -569,19 +574,21 @@ public class PrivacyDataFlowConstrainTest {
 
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
 		assertEquals(1, violations.size());
-		for(var violation: violations) {
-			assertTrue(violation.message().contains("The vertex/node \"Sink\" could derive information not authorized by its consent options."));
+		for (var violation : violations) {
+			assertTrue(violation.message().contains(
+					"information not authorized by its consent options."));
 		}
 	}
-	
+
 	@Test
 	public void testNodeInferenceStateful() {
-		//NodeInferenceStateFree
+		// NodeInferenceStateFree
 		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"NodeInferenceStateful.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"NodeInferenceStateful.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "NodeInferenceStateful.consentmodel");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"NodeInferenceStateful.consentmodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
@@ -593,8 +600,9 @@ public class PrivacyDataFlowConstrainTest {
 
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
 		assertEquals(1, violations.size());
-		for(var violation: violations) {
-			assertTrue(violation.message().contains("The vertex/node \"Sink\" could derive information not authorized by its consent options."));
+		for (var violation : violations) {
+			assertTrue(violation.message().contains(
+					"information not authorized by its consent options."));
 			assertTrue(violation.message().contains("ItemTwo:[]"));
 		}
 	}

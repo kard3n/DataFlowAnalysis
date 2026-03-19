@@ -100,11 +100,11 @@ public class PrivacyDataFlowConstraint {
 				// Check that each of the possible combination is allowed
 				for (var combination : possibleCombinations) {
 					if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
-						violations.add(new PrivacyConstraintViolation(vert.getName(),
-								"The vertex " + vert.getName() + " has received a data combination in pin " + pin.getKey()
-										+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
-										+ dataCombinatioToString(combination) + "\nConsent options of the vertex: "
-										+ consentOptions.stream().map(co -> consentOptionToString(co)).toList()));
+						violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
+								+ " has received a data combination in pin " + pin.getKey()
+								+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
+								+ dataCombinatioToString(combination) + "\nConsent options of the vertex: "
+								+ consentOptions.stream().map(co -> consentOptionToString(co)).toList()));
 					}
 				}
 
@@ -176,14 +176,20 @@ public class PrivacyDataFlowConstraint {
 		HashSet<PrivacyConstraintViolation> violations = new HashSet<>();
 		List<ConsentLabel> vertexFunctionalities = extractConsentLabels(vertexCharacteristics);
 		for (var incoming : pinIncomingCharacteristics) {
+			// Check that the incoming labels contain at least one data item
+			if(incoming.stream().filter(i -> ((DFDCharacteristicValue)i).getLabel() instanceof DataItemLabel ).count() == 0) {
+				continue;
+			}
+			
 			if (!extractConsentLabels(incoming).containsAll(vertexFunctionalities)) {
 				// TODO: maybe include more information such as role, ...
-				violations.add(new PrivacyConstraintViolation(vertexName,
-						"The vertex " + vertexName + " can receive data from a user which has not consented to its functionalities. \nFunctionalities consented to by user: "
-								+ extractConsentLabels(incoming).stream()
-										.map(label -> label.getConsentOption().getEntityName()).toList()
-								+ "\nFunctionalities of the vertex: " + vertexFunctionalities.stream()
-										.map(label -> label.getConsentOption().getEntityName()).toList()));
+				violations.add(new PrivacyConstraintViolation(vertexName, "The vertex " + vertexName
+						+ " can receive data from a user which has not consented to its functionalities. \nFunctionalities consented to by user: "
+						+ extractConsentLabels(incoming).stream().map(label -> label.getConsentOption().getEntityName())
+								.toList()
+						+ "\nFunctionalities of the vertex: "
+						+ vertexFunctionalities.stream().map(label -> label.getConsentOption().getEntityName()).toList()
+						+ "\nReceived input labels: " + incoming.stream().map(i -> i.toString()).toList()));
 			}
 		}
 
@@ -589,11 +595,16 @@ public class PrivacyDataFlowConstraint {
 	 * Converts a consent option to a human-readable form
 	 */
 	public static String consentOptionToString(ConsentOption input) {
-		return "\n" + input.getEntityName() + ":\n\tAllowsFor: "
-				+ input.getAllowsFor().stream()
-						.map(af -> af.getEntityName() + ":"
-								+ af.getMembers().stream().map(member -> member.getItem().getEntityName() + ":"
-										+ member.getState().stream().map(state -> state.getEntityName()).toList()).toList())
+		return "\n"
+				+ input.getEntityName() + ":\n\tAllowsFor: " + input
+						.getAllowsFor().stream().map(
+								af -> af.getEntityName()
+										+ ":" + af
+												.getMembers().stream().map(
+														member -> member.getItem().getEntityName() + ":"
+																+ member.getState().stream()
+																		.map(state -> state.getEntityName()).toList())
+												.toList())
 						.toList();
 	}
 }

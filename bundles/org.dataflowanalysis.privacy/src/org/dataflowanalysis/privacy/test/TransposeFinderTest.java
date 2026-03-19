@@ -1,9 +1,13 @@
 package org.dataflowanalysis.privacy.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.dfd.core.DFDFlowGraphCollection;
@@ -19,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 public class TransposeFinderTest {
 	public static final String TEST_MODEL_PROJECT_NAME = "org.dataflowanalysis.examplemodels";
+	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstrainTest.class);
 
 	PrivacyDFDConfidentialityAnalysis analysis;
 
@@ -38,26 +43,29 @@ public class TransposeFinderTest {
 	public void createsGraphsForRole() {
 		this.analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
-		
 
 		flowGraphCollection.evaluate();
-		
-		var flowGraphs = flowGraphCollection.getTransposeFlowGraphs();
-		
-		assertEquals(2, flowGraphs.size());
 
-		
-		// Check that the first graph's sink has the correct data characteristic
-		assert flowGraphs.get(0).getSink().getAllDataCharacteristics().size() == 1;
-		assert flowGraphs.get(0).getSink().getAllDataCharacteristics().get(0).getAllCharacteristics().size() == 2;
-		List<String> labelsOne = List.of("exampleLabel", "RoleLabel");
-		assert flowGraphs.get(0).getSink().getAllDataCharacteristics().get(0).getAllCharacteristics().stream().map(ch -> ch.getValueName()).toList().equals(labelsOne);
-		
-		// Check that the second graph's sink has the correct data characteristic
-		assert flowGraphs.get(1).getSink().getAllDataCharacteristics().size() == 1;
-		assert flowGraphs.get(1).getSink().getAllDataCharacteristics().get(0).getAllCharacteristics().size() == 3;
-		List<String> labelsTwo = List.of("exampleLabel", "BasicConsentLabel", "RoleLabel");
-		assert flowGraphs.get(1).getSink().getAllDataCharacteristics().get(0).getAllCharacteristics().stream().map(ch -> ch.getValueName()).toList().equals(labelsTwo);
+		var flowGraphs = flowGraphCollection.getTransposeFlowGraphs();
+
+		assertEquals(4, flowGraphs.size());
+
+		for (var fg : flowGraphs) {
+			fg.getVertices().forEach(vert -> {
+				logger.debug("Vert " + ((DFDVertex) vert).getName() + "  char: " + vert
+						.getAllIncomingDataCharacteristics().stream().map(i -> i.getAllCharacteristics()).toList());
+			});
+		}
+
+		List<Set<String>> expectedIncoming = new ArrayList<>(
+				List.of(Set.of("exampleLabel", "RoleLabel"), Set.of("exampleLabel", "BasicConsentLabel", "RoleLabel"),
+						Set.of("exampleLabel", "exampleLabelTwo", "RoleLabel"),
+						Set.of("exampleLabel", "exampleLabelTwo", "BasicConsentLabel", "RoleLabel")));
+
+		for (var fg : flowGraphs) {
+			assertTrue(expectedIncoming.remove(new HashSet<>(fg.getSink().getAllIncomingDataCharacteristics().get(0)
+					.getAllCharacteristics().stream().map(i -> i.getValueName()).toList())));
+		}
 	}
 
 }

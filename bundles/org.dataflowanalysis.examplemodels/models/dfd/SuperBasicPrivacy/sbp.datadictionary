@@ -2,6 +2,7 @@
 <datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_YKRDcA5LEfGPjL6qQZv--g">
   <labelTypes id="_FCvHAA5NEfGPjL6qQZv--g" entityName="exampleLabelType">
     <label id="_HkX9UA5NEfGPjL6qQZv--g" entityName="exampleLabel"/>
+    <label id="__Df9MCLsEfGKXuVhbPlobg" entityName="exampleLabelTwo"/>
   </labelTypes>
   <behavior id="_I_WGgQ5NEfGPjL6qQZv--g" entityName="sourceSend">
     <outPin id="_K6AcYQ5NEfGPjL6qQZv--g" entityName="sourcePinOut"/>
@@ -14,7 +15,11 @@
   </behavior>
   <behavior id="_TsW6cQ5bEfGdzZwkavR8kQ" entityName="middleForward">
     <inPin id="_VYeeAA5bEfGdzZwkavR8kQ" entityName="middleInPin"/>
+    <inPin id="_eZ0VQCLsEfGtxclFstCwZA" entityName="middleInEmpty"/>
     <outPin id="_XifegQ5bEfGdzZwkavR8kQ" entityName="middleOutPin"/>
+    <outPin id="_6vEJASLrEfGtxclFstCwZA" entityName="middleOutTwo"/>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_8a0gNCLrEfGtxclFstCwZA" entityName="setOutTwo" outputPin="_6vEJASLrEfGtxclFstCwZA" outputLabels="__Df9MCLsEfGKXuVhbPlobg"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Y59Asw5bEfGdzZwkavR8kQ" outputPin="_XifegQ5bEfGdzZwkavR8kQ" inputPins="_VYeeAA5bEfGdzZwkavR8kQ"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_gOsMMyLsEfGtxclFstCwZA" outputPin="_6vEJASLrEfGtxclFstCwZA" inputPins="_VYeeAA5bEfGdzZwkavR8kQ"/>
   </behavior>
 </datadictionary:DataDictionary>

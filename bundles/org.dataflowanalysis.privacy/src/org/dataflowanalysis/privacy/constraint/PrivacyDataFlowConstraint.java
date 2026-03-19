@@ -101,7 +101,7 @@ public class PrivacyDataFlowConstraint {
 				for (var combination : possibleCombinations) {
 					if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
 						violations.add(new PrivacyConstraintViolation(vert.getName(),
-								"The vertex has received a data combination in pin " + pin.getKey()
+								"The vertex " + vert.getName() + " has received a data combination in pin " + pin.getKey()
 										+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
 										+ dataCombinatioToString(combination) + "\nConsent options of the vertex: "
 										+ consentOptions.stream().map(co -> consentOptionToString(co)).toList()));
@@ -179,7 +179,7 @@ public class PrivacyDataFlowConstraint {
 			if (!extractConsentLabels(incoming).containsAll(vertexFunctionalities)) {
 				// TODO: maybe include more information such as role, ...
 				violations.add(new PrivacyConstraintViolation(vertexName,
-						"The vertex can receive data from a user which has not consented to its functionalities. \nFunctionalities consented to by user: "
+						"The vertex " + vertexName + " can receive data from a user which has not consented to its functionalities. \nFunctionalities consented to by user: "
 								+ extractConsentLabels(incoming).stream()
 										.map(label -> label.getConsentOption().getEntityName()).toList()
 								+ "\nFunctionalities of the vertex: " + vertexFunctionalities.stream()
@@ -568,7 +568,7 @@ public class PrivacyDataFlowConstraint {
 			if (!combinationAllowedByConsentOptions(combination, nodeConsentOptions)) {
 				detectedViolations.add(new PrivacyConstraintViolation(vertexName,
 						"The vertex/node \"" + vertexName
-								+ "\" could derive information not authorized by its consent options."
+								+ "\" received or could derive information not authorized by its consent options."
 								+ "\n\tDetected combination: " + dataCombinatioToString(combination)
 								+ "\n\tVertex consent options: "
 								+ nodeConsentOptions.stream().map(co -> consentOptionToString(co)).toList()));

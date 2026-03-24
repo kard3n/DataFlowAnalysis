@@ -82,7 +82,7 @@ public class SetAssignmentItemProvider extends AbstractAssignmentItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SetAssignment) object).getId();
+		String label = ((SetAssignment) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_SetAssignment_type")
 				: getString("_UI_SetAssignment_type") + " " + label;
 	}

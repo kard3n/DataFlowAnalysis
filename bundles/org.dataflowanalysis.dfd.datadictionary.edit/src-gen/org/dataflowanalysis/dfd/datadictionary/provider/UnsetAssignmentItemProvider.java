@@ -81,7 +81,7 @@ public class UnsetAssignmentItemProvider extends AbstractAssignmentItemProvider 
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((UnsetAssignment) object).getId();
+		String label = ((UnsetAssignment) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_UnsetAssignment_type")
 				: getString("_UI_UnsetAssignment_type") + " " + label;
 	}

@@ -81,7 +81,7 @@ public class ForwardingAssignmentItemProvider extends AbstractAssignmentItemProv
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ForwardingAssignment) object).getId();
+		String label = ((ForwardingAssignment) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_ForwardingAssignment_type")
 				: getString("_UI_ForwardingAssignment_type") + " " + label;
 	}

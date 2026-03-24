@@ -35,7 +35,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//Assignment/outputLabels"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//Assignment/inputPins"/>
     </genClasses>
-    <genClasses ecoreClass="datadictionary.ecore#//ForwardingAssignment">
+    <genClasses ecoreClass="datadictionary.ecore#//ForwardingAssignment" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//ForwardingAssignment/inputPins"/>
     </genClasses>
     <genClasses ecoreClass="datadictionary.ecore#//Label" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
@@ -55,10 +55,10 @@
     <genClasses ecoreClass="datadictionary.ecore#//LabelReference" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//LabelReference/label"/>
     </genClasses>
-    <genClasses ecoreClass="datadictionary.ecore#//SetAssignment">
+    <genClasses ecoreClass="datadictionary.ecore#//SetAssignment" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//SetAssignment/outputLabels"/>
     </genClasses>
-    <genClasses ecoreClass="datadictionary.ecore#//UnsetAssignment">
+    <genClasses ecoreClass="datadictionary.ecore#//UnsetAssignment" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//UnsetAssignment/outputLabels"/>
     </genClasses>
     <genClasses image="false" ecoreClass="datadictionary.ecore#//AbstractLabel"/>

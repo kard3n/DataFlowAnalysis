@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="__Q6QQCeQEfGy46PZCQlGfA">
+  <flows id="_oZokQCeVEfGy46PZCQlGfA" entityName="Customer_AuthService_Login" sourceNode="_LNVmASeREfGy46PZCQlGfA" destinationNode="_3WY0QyeREfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_dlnU8Cd9EfGnCpRFpfCwug"/>
+    <sourcePin href="online_shop.datadictionary#_90uWMCd8EfGnCpRFpfCwug"/>
+  </flows>
+  <flows id="_AgeocCeWEfGy46PZCQlGfA" entityName="Customer_AuthService_Signup" sourceNode="_LNVmASeREfGy46PZCQlGfA" destinationNode="_3WY0QyeREfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_Vw_iECd9EfGnCpRFpfCwug"/>
+    <sourcePin href="online_shop.datadictionary#_kbdn4Sd8EfGnCpRFpfCwug"/>
+  </flows>
+  <flows id="_Nl4YcCeWEfGy46PZCQlGfA" entityName="AuthService_Customer_Result" sourceNode="_3WY0QyeREfGy46PZCQlGfA" destinationNode="_LNVmASeREfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_WUzQYCeWEfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_kkRwMSd9EfGnCpRFpfCwug"/>
+  </flows>
+  <flows id="_5S-DcCeWEfGy46PZCQlGfA" entityName="Customer_ProductSearch_Request" sourceNode="_LNVmASeREfGy46PZCQlGfA" destinationNode="_bQWhMyeSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_AAeKICd_EfGnCpRFpfCwug"/>
+    <sourcePin href="online_shop.datadictionary#_velFISd-EfGnCpRFpfCwug"/>
+  </flows>
+  <flows id="_LGyDUCeXEfGy46PZCQlGfA" entityName="ProductSearch_PurchaseDB_RequestBought" sourceNode="_bQWhMyeSEfGy46PZCQlGfA" destinationNode="_ksIfJieSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_4yRMICeAEfGnCpRFpfCwug"/>
+    <sourcePin href="online_shop.datadictionary#_RHCpgSd_EfGnCpRFpfCwug"/>
+  </flows>
+  <flows id="_VM6l0CeXEfGy46PZCQlGfA" entityName="ProductSearch_ProductDB_RequestMatching" sourceNode="_bQWhMyeSEfGy46PZCQlGfA" destinationNode="_oj-TYieSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_hIEgUCeDEfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_wu3EcSeCEfGy46PZCQlGfA"/>
+  </flows>
+  <flows id="_CRSM0CeYEfGy46PZCQlGfA" entityName="PurchaseDB_ProductSearch_ReturnResult" sourceNode="_ksIfJieSEfGy46PZCQlGfA" destinationNode="_bQWhMyeSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_DUoNECeAEfGnCpRFpfCwug"/>
+    <sourcePin href="online_shop.datadictionary#_8pbD4SeAEfGnCpRFpfCwug"/>
+  </flows>
+  <flows id="_Vv9MACeYEfGy46PZCQlGfA" entityName="ProductDB_ProductSearch_ReturnResult" sourceNode="_oj-TYieSEfGy46PZCQlGfA" destinationNode="_bQWhMyeSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_1nrNgCeCEfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_paoMYSeDEfGy46PZCQlGfA"/>
+  </flows>
+  <flows id="_ZI5BQCeZEfGy46PZCQlGfA" entityName="ProductSearch_PersonalRecommendations_Consented" sourceNode="_bQWhMyeSEfGy46PZCQlGfA" destinationNode="_sdOc4yeSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_0ATNwCeHEfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_OTvXQCeGEfGy46PZCQlGfA"/>
+  </flows>
+  <flows id="_9HEqYCeaEfGy46PZCQlGfA" entityName="PersonalizedRecommendations_RecommenderDB_Search" sourceNode="_sdOc4yeSEfGy46PZCQlGfA" destinationNode="_wlvKYieSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_0JMuQCeLEfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_PZz8kSeIEfGy46PZCQlGfA"/>
+  </flows>
+  <flows id="_MrcXMCebEfGy46PZCQlGfA" entityName="RecommenderDB_PersonalizedRecommendations_Search" sourceNode="_wlvKYieSEfGy46PZCQlGfA" destinationNode="_sdOc4yeSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_yA6BgCeKEfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_5Z-EUSeLEfGy46PZCQlGfA"/>
+  </flows>
+  <flows id="_aI_hcCebEfGy46PZCQlGfA" entityName="PersonalizedRecommendations_RecommenderDB_Update" sourceNode="_sdOc4yeSEfGy46PZCQlGfA" destinationNode="_wlvKYieSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_3FT6ECeLEfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_dLRhUSeIEfGy46PZCQlGfA"/>
+  </flows>
+  <flows id="_Jl2CwCecEfGy46PZCQlGfA" entityName="PersonalizedRecommendations_ProductSearch_Result" sourceNode="_sdOc4yeSEfGy46PZCQlGfA" destinationNode="_bQWhMyeSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_nhYDYCeREfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_OpkEASeLEfGy46PZCQlGfA"/>
+  </flows>
+  <flows id="_ZVa6ACecEfGy46PZCQlGfA" entityName="ProductSearch_BasicRecommendations_Get" sourceNode="_bQWhMyeSEfGy46PZCQlGfA" destinationNode="_eeWuQyeSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_90mxsCeNEfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_td3WUSeZEfGy46PZCQlGfA"/>
+  </flows>
+  <flows id="_2ZklsCecEfGy46PZCQlGfA" entityName="BasicRecommendations_ProductSearch_ReturnResult" sourceNode="_eeWuQyeSEfGy46PZCQlGfA" destinationNode="_bQWhMyeSEfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_nhYDYCeREfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_HzcZYSeOEfGy46PZCQlGfA"/>
+  </flows>
+  <flows id="_BKkDECedEfGy46PZCQlGfA" entityName="ProductSearch_Customer_ReturnSearchResult" sourceNode="_bQWhMyeSEfGy46PZCQlGfA" destinationNode="_LNVmASeREfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_XiT-oCeREfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_cdb00SeREfGy46PZCQlGfA"/>
+  </flows>
+  <nodes xsi:type="dataflowdiagram:External" id="_LNVmASeREfGy46PZCQlGfA" entityName="Customer">
+    <behavior href="online_shop.datadictionary#_pGKS4SdwEfG4v88XP06kfw"/>
+    <properties xsi:type="consentmodel:RoleLabel" href="online_shop.consentmodel#_SSagMCduEfG4v88XP06kfw"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Process" id="_3WY0QyeREfGy46PZCQlGfA" entityName="AuthService">
+    <behavior href="online_shop.datadictionary#_TxXMoSd9EfGnCpRFpfCwug"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="online_shop.consentmodel#_jM-10CdsEfG4v88XP06kfw"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_-LXIAieREfGy46PZCQlGfA" entityName="UserDB">
+    <behavior href="online_shop.datadictionary#_GL5AASd-EfGnCpRFpfCwug"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="online_shop.consentmodel#_jM-10CdsEfG4v88XP06kfw"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Process" id="_bQWhMyeSEfGy46PZCQlGfA" entityName="ProductSearch">
+    <behavior href="online_shop.datadictionary#_-QHm0Sd-EfGnCpRFpfCwug"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="online_shop.consentmodel#_7Mx-MCdpEfG4v88XP06kfw"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Process" id="_eeWuQyeSEfGy46PZCQlGfA" entityName="BasicRecommendations">
+    <behavior href="online_shop.datadictionary#_7hpQlyeNEfGy46PZCQlGfA"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="online_shop.consentmodel#_7Mx-MCdpEfG4v88XP06kfw"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_ksIfJieSEfGy46PZCQlGfA" entityName="PurchaseDB">
+    <behavior href="online_shop.datadictionary#_a_qfASeAEfGnCpRFpfCwug"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="online_shop.consentmodel#_7Mx-MCdpEfG4v88XP06kfw"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_oj-TYieSEfGy46PZCQlGfA" entityName="ProductDB">
+    <behavior href="online_shop.datadictionary#_tAJXASeCEfGy46PZCQlGfA"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="online_shop.consentmodel#_7Mx-MCdpEfG4v88XP06kfw"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Process" id="_sdOc4yeSEfGy46PZCQlGfA" entityName="PersonalizedRecommendations">
+    <behavior href="online_shop.datadictionary#_rDWg4CeHEfGy46PZCQlGfA"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="online_shop.consentmodel#_zqc1MCdpEfG4v88XP06kfw"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_wlvKYieSEfGy46PZCQlGfA" entityName="RecommenderDB">
+    <behavior href="online_shop.datadictionary#_uxpaxyeLEfGy46PZCQlGfA"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="online_shop.consentmodel#_zqc1MCdpEfG4v88XP06kfw"/>
+  </nodes>
+</dataflowdiagram:DataFlowDiagram>

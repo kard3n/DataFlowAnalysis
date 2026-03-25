@@ -149,6 +149,21 @@ public class consentmodelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseDataContextLabelType(DataContextLabelType object) {
+			return createDataContextLabelTypeAdapter();
+		}
+
+		@Override
+		public Adapter caseDataContextLabel(DataContextLabel object) {
+			return createDataContextLabelAdapter();
+		}
+
+		@Override
+		public Adapter caseDataContext(DataContext object) {
+			return createDataContextAdapter();
+		}
+
+		@Override
 		public Adapter caseIdentifier(Identifier object) {
 			return createIdentifierAdapter();
 		}
@@ -399,6 +414,48 @@ public class consentmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDataStateLabelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.privacy.consentmodel.DataContextLabelType <em>Data Context Label Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataContextLabelType
+	 * @generated
+	 */
+	public Adapter createDataContextLabelTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.privacy.consentmodel.DataContextLabel <em>Data Context Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataContextLabel
+	 * @generated
+	 */
+	public Adapter createDataContextLabelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.dataflowanalysis.privacy.consentmodel.DataContext <em>Data Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataContext
+	 * @generated
+	 */
+	public Adapter createDataContextAdapter() {
 		return null;
 	}
 

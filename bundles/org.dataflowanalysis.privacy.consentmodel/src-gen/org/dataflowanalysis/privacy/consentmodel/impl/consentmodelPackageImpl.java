@@ -8,6 +8,9 @@ import org.dataflowanalysis.privacy.consentmodel.ConsentLabel;
 import org.dataflowanalysis.privacy.consentmodel.ConsentLabelType;
 import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
 import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
+import org.dataflowanalysis.privacy.consentmodel.DataContext;
+import org.dataflowanalysis.privacy.consentmodel.DataContextLabel;
+import org.dataflowanalysis.privacy.consentmodel.DataContextLabelType;
 import org.dataflowanalysis.privacy.consentmodel.DataItem;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabelType;
@@ -140,6 +143,27 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 	 * @generated
 	 */
 	private EClass dataStateLabelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataContextLabelTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataContextLabelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataContextEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -385,6 +409,16 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 	 * @generated
 	 */
 	@Override
+	public EReference getConsentModel_DataContextLabelType() {
+		return (EReference) consentModelEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRoleLabelType() {
 		return roleLabelTypeEClass;
 	}
@@ -535,6 +569,16 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 	 * @generated
 	 */
 	@Override
+	public EReference getStatefulItem_Context() {
+		return (EReference) statefulItemEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getDataStateLabelType() {
 		return dataStateLabelTypeEClass;
 	}
@@ -567,6 +611,56 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 	@Override
 	public EReference getDataStateLabel_DataState() {
 		return (EReference) dataStateLabelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDataContextLabelType() {
+		return dataContextLabelTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDataContextLabelType_Labels() {
+		return (EReference) dataContextLabelTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDataContextLabel() {
+		return dataContextLabelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDataContextLabel_DataContext() {
+		return (EReference) dataContextLabelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDataContext() {
+		return dataContextEClass;
 	}
 
 	/**
@@ -621,6 +715,7 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		createEReference(consentModelEClass, CONSENT_MODEL__CONSENT_LABEL_TYPE);
 		createEReference(consentModelEClass, CONSENT_MODEL__DATA_ITEM_LABEL_TYPE);
 		createEReference(consentModelEClass, CONSENT_MODEL__DATA_STATE_LABEL_TYPE);
+		createEReference(consentModelEClass, CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE);
 
 		roleLabelTypeEClass = createEClass(ROLE_LABEL_TYPE);
 		createEReference(roleLabelTypeEClass, ROLE_LABEL_TYPE__LABELS);
@@ -643,12 +738,21 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		statefulItemEClass = createEClass(STATEFUL_ITEM);
 		createEReference(statefulItemEClass, STATEFUL_ITEM__STATE);
 		createEReference(statefulItemEClass, STATEFUL_ITEM__ITEM);
+		createEReference(statefulItemEClass, STATEFUL_ITEM__CONTEXT);
 
 		dataStateLabelTypeEClass = createEClass(DATA_STATE_LABEL_TYPE);
 		createEReference(dataStateLabelTypeEClass, DATA_STATE_LABEL_TYPE__LABELS);
 
 		dataStateLabelEClass = createEClass(DATA_STATE_LABEL);
 		createEReference(dataStateLabelEClass, DATA_STATE_LABEL__DATA_STATE);
+
+		dataContextLabelTypeEClass = createEClass(DATA_CONTEXT_LABEL_TYPE);
+		createEReference(dataContextLabelTypeEClass, DATA_CONTEXT_LABEL_TYPE__LABELS);
+
+		dataContextLabelEClass = createEClass(DATA_CONTEXT_LABEL);
+		createEReference(dataContextLabelEClass, DATA_CONTEXT_LABEL__DATA_CONTEXT);
+
+		dataContextEClass = createEClass(DATA_CONTEXT);
 	}
 
 	/**
@@ -700,6 +804,9 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		dataItemLabelEClass.getESuperTypes().add(thedatadictionaryPackage.getAbstractLabel());
 		dataStateLabelTypeEClass.getESuperTypes().add(thedatadictionaryPackage.getAbstractLabelType());
 		dataStateLabelEClass.getESuperTypes().add(thedatadictionaryPackage.getAbstractLabel());
+		dataContextLabelTypeEClass.getESuperTypes().add(thedatadictionaryPackage.getAbstractLabelType());
+		dataContextLabelEClass.getESuperTypes().add(thedatadictionaryPackage.getAbstractLabel());
+		dataContextEClass.getESuperTypes().add(theIdentifierPackage.getEntity());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(dataItemEClass, DataItem.class, "DataItem", !IS_ABSTRACT, !IS_INTERFACE,
@@ -751,6 +858,9 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		initEReference(getConsentModel_DataStateLabelType(), this.getDataStateLabelType(), null, "dataStateLabelType",
 				null, 1, 1, ConsentModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConsentModel_DataContextLabelType(), this.getDataContextLabelType(), null,
+				"dataContextLabelType", null, 1, 1, ConsentModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roleLabelTypeEClass, RoleLabelType.class, "RoleLabelType", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -796,6 +906,9 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		initEReference(getStatefulItem_Item(), this.getDataItem(), null, "item", null, 1, 1, StatefulItem.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStatefulItem_Context(), this.getDataContext(), null, "context", null, 0, -1,
+				StatefulItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataStateLabelTypeEClass, DataStateLabelType.class, "DataStateLabelType", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -808,6 +921,21 @@ public class consentmodelPackageImpl extends EPackageImpl implements consentmode
 		initEReference(getDataStateLabel_DataState(), this.getDataState(), null, "dataState", null, 1, 1,
 				DataStateLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dataContextLabelTypeEClass, DataContextLabelType.class, "DataContextLabelType", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDataContextLabelType_Labels(), this.getDataContextLabel(), null, "labels", null, 1, -1,
+				DataContextLabelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dataContextLabelEClass, DataContextLabel.class, "DataContextLabel", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDataContextLabel_DataContext(), this.getDataContext(), null, "dataContext", null, 1, 1,
+				DataContextLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dataContextEClass, DataContext.class, "DataContext", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

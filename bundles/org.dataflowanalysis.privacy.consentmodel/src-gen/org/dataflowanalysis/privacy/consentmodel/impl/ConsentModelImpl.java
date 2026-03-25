@@ -5,6 +5,7 @@ package org.dataflowanalysis.privacy.consentmodel.impl;
 import java.util.Collection;
 import org.dataflowanalysis.privacy.consentmodel.ConsentLabelType;
 import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
+import org.dataflowanalysis.privacy.consentmodel.DataContextLabelType;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabelType;
 import org.dataflowanalysis.privacy.consentmodel.DataStateLabelType;
 import org.dataflowanalysis.privacy.consentmodel.RoleLabelType;
@@ -33,6 +34,7 @@ import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentModelImpl#getConsentLabelType <em>Consent Label Type</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentModelImpl#getDataItemLabelType <em>Data Item Label Type</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentModelImpl#getDataStateLabelType <em>Data State Label Type</em>}</li>
+ *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.ConsentModelImpl#getDataContextLabelType <em>Data Context Label Type</em>}</li>
  * </ul>
  *
  * @generated
@@ -77,6 +79,16 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 	 * @ordered
 	 */
 	protected DataStateLabelType dataStateLabelType;
+
+	/**
+	 * The cached value of the '{@link #getDataContextLabelType() <em>Data Context Label Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataContextLabelType()
+	 * @generated
+	 * @ordered
+	 */
+	protected DataContextLabelType dataContextLabelType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -276,6 +288,63 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 	 * @generated
 	 */
 	@Override
+	public DataContextLabelType getDataContextLabelType() {
+		return dataContextLabelType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDataContextLabelType(DataContextLabelType newDataContextLabelType,
+			NotificationChain msgs) {
+		DataContextLabelType oldDataContextLabelType = dataContextLabelType;
+		dataContextLabelType = newDataContextLabelType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					consentmodelPackage.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE, oldDataContextLabelType,
+					newDataContextLabelType);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDataContextLabelType(DataContextLabelType newDataContextLabelType) {
+		if (newDataContextLabelType != dataContextLabelType) {
+			NotificationChain msgs = null;
+			if (dataContextLabelType != null)
+				msgs = ((InternalEObject) dataContextLabelType).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - consentmodelPackage.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE, null,
+						msgs);
+			if (newDataContextLabelType != null)
+				msgs = ((InternalEObject) newDataContextLabelType).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - consentmodelPackage.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE, null,
+						msgs);
+			msgs = basicSetDataContextLabelType(newDataContextLabelType, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					consentmodelPackage.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE, newDataContextLabelType,
+					newDataContextLabelType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case consentmodelPackage.CONSENT_MODEL__ROLE_LABEL_TYPE:
@@ -286,6 +355,8 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 			return ((InternalEList<?>) getDataItemLabelType()).basicRemove(otherEnd, msgs);
 		case consentmodelPackage.CONSENT_MODEL__DATA_STATE_LABEL_TYPE:
 			return basicSetDataStateLabelType(null, msgs);
+		case consentmodelPackage.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE:
+			return basicSetDataContextLabelType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -306,6 +377,8 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 			return getDataItemLabelType();
 		case consentmodelPackage.CONSENT_MODEL__DATA_STATE_LABEL_TYPE:
 			return getDataStateLabelType();
+		case consentmodelPackage.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE:
+			return getDataContextLabelType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -332,6 +405,9 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 		case consentmodelPackage.CONSENT_MODEL__DATA_STATE_LABEL_TYPE:
 			setDataStateLabelType((DataStateLabelType) newValue);
 			return;
+		case consentmodelPackage.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE:
+			setDataContextLabelType((DataContextLabelType) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -356,6 +432,9 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 		case consentmodelPackage.CONSENT_MODEL__DATA_STATE_LABEL_TYPE:
 			setDataStateLabelType((DataStateLabelType) null);
 			return;
+		case consentmodelPackage.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE:
+			setDataContextLabelType((DataContextLabelType) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -376,6 +455,8 @@ public class ConsentModelImpl extends EntityImpl implements ConsentModel {
 			return dataItemLabelType != null && !dataItemLabelType.isEmpty();
 		case consentmodelPackage.CONSENT_MODEL__DATA_STATE_LABEL_TYPE:
 			return dataStateLabelType != null;
+		case consentmodelPackage.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE:
+			return dataContextLabelType != null;
 		}
 		return super.eIsSet(featureID);
 	}

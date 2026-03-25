@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.StatefulItem#getState <em>State</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.StatefulItem#getItem <em>Item</em>}</li>
+ *   <li>{@link org.dataflowanalysis.privacy.consentmodel.StatefulItem#getContext <em>Context</em>}</li>
  * </ul>
  *
  * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getStatefulItem()
@@ -57,5 +58,17 @@ public interface StatefulItem extends EObject {
 	 * @generated
 	 */
 	void setItem(DataItem value);
+
+	/**
+	 * Returns the value of the '<em><b>Context</b></em>' reference list.
+	 * The list contents are of type {@link org.dataflowanalysis.privacy.consentmodel.DataContext}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Context</em>' reference list.
+	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getStatefulItem_Context()
+	 * @model
+	 * @generated
+	 */
+	EList<DataContext> getContext();
 
 } // StatefulItem

@@ -86,6 +86,12 @@ public class consentmodelFactoryImpl extends EFactoryImpl implements consentmode
 			return createDataStateLabelType();
 		case consentmodelPackage.DATA_STATE_LABEL:
 			return createDataStateLabel();
+		case consentmodelPackage.DATA_CONTEXT_LABEL_TYPE:
+			return createDataContextLabelType();
+		case consentmodelPackage.DATA_CONTEXT_LABEL:
+			return createDataContextLabel();
+		case consentmodelPackage.DATA_CONTEXT:
+			return createDataContext();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -254,6 +260,39 @@ public class consentmodelFactoryImpl extends EFactoryImpl implements consentmode
 	public DataStateLabel createDataStateLabel() {
 		DataStateLabelImpl dataStateLabel = new DataStateLabelImpl();
 		return dataStateLabel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataContextLabelType createDataContextLabelType() {
+		DataContextLabelTypeImpl dataContextLabelType = new DataContextLabelTypeImpl();
+		return dataContextLabelType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataContextLabel createDataContextLabel() {
+		DataContextLabelImpl dataContextLabel = new DataContextLabelImpl();
+		return dataContextLabel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataContext createDataContext() {
+		DataContextImpl dataContext = new DataContextImpl();
+		return dataContext;
 	}
 
 	/**

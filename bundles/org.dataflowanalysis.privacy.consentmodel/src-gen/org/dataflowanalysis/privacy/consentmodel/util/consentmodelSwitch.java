@@ -278,6 +278,49 @@ public class consentmodelSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case consentmodelPackage.DATA_CONTEXT_LABEL_TYPE: {
+			DataContextLabelType dataContextLabelType = (DataContextLabelType) theEObject;
+			T result = caseDataContextLabelType(dataContextLabelType);
+			if (result == null)
+				result = caseAbstractLabelType(dataContextLabelType);
+			if (result == null)
+				result = caseEntity(dataContextLabelType);
+			if (result == null)
+				result = caseIdentifier(dataContextLabelType);
+			if (result == null)
+				result = caseNamedElement(dataContextLabelType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case consentmodelPackage.DATA_CONTEXT_LABEL: {
+			DataContextLabel dataContextLabel = (DataContextLabel) theEObject;
+			T result = caseDataContextLabel(dataContextLabel);
+			if (result == null)
+				result = caseAbstractLabel(dataContextLabel);
+			if (result == null)
+				result = caseEntity(dataContextLabel);
+			if (result == null)
+				result = caseIdentifier(dataContextLabel);
+			if (result == null)
+				result = caseNamedElement(dataContextLabel);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case consentmodelPackage.DATA_CONTEXT: {
+			DataContext dataContext = (DataContext) theEObject;
+			T result = caseDataContext(dataContext);
+			if (result == null)
+				result = caseEntity(dataContext);
+			if (result == null)
+				result = caseIdentifier(dataContext);
+			if (result == null)
+				result = caseNamedElement(dataContext);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -505,6 +548,51 @@ public class consentmodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDataStateLabel(DataStateLabel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Context Label Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Context Label Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataContextLabelType(DataContextLabelType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Context Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Context Label</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataContextLabel(DataContextLabel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Context</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Context</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataContext(DataContext object) {
 		return null;
 	}
 

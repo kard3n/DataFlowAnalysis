@@ -4,6 +4,7 @@ package org.dataflowanalysis.privacy.consentmodel.impl;
 
 import java.util.Collection;
 
+import org.dataflowanalysis.privacy.consentmodel.DataContext;
 import org.dataflowanalysis.privacy.consentmodel.DataItem;
 import org.dataflowanalysis.privacy.consentmodel.DataState;
 import org.dataflowanalysis.privacy.consentmodel.StatefulItem;
@@ -31,6 +32,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <ul>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.StatefulItemImpl#getState <em>State</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.StatefulItemImpl#getItem <em>Item</em>}</li>
+ *   <li>{@link org.dataflowanalysis.privacy.consentmodel.impl.StatefulItemImpl#getContext <em>Context</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,6 +57,16 @@ public class StatefulItemImpl extends MinimalEObjectImpl.Container implements St
 	 * @ordered
 	 */
 	protected DataItem item;
+
+	/**
+	 * The cached value of the '{@link #getContext() <em>Context</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DataContext> context;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -137,6 +149,20 @@ public class StatefulItemImpl extends MinimalEObjectImpl.Container implements St
 	 * @generated
 	 */
 	@Override
+	public EList<DataContext> getContext() {
+		if (context == null) {
+			context = new EObjectResolvingEList<DataContext>(DataContext.class, this,
+					consentmodelPackage.STATEFUL_ITEM__CONTEXT);
+		}
+		return context;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case consentmodelPackage.STATEFUL_ITEM__STATE:
@@ -145,6 +171,8 @@ public class StatefulItemImpl extends MinimalEObjectImpl.Container implements St
 			if (resolve)
 				return getItem();
 			return basicGetItem();
+		case consentmodelPackage.STATEFUL_ITEM__CONTEXT:
+			return getContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -165,6 +193,10 @@ public class StatefulItemImpl extends MinimalEObjectImpl.Container implements St
 		case consentmodelPackage.STATEFUL_ITEM__ITEM:
 			setItem((DataItem) newValue);
 			return;
+		case consentmodelPackage.STATEFUL_ITEM__CONTEXT:
+			getContext().clear();
+			getContext().addAll((Collection<? extends DataContext>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -183,6 +215,9 @@ public class StatefulItemImpl extends MinimalEObjectImpl.Container implements St
 		case consentmodelPackage.STATEFUL_ITEM__ITEM:
 			setItem((DataItem) null);
 			return;
+		case consentmodelPackage.STATEFUL_ITEM__CONTEXT:
+			getContext().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -199,6 +234,8 @@ public class StatefulItemImpl extends MinimalEObjectImpl.Container implements St
 			return state != null && !state.isEmpty();
 		case consentmodelPackage.STATEFUL_ITEM__ITEM:
 			return item != null;
+		case consentmodelPackage.STATEFUL_ITEM__CONTEXT:
+			return context != null && !context.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

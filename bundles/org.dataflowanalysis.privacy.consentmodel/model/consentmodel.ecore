@@ -34,6 +34,8 @@
         upperBound="-1" eType="#//DataItemLabelType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataStateLabelType" lowerBound="1"
         eType="#//DataStateLabelType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataContextLabelType" lowerBound="1"
+        eType="#//DataContextLabelType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleLabelType" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabelType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="labels" lowerBound="1"
@@ -63,6 +65,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" upperBound="-1"
         eType="#//DataState"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="item" lowerBound="1" eType="#//DataItem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" upperBound="-1"
+        eType="#//DataContext"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataStateLabelType" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabelType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="labels" lowerBound="1"
@@ -72,4 +76,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataState" lowerBound="1"
         eType="#//DataState" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataContextLabelType" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabelType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" lowerBound="1"
+        upperBound="-1" eType="#//DataContextLabel" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataContextLabel" eSuperTypes="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.ecore#//AbstractLabel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataContext" lowerBound="1"
+        eType="#//DataContext" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataContext" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
 </ecore:EPackage>

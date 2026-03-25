@@ -18,6 +18,7 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getConsentLabelType <em>Consent Label Type</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataItemLabelType <em>Data Item Label Type</em>}</li>
  *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataStateLabelType <em>Data State Label Type</em>}</li>
+ *   <li>{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataContextLabelType <em>Data Context Label Type</em>}</li>
  * </ul>
  *
  * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getConsentModel()
@@ -102,5 +103,27 @@ public interface ConsentModel extends Entity {
 	 * @generated
 	 */
 	void setDataStateLabelType(DataStateLabelType value);
+
+	/**
+	 * Returns the value of the '<em><b>Data Context Label Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Data Context Label Type</em>' containment reference.
+	 * @see #setDataContextLabelType(DataContextLabelType)
+	 * @see org.dataflowanalysis.privacy.consentmodel.consentmodelPackage#getConsentModel_DataContextLabelType()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	DataContextLabelType getDataContextLabelType();
+
+	/**
+	 * Sets the value of the '{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataContextLabelType <em>Data Context Label Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Data Context Label Type</em>' containment reference.
+	 * @see #getDataContextLabelType()
+	 * @generated
+	 */
+	void setDataContextLabelType(DataContextLabelType value);
 
 } // ConsentModel

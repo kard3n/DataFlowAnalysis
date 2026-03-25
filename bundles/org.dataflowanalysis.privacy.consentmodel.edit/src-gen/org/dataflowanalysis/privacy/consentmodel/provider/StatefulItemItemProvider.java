@@ -52,6 +52,7 @@ public class StatefulItemItemProvider extends ItemProviderAdapter implements IEd
 
 			addStatePropertyDescriptor(object);
 			addItemPropertyDescriptor(object);
+			addContextPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -84,6 +85,21 @@ public class StatefulItemItemProvider extends ItemProviderAdapter implements IEd
 						getString("_UI_PropertyDescriptor_description", "_UI_StatefulItem_item_feature",
 								"_UI_StatefulItem_type"),
 						consentmodelPackage.Literals.STATEFUL_ITEM__ITEM, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Context feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addContextPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_StatefulItem_context_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_StatefulItem_context_feature",
+								"_UI_StatefulItem_type"),
+						consentmodelPackage.Literals.STATEFUL_ITEM__CONTEXT, true, false, true, null, null, null));
 	}
 
 	/**

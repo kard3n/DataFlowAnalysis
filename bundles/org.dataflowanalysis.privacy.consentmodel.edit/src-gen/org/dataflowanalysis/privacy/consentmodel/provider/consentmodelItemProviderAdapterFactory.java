@@ -418,6 +418,75 @@ public class consentmodelItemProviderAdapterFactory extends consentmodelAdapterF
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.privacy.consentmodel.DataContextLabelType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataContextLabelTypeItemProvider dataContextLabelTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.privacy.consentmodel.DataContextLabelType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataContextLabelTypeAdapter() {
+		if (dataContextLabelTypeItemProvider == null) {
+			dataContextLabelTypeItemProvider = new DataContextLabelTypeItemProvider(this);
+		}
+
+		return dataContextLabelTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.privacy.consentmodel.DataContextLabel} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataContextLabelItemProvider dataContextLabelItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.privacy.consentmodel.DataContextLabel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataContextLabelAdapter() {
+		if (dataContextLabelItemProvider == null) {
+			dataContextLabelItemProvider = new DataContextLabelItemProvider(this);
+		}
+
+		return dataContextLabelItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.privacy.consentmodel.DataContext} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataContextItemProvider dataContextItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.privacy.consentmodel.DataContext}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataContextAdapter() {
+		if (dataContextItemProvider == null) {
+			dataContextItemProvider = new DataContextItemProvider(this);
+		}
+
+		return dataContextItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -552,6 +621,12 @@ public class consentmodelItemProviderAdapterFactory extends consentmodelAdapterF
 			dataStateLabelTypeItemProvider.dispose();
 		if (dataStateLabelItemProvider != null)
 			dataStateLabelItemProvider.dispose();
+		if (dataContextLabelTypeItemProvider != null)
+			dataContextLabelTypeItemProvider.dispose();
+		if (dataContextLabelItemProvider != null)
+			dataContextLabelItemProvider.dispose();
+		if (dataContextItemProvider != null)
+			dataContextItemProvider.dispose();
 	}
 
 }

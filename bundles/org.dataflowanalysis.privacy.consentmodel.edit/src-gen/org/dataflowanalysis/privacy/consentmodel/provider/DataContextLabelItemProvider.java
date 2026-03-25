@@ -5,7 +5,9 @@ package org.dataflowanalysis.privacy.consentmodel.provider;
 import java.util.Collection;
 import java.util.List;
 
-import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
+import org.dataflowanalysis.dfd.datadictionary.provider.AbstractLabelItemProvider;
+
+import org.dataflowanalysis.privacy.consentmodel.DataContextLabel;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
 
@@ -19,22 +21,20 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
-
 /**
- * This is the item provider adapter for a {@link org.dataflowanalysis.privacy.consentmodel.ConsentModel} object.
+ * This is the item provider adapter for a {@link org.dataflowanalysis.privacy.consentmodel.DataContextLabel} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ConsentModelItemProvider extends EntityItemProvider {
+public class DataContextLabelItemProvider extends AbstractLabelItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConsentModelItemProvider(AdapterFactory adapterFactory) {
+	public DataContextLabelItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -65,11 +65,7 @@ public class ConsentModelItemProvider extends EntityItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(consentmodelPackage.Literals.CONSENT_MODEL__ROLE_LABEL_TYPE);
-			childrenFeatures.add(consentmodelPackage.Literals.CONSENT_MODEL__CONSENT_LABEL_TYPE);
-			childrenFeatures.add(consentmodelPackage.Literals.CONSENT_MODEL__DATA_ITEM_LABEL_TYPE);
-			childrenFeatures.add(consentmodelPackage.Literals.CONSENT_MODEL__DATA_STATE_LABEL_TYPE);
-			childrenFeatures.add(consentmodelPackage.Literals.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE);
+			childrenFeatures.add(consentmodelPackage.Literals.DATA_CONTEXT_LABEL__DATA_CONTEXT);
 		}
 		return childrenFeatures;
 	}
@@ -88,14 +84,14 @@ public class ConsentModelItemProvider extends EntityItemProvider {
 	}
 
 	/**
-	 * This returns ConsentModel.gif.
+	 * This returns DataContextLabel.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ConsentModel"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DataContextLabel"));
 	}
 
 	/**
@@ -116,9 +112,9 @@ public class ConsentModelItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ConsentModel) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_ConsentModel_type")
-				: getString("_UI_ConsentModel_type") + " " + label;
+		String label = ((DataContextLabel) object).getEntityName();
+		return label == null || label.length() == 0 ? getString("_UI_DataContextLabel_type")
+				: getString("_UI_DataContextLabel_type") + " " + label;
 	}
 
 	/**
@@ -132,12 +128,8 @@ public class ConsentModelItemProvider extends EntityItemProvider {
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ConsentModel.class)) {
-		case consentmodelPackage.CONSENT_MODEL__ROLE_LABEL_TYPE:
-		case consentmodelPackage.CONSENT_MODEL__CONSENT_LABEL_TYPE:
-		case consentmodelPackage.CONSENT_MODEL__DATA_ITEM_LABEL_TYPE:
-		case consentmodelPackage.CONSENT_MODEL__DATA_STATE_LABEL_TYPE:
-		case consentmodelPackage.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE:
+		switch (notification.getFeatureID(DataContextLabel.class)) {
+		case consentmodelPackage.DATA_CONTEXT_LABEL__DATA_CONTEXT:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -155,21 +147,8 @@ public class ConsentModelItemProvider extends EntityItemProvider {
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(consentmodelPackage.Literals.CONSENT_MODEL__ROLE_LABEL_TYPE,
-				consentmodelFactory.eINSTANCE.createRoleLabelType()));
-
-		newChildDescriptors.add(createChildParameter(consentmodelPackage.Literals.CONSENT_MODEL__CONSENT_LABEL_TYPE,
-				consentmodelFactory.eINSTANCE.createConsentLabelType()));
-
-		newChildDescriptors.add(createChildParameter(consentmodelPackage.Literals.CONSENT_MODEL__DATA_ITEM_LABEL_TYPE,
-				consentmodelFactory.eINSTANCE.createDataItemLabelType()));
-
-		newChildDescriptors.add(createChildParameter(consentmodelPackage.Literals.CONSENT_MODEL__DATA_STATE_LABEL_TYPE,
-				consentmodelFactory.eINSTANCE.createDataStateLabelType()));
-
-		newChildDescriptors
-				.add(createChildParameter(consentmodelPackage.Literals.CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE,
-						consentmodelFactory.eINSTANCE.createDataContextLabelType()));
+		newChildDescriptors.add(createChildParameter(consentmodelPackage.Literals.DATA_CONTEXT_LABEL__DATA_CONTEXT,
+				consentmodelFactory.eINSTANCE.createDataContext()));
 	}
 
 	/**

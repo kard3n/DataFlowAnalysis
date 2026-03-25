@@ -157,6 +157,33 @@ public interface consentmodelFactory extends EFactory {
 	DataStateLabel createDataStateLabel();
 
 	/**
+	 * Returns a new object of class '<em>Data Context Label Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Context Label Type</em>'.
+	 * @generated
+	 */
+	DataContextLabelType createDataContextLabelType();
+
+	/**
+	 * Returns a new object of class '<em>Data Context Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Context Label</em>'.
+	 * @generated
+	 */
+	DataContextLabel createDataContextLabel();
+
+	/**
+	 * Returns a new object of class '<em>Data Context</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Context</em>'.
+	 * @generated
+	 */
+	DataContext createDataContext();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

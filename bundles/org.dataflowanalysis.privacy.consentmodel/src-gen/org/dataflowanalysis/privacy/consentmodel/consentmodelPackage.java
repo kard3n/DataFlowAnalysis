@@ -416,13 +416,22 @@ public interface consentmodelPackage extends EPackage {
 	int CONSENT_MODEL__DATA_STATE_LABEL_TYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Data Context Label Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Consent Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSENT_MODEL_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 4;
+	int CONSENT_MODEL_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Consent Model</em>' class.
@@ -792,13 +801,22 @@ public interface consentmodelPackage extends EPackage {
 	int STATEFUL_ITEM__ITEM = 1;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEFUL_ITEM__CONTEXT = 2;
+
+	/**
 	 * The number of structural features of the '<em>Stateful Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATEFUL_ITEM_FEATURE_COUNT = 2;
+	int STATEFUL_ITEM_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Stateful Item</em>' class.
@@ -918,6 +936,162 @@ public interface consentmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_STATE_LABEL_OPERATION_COUNT = datadictionaryPackage.ABSTRACT_LABEL_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataContextLabelTypeImpl <em>Data Context Label Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.DataContextLabelTypeImpl
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getDataContextLabelType()
+	 * @generated
+	 */
+	int DATA_CONTEXT_LABEL_TYPE = 15;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_LABEL_TYPE__ID = datadictionaryPackage.ABSTRACT_LABEL_TYPE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_LABEL_TYPE__ENTITY_NAME = datadictionaryPackage.ABSTRACT_LABEL_TYPE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_LABEL_TYPE__LABELS = datadictionaryPackage.ABSTRACT_LABEL_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Data Context Label Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_LABEL_TYPE_FEATURE_COUNT = datadictionaryPackage.ABSTRACT_LABEL_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Data Context Label Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_LABEL_TYPE_OPERATION_COUNT = datadictionaryPackage.ABSTRACT_LABEL_TYPE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataContextLabelImpl <em>Data Context Label</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.DataContextLabelImpl
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getDataContextLabel()
+	 * @generated
+	 */
+	int DATA_CONTEXT_LABEL = 16;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_LABEL__ID = datadictionaryPackage.ABSTRACT_LABEL__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_LABEL__ENTITY_NAME = datadictionaryPackage.ABSTRACT_LABEL__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Data Context</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_LABEL__DATA_CONTEXT = datadictionaryPackage.ABSTRACT_LABEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Data Context Label</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_LABEL_FEATURE_COUNT = datadictionaryPackage.ABSTRACT_LABEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Data Context Label</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_LABEL_OPERATION_COUNT = datadictionaryPackage.ABSTRACT_LABEL_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataContextImpl <em>Data Context</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.DataContextImpl
+	 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getDataContext()
+	 * @generated
+	 */
+	int DATA_CONTEXT = 17;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT__ID = IdentifierPackage.ENTITY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT__ENTITY_NAME = IdentifierPackage.ENTITY__ENTITY_NAME;
+
+	/**
+	 * The number of structural features of the '<em>Data Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Data Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONTEXT_OPERATION_COUNT = IdentifierPackage.ENTITY_OPERATION_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.DataItem <em>Data Item</em>}'.
@@ -1101,6 +1275,17 @@ public interface consentmodelPackage extends EPackage {
 	EReference getConsentModel_DataStateLabelType();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataContextLabelType <em>Data Context Label Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Data Context Label Type</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.ConsentModel#getDataContextLabelType()
+	 * @see #getConsentModel()
+	 * @generated
+	 */
+	EReference getConsentModel_DataContextLabelType();
+
+	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.RoleLabelType <em>Role Label Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1259,6 +1444,17 @@ public interface consentmodelPackage extends EPackage {
 	EReference getStatefulItem_Item();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.dataflowanalysis.privacy.consentmodel.StatefulItem#getContext <em>Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Context</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.StatefulItem#getContext()
+	 * @see #getStatefulItem()
+	 * @generated
+	 */
+	EReference getStatefulItem_Context();
+
+	/**
 	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.DataStateLabelType <em>Data State Label Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1299,6 +1495,58 @@ public interface consentmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDataStateLabel_DataState();
+
+	/**
+	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.DataContextLabelType <em>Data Context Label Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Context Label Type</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataContextLabelType
+	 * @generated
+	 */
+	EClass getDataContextLabelType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.dataflowanalysis.privacy.consentmodel.DataContextLabelType#getLabels <em>Labels</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Labels</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataContextLabelType#getLabels()
+	 * @see #getDataContextLabelType()
+	 * @generated
+	 */
+	EReference getDataContextLabelType_Labels();
+
+	/**
+	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.DataContextLabel <em>Data Context Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Context Label</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataContextLabel
+	 * @generated
+	 */
+	EClass getDataContextLabel();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.dataflowanalysis.privacy.consentmodel.DataContextLabel#getDataContext <em>Data Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Data Context</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataContextLabel#getDataContext()
+	 * @see #getDataContextLabel()
+	 * @generated
+	 */
+	EReference getDataContextLabel_DataContext();
+
+	/**
+	 * Returns the meta object for class '{@link org.dataflowanalysis.privacy.consentmodel.DataContext <em>Data Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Context</em>'.
+	 * @see org.dataflowanalysis.privacy.consentmodel.DataContext
+	 * @generated
+	 */
+	EClass getDataContext();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1472,6 +1720,14 @@ public interface consentmodelPackage extends EPackage {
 		EReference CONSENT_MODEL__DATA_STATE_LABEL_TYPE = eINSTANCE.getConsentModel_DataStateLabelType();
 
 		/**
+		 * The meta object literal for the '<em><b>Data Context Label Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSENT_MODEL__DATA_CONTEXT_LABEL_TYPE = eINSTANCE.getConsentModel_DataContextLabelType();
+
+		/**
 		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.RoleLabelTypeImpl <em>Role Label Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1606,6 +1862,14 @@ public interface consentmodelPackage extends EPackage {
 		EReference STATEFUL_ITEM__ITEM = eINSTANCE.getStatefulItem_Item();
 
 		/**
+		 * The meta object literal for the '<em><b>Context</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATEFUL_ITEM__CONTEXT = eINSTANCE.getStatefulItem_Context();
+
+		/**
 		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataStateLabelTypeImpl <em>Data State Label Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1640,6 +1904,52 @@ public interface consentmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DATA_STATE_LABEL__DATA_STATE = eINSTANCE.getDataStateLabel_DataState();
+
+		/**
+		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataContextLabelTypeImpl <em>Data Context Label Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.DataContextLabelTypeImpl
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getDataContextLabelType()
+		 * @generated
+		 */
+		EClass DATA_CONTEXT_LABEL_TYPE = eINSTANCE.getDataContextLabelType();
+
+		/**
+		 * The meta object literal for the '<em><b>Labels</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_CONTEXT_LABEL_TYPE__LABELS = eINSTANCE.getDataContextLabelType_Labels();
+
+		/**
+		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataContextLabelImpl <em>Data Context Label</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.DataContextLabelImpl
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getDataContextLabel()
+		 * @generated
+		 */
+		EClass DATA_CONTEXT_LABEL = eINSTANCE.getDataContextLabel();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Context</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_CONTEXT_LABEL__DATA_CONTEXT = eINSTANCE.getDataContextLabel_DataContext();
+
+		/**
+		 * The meta object literal for the '{@link org.dataflowanalysis.privacy.consentmodel.impl.DataContextImpl <em>Data Context</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.DataContextImpl
+		 * @see org.dataflowanalysis.privacy.consentmodel.impl.consentmodelPackageImpl#getDataContext()
+		 * @generated
+		 */
+		EClass DATA_CONTEXT = eINSTANCE.getDataContext();
 
 	}
 

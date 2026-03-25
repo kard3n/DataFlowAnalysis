@@ -96,27 +96,29 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 				// Make a list of all labels that should be added to each data item for the
 				// current consent combination
-				ArrayList<AbstractLabel> labelsToAdd = new ArrayList<>(this.consentModel.getConsentLabelType()
+				ArrayList<AbstractLabel> consentLabelsToAdd = new ArrayList<>(this.consentModel.getConsentLabelType()
 						.getLabels().stream().filter(label -> combination.contains(label.getConsentOption()))
 						.map(label -> (AbstractLabel) label).toList());
-				labelsToAdd.add((AbstractLabel) roleLabel);
+				//labelsToAdd.add((AbstractLabel) roleLabel);
 
-				// Add new labels to the Assignment behaviors of source nodes
+				// Adapt nodes with the labels
 				clonedSources.forEach(source -> {
 					source.getBehavior().getAssignment().forEach(assignment -> {
+						// Add new labels to the Assignment behaviors of source nodes
 						if (assignment instanceof Assignment) {
-							((Assignment) assignment).getOutputLabels().addAll(labelsToAdd);
+							((Assignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
+							((Assignment) assignment).getOutputLabels().add(roleLabel);
 						}
-					});
-				});
-				
-				// Set assignments need to also set user data -> add all user labels to it
-				clonedDiagram.getNodes().forEach(node -> {
-					node.getBehavior().getAssignment().forEach(assignment -> {
+						
+						// Set assignments need to also set user data -> add all user labels to it
 						if (assignment instanceof SetAssignment) {
-							((SetAssignment) assignment).getOutputLabels().addAll(labelsToAdd);
+							((SetAssignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
+							((SetAssignment) assignment).getOutputLabels().add(roleLabel);
 						}
 					});
+					
+					// Add consent labels to the node's properties
+					source.getProperties().addAll(consentLabelsToAdd);
 				});
 
 				// Compute and add new DFDs.

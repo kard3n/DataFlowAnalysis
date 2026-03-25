@@ -50,12 +50,20 @@ public class TransposeFinderTest {
 
 		assertEquals(4, flowGraphs.size());
 
+		boolean sourceWithConsentOptionFound = false;
 		for (var fg : flowGraphs) {
-			fg.getVertices().forEach(vert -> {
+			for (var vert : fg.getVertices()) {
+				logger.info(((DFDVertex) vert).getName());
+				if (((DFDVertex) vert).getName().equals("source") && vert.getAllVertexCharacteristics().stream()
+						.filter(it -> it.getValueName().equals("BasicConsentLabel")).count() > 0) {
+					sourceWithConsentOptionFound = true;
+				}
 				logger.debug("Vert " + ((DFDVertex) vert).getName() + "  char: " + vert
 						.getAllIncomingDataCharacteristics().stream().map(i -> i.getAllCharacteristics()).toList());
-			});
+			}
 		}
+
+		assertTrue(sourceWithConsentOptionFound);
 
 		List<Set<String>> expectedIncoming = new ArrayList<>(
 				List.of(Set.of("exampleLabel", "RoleLabel"), Set.of("exampleLabel", "BasicConsentLabel", "RoleLabel"),

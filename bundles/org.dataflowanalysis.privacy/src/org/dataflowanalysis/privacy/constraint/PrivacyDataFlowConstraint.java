@@ -41,7 +41,7 @@ public class PrivacyDataFlowConstraint {
 	 * multiple context sets: when state sets are joined, the context is maintained
 	 * separate
 	 */
-	public record ItemInformation(Set<DataState> state, List<Set<DataContext>> context) {
+	public record ItemInformation(Set<DataState> state, Set<Set<DataContext>> context) {
 		/**
 		 * Creates a shallow clone of the input
 		 * 
@@ -50,7 +50,7 @@ public class PrivacyDataFlowConstraint {
 		 */
 		public ItemInformation cloneShallow() {
 			return new ItemInformation(new HashSet<>(this.state),
-					new LinkedList<>(this.context.stream().map(set -> new HashSet<>(set)).toList()));
+					new HashSet<>(this.context.stream().map(set -> new HashSet<>(set)).toList()));
 		}
 	}
 
@@ -247,7 +247,7 @@ public class PrivacyDataFlowConstraint {
 
 			dataItems.forEach(item -> {
 				itemToStates.computeIfAbsent(item, k -> new LinkedList<>())
-						.add(new ItemInformation(new HashSet<>(dataStates), List.of(new HashSet<>(dataContexts))));
+						.add(new ItemInformation(new HashSet<>(dataStates), Set.of(new HashSet<>(dataContexts))));
 			});
 		}
 
@@ -411,7 +411,7 @@ public class PrivacyDataFlowConstraint {
 
 		for (var entry : input.entrySet()) {
 			if (entry.getValue().size() == 0) {
-				startingResult.put(entry.getKey(), new ItemInformation(new HashSet<>(), new LinkedList<>()));
+				startingResult.put(entry.getKey(), new ItemInformation(new HashSet<>(), new HashSet<>()));
 			} else if (entry.getValue().size() == 1) {
 				startingResult.put(entry.getKey(), entry.getValue().get(0));
 			} else {
@@ -485,8 +485,16 @@ public class PrivacyDataFlowConstraint {
 		if (combinationMembersOfItem.size() == 0)
 			return false;
 		for (var member : combinationMembersOfItem) {
-			if (itemInfo.state.containsAll(member.getState()) && itemInfo.context.stream()
-					.filter(con -> con.containsAll(member.getContext())).count() == itemInfo.context.size())
+
+			long numCompatibleContextSets = itemInfo.context.stream()
+					.filter(con -> con.containsAll(member.getContext())).count();
+			// Check that for every item:
+			// * Its states contain all defined by the UDC
+			// * Every context set is a subset of the context set of the UDC
+			// * If a context is defined by the UDC, then at least one of the item's context
+			// sets is compatible
+			if (itemInfo.state.containsAll(member.getState()) && numCompatibleContextSets == itemInfo.context.size()
+					&& numCompatibleContextSets >= Math.min(1, member.getContext().size()))
 				return true;
 		}
 		return false;
@@ -633,8 +641,11 @@ public class PrivacyDataFlowConstraint {
 	 */
 	public static String itemInformationToString(HashMap<DataItem, ItemInformation> input) {
 		return input.entrySet().stream()
-				.map(entry -> entry.getKey().getEntityName() + ":"
-						+ entry.getValue().state.stream().map(state -> state.getEntityName()).toList())
+				.map(entry -> entry.getKey().getEntityName() + ": {state: {"
+						+ entry.getValue().state.stream().map(state -> state.getEntityName()).toList() + "}, context: {"
+						+ entry.getValue().context.stream()
+								.map(contl -> contl.stream().map(cont -> cont.getEntityName()).toList()).toList()
+						+ "}}")
 				.toList().toString();
 	}
 
@@ -642,16 +653,12 @@ public class PrivacyDataFlowConstraint {
 	 * Converts a consent option to a human-readable form
 	 */
 	public static String consentOptionToString(ConsentOption input) {
-		return "\n"
-				+ input.getEntityName() + ":\n\tAllowsFor: " + input
-						.getAllowsFor().stream().map(
-								af -> af.getEntityName()
-										+ ":" + af
-												.getMembers().stream().map(
-														member -> member.getItem().getEntityName() + ":"
-																+ member.getState().stream()
-																		.map(state -> state.getEntityName()).toList())
-												.toList())
-						.toList();
+		return "\n" + input.getEntityName() + ":\n\tAllowsFor: " + input.getAllowsFor().stream().map(af -> af
+				.getEntityName()
+				+ ":"
+				+ af.getMembers().stream().map(member -> member.getItem().getEntityName() + ": {state: {"
+						+ member.getState().stream().map(state -> state.getEntityName()).toList() + "}, context: {"
+						+ member.getContext().stream().map(contl -> contl.getEntityName()).toList() + "}}").toList())
+				.toList();
 	}
 }

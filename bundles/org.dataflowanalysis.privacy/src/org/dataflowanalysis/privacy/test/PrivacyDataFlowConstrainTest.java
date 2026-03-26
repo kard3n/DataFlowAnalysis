@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,6 +34,7 @@ import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
 import org.dataflowanalysis.privacy.constraint.PrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
+import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint.ItemInformation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -135,22 +137,32 @@ public class PrivacyDataFlowConstrainTest {
 
 	@Test
 	public void testCalculateItemToDataStateCombinations() {
-		HashMap<DataItem, List<Set<DataState>>> input = new HashMap<>();
+		HashMap<DataItem, List<ItemInformation>> input = new HashMap<>();
 		input.put(dataItemOne, List.of());
-		input.put(dataItemTwo, List.of(Set.of(dataStateOne), Set.of(dataStateTwo)));
-		input.put(dataItemThree, List.of(Set.of(dataStateTwo), Set.of(dataStateThree)));
-		input.put(dataItemFour, List.of(Set.of(dataStateOne)));
+		input.put(dataItemTwo, List.of(new ItemInformation(Set.of(dataStateOne), List.of()),
+				new ItemInformation(Set.of(dataStateTwo), List.of())));
+		input.put(dataItemThree, List.of(new ItemInformation(Set.of(dataStateTwo), List.of()),
+				new ItemInformation(Set.of(dataStateThree), List.of())));
+		input.put(dataItemFour, List.of(new ItemInformation(Set.of(dataStateOne), List.of())));
 
 		var result = PrivacyDataFlowConstraint.calculateItemToDataStateCombinations(input);
-		assertTrue(result.contains(Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of(dataStateOne), dataItemThree,
-				Set.of(dataStateTwo), dataItemFour, Set.of(dataStateOne))));
-		assertTrue(result.contains(Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of(dataStateOne), dataItemThree,
-				Set.of(dataStateThree), dataItemFour, Set.of(dataStateOne))));
+		assertTrue(result.contains(Map.of(dataItemOne, new ItemInformation(Set.of(), List.of()), dataItemTwo,
+				new ItemInformation(Set.of(dataStateOne), List.of()), dataItemThree,
+				new ItemInformation(Set.of(dataStateTwo), List.of()), dataItemFour,
+				new ItemInformation(Set.of(dataStateOne), List.of()))));
+		assertTrue(result.contains(Map.of(dataItemOne, new ItemInformation(Set.of(), List.of()), dataItemTwo,
+				new ItemInformation(Set.of(dataStateOne), List.of()), dataItemThree,
+				new ItemInformation(Set.of(dataStateThree), List.of()), dataItemFour,
+				new ItemInformation(Set.of(dataStateOne), List.of()))));
 
-		assertTrue(result.contains(Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of(dataStateTwo), dataItemThree,
-				Set.of(dataStateTwo), dataItemFour, Set.of(dataStateOne))));
-		assertTrue(result.contains(Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of(dataStateTwo), dataItemThree,
-				Set.of(dataStateThree), dataItemFour, Set.of(dataStateOne))));
+		assertTrue(result.contains(Map.of(dataItemOne, new ItemInformation(Set.of(), List.of()), dataItemTwo,
+				new ItemInformation(Set.of(dataStateTwo), List.of()), dataItemThree,
+				new ItemInformation(Set.of(dataStateTwo), List.of()), dataItemFour,
+				new ItemInformation(Set.of(dataStateOne), List.of()))));
+		assertTrue(result.contains(Map.of(dataItemOne, new ItemInformation(Set.of(), List.of()), dataItemTwo,
+				new ItemInformation(Set.of(dataStateTwo), List.of()), dataItemThree,
+				new ItemInformation(Set.of(dataStateThree), List.of()), dataItemFour,
+				new ItemInformation(Set.of(dataStateOne), List.of()))));
 
 		/*
 		 * for (var combination : result) {
@@ -199,18 +211,21 @@ public class PrivacyDataFlowConstrainTest {
 	public void testReduceDataStateSets() {
 		// Scenario one: reduction can be done immediately for two sets, third does not
 		// have an overlap with either (but the data state is relatable to the others)
-		List<Set<DataState>> states = List.of(Set.of(dataStateOne, dataStateTwo), Set.of(dataStateTwo, dataStateThree),
-				Set.of(dataStateFour));
-		assertEquals(List.of(Set.of()), PrivacyDataFlowConstraint.reduceDataStateSets(states));
+		List<ItemInformation> states = List.of(new ItemInformation(Set.of(dataStateOne, dataStateTwo), List.of()),
+				new ItemInformation(Set.of(dataStateTwo, dataStateThree), List.of()),
+				new ItemInformation(Set.of(dataStateFour), List.of()));
+		assertEquals(List.of(new ItemInformation(Set.of(), List.of())), PrivacyDataFlowConstraint.reduceDataStateSets(states));
 
 		// Scenario two: Two sets have an overlap of more than one element
-		states = List.of(Set.of(dataStateOne, dataStateTwo), Set.of(dataStateTwo, dataStateOne, dataStateThree));
-		assertEquals(List.of(Set.of(dataStateOne, dataStateTwo)),
+		states = List.of(new ItemInformation(Set.of(dataStateOne, dataStateTwo), List.of()),
+				new ItemInformation(Set.of(dataStateTwo, dataStateOne, dataStateThree), List.of()));
+		assertEquals(List.of(new ItemInformation(Set.of(dataStateOne, dataStateTwo), List.of())),
 				PrivacyDataFlowConstraint.reduceDataStateSets(states));
 
 		// Scenario three: there is overlap, but both sets have a data state exclusive
 		// to one from the other
-		states = List.of(Set.of(dataStateOne, dataStateTwo), Set.of(dataStateTwo, dataStateOne, dataStateThree));
+		states = List.of(new ItemInformation(Set.of(dataStateOne, dataStateTwo), List.of()),
+				new ItemInformation(Set.of(dataStateTwo, dataStateOne, dataStateThree), List.of()));
 		dataStateThree.getNotRelatableWith().add(dataStateOne);
 		dataStateOne.getNotRelatableWith().add(dataStateThree);
 		assertEquals(states, PrivacyDataFlowConstraint.reduceDataStateSets(states));
@@ -219,10 +234,11 @@ public class PrivacyDataFlowConstrainTest {
 		// one from the other.
 		// A third set can be used to remove one of the states exclusive to the other
 		// from one of the sets, making intersection possible
-		states = List.of(Set.of(dataStateOne, dataStateTwo), Set.of(dataStateTwo, dataStateOne, dataStateThree),
-				Set.of(dataStateTwo, dataStateFour));
+		states = List.of(new ItemInformation(Set.of(dataStateOne, dataStateTwo), List.of()),
+				new ItemInformation(Set.of(dataStateTwo, dataStateOne, dataStateThree), List.of()),
+				new ItemInformation(Set.of(dataStateTwo, dataStateFour), List.of()));
 
-		assertEquals(List.of(Set.of(dataStateTwo)), PrivacyDataFlowConstraint.reduceDataStateSets(states));
+		assertEquals(List.of(new ItemInformation(Set.of(dataStateTwo), List.of())), PrivacyDataFlowConstraint.reduceDataStateSets(states));
 
 	}
 
@@ -289,8 +305,6 @@ public class PrivacyDataFlowConstrainTest {
 				PrivacyDataFlowConstraint.groupIncomingCharacteristicsByPin(incomingCharacteristics));
 	}
 
-	// TODO test findViolations
-
 	@Test
 	public void testCombinationAllowsItem() {
 		UserDataCombination combination = consentmodelFactory.eINSTANCE.createUserDataCombination();
@@ -300,19 +314,21 @@ public class PrivacyDataFlowConstrainTest {
 		combination.getMembers().add(itemOne);
 		// Scenario one: combination allows for the item
 		assertTrue(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
-				Set.of(dataStateOne, dataStateTwo)));
+				new ItemInformation(Set.of(dataStateOne, dataStateTwo), List.of())));
 		// Scenario two: the passed item doesn't have the required state
-		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne, Set.of(dataStateTwo)));
+		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
+				new ItemInformation(Set.of(dataStateTwo), List.of())));
 		// Scenario three: the passed item lacks one of the required states
 		itemOne.getState().add(dataStateTwo);
-		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne, Set.of(dataStateOne)));
+		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
+				new ItemInformation(Set.of(dataStateOne), List.of())));
 	}
 
 	@Test
 	public void testCombinationAllowedByConsentOptionsNoStateNonAllowedItem() {
 		// Passed combination (received data)
-		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>(
-				Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of()));
+		HashMap<DataItem, ItemInformation> dataCombinationOne = new HashMap<>(Map.of(dataItemOne,
+				new ItemInformation(Set.of(), List.of()), dataItemTwo, new ItemInformation(Set.of(), List.of())));
 		// Consent combination
 		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
 		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
@@ -331,8 +347,8 @@ public class PrivacyDataFlowConstrainTest {
 	@Test
 	public void testCombinationAllowedByConsentOptionsTwoNoStateItemsAllowed() {
 		// Passed combination (received data)
-		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>(
-				Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of()));
+		HashMap<DataItem, ItemInformation> dataCombinationOne = new HashMap<>(Map.of(dataItemOne,
+				new ItemInformation(Set.of(), List.of()), dataItemTwo, new ItemInformation(Set.of(), List.of())));
 		// Consent combination
 		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
 		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
@@ -353,8 +369,8 @@ public class PrivacyDataFlowConstrainTest {
 	@Test
 	public void testCombinationAllowedByConsentOptionsStateIncorrect() {
 		// Passed combination (received data)
-		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>(
-				Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of()));
+		HashMap<DataItem, ItemInformation> dataCombinationOne = new HashMap<>(Map.of(dataItemOne,
+				new ItemInformation(Set.of(), List.of()), dataItemTwo, new ItemInformation(Set.of(), List.of())));
 		// Consent combination
 		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
 		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
@@ -376,8 +392,8 @@ public class PrivacyDataFlowConstrainTest {
 	@Test
 	public void testCombinationAllowedByConsentOptionsStateAdditionalButCorrect() {
 		// Passed combination (received data)
-		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>(
-				Map.of(dataItemOne, Set.of(), dataItemTwo, Set.of()));
+		HashMap<DataItem, ItemInformation> dataCombinationOne = new HashMap<>(Map.of(dataItemOne,
+				new ItemInformation(Set.of(), List.of()), dataItemTwo, new ItemInformation(Set.of(), List.of())));
 		// Consent combination
 		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
 		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
@@ -394,7 +410,8 @@ public class PrivacyDataFlowConstrainTest {
 		// Scenario 4: passed item has more states than required by the consent option.
 		// Consent option requires two states simultaneously
 		itemOne.getState().add(dataStateTwo);
-		dataCombinationOne.put(dataItemOne, Set.of(dataStateOne, dataStateTwo, dataStateThree));
+		dataCombinationOne.put(dataItemOne,
+				new ItemInformation(Set.of(dataStateOne, dataStateTwo, dataStateThree), List.of()));
 		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
 				List.of(consentOption)));
 	}
@@ -402,7 +419,7 @@ public class PrivacyDataFlowConstrainTest {
 	@Test
 	public void testEmptyCombinationAllowedByConsentOptions() {
 		// Passed combination (received data)
-		HashMap<DataItem, Set<DataState>> dataCombinationOne = new HashMap<>();
+		HashMap<DataItem, ItemInformation> dataCombinationOne = new HashMap<>();
 		// Consent combination
 		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
 		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
@@ -413,7 +430,8 @@ public class PrivacyDataFlowConstrainTest {
 
 		// Scenario The passed item combination is empty
 		itemOne.getState().add(dataStateTwo);
-		dataCombinationOne.put(dataItemOne, Set.of(dataStateOne, dataStateTwo, dataStateThree));
+		dataCombinationOne.put(dataItemOne,
+				new ItemInformation(Set.of(dataStateOne, dataStateTwo, dataStateThree), List.of()));
 		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
 				List.of(consentOption)));
 	}
@@ -507,28 +525,33 @@ public class PrivacyDataFlowConstrainTest {
 
 	@Test
 	public void testUniteItemTuples() {
-		Map<DataItem, Set<DataState>> mapOne = new HashMap<>(
-				Map.of(this.dataItemOne, new HashSet<>(), this.dataItemTwo, new HashSet<>()));
-		Map<DataItem, Set<DataState>> mapTwo = new HashMap<>(
-				Map.of(this.dataItemTwo, new HashSet<>(), this.dataItemThree, new HashSet<>()));
+		Map<DataItem, ItemInformation> mapOne = new HashMap<>(
+				Map.of(this.dataItemOne, new ItemInformation(new HashSet<>(), new LinkedList<>()), this.dataItemTwo,
+						new ItemInformation(new HashSet<>(), new LinkedList<>())));
+		Map<DataItem, ItemInformation> mapTwo = new HashMap<>(
+				Map.of(this.dataItemTwo, new ItemInformation(new HashSet<>(), new LinkedList<>()), this.dataItemThree,
+						new ItemInformation(new HashSet<>(), new LinkedList<>())));
 
 		logger.debug("Result: "
 				+ PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo)))
 						.get(0).keySet().stream().map(item -> item.getEntityName()).toList());
 		// Scenario one: no state
 		assertEquals(
-				List.of(Map.of(this.dataItemOne, Set.of(), this.dataItemTwo, Set.of(), this.dataItemThree, Set.of())),
+				List.of(Map.of(this.dataItemOne, new ItemInformation(Set.of(), List.of()), this.dataItemTwo,
+						new ItemInformation(Set.of(), List.of()), this.dataItemThree,
+						new ItemInformation(Set.of(), List.of()))),
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
 
 		// Scenario two: state, but no incompatibilities
-		mapOne.get(this.dataItemTwo).add(this.dataStateOne);
-		mapOne.get(this.dataItemTwo).add(this.dataStateTwo);
-		mapTwo.get(this.dataItemTwo).add(this.dataStateOne);
-		mapTwo.get(this.dataItemTwo).add(this.dataStateThree);
+		mapOne.get(this.dataItemTwo).state().add(this.dataStateOne);
+		mapOne.get(this.dataItemTwo).state().add(this.dataStateTwo);
+		mapTwo.get(this.dataItemTwo).state().add(this.dataStateOne);
+		mapTwo.get(this.dataItemTwo).state().add(this.dataStateThree);
 
 		assertEquals(
-				List.of(Map.of(this.dataItemOne, Set.of(), this.dataItemTwo, Set.of(this.dataStateOne),
-						this.dataItemThree, Set.of())),
+				List.of(Map.of(this.dataItemOne, new ItemInformation(Set.of(), List.of()), this.dataItemTwo,
+						new ItemInformation(Set.of(this.dataStateOne), List.of()), this.dataItemThree,
+						new ItemInformation(Set.of(), List.of()))),
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
 
 		// Scenario three: non-relatability resulting in the initial two sets, as the
@@ -542,14 +565,16 @@ public class PrivacyDataFlowConstrainTest {
 
 		// Scenario four: non-relatability resulting in two sets, intersection has a
 		// relatable part
-		mapOne.put(dataItemFour, new HashSet<>());
-		mapTwo.put(dataItemFour, new HashSet<>());
+		mapOne.put(dataItemFour, new ItemInformation(new HashSet<>(), new LinkedList<>()));
+		mapTwo.put(dataItemFour, new ItemInformation(new HashSet<>(), new LinkedList<>()));
 
-		assertEquals(List.of(
-				Map.of(this.dataItemOne, Set.of(), this.dataItemTwo, Set.of(this.dataStateOne, this.dataStateTwo),
-						this.dataItemThree, Set.of(), this.dataItemFour, Set.of()),
-				Map.of(this.dataItemOne, Set.of(), this.dataItemTwo, Set.of(this.dataStateOne, this.dataStateThree),
-						this.dataItemThree, Set.of(), this.dataItemFour, Set.of())),
+		assertEquals(List.of(Map.of(this.dataItemOne, new ItemInformation(Set.of(), List.of()), this.dataItemTwo,
+				new ItemInformation(Set.of(this.dataStateOne, this.dataStateTwo), List.of()), this.dataItemThree,
+				new ItemInformation(Set.of(), List.of()), this.dataItemFour, new ItemInformation(Set.of(), List.of())),
+				Map.of(this.dataItemOne, new ItemInformation(Set.of(), List.of()), this.dataItemTwo,
+						new ItemInformation(Set.of(this.dataStateOne, this.dataStateThree), List.of()),
+						this.dataItemThree, new ItemInformation(Set.of(), List.of()), this.dataItemFour,
+						new ItemInformation(Set.of(), List.of()))),
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
 
 	}
@@ -575,8 +600,7 @@ public class PrivacyDataFlowConstrainTest {
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
 		assertEquals(1, violations.size());
 		for (var violation : violations) {
-			assertTrue(violation.message().contains(
-					"information not authorized by its consent options."));
+			assertTrue(violation.message().contains("information not authorized by its consent options."));
 		}
 	}
 
@@ -601,8 +625,7 @@ public class PrivacyDataFlowConstrainTest {
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
 		assertEquals(1, violations.size());
 		for (var violation : violations) {
-			assertTrue(violation.message().contains(
-					"information not authorized by its consent options."));
+			assertTrue(violation.message().contains("information not authorized by its consent options."));
 			assertTrue(violation.message().contains("ItemTwo:[]"));
 		}
 	}

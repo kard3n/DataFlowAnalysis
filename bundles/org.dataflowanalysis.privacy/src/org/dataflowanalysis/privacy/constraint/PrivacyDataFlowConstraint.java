@@ -20,6 +20,8 @@ import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.dfd.dataflowdiagram.Node;
 import org.dataflowanalysis.privacy.consentmodel.ConsentLabel;
 import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
+import org.dataflowanalysis.privacy.consentmodel.DataContext;
+import org.dataflowanalysis.privacy.consentmodel.DataContextLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataItem;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataState;
@@ -32,6 +34,24 @@ public class PrivacyDataFlowConstraint {
 	public static HashSet<PrivacyConstraintViolation> findViolations(FlowGraphCollection flowGraphs,
 			boolean checkNodeLevelInference) {
 		return findViolations(flowGraphs.getTransposeFlowGraphs(), checkNodeLevelInference);
+	}
+
+	/**
+	 * For an item, holds its state and context. A state set can be associated with
+	 * multiple context sets: when state sets are joined, the context is maintained
+	 * separate
+	 */
+	public record ItemInformation(Set<DataState> state, List<Set<DataContext>> context) {
+		/**
+		 * Creates a shallow clone of the input
+		 * 
+		 * @param input
+		 * @return
+		 */
+		public ItemInformation cloneShallow() {
+			return new ItemInformation(new HashSet<>(this.state),
+					new LinkedList<>(this.context.stream().map(set -> new HashSet<>(set)).toList()));
+		}
 	}
 
 	public static HashSet<PrivacyConstraintViolation> findViolations(
@@ -70,7 +90,7 @@ public class PrivacyDataFlowConstraint {
 					.map(label -> label.getConsentOption()).toList();
 
 			// List of all combinations from the pins
-			List<HashMap<DataItem, Set<DataState>>> nodeLevelCombinations = new LinkedList<>();
+			List<HashMap<DataItem, ItemInformation>> nodeLevelCombinations = new LinkedList<>();
 
 			// Evaluate every pin by itself: check that only data from users who have
 			// consented to this node's functionalities reached this pin,
@@ -90,20 +110,20 @@ public class PrivacyDataFlowConstraint {
 				// intersection is not empty.
 				// If two sets contain DataStates that can not be related to each other, those
 				// sets can not be unified
-				var dataItemToDataState = groupDataStateByItem(pin.getValue());
-				dataItemToDataState.keySet().forEach(pinName -> {
-					dataItemToDataState.put(pinName, reduceDataStateSets(dataItemToDataState.get(pinName)));
+				var dataItemToDataState = groupDataInformationByItem(pin.getValue());
+				dataItemToDataState.keySet().forEach(item -> {
+					dataItemToDataState.put(item, reduceDataStateSets(dataItemToDataState.get(item)));
 				});
 
 				var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
 				nodeLevelCombinations.addAll(possibleCombinations);
-				// Check that each of the possible combination is allowed
+				// Check that each of the possible combinations is allowed
 				for (var combination : possibleCombinations) {
 					if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
 						violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
 								+ " has received a data combination in pin " + pin.getKey()
 								+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
-								+ dataCombinatioToString(combination) + "\nConsent options of the vertex: "
+								+ itemInformationToString(combination) + "\nConsent options of the vertex: "
 								+ consentOptions.stream().map(co -> consentOptionToString(co)).toList()));
 					}
 				}
@@ -177,10 +197,11 @@ public class PrivacyDataFlowConstraint {
 		List<ConsentLabel> vertexFunctionalities = extractConsentLabels(vertexCharacteristics);
 		for (var incoming : pinIncomingCharacteristics) {
 			// Check that the incoming labels contain at least one data item
-			if(incoming.stream().filter(i -> ((DFDCharacteristicValue)i).getLabel() instanceof DataItemLabel ).count() == 0) {
+			if (incoming.stream().filter(i -> ((DFDCharacteristicValue) i).getLabel() instanceof DataItemLabel)
+					.count() == 0) {
 				continue;
 			}
-			
+
 			if (!extractConsentLabels(incoming).containsAll(vertexFunctionalities)) {
 				// TODO: maybe include more information such as role, ...
 				violations.add(new PrivacyConstraintViolation(vertexName, "The vertex " + vertexName
@@ -216,15 +237,17 @@ public class PrivacyDataFlowConstraint {
 	 * @param values
 	 * @return
 	 */
-	private static HashMap<DataItem, List<Set<DataState>>> groupDataStateByItem(
+	private static HashMap<DataItem, List<ItemInformation>> groupDataInformationByItem(
 			HashSet<HashSet<CharacteristicValue>> values) {
-		HashMap<DataItem, List<Set<DataState>>> itemToStates = new HashMap<>();
+		HashMap<DataItem, List<ItemInformation>> itemToStates = new HashMap<>();
 		for (var characSet : values) {
 			var dataStates = extractDataStates(characSet);
+			var dataContexts = extractDataContexts(characSet);
 			var dataItems = extractDataItems(characSet);
 
 			dataItems.forEach(item -> {
-				itemToStates.computeIfAbsent(item, k -> new LinkedList<>()).add(new HashSet<>(dataStates));
+				itemToStates.computeIfAbsent(item, k -> new LinkedList<>())
+						.add(new ItemInformation(new HashSet<>(dataStates), List.of(new HashSet<>(dataContexts))));
 			});
 		}
 
@@ -245,6 +268,19 @@ public class PrivacyDataFlowConstraint {
 	}
 
 	/**
+	 * From the given list of CharacteristicValues, extract all DataContexts
+	 * associated with its DataContextLabels
+	 * 
+	 * @param labels list of CharacteristicValue whose DataContexts to extract
+	 * @return A list of DataContexts
+	 */
+	public static List<DataContext> extractDataContexts(Collection<CharacteristicValue> labels) {
+		return labels.stream().map(cv -> ((DFDCharacteristicValue) cv)).filter(cv -> {
+			return cv.getLabel() instanceof DataContextLabel;
+		}).map(cv -> ((DataContextLabel) cv.getLabel()).getDataContext()).toList();
+	}
+
+	/**
 	 * From the given list of CharacteristicValues, extract all DataItems associated
 	 * with its DataItemLabels
 	 * 
@@ -258,22 +294,24 @@ public class PrivacyDataFlowConstraint {
 	}
 
 	/**
-	 * Constructs the largest possible sets of the given data states by creating
-	 * their intersection. If two sets contain a DataState that can not be
-	 * associated to a DataState of the other set, the intersection of those two
-	 * sets can not be created in that iteration as their data can not be related
+	 * Constructs the largest possible sets of the data states of the passed
+	 * ItemInformations by creating their intersection. If two sets contain a
+	 * DataState that can not be associated to a DataState of the other set, the
+	 * intersection of those two sets can not be created in that iteration as their
+	 * data can not be related. The context of the resulting ItemInfos is the
+	 * combined one of those that were combined into it.
 	 * 
 	 * @param states
 	 * @return
 	 */
-	public static List<Set<DataState>> reduceDataStateSets(List<Set<DataState>> states) {
+	public static List<ItemInformation> reduceDataStateSets(List<ItemInformation> info) {
 		// If less than two, we can't do intersections
-		if (states.size() < 2)
-			return states.stream().map(i -> ((Set<DataState>) new HashSet<>(i))).toList();
+		if (info.size() < 2)
+			return info;
 
-		List<Set<DataState>> reducedState = new LinkedList<>();
-		states.forEach(stateList -> {
-			reducedState.add(new HashSet<>(stateList));
+		List<ItemInformation> reducedState = new LinkedList<>();
+		info.forEach(stateList -> {
+			reducedState.add(stateList.cloneShallow());
 		});
 
 		boolean stateChanged = true;
@@ -286,18 +324,20 @@ public class PrivacyDataFlowConstraint {
 				// If the intersection is possible, the original sets are removed and the
 				// intersection added
 
-				var stateList = reducedState.get(i);
-				for (var otherStateList : reducedState) {
-					if (stateList == otherStateList)
+				var itemInfo = reducedState.get(i);
+				for (var otherItemInfo : reducedState) {
+					if (itemInfo == otherItemInfo)
 						continue;
-					if (stateSetsCanBeIntersected(stateList, otherStateList)) {
-						var intersection = new HashSet<>(stateList);
-						intersection.retainAll(otherStateList);
-						reducedState.remove(stateList);
-						reducedState.remove(otherStateList);
+					if (stateSetsCanBeIntersected(itemInfo.state, otherItemInfo.state)) {
+						var intersection = new HashSet<>(itemInfo.state);
+						intersection.retainAll(otherItemInfo.state);
+						reducedState.remove(itemInfo);
+						reducedState.remove(otherItemInfo);
 						// Add to the beginning. This set is reduced and therewith more likely to be
 						// able to intersect with other entries
-						reducedState.add(0, intersection);
+						var newContext = itemInfo.context;
+						newContext.addAll(otherItemInfo.context);
+						reducedState.add(0, new ItemInformation(intersection, newContext));
 						stateChanged = true;
 						break;
 					}
@@ -344,45 +384,45 @@ public class PrivacyDataFlowConstraint {
 	}
 
 	/**
-	 * Iteratively computes all possible combinations of Map<DataItem,
-	 * Set<DataState>> for the input
+	 * Iteratively computes all possible combinations of
+	 * {@code Map<DataItem, ItemInformation>} for the input
 	 * 
-	 * @param input A map linking DataItems to their possible DataStates.
-	 * @return A List<HashMap<DataItem, Set<DataState>>>, created recursively
+	 * @param input A map linking DataItems to their possible ItemInformations.
+	 * @return A List<HashMap<DataItem, ItemInformation>>, created recursively
 	 */
-	public static List<HashMap<DataItem, Set<DataState>>> calculateItemToDataStateCombinations(
-			HashMap<DataItem, List<Set<DataState>>> input) {
+	public static List<HashMap<DataItem, ItemInformation>> calculateItemToDataStateCombinations(
+			HashMap<DataItem, List<ItemInformation>> input) {
 		return calculateItemToDataStateCombinations(input, new HashMap<>());
 	}
 
 	/**
 	 * Iteratively computes all possible combinations of Map<DataItem,
-	 * Set<DataState>> for the input
+	 * ItemInformation> for the input
 	 * 
-	 * @param input          A map linking DataItems to their possible DataStates.
-	 *                       Should only include DataItems which have not yet been
-	 *                       added to the startingResult
+	 * @param input          A map linking DataItems to their possible
+	 *                       ItemInformations. Should only include DataItems which
+	 *                       have not yet been added to the startingResult
 	 * @param startingResult The intermediary result from the previous iteration
-	 * @return A List<HashMap<DataItem, Set<DataState>>>, created recursively
+	 * @return A List<HashMap<DataItem, ItemInformation>>, created recursively
 	 */
-	public static List<HashMap<DataItem, Set<DataState>>> calculateItemToDataStateCombinations(
-			HashMap<DataItem, List<Set<DataState>>> input, HashMap<DataItem, Set<DataState>> startingResult) {
-		List<HashMap<DataItem, Set<DataState>>> result = new ArrayList<>();
+	public static List<HashMap<DataItem, ItemInformation>> calculateItemToDataStateCombinations(
+			HashMap<DataItem, List<ItemInformation>> input, HashMap<DataItem, ItemInformation> startingResult) {
+		List<HashMap<DataItem, ItemInformation>> result = new ArrayList<>();
 
 		for (var entry : input.entrySet()) {
 			if (entry.getValue().size() == 0) {
-				startingResult.put(entry.getKey(), new HashSet<>());
+				startingResult.put(entry.getKey(), new ItemInformation(new HashSet<>(), new LinkedList<>()));
 			} else if (entry.getValue().size() == 1) {
 				startingResult.put(entry.getKey(), entry.getValue().get(0));
 			} else {
 				// more than one element
 				for (int i = 0; i < entry.getValue().size(); i++) {
 					@SuppressWarnings("unchecked")
-					var newIn = (HashMap<DataItem, List<Set<DataState>>>) input.clone();
+					var newIn = (HashMap<DataItem, List<ItemInformation>>) input.clone();
 					newIn.remove(entry.getKey()); // Remove current entry. It has been treated by us, should not be
 													// passed to the next list
 					@SuppressWarnings("unchecked")
-					var newStarting = (HashMap<DataItem, Set<DataState>>) startingResult.clone();
+					var newStarting = (HashMap<DataItem, ItemInformation>) startingResult.clone();
 					newStarting.put(entry.getKey(), entry.getValue().get(i));
 					result.addAll(calculateItemToDataStateCombinations(newIn, newStarting));
 				}
@@ -404,7 +444,7 @@ public class PrivacyDataFlowConstraint {
 	 *                           should be compatible with
 	 * @return True is the combination is allowed by the consent options
 	 */
-	public static boolean combinationAllowedByConsentOptions(HashMap<DataItem, Set<DataState>> dataCombination,
+	public static boolean combinationAllowedByConsentOptions(HashMap<DataItem, ItemInformation> dataCombination,
 			List<ConsentOption> nodeConsentOptions) {
 		var consentOptionCopy = (List<ConsentOption>) new LinkedList<>(nodeConsentOptions);
 
@@ -427,23 +467,26 @@ public class PrivacyDataFlowConstraint {
 
 	/**
 	 * Checks that the passed data item is compatible with the data combination.
-	 * This means that it itself must included in the combination, and that the
-	 * combinations list of state for the item must be a sublist of the item's
-	 * states
+	 * This means that it itself must included in the combination, the combination's
+	 * list of states for the item must be a sublist of the item's states and the
+	 * combination's list of contexts must be a subset of all context sets of the
+	 * item.
 	 * 
 	 * @param combination A data combination of the consent model
 	 * @param item        The item to check for
-	 * @param itemState   The state the item has
+	 * @param itemInfo    The information of the item. Contains both state and
+	 *                    context
 	 * @return
 	 */
 	public static boolean combinationAllowsItem(UserDataCombination combination, DataItem item,
-			Set<DataState> itemState) {
+			ItemInformation itemInfo) {
 		var combinationMembersOfItem = combination.getMembers().stream().filter(member -> member.getItem().equals(item))
 				.toList();
 		if (combinationMembersOfItem.size() == 0)
 			return false;
 		for (var member : combinationMembersOfItem) {
-			if (itemState.containsAll(member.getState()))
+			if (itemInfo.state.containsAll(member.getState()) && itemInfo.context.stream()
+					.filter(con -> con.containsAll(member.getContext())).count() == itemInfo.context.size())
 				return true;
 		}
 		return false;
@@ -456,9 +499,9 @@ public class PrivacyDataFlowConstraint {
 	 * @param combinations The input sets
 	 * @return The expanded sets
 	 */
-	public static List<HashMap<DataItem, Set<DataState>>> uniteItemTuples(
-			List<HashMap<DataItem, Set<DataState>>> inputCombinations) {
-		List<HashMap<DataItem, Set<DataState>>> result = new ArrayList<>(inputCombinations);
+	public static List<HashMap<DataItem, ItemInformation>> uniteItemTuples(
+			List<HashMap<DataItem, ItemInformation>> inputCombinations) {
+		List<HashMap<DataItem, ItemInformation>> result = new ArrayList<>(inputCombinations);
 
 		boolean stateChanged = true;
 		while (stateChanged) {
@@ -476,8 +519,9 @@ public class PrivacyDataFlowConstraint {
 						continue; // Empty intersection: sets can't be combined
 
 					// Check which of the items of the intersection cannot be related
-					List<DataItem> nonRelatable = intersection.stream().filter(
-							item -> !stateSetsCanBeIntersected(combinationOne.get(item), combinationTwo.get(item)))
+					List<DataItem> nonRelatable = intersection.stream()
+							.filter(item -> !stateSetsCanBeIntersected(combinationOne.get(item).state,
+									combinationTwo.get(item).state))
 							.toList();
 
 					// If all items of the intersection are unrelatable: cannot do intersection
@@ -487,19 +531,20 @@ public class PrivacyDataFlowConstraint {
 
 					// Create a new base combination, including all items that were both not in the
 					// intersection and are unrelatable
-					HashMap<DataItem, Set<DataState>> baseNewCombination = new HashMap<>();
+					HashMap<DataItem, ItemInformation> baseNewCombination = new HashMap<>();
 					for (var item : combinationOne.entrySet()) {
 						if (!nonRelatable.contains(item.getKey()))
-							baseNewCombination.put(item.getKey(), new HashSet<>(item.getValue()));
+							baseNewCombination.put(item.getKey(), item.getValue().cloneShallow());
 					}
 
 					boolean stateWasReduced = false;
 					for (var item : combinationTwo.entrySet()) {
 						if (!nonRelatable.contains(item.getKey())) {
 							if (!baseNewCombination.containsKey(item.getKey())) {
-								baseNewCombination.put(item.getKey(), new HashSet<>(item.getValue()));
+								baseNewCombination.put(item.getKey(), item.getValue().cloneShallow());
 							} else {
-								if (baseNewCombination.get(item.getKey()).retainAll(item.getValue())) {
+								if (baseNewCombination.get(item.getKey()).state.retainAll(item.getValue().state)) {
+									baseNewCombination.get(item.getKey()).context.addAll(item.getValue().context);
 									stateWasReduced = true;
 								}
 							}
@@ -513,19 +558,19 @@ public class PrivacyDataFlowConstraint {
 						continue;
 					}
 
-					List<HashMap<DataItem, Set<DataState>>> newCombinations = new LinkedList<>();
+					List<HashMap<DataItem, ItemInformation>> newCombinations = new LinkedList<>();
 					newCombinations.add(baseNewCombination);
 
 					// Add non-relatable entries of the intersection to the new combinations
 					// For each one, duplicate the old set: one for item one, and one for item two
 					for (var item : nonRelatable) {
-						List<HashMap<DataItem, Set<DataState>>> secondStateNewCombinations = new LinkedList<>();
+						List<HashMap<DataItem, ItemInformation>> secondStateNewCombinations = new LinkedList<>();
 						// Create copy of new combinations, and add the item with the second state set
 						// to it
 						for (var entry : newCombinations) {
-							HashMap<DataItem, Set<DataState>> newMap = new HashMap<>();
+							HashMap<DataItem, ItemInformation> newMap = new HashMap<>();
 							for (var itemEntry : entry.entrySet()) {
-								newMap.put(itemEntry.getKey(), new HashSet<DataState>(itemEntry.getValue()));
+								newMap.put(itemEntry.getKey(), itemEntry.getValue().cloneShallow());
 							}
 							newMap.put(item, combinationTwo.get(item));
 							secondStateNewCombinations.add(newMap);
@@ -566,7 +611,7 @@ public class PrivacyDataFlowConstraint {
 	 * @return
 	 */
 	public static List<PrivacyConstraintViolation> verifyDataTupleConformance(
-			List<HashMap<DataItem, Set<DataState>>> combinationTuples, List<ConsentOption> nodeConsentOptions,
+			List<HashMap<DataItem, ItemInformation>> combinationTuples, List<ConsentOption> nodeConsentOptions,
 			String vertexName) {
 		List<PrivacyConstraintViolation> detectedViolations = new LinkedList<>();
 
@@ -575,7 +620,7 @@ public class PrivacyDataFlowConstraint {
 				detectedViolations.add(new PrivacyConstraintViolation(vertexName,
 						"The vertex/node \"" + vertexName
 								+ "\" received or could derive information not authorized by its consent options."
-								+ "\n\tDetected combination: " + dataCombinatioToString(combination)
+								+ "\n\tDetected combination: " + itemInformationToString(combination)
 								+ "\n\tVertex consent options: "
 								+ nodeConsentOptions.stream().map(co -> consentOptionToString(co)).toList()));
 			}
@@ -586,9 +631,11 @@ public class PrivacyDataFlowConstraint {
 	/**
 	 * Converts a data combination to a human-readable format
 	 */
-	public static String dataCombinatioToString(HashMap<DataItem, Set<DataState>> input) {
-		return input.entrySet().stream().map(entry -> entry.getKey().getEntityName() + ":"
-				+ entry.getValue().stream().map(state -> state.getEntityName()).toList()).toList().toString();
+	public static String itemInformationToString(HashMap<DataItem, ItemInformation> input) {
+		return input.entrySet().stream()
+				.map(entry -> entry.getKey().getEntityName() + ":"
+						+ entry.getValue().state.stream().map(state -> state.getEntityName()).toList())
+				.toList().toString();
 	}
 
 	/**

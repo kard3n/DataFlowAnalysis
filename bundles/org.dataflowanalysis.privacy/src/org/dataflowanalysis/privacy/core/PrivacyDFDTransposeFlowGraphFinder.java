@@ -92,7 +92,6 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 				copier.copyReferences();
 
 				List<Node> clonedSources = this.getSourceNodes(clonedDiagram.getNodes());
-				List<Node> clonedSinks = this.getSinkNodes(clonedDiagram.getNodes());
 
 				// Make a list of all labels that should be added to each data item for the
 				// current consent combination
@@ -123,7 +122,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 				// Compute and add new DFDs.
 				DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(clonedDictionary, clonedDiagram);
-				transposeFlowGraphs.addAll(finder.findTransposeFlowGraphs(clonedSinks, clonedSources).stream()
+				transposeFlowGraphs.addAll(finder.findTransposeFlowGraphs().stream()
 						.filter(DFDTransposeFlowGraph.class::isInstance).map(DFDTransposeFlowGraph.class::cast)
 						.toList());
 

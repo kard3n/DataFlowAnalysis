@@ -9,6 +9,7 @@ import org.dataflowanalysis.examplemodels.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
 import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
+import org.dataflowanalysis.privacy.core.PrivacyDFDTransposeFlowGraphFinder;
 import org.dataflowanalysis.privacy.test.PrivacyDataFlowConstrainTest;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,7 @@ public class AppleWallet {
 				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
 				.useConsentModel(consentModelPath.toString()).build();
 		analysis.initializeAnalysis();
+		PrivacyDFDTransposeFlowGraphFinder.setAssigmnentAutoConsentOptions(true);
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
 

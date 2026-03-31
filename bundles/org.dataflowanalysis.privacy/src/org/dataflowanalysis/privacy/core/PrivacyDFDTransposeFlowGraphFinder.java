@@ -23,11 +23,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
  */
 // TODO: inherit from DFDTransposeFlowGraphFinder
 public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFinder {
-	private final Logger logger = LoggerManager.getLogger(PrivacyDFDTransposeFlowGraphFinder.class);
+	private static final Logger logger = LoggerManager.getLogger(PrivacyDFDTransposeFlowGraphFinder.class);
 	protected final DataFlowDiagram dataFlowDiagram;
 	protected final ConsentModel consentModel;
 	private boolean hasCycles = false;
 	private final DataDictionary dataDictionary;
+	// If this is set to true, SetAssignments are adapted to always send the user's
+	// chosen consent options and role
+	private static boolean assigmnentAutoConsentOptions;
 
 	public PrivacyDFDTransposeFlowGraphFinder(DFDResourceProvider resourceProvider) {
 		if (!(resourceProvider instanceof PrivacyDFDResourceProvider)) {
@@ -48,6 +51,10 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 		this.consentModel = consentModel;
 	}
 
+	public static void setAssigmnentAutoConsentOptions(boolean value) {
+		assigmnentAutoConsentOptions = value;
+	}
+
 	/**
 	 * Finds all transpose flow graphs in a dataflowdiagram model instance
 	 * 
@@ -55,8 +62,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 */
 	@Override
 	public List<? extends AbstractTransposeFlowGraph> findTransposeFlowGraphs() {
-		return this.findTransposeFlowGraphs(List.of(),
-				List.of());
+		return this.findTransposeFlowGraphs(List.of(), List.of());
 	}
 
 	@Override
@@ -75,13 +81,17 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 			Role role = roleLabel.getRole();
 
 			// Skip the role if no source node with the role exists
-			if (sources.stream().filter(node -> node.getProperties().contains(roleLabel)).count() == 0) continue;
+			if (sources.stream().filter(node -> node.getProperties().contains(roleLabel)).count() == 0)
+				continue;
 
 			// calculate all consent combinations for the current role
 			List<Set<ConsentOption>> combinations = this.calculateRoleConsentOptions(role);
 
 			logger.info("Final amount of consent combinations for role " + role.getEntityName() + " : "
 					+ combinations.size());
+			if(assigmnentAutoConsentOptions) {
+				logger.info("AssigmnentAutoConsentOptions is set to true. All set assignments will also set the user's consent options and role.");
+			}
 
 			// Adapt source nodes
 			combinations.forEach(combination -> {
@@ -98,7 +108,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 				ArrayList<AbstractLabel> consentLabelsToAdd = new ArrayList<>(this.consentModel.getConsentLabelType()
 						.getLabels().stream().filter(label -> combination.contains(label.getConsentOption()))
 						.map(label -> (AbstractLabel) label).toList());
-				//labelsToAdd.add((AbstractLabel) roleLabel);
+				// labelsToAdd.add((AbstractLabel) roleLabel);
 
 				// Adapt nodes with the labels
 				clonedSources.forEach(source -> {
@@ -108,23 +118,38 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 							((Assignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
 							((Assignment) assignment).getOutputLabels().add(roleLabel);
 						}
-						
+
 						// Set assignments need to also set user data -> add all user labels to it
-						if (assignment instanceof SetAssignment) {
-							((SetAssignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
-							((SetAssignment) assignment).getOutputLabels().add(roleLabel);
+						if (!assigmnentAutoConsentOptions) {
+							if (assignment instanceof SetAssignment) {
+								((SetAssignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
+								((SetAssignment) assignment).getOutputLabels().add(roleLabel);
+							}
 						}
+
 					});
-					
+
 					// Add consent labels to the node's properties
 					source.getProperties().addAll(consentLabelsToAdd);
 				});
 
+				if (assigmnentAutoConsentOptions) {
+					for (var node : clonedDiagram.getNodes()) {
+						node.getBehavior().getAssignment().forEach(assignment -> {
+							// Set assignments need to also set user data -> add all user labels to it
+							if (assignment instanceof SetAssignment) {
+								((SetAssignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
+								((SetAssignment) assignment).getOutputLabels().add(roleLabel);
+							}
+						});
+					}
+				}
+
 				// Compute and add new DFDs.
 				DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(clonedDictionary, clonedDiagram);
-				transposeFlowGraphs.addAll(finder.findTransposeFlowGraphs().stream()
-						.filter(DFDTransposeFlowGraph.class::isInstance).map(DFDTransposeFlowGraph.class::cast)
-						.toList());
+				transposeFlowGraphs.addAll(
+						finder.findTransposeFlowGraphs().stream().filter(DFDTransposeFlowGraph.class::isInstance)
+								.map(DFDTransposeFlowGraph.class::cast).toList());
 
 			});
 

@@ -10,11 +10,11 @@
       <consentOption id="_2CttECdpEfG4v88XP06kfw" entityName="PersonalizedRecommendation">
         <allowsFor id="_I7rXICdqEfG4v88XP06kfw">
           <members item="_5Ov9gCdkEfG4v88XP06kfw"/>
-          <members state="_fJ7-gCdpEfG4v88XP06kfw" item="_9nx90CdlEfG4v88XP06kfw"/>
-          <members state="_iYOfcCdpEfG4v88XP06kfw" item="_9nx90CdlEfG4v88XP06kfw"/>
-          <members state="_smaKsCdpEfG4v88XP06kfw" item="_YGRSACdqEfG4v88XP06kfw"/>
-          <members state="_pZp60CdpEfG4v88XP06kfw" item="_YGRSACdqEfG4v88XP06kfw"/>
-          <members state="_smaKsCdpEfG4v88XP06kfw" item="_9nx90CdlEfG4v88XP06kfw"/>
+          <members item="_9nx90CdlEfG4v88XP06kfw" context="_d7VLcCncEfGcV4FxlRu8Rw"/>
+          <members item="_9nx90CdlEfG4v88XP06kfw" context="_ZcV3oCncEfGcV4FxlRu8Rw"/>
+          <members item="_YGRSACdqEfG4v88XP06kfw" context="_axwLYCncEfGcV4FxlRu8Rw"/>
+          <members item="_YGRSACdqEfG4v88XP06kfw" context="_fLUMoCncEfGcV4FxlRu8Rw"/>
+          <members item="_9nx90CdlEfG4v88XP06kfw" context="_axwLYCncEfGcV4FxlRu8Rw"/>
         </allowsFor>
       </consentOption>
     </labels>
@@ -22,9 +22,10 @@
       <consentOption id="_8K1h4CdpEfG4v88XP06kfw" entityName="BasicPersonalizedRecommendation">
         <allowsFor id="_jNv8wCdqEfG4v88XP06kfw">
           <members item="_5Ov9gCdkEfG4v88XP06kfw"/>
-          <members state="_fJ7-gCdpEfG4v88XP06kfw" item="_9nx90CdlEfG4v88XP06kfw"/>
-          <members state="_smaKsCdpEfG4v88XP06kfw" item="_9nx90CdlEfG4v88XP06kfw"/>
-          <members state="_smaKsCdpEfG4v88XP06kfw" item="_YGRSACdqEfG4v88XP06kfw"/>
+          <members item="_9nx90CdlEfG4v88XP06kfw" context="_d7VLcCncEfGcV4FxlRu8Rw"/>
+          <members item="_9nx90CdlEfG4v88XP06kfw" context="_axwLYCncEfGcV4FxlRu8Rw"/>
+          <members item="_YGRSACdqEfG4v88XP06kfw" context="_axwLYCncEfGcV4FxlRu8Rw"/>
+          <members item="_9nx90CdlEfG4v88XP06kfw" context="_X2sgwCniEfGCS4pvGiTYCw"/>
         </allowsFor>
       </consentOption>
     </labels>
@@ -33,8 +34,8 @@
         <allowsFor id="_AVDNoCdsEfG4v88XP06kfw">
           <members item="_2UfL0CdkEfG4v88XP06kfw"/>
           <members item="_7PNZYCdkEfG4v88XP06kfw"/>
-          <members state="_mHtB4CdpEfG4v88XP06kfw" item="_9nx90CdlEfG4v88XP06kfw"/>
-          <members state="_smaKsCdpEfG4v88XP06kfw" item="_YGRSACdqEfG4v88XP06kfw"/>
+          <members item="_9nx90CdlEfG4v88XP06kfw" context="_b6y3ECncEfGcV4FxlRu8Rw"/>
+          <members item="_YGRSACdqEfG4v88XP06kfw" context="_axwLYCncEfGcV4FxlRu8Rw"/>
         </allowsFor>
       </consentOption>
     </labels>
@@ -119,6 +120,9 @@
     <labels id="_nF0h4CdnEfG4v88XP06kfw" entityName="SearchTerm">
       <dataItem id="_YGRSACdqEfG4v88XP06kfw" entityName="SearchTerm"/>
     </labels>
+    <labels id="_aL_nYCnmEfGCS4pvGiTYCw" entityName="NeverAllowed">
+      <dataItem id="_bjeXsCnmEfGCS4pvGiTYCw" entityName="NeverAllowed"/>
+    </labels>
   </dataItemLabelType>
   <dataStateLabelType id="_xf4F8ydnEfG4v88XP06kfw">
     <labels id="_U3rEgCdpEfG4v88XP06kfw" entityName="Anonymized">
@@ -143,4 +147,24 @@
       <dataState id="_smaKsCdpEfG4v88XP06kfw" entityName="Current"/>
     </labels>
   </dataStateLabelType>
+  <dataContextLabelType id="_Jn29JCnaEfGG06ZCYGn4rw" entityName="Context">
+    <labels id="_KvdeYCnaEfGG06ZCYGn4rw" entityName="Viewed">
+      <dataContext id="_ZcV3oCncEfGcV4FxlRu8Rw" entityName="Viewed"/>
+    </labels>
+    <labels id="_NCkwgCnaEfGG06ZCYGn4rw" entityName="Current">
+      <dataContext id="_axwLYCncEfGcV4FxlRu8Rw" entityName="Current"/>
+    </labels>
+    <labels id="_OmmvECnaEfGG06ZCYGn4rw" entityName="Recommended">
+      <dataContext id="_b6y3ECncEfGcV4FxlRu8Rw" entityName="Recommended"/>
+    </labels>
+    <labels id="_Qrv2oCnaEfGG06ZCYGn4rw" entityName="Purchased">
+      <dataContext id="_d7VLcCncEfGcV4FxlRu8Rw" entityName="Purchased"/>
+    </labels>
+    <labels id="_UZc3cCnaEfGG06ZCYGn4rw" entityName="Previous">
+      <dataContext id="_fLUMoCncEfGcV4FxlRu8Rw" entityName="Previous"/>
+    </labels>
+    <labels id="_WiTgsCniEfGCS4pvGiTYCw" entityName="SearchResult">
+      <dataContext id="_X2sgwCniEfGCS4pvGiTYCw" entityName="SearchResult"/>
+    </labels>
+  </dataContextLabelType>
 </consentmodel:ConsentModel>

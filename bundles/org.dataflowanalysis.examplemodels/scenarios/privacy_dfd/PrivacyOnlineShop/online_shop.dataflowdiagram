@@ -64,6 +64,10 @@
     <destinationPin href="online_shop.datadictionary#_XiT-oCeREfGy46PZCQlGfA"/>
     <sourcePin href="online_shop.datadictionary#_cdb00SeREfGy46PZCQlGfA"/>
   </flows>
+  <flows id="_pbXwECnwEfGCS4pvGiTYCw" sourceNode="_wlvKYieSEfGy46PZCQlGfA" destinationNode="_LNVmASeREfGy46PZCQlGfA">
+    <destinationPin href="online_shop.datadictionary#_XiT-oCeREfGy46PZCQlGfA"/>
+    <sourcePin href="online_shop.datadictionary#_5Z-EUSeLEfGy46PZCQlGfA"/>
+  </flows>
   <nodes xsi:type="dataflowdiagram:External" id="_LNVmASeREfGy46PZCQlGfA" entityName="Customer">
     <behavior href="online_shop.datadictionary#_pGKS4SdwEfG4v88XP06kfw"/>
     <properties xsi:type="consentmodel:RoleLabel" href="online_shop.consentmodel#_SSagMCduEfG4v88XP06kfw"/>

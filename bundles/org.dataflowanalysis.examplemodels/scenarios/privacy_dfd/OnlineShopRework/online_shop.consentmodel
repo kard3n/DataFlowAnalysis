@@ -24,6 +24,7 @@
           <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_J5PoECxLEfGY9NwNwqb70Q"/>
           <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_ckQ8wCxLEfGY9NwNwqb70Q"/>
           <members item="_-Oq6gCxOEfGY9NwNwqb70Q" context="_ckQ8wCxLEfGY9NwNwqb70Q"/>
+          <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_gToKcCxLEfGY9NwNwqb70Q"/>
         </allowsFor>
         <allowsFor id="_OqjMMCxREfGY9NwNwqb70Q">
           <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_U_4lUCxLEfGY9NwNwqb70Q"/>
@@ -92,8 +93,8 @@
     <labels id="_a31QICxLEfGY9NwNwqb70Q" entityName="Current">
       <dataContext id="_ckQ8wCxLEfGY9NwNwqb70Q" entityName="Current"/>
     </labels>
-    <labels id="_ez4O8CxLEfGY9NwNwqb70Q" entityName="Searched">
-      <dataContext id="_gToKcCxLEfGY9NwNwqb70Q" entityName="Searched"/>
+    <labels id="_ez4O8CxLEfGY9NwNwqb70Q" entityName="SearchResult">
+      <dataContext id="_gToKcCxLEfGY9NwNwqb70Q" entityName="SearchResult"/>
     </labels>
   </dataContextLabelType>
 </consentmodel:ConsentModel>

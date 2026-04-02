@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <consentmodel:ConsentModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" id="_ZvN3sCxKEfGY9NwNwqb70Q">
+  <roleLabelType id="_rOGwEC5xEfGTosUH5llL5A" entityName="Roles">
+    <labels id="_s3-Q4C5xEfGTosUH5llL5A" entityName="Customer">
+      <role id="_uJjNgC5xEfGTosUH5llL5A" entityName="Customer" requires="_y2xjQCxQEfGY9NwNwqb70Q _VI7-MCxMEfGY9NwNwqb70Q" allows="_gCwOICxREfGY9NwNwqb70Q"/>
+    </labels>
+  </roleLabelType>
   <consentLabelType id="_Qx2CISxMEfGY9NwNwqb70Q" entityName="ConsentOptions">
     <labels id="_S-5IgCxMEfGY9NwNwqb70Q" entityName="UserManagement">
       <consentOption id="_VI7-MCxMEfGY9NwNwqb70Q" entityName="UserManagement">

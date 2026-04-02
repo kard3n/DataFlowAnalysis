@@ -28,7 +28,8 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	protected final ConsentModel consentModel;
 	private boolean hasCycles = false;
 	private final DataDictionary dataDictionary;
-	// If this is set to true, SetAssignments are adapted to always send the user's
+	// If this is set to true, SetAssignments and Assignments are adapted to always
+	// send the user's
 	// chosen consent options and role
 	private static boolean assigmnentAutoConsentOptions;
 
@@ -89,8 +90,9 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 			logger.info("Final amount of consent combinations for role " + role.getEntityName() + " : "
 					+ combinations.size());
-			if(assigmnentAutoConsentOptions) {
-				logger.info("AssigmnentAutoConsentOptions is set to true. All set assignments will also set the user's consent options and role.");
+			if (assigmnentAutoConsentOptions) {
+				logger.info(
+						"AssigmnentAutoConsentOptions is set to true. All set assignments will also set the user's consent options and role.");
 			}
 
 			// Adapt source nodes
@@ -111,16 +113,17 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 				// labelsToAdd.add((AbstractLabel) roleLabel);
 
 				// Adapt nodes with the labels
+
 				clonedSources.forEach(source -> {
 					source.getBehavior().getAssignment().forEach(assignment -> {
-						// Add new labels to the Assignment behaviors of source nodes
-						if (assignment instanceof Assignment) {
-							((Assignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
-							((Assignment) assignment).getOutputLabels().add(roleLabel);
-						}
-
-						// Set assignments need to also set user data -> add all user labels to it
 						if (!assigmnentAutoConsentOptions) {
+							// Add new labels to the Assignment behaviors of source nodes
+							if (assignment instanceof Assignment) {
+								((Assignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
+								((Assignment) assignment).getOutputLabels().add(roleLabel);
+							}
+
+							// Set assignments need to also set user data -> add all user labels to it
 							if (assignment instanceof SetAssignment) {
 								((SetAssignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
 								((SetAssignment) assignment).getOutputLabels().add(roleLabel);
@@ -136,6 +139,11 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 				if (assigmnentAutoConsentOptions) {
 					for (var node : clonedDiagram.getNodes()) {
 						node.getBehavior().getAssignment().forEach(assignment -> {
+							// Add new labels to the Assignment behaviors
+							if (assignment instanceof Assignment) {
+								((Assignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
+								((Assignment) assignment).getOutputLabels().add(roleLabel);
+							}
 							// Set assignments need to also set user data -> add all user labels to it
 							if (assignment instanceof SetAssignment) {
 								((SetAssignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);

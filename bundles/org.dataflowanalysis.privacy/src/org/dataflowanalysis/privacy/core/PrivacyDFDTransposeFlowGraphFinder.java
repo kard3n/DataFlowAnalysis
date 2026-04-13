@@ -86,7 +86,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 				continue;
 
 			// calculate all consent combinations for the current role
-			List<Set<ConsentOption>> combinations = this.calculateRoleConsentOptions(role);
+			Set<Set<ConsentOption>> combinations = this.calculateRoleConsentOptions(role);
 
 			logger.info("Final amount of consent combinations for role " + role.getEntityName() + " : "
 					+ combinations.size());
@@ -166,11 +166,11 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 		return transposeFlowGraphs;
 	}
 
-	protected List<Set<ConsentOption>> calculateRoleConsentOptions(Role role) {
+	protected Set<Set<ConsentOption>> calculateRoleConsentOptions(Role role) {
 		Set<ConsentOption> required = calculateRequiredFunctionalities(role);
 
 		// Calculate all combinations taking into account optional consent options
-		List<Set<ConsentOption>> combinations = new ArrayList<>();
+		Set<Set<ConsentOption>> combinations = new HashSet<>();
 		combinations.add(required);
 		this.createOptionalCombinations(required, combinations, role.getAllows());
 
@@ -188,8 +188,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 *                        created with
 	 */
 	protected void createOptionalCombinations(Set<ConsentOption> startingEntry,
-			List<Set<ConsentOption>> existingEntries, List<ConsentOption> allowed) {
-		// List<Set<ConsentedFunctionality>> result = new ArrayList<>();
+			Set<Set<ConsentOption>> existingEntries, List<ConsentOption> allowed) {
 		allowed.forEach(addition -> {
 			if (!startingEntry.contains(addition) && isCompatible(startingEntry, addition)) {
 				Set<ConsentOption> newCombination = new HashSet<>(startingEntry); // Copy

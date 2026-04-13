@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<consentmodel:ConsentModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" id="_-PnVADS6EfG3Y--YywfPmQ">
+  <roleLabelType id="_ctGLIDS7EfG3Y--YywfPmQ"/>
+  <consentLabelType id="_brp8QTS7EfG3Y--YywfPmQ">
+    <labels id="_zm8foDTaEfGE78d8BwM0hQ" entityName="ConsentLabelOne">
+      <consentOption id="_2HaRQDTaEfGE78d8BwM0hQ" entityName="ConsentOptionOne"/>
+    </labels>
+    <labels id="_4XBjcDTaEfGE78d8BwM0hQ" entityName="ConsentLabelTwo">
+      <consentOption id="_5_8CADTaEfGE78d8BwM0hQ" entityName="ConsentOptionTwo"/>
+    </labels>
+    <labels id="_7ul8MTTaEfGE78d8BwM0hQ" entityName="ConsentLabelThree">
+      <consentOption id="_9OzKsDTaEfGE78d8BwM0hQ" entityName="ConsentOptionThree"/>
+    </labels>
+    <labels id="__BeCMTTaEfGE78d8BwM0hQ" entityName="ConsentLabelFour">
+      <consentOption id="_CCPrkDTbEfGE78d8BwM0hQ" entityName="ConsentOptionFour"/>
+    </labels>
+    <labels id="_EF3JITTbEfGE78d8BwM0hQ" entityName="ConsentLabelFive">
+      <consentOption id="_GXDvsDTbEfGE78d8BwM0hQ" entityName="ConsentOptionFive"/>
+    </labels>
+  </consentLabelType>
+  <dataItemLabelType id="_dlbhUjS7EfG3Y--YywfPmQ" entityName="BaseItemLabelType">
+    <labels id="_i4YBoDS7EfG3Y--YywfPmQ" entityName="BaseItemLabel">
+      <dataItem id="_JJ0jUDS8EfG3Y--YywfPmQ" entityName="BaseItem"/>
+    </labels>
+  </dataItemLabelType>
+  <dataStateLabelType id="_e26XUzS7EfG3Y--YywfPmQ"/>
+  <dataContextLabelType id="_f9tARDS7EfG3Y--YywfPmQ"/>
+</consentmodel:ConsentModel>

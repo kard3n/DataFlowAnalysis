@@ -7,8 +7,10 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
+import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
 import org.dataflowanalysis.dfd.datadictionary.Behavior;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
+import org.dataflowanalysis.dfd.datadictionary.Pin;
 import org.dataflowanalysis.dfd.datadictionary.SetAssignment;
 import org.dataflowanalysis.dfd.datadictionary.datadictionaryFactory;
 import org.dataflowanalysis.dfd.dataflowdiagram.DataFlowDiagram;
@@ -22,6 +24,7 @@ import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabelType;
 import org.dataflowanalysis.privacy.consentmodel.Role;
 import org.dataflowanalysis.privacy.consentmodel.RoleLabel;
+import org.dataflowanalysis.privacy.consentmodel.RoleLabelType;
 import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
 import org.dataflowanalysis.privacy.test.PrivacyDataFlowConstrainTest;
 import org.eclipse.emf.common.util.URI;
@@ -106,6 +109,7 @@ public class PrivacyContractGenerator {
 			int numberSourceNodes, int dataCombinationSize, int dataCombinationOverlap) {
 		var ddFactory = datadictionaryFactory.eINSTANCE;
 		var dfdFactory = dataflowdiagramFactory.eINSTANCE;
+		var cmFactory = consentmodelFactory.eINSTANCE;
 		
 		
 		if (dataCombinationOverlap*2 > dataCombinationSize) {
@@ -131,43 +135,58 @@ public class PrivacyContractGenerator {
 		if(input.cm().getDataItemLabelType().size() < 1) {
 			new RuntimeException("No DataItemLabelType detected.");
 		}
+		DataItemLabelType itemLabelType = input.cm().getDataItemLabelType().get(0);
 		
-		DataItemLabelType labelType = input.cm().getDataItemLabelType().get(0);
-
+		if(input.cm().getRoleLabelType() == null) {
+			new RuntimeException("No RoleItemLabelType detected.");
+		}
+		RoleLabelType  roleLabelType = input.cm().getRoleLabelType();
 		
 		ArrayList<DataItemLabel> overlap = new ArrayList<>();
 		for(int i = 0; i < dataCombinationOverlap; i++) {
-			overlap.add(createUniqueDataItemLabel(labelType));
+			overlap.add(createUniqueDataItemLabel(itemLabelType));
 		}
+		
+		Role defaultRole = cmFactory.createRole();
+		defaultRole.setEntityName("defaultRole");
+		RoleLabel defaultRoleLabel = cmFactory.createRoleLabel();
+		defaultRoleLabel.setEntityName("defaultRoleLabel");
+		defaultRoleLabel.setRole(defaultRole);
+		roleLabelType.getLabels().add(defaultRoleLabel);
 		
 		for(int i = 0; i < numberSourceNodes; i++) {
 			// Create behavior
 			Behavior behavior = ddFactory.createBehavior();
-			behavior.getOutPin().add(sourceOutFlow.getSourcePin());
+			Pin outPin = ddFactory.createPin();
+			behavior.getOutPin().add(outPin);
 			SetAssignment assignment = ddFactory.createSetAssignment();
-			assignment.setOutputPin(sourceOutFlow.getSourcePin());
+			assignment.setOutputPin(outPin);
 			assignment.getOutputLabels().addAll(overlap);
 			overlap.clear();
 			for(int x = 0; x < dataCombinationOverlap; x++) {
-				overlap.add(createUniqueDataItemLabel(labelType));
+				overlap.add(createUniqueDataItemLabel(itemLabelType));
 			}
 			assignment.getOutputLabels().addAll(overlap);
 			while(assignment.getOutputLabels().size() < dataCombinationSize) {
-				assignment.getOutputLabels().add(createUniqueDataItemLabel(labelType));
+				assignment.getOutputLabels().add(createUniqueDataItemLabel(itemLabelType));
 			}
 			
 			// Create node
 			Node newNode = dfdFactory.createExternal();
 			newNode.setEntityName("Node_" + 1);
 			newNode.setBehavior(behavior);
+			newNode.getProperties().add(defaultRoleLabel);
 			
 			//create flow
 			Flow flow = dfdFactory.createFlow();
 			flow.setDestinationNode(sourceOutFlow.getDestinationNode());
 			flow.setDestinationPin(sourceOutFlow.getDestinationPin());
 			flow.setSourceNode(newNode);
-			flow.setSourcePin(sourceOutFlow.getSourcePin());
+			flow.setSourcePin(outPin);
+			
+			input.dd().getBehavior().add(behavior);
 			input.dfd().getFlows().add(flow);
+			input.dfd().getNodes().add(newNode);
 		}
 		
 		

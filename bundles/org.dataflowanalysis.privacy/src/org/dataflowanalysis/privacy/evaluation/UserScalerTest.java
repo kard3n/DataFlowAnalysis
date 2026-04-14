@@ -27,7 +27,7 @@ public class UserScalerTest {
 
 		String outputDir = "scaled_models";
 		String scaledModelNameBase = "scaled_";
-		int numberHeatupRuns = 1; // How many times each scenario should be run before starting the evaluation
+		int numberWarmupRuns = 1; // How many times each scenario should be run before starting the evaluation
 		int numberEvaluationRuns = 5; // How many times each scenario should be ran to determine the result
 		int[] numberUsers = { 1, 100, 1000, 2000, 5000 };
 
@@ -65,12 +65,12 @@ public class UserScalerTest {
 			resultAnalysis[x] = 0;
 			scaledModelName = scaledModelNameBase + currentAmount;
 
-			for (int i = 0; i < numberHeatupRuns + numberEvaluationRuns; i++) {
-				if (i < numberHeatupRuns) {
-					logger.info("Heatup run " + (i + 1) + "/" + numberHeatupRuns + " for size " + currentAmount
+			for (int i = 0; i < numberWarmupRuns + numberEvaluationRuns; i++) {
+				if (i < numberWarmupRuns) {
+					logger.info("Warmup run " + (i + 1) + "/" + numberWarmupRuns + " for size " + currentAmount
 							+ " started.");
 				} else {
-					logger.info("Run " + (i + 1 - numberHeatupRuns) + "/" + numberEvaluationRuns + " for size "
+					logger.info("Run " + (i + 1 - numberWarmupRuns) + "/" + numberEvaluationRuns + " for size "
 							+ currentAmount + " started.");
 				}
 
@@ -94,11 +94,11 @@ public class UserScalerTest {
 				findGraphsTime = endFindGraphs - startFindGraphs;
 				labelPropagationTime = endLabelPropagation - startLabelPropagation;
 				analysisTime = endAnalysis - startAnalysis;
-				if (i < numberHeatupRuns) {
-					logger.info("Heatup run " + (i + 1) + "/" + numberHeatupRuns + " for size " + currentAmount
+				if (i < numberWarmupRuns) {
+					logger.info("Warnup run " + (i + 1) + "/" + numberWarmupRuns + " for size " + currentAmount
 							+ " finished.");
 				} else {
-					logger.info("Run " + (i + 1 - numberHeatupRuns) + "/" + numberEvaluationRuns + " for size "
+					logger.info("Run " + (i + 1 - numberWarmupRuns) + "/" + numberEvaluationRuns + " for size "
 							+ currentAmount + " finished. TFG Find: " + findGraphsTime + ". Label Propagation: "
 							+ labelPropagationTime + ". Analysis: " + analysisTime + ". Violations detected: " + violations.size());
 					// Add runtimes

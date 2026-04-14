@@ -63,7 +63,6 @@ public class PrivacyContractGenerator {
 				newRole.setEntityName(String.valueOf(usersAdded));
 
 				// Add i labels to the role
-				logger.info("Adding " + i + " COs to role " + newRole.getEntityName());
 				for (int coPos = 0; coPos < i; coPos++) {
 					newRole.getAllows().add(consentOptions.get(coPos));
 				}
@@ -72,7 +71,6 @@ public class PrivacyContractGenerator {
 				input.cm().getRoleLabelType().getLabels().add(newRoleLabel);
 				source.getProperties().add(newRoleLabel);
 				usersAdded += numberResultingUsers;
-				logger.info(usersAdded);
 			}
 		}
 

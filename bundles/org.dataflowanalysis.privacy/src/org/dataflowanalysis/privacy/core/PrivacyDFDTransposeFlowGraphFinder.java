@@ -88,7 +88,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 			// calculate all consent combinations for the current role
 			Set<Set<ConsentOption>> combinations = this.calculateRoleConsentOptions(role);
 
-			logger.info("Final amount of consent combinations for role " + role.getEntityName() + " : "
+			logger.debug("Final amount of consent combinations for role " + role.getEntityName() + " : "
 					+ combinations.size());
 			if (assigmnentAutoConsentOptions) {
 				logger.info(

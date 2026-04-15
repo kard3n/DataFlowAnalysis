@@ -14,154 +14,85 @@ import org.dataflowanalysis.analysis.dsl.AnalysisConstraint;
 import org.dataflowanalysis.analysis.dsl.result.DSLResult;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.analysis.utils.StringView;
+import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
+import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
+import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
+import org.dataflowanalysis.privacy.core.PrivacyDFDTransposeFlowGraphFinder;
 
 /**
- * This class is responsible for the interaction with the analysis via a command line interface (CLI)
+ * This class is responsible for the interaction with the analysis via a command
+ * line interface (CLI)
  */
 public class PrivacyDFDAnalysisCLI {
-    private static final Logger logger = LoggerManager.getLogger(PrivacyDFDAnalysisCLI.class);
-    private static final String INPUT_INDICATOR = "> ";
+	private static final Logger logger = LoggerManager.getLogger(PrivacyDFDAnalysisCLI.class);
+	private static final String INPUT_INDICATOR = "> ";
 
-    /**
-     * Main entry point of the privacy dfd analysis command line interface
-     * <p/>
-     * If the program is called without any arguments, the command line interface starts in interactive mode.
-     * <p/>
-     * If the program is called with arguments, the arguments must follow the following format: 1. Path to a
-     * .dataflowdiagram file 2. Path to a .datadictionary file 3. Either a path to a .dfadsl file or a DSL constraint as a
-     * string
-     * @param args Arguments passed to the program via the command line call
-     */
-    public static void main(String[] args) {
-        if (args.length != 0 && args.length != 3) {
-            logger.error("Please provide either no arguments, or a path to a .dataflowdiagram and .datadictionary file!");
-            System.exit(-1);
-        }
-        DFDConfidentialityAnalysis analysis;
-        List<AnalysisConstraint> constraints;
-        if (args.length == 0) {
-            Scanner scanner = new Scanner(System.in);
-            analysis = createAnalysisInteractive(scanner);
-            constraints = createConstraintInteractive(scanner);
-            scanner.close();
-        } else {
-            if (!args[0].endsWith(".dataflowdiagram")) {
-                logger.error("The first argument should be a path to a .dataflowdiagram file");
-                System.exit(-1);
-            }
-            if (!args[1].endsWith(".datadictionary")) {
-                logger.error("The second argument should be a path to a .datadictionary file");
-                System.exit(-1);
-            }
-            analysis = createAnalysis(args[0], args[1]);
-            if (args[2].endsWith(".dfadsl")) {
-                constraints = createConstraintsFromFile(args[2]);
-            } else {
-                constraints = List.of(createConstraint(args[2]));
-            }
-        }
-        analysis.initializeAnalysis();
-        FlowGraphCollection flowGraphs = analysis.findFlowGraphs();
-        flowGraphs.evaluate();
-        for (int i = 0; i < constraints.size(); i++) {
-            AnalysisConstraint constraint = constraints.get(i);
-            List<DSLResult> violations = constraint.findViolations(flowGraphs);
-            for (DSLResult violation : violations) {
-                logger.info("Violation for constraint " + constraint.getName() + ":");
-                logger.info(violation.toString());
-                logger.info("-------------------------");
-            }
-        }
-        System.exit(0);
-    }
+	/**
+	 * Main entry point of the privacy dfd analysis command line interface
+	 * <p/>
+	 * If the program is called without any arguments, the command line interface
+	 * starts in interactive mode.
+	 * <p/>
+	 * If the program is called with arguments, the arguments must follow the
+	 * following format: 1. Path to a .dataflowdiagram file 2. Path to a
+	 * .datadictionary file 3. Either a path to a .dfadsl file or a DSL constraint
+	 * as a string
+	 * 
+	 * @param args Arguments passed to the program via the command line call
+	 */
+	public static void main(String[] args) {
+		if (args.length < 3) {
+			logger.error(
+					"Please provide either no arguments, or a path to a .dataflowdiagram, .datadictionary and .consentmodel file!");
+			System.exit(-1);
+		}
 
-    /**
-     * Create a confidentiality analysis using the provided scanner input
-     * @param scanner Scanner that provides the expected input file
-     * @return Returns a confidentiality analysis with the dataflow diagram and data dictionary provided by the scanner
-     */
-    private static DFDConfidentialityAnalysis createAnalysisInteractive(Scanner scanner) {
-        System.out.println("Please enter a path to a .dataflowdiagram file: ");
-        System.out.print(INPUT_INDICATOR);
-        String dataFlowDiagramPath = scanner.nextLine();
+		if (!args[0].endsWith(".dataflowdiagram")) {
+			logger.error("The first argument should be a path to a .dataflowdiagram file");
+			System.exit(-1);
+		}
+		if (!args[1].endsWith(".datadictionary")) {
+			logger.error("The second argument should be a path to a .datadictionary file");
+			System.exit(-1);
+		}
+		if (!args[2].endsWith(".consentmodel")) {
+			logger.error("The third argument should be a path to a .consentmodel file");
+			System.exit(-1);
+		}
+		
+		boolean autoConsentOptions = false;
+		if(args[3].startsWith("-aco")) {
+			autoConsentOptions = Boolean.valueOf(args[3].split("=")[1]);
+		}
+		
+		PrivacyDFDTransposeFlowGraphFinder.setAssigmnentAutoConsentOptions(autoConsentOptions);
 
-        System.out.println("Please enter a path to a .datadictionary file: ");
-        System.out.print(INPUT_INDICATOR);
-        String dataDictionaryPath = scanner.nextLine();
+		PrivacyDFDConfidentialityAnalysis analysis = createAnalysis(args[0], args[1], args[2]);
 
-        return createAnalysis(dataFlowDiagramPath, dataDictionaryPath);
-    }
+		analysis.initializeAnalysis();
+		FlowGraphCollection flowGraphs = analysis.findFlowGraphs();
+		flowGraphs.evaluate();
+		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphs, true);
+		logger.info("### Detected " + violations.size() + " violations ###");
+		int i = 0;
+		for (var violation: violations) {
+			i++;
+			logger.info("Violation #" + i + ": " + violation.message());
+		}
+		System.exit(0);
+	}
 
-    /**
-     * Creates a confidentiality analysis using the provided dataflow diagram and data dictionary path
-     * @param dataFlowDiagramPath Path to the dataflow diagram
-     * @param dataDictionaryPath Path to the data dictionary
-     * @return Returns a confidentiality analysis using the two provided paths
-     */
-    private static DFDConfidentialityAnalysis createAnalysis(String dataFlowDiagramPath, String dataDictionaryPath) {
-        return new DFDDataFlowAnalysisBuilder().standalone()
-                .useDataFlowDiagram(dataFlowDiagramPath)
-                .useDataDictionary(dataDictionaryPath)
-                .build();
-    }
-
-    /**
-     * Creates a list of constraints from the provided strings on the scanner
-     * @param scanner Scanner that provides constraints on each new line
-     * @return Returns a list containing at least one analysis constraint
-     */
-    private static List<AnalysisConstraint> createConstraintInteractive(Scanner scanner) {
-        List<AnalysisConstraint> constraints = new ArrayList<>();
-        System.out.println("Please enter constraints: ");
-        System.out.print(INPUT_INDICATOR);
-        String constraintString = scanner.nextLine();
-        while (!constraintString.isEmpty()) {
-            constraints.add(createConstraint(constraintString));
-            System.out.println("Please enter constraints (end with empty line): ");
-            System.out.print(INPUT_INDICATOR);
-            constraintString = scanner.nextLine();
-        }
-        return constraints;
-    }
-
-    /**
-     * Creates a list of constraints from the provided file path
-     * @param fileName Path to the file containing analysis constraints
-     * @return Returns a list containing all constraints read from the provided input file
-     */
-    private static List<AnalysisConstraint> createConstraintsFromFile(String fileName) {
-        List<AnalysisConstraint> constraints = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-            List<String> lines = bufferedReader.lines()
-                    .toList();
-            for (int i = 0; i < lines.size(); i++) {
-                var parseResult = AnalysisConstraint.fromString(new StringView(lines.get(i)));
-                if (parseResult.failed()) {
-                    logger.error("Invalid constraint in line" + i + ":");
-                    logger.error(parseResult.getError());
-                    System.exit(-1);
-                }
-                constraints.add(parseResult.getResult());
-            }
-        } catch (IOException e) {
-            logger.error("Could not read file!", e);
-            System.exit(-1);
-        }
-        return constraints;
-    }
-
-    /**
-     * Creates a constraint using the given constraint in string form
-     * @param constraintString Constraint in string form
-     * @return Returns an analysis constraint parsed from the given string
-     */
-    private static AnalysisConstraint createConstraint(String constraintString) {
-        var parseResult = AnalysisConstraint.fromString(new StringView(constraintString));
-        if (parseResult.failed()) {
-            logger.error("Invalid constraint:");
-            logger.error(parseResult.getError());
-            System.exit(-1);
-        }
-        return parseResult.getResult();
-    }
+	/**
+	 * Creates a confidentiality analysis using the provided dataflow diagram and
+	 * data dictionary path
+	 * 
+	 * @param dataFlowDiagramPath Path to the dataflow diagram
+	 * @param dataDictionaryPath  Path to the data dictionary
+	 * @return Returns a confidentiality analysis using the two provided paths
+	 */
+	private static PrivacyDFDConfidentialityAnalysis createAnalysis(String dataFlowDiagramPath,
+			String dataDictionaryPath, String consentModelPath) {
+		return new PrivacyDFDDataFlowAnalysisBuilder().standalone().useDataFlowDiagram(dataFlowDiagramPath)
+				.useDataDictionary(dataDictionaryPath).useConsentModel(consentModelPath).build();
+	}
 }

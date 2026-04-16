@@ -303,15 +303,15 @@ public class PrivacyDataFlowConstrainTest {
 				new DataCharacteristic("pinOne",
 						List.of(new DFDCharacteristicValue(consentLabelType, consentLabelOne),
 								new DFDCharacteristicValue(consentLabelType, consentLabelTwo))),
-				new DataCharacteristic("pinOne",
-						List.of(new DFDCharacteristicValue(consentLabelType, consentLabelThree))),
 				new DataCharacteristic("pinTwo",
+						List.of(new DFDCharacteristicValue(consentLabelType, consentLabelThree))),
+				new DataCharacteristic("pinThree",
 						List.of(new DFDCharacteristicValue(consentLabelType, consentLabelThree))));
 
-		HashMap<String, Set<HashSet<CharacteristicValue>>> expectedResult = new HashMap<>();
-		expectedResult.put("pinOne", Set.of(new HashSet<>(incomingCharacteristics.get(0).getAllCharacteristics()),
-				new HashSet<>(incomingCharacteristics.get(1).getAllCharacteristics())));
-		expectedResult.put("pinTwo", Set.of(new HashSet<>(incomingCharacteristics.get(2).getAllCharacteristics())));
+		HashMap<String, HashSet<CharacteristicValue>> expectedResult = new HashMap<>();
+		expectedResult.put("pinOne", new HashSet<>(incomingCharacteristics.get(0).getAllCharacteristics()));
+		expectedResult.put("pinTwo", new HashSet<>(incomingCharacteristics.get(1).getAllCharacteristics()));
+		expectedResult.put("pinThree", new HashSet<>(incomingCharacteristics.get(2).getAllCharacteristics()));
 
 		assertEquals(expectedResult,
 				PrivacyDataFlowConstraint.groupIncomingCharacteristicsByPin(incomingCharacteristics));

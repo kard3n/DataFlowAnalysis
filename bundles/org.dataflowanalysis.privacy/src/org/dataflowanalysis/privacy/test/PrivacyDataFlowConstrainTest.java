@@ -276,25 +276,26 @@ public class PrivacyDataFlowConstrainTest {
 				Set.of(new DFDCharacteristicValue(consentLabelType, consentLabelTwo),
 						new DFDCharacteristicValue(this.dataItemLabelType, this.dataItemLabelOne)));
 
-		HashSet<HashSet<CharacteristicValue>> pinIncomingHashSet = new HashSet<>();
+		var vertexCharacteristicsOne = List.of(consentLabelTwo);
+
 		pinIncoming.forEach(incoming -> {
-			pinIncomingHashSet.add(new HashSet<>(incoming));
+			assertEquals(true, PrivacyDataFlowConstraint.allFunctionalitiesConsentedTo(new HashSet<>(incoming),
+					vertexCharacteristicsOne, "testVertex"));
 		});
 
-		var vertexCharacteristicsOne = List
-				.of(((CharacteristicValue) new DFDCharacteristicValue(consentLabelType, consentLabelTwo)));
-
-		assertEquals(Set.of(), PrivacyDataFlowConstraint.allFunctionalitiesConsentedTo(pinIncomingHashSet,
-				vertexCharacteristicsOne, "testVertex"));
-
 		// Scenario two: one consent option is not met
-		var vertexCharacteristicsTwo = List.of(
-				((CharacteristicValue) new DFDCharacteristicValue(consentLabelType, consentLabelTwo)),
-				((CharacteristicValue) new DFDCharacteristicValue(consentLabelType, consentLabelThree)));
+		var vertexCharacteristicsTwo = List.of(consentLabelTwo, consentLabelThree);
 
-		// One error for each of the sets
-		assertEquals(2, PrivacyDataFlowConstraint
-				.allFunctionalitiesConsentedTo(pinIncomingHashSet, vertexCharacteristicsTwo, "testVertex").size());
+		int detectedViolations = 0;
+		for (var incoming : pinIncoming) {
+			if (!PrivacyDataFlowConstraint.allFunctionalitiesConsentedTo(new HashSet<>(incoming),
+					vertexCharacteristicsTwo, "testVertex")) {
+				detectedViolations++;
+			}
+		}
+		;
+		assertEquals(2, detectedViolations);
+
 	}
 
 	@Test
@@ -345,8 +346,8 @@ public class PrivacyDataFlowConstrainTest {
 		itemOne.getContext().add(dataContextOne);
 		combination.getMembers().add(itemOne);
 		// Scenario one: combination allows for the item
-		assertTrue(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne, new ItemInformation(
-				Set.of(dataStateOne), Set.of(Set.of(dataContextOne, dataContextTwo)))));
+		assertTrue(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
+				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of(dataContextOne, dataContextTwo)))));
 		// Scenario two: the passed item doesn't have the required context
 		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
 				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of(dataContextTwo)))));
@@ -488,7 +489,7 @@ public class PrivacyDataFlowConstrainTest {
 
 		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
 		logger.info(result.size());
-		for(var res: result){
+		for (var res : result) {
 			logger.info(res.message());
 		}
 		assertEquals(3, result.size());
@@ -557,7 +558,9 @@ public class PrivacyDataFlowConstrainTest {
 			logger.info(violation.message());
 			assertTrue(violation.message().contains(
 					"has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its consent options/functionalities."));
-			assertTrue(violation.message().contains("[DataItemOne: {state: {[]}, context: {[[]]}}]")); // State has been reduced to the empty set
+			assertTrue(violation.message().contains("[DataItemOne: {state: {[]}, context: {[[]]}}]")); // State has been
+																										// reduced to
+																										// the empty set
 		}
 	}
 
@@ -574,10 +577,8 @@ public class PrivacyDataFlowConstrainTest {
 				+ PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo)))
 						.get(0).keySet().stream().map(item -> item.getEntityName()).toList());
 		// Scenario one: no state
-		assertEquals(
-				List.of(Map.of(this.dataItemOne, new ItemInformation(Set.of(), Set.of()), this.dataItemTwo,
-						new ItemInformation(Set.of(), Set.of()), this.dataItemThree,
-						new ItemInformation(Set.of(), Set.of()))),
+		assertEquals(List.of(Map.of(this.dataItemOne, new ItemInformation(Set.of(), Set.of()), this.dataItemTwo,
+				new ItemInformation(Set.of(), Set.of()), this.dataItemThree, new ItemInformation(Set.of(), Set.of()))),
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
 
 		// Scenario two: state, but no incompatibilities

@@ -75,12 +75,31 @@ public class PrivacyDataFlowConstraint {
 					vert = (DFDVertex) vertBase;
 				}
 
+				List<ConsentLabel> vertexFunctionalities = extractConsentLabels(vertBase.getAllVertexCharacteristics());
+
 				var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(
 						((DFDVertex) vertBase).getAllIncomingDataCharacteristics());
 				for (var newCharacteristics : newCharacteristicsPerPin.entrySet()) {
 					pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(),
 							k -> new HashSet<HashSet<CharacteristicValue>>());
 					pinToCharacteristics.get(newCharacteristics.getKey()).add(newCharacteristics.getValue());
+
+					// Go through the lists of CharacteristicValues, and check that all
+					// functionalities of the node (in form of ConsentOptions)
+					// are present in it -> check that the user has consented to all functionalities
+					// of this node
+					if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalities,
+							vert.getName())) {
+						violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
+								+ " can receive data from a user which has not consented to its functionalities. \nFunctionalities consented to by user: "
+								+ extractConsentLabels(newCharacteristics.getValue()).stream()
+										.map(label -> label.getConsentOption().getEntityName()).toList()
+								+ "\nFunctionalities of the vertex: "
+								+ vertexFunctionalities.stream().map(label -> label.getConsentOption().getEntityName())
+										.toList()
+								+ "\nReceived input labels: "
+								+ newCharacteristics.getValue().stream().map(i -> i.toString()).toList()));
+					}
 				}
 			}
 
@@ -96,13 +115,6 @@ public class PrivacyDataFlowConstraint {
 			// and that the data combinations are allowed as part of this node's
 			// functionalities
 			for (var pin : pinToCharacteristics.entrySet()) {
-				// Go through the lists of CharacteristicValues, and check that all
-				// functionalities of the node (in form of ConsentOptions)
-				// are present in it -> check that the user has consented to all functionalities
-				// of this node
-				violations.addAll(allFunctionalitiesConsentedTo(pin.getValue(), vert.getAllVertexCharacteristics(),
-						vert.getName()));
-
 				// Create worst-case scenarios for this pin by creating the smallest subset of
 				// DataStates possible for each data item, using the following rule:
 				// Two DataState sets can be combined to their intersection, if their
@@ -187,36 +199,25 @@ public class PrivacyDataFlowConstraint {
 	 * Node's consent options are included for each of the incoming items.
 	 * 
 	 * @param pinIncomingCharacteristics The incoming characteristics of a pin
-	 * @param vertexCharacteristics      The characteristics of the vertex
-	 * @param vertex                     The name of the vertex (for including it in
+	 * @param vertexFunctionalities      The functionalities of the vertex
+	 * @param vertexName                 The name of the vertex (for including it in
 	 *                                   the violations)
-	 * @return A list of all violations found
+	 * @return False if a violation is found, otherwise true
 	 */
-	public static HashSet<PrivacyConstraintViolation> allFunctionalitiesConsentedTo(
-			HashSet<HashSet<CharacteristicValue>> pinIncomingCharacteristics,
-			List<CharacteristicValue> vertexCharacteristics, String vertexName) {
+	public static boolean allFunctionalitiesConsentedTo(HashSet<CharacteristicValue> pinIncomingCharacteristics,
+			List<ConsentLabel> vertexFunctionalities, String vertexName) {
 		HashSet<PrivacyConstraintViolation> violations = new HashSet<>();
-		List<ConsentLabel> vertexFunctionalities = extractConsentLabels(vertexCharacteristics);
-		for (var incoming : pinIncomingCharacteristics) {
-			// Check that the incoming labels contain at least one data item
-			if (incoming.stream().filter(i -> ((DFDCharacteristicValue) i).getLabel() instanceof DataItemLabel)
-					.count() == 0) {
-				continue;
-			}
 
-			if (!extractConsentLabels(incoming).containsAll(vertexFunctionalities)) {
-				// TODO: maybe include more information such as role, ...
-				violations.add(new PrivacyConstraintViolation(vertexName, "The vertex " + vertexName
-						+ " can receive data from a user which has not consented to its functionalities. \nFunctionalities consented to by user: "
-						+ extractConsentLabels(incoming).stream().map(label -> label.getConsentOption().getEntityName())
-								.toList()
-						+ "\nFunctionalities of the vertex: "
-						+ vertexFunctionalities.stream().map(label -> label.getConsentOption().getEntityName()).toList()
-						+ "\nReceived input labels: " + incoming.stream().map(i -> i.toString()).toList()));
-			}
+		// Check that the incoming labels contain at least one data item
+		if (pinIncomingCharacteristics.stream()
+				.filter(i -> ((DFDCharacteristicValue) i).getLabel() instanceof DataItemLabel).count() == 0) {
+			return true;
 		}
 
-		return violations;
+		if (!extractConsentLabels(pinIncomingCharacteristics).containsAll(vertexFunctionalities)) {
+			return false;
+		}
+		return true;
 	}
 
 	/**

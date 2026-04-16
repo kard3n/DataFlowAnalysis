@@ -71,17 +71,16 @@ public class PrivacyDataFlowConstraint {
 			for (var vertBase : entry.getValue()) {
 				// Go through the instances of the vertex from every TFG, and add the grouped
 				// information of their pins
-				if (vert == null)
+				if (vert == null) {
 					vert = (DFDVertex) vertBase;
+				}
+
 				var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(
 						((DFDVertex) vertBase).getAllIncomingDataCharacteristics());
 				for (var newCharacteristics : newCharacteristicsPerPin.entrySet()) {
 					pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(),
 							k -> new HashSet<HashSet<CharacteristicValue>>());
-					for (var newChar : newCharacteristics.getValue()) {
-						pinToCharacteristics.get(newCharacteristics.getKey()).add(newChar);
-					}
-
+					pinToCharacteristics.get(newCharacteristics.getKey()).add(newCharacteristics.getValue());
 				}
 			}
 
@@ -165,16 +164,19 @@ public class PrivacyDataFlowConstraint {
 	 * Groups the lists of incoming data characteristics of the vertex to their
 	 * origin input pin
 	 * 
-	 * @param vertex The vertex whose CharacteristicValues to group
+	 * @param incomingCharacteristics The incoming characteristics of the vertex
+	 *                                whose CharacteristicValues to group
 	 * @return A HashMap whose key is the ID of a pin, and the value the set of
-	 *         different lists of CharacteristicValues that can reach said pin
+	 *         CharacteristicValues that can reach said pin
 	 */
-	public static HashMap<String, HashSet<HashSet<CharacteristicValue>>> groupIncomingCharacteristicsByPin(
+	public static HashMap<String, HashSet<CharacteristicValue>> groupIncomingCharacteristicsByPin(
 			List<DataCharacteristic> incomingCharacteristics) {
-		HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToIncomingCharacteristics = new HashMap<>();
+		HashMap<String, HashSet<CharacteristicValue>> pinToIncomingCharacteristics = new HashMap<>();
+		// Each pin will only be present once per vertex since TFGs are split if a pin
+		// receives more than one input flow
 		incomingCharacteristics.forEach(incoming -> {
-			pinToIncomingCharacteristics.computeIfAbsent(incoming.getVariableName(), k -> new HashSet<>())
-					.add(new HashSet<CharacteristicValue>(incoming.getAllCharacteristics()));
+			pinToIncomingCharacteristics.put(incoming.getVariableName(),
+					new HashSet<CharacteristicValue>(incoming.getAllCharacteristics()));
 		});
 
 		return pinToIncomingCharacteristics;

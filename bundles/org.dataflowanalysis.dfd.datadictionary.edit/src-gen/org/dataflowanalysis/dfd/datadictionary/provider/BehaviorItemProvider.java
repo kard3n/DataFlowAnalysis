@@ -57,6 +57,7 @@ public class BehaviorItemProvider extends EntityItemProvider {
 			childrenFeatures.add(datadictionaryPackage.Literals.BEHAVIOR__IN_PIN);
 			childrenFeatures.add(datadictionaryPackage.Literals.BEHAVIOR__OUT_PIN);
 			childrenFeatures.add(datadictionaryPackage.Literals.BEHAVIOR__ASSIGNMENT);
+			childrenFeatures.add(datadictionaryPackage.Literals.BEHAVIOR__PIN_RELATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -118,6 +119,7 @@ public class BehaviorItemProvider extends EntityItemProvider {
 		case datadictionaryPackage.BEHAVIOR__IN_PIN:
 		case datadictionaryPackage.BEHAVIOR__OUT_PIN:
 		case datadictionaryPackage.BEHAVIOR__ASSIGNMENT:
+		case datadictionaryPackage.BEHAVIOR__PIN_RELATIONS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -151,6 +153,9 @@ public class BehaviorItemProvider extends EntityItemProvider {
 
 		newChildDescriptors.add(createChildParameter(datadictionaryPackage.Literals.BEHAVIOR__ASSIGNMENT,
 				datadictionaryFactory.eINSTANCE.createUnsetAssignment()));
+
+		newChildDescriptors.add(createChildParameter(datadictionaryPackage.Literals.BEHAVIOR__PIN_RELATIONS,
+				datadictionaryFactory.eINSTANCE.createPinRelation()));
 	}
 
 	/**

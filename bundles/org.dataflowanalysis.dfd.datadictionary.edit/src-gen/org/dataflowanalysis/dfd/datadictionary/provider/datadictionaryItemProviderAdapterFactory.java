@@ -387,6 +387,29 @@ public class datadictionaryItemProviderAdapterFactory extends datadictionaryAdap
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.PinRelation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PinRelationItemProvider pinRelationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.PinRelation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPinRelationAdapter() {
+		if (pinRelationItemProvider == null) {
+			pinRelationItemProvider = new PinRelationItemProvider(this);
+		}
+
+		return pinRelationItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -530,6 +553,8 @@ public class datadictionaryItemProviderAdapterFactory extends datadictionaryAdap
 			setAssignmentItemProvider.dispose();
 		if (unsetAssignmentItemProvider != null)
 			unsetAssignmentItemProvider.dispose();
+		if (pinRelationItemProvider != null)
+			pinRelationItemProvider.dispose();
 	}
 
 }

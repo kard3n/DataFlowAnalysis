@@ -26,6 +26,7 @@ import org.dataflowanalysis.privacy.consentmodel.DataItem;
 import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
 import org.dataflowanalysis.privacy.consentmodel.DataState;
 import org.dataflowanalysis.privacy.consentmodel.DataStateLabel;
+import org.dataflowanalysis.privacy.consentmodel.RoleLabel;
 import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
 
 public class PrivacyDataFlowConstraint {
@@ -65,87 +66,142 @@ public class PrivacyDataFlowConstraint {
 
 		// Step two: calculate worst-case scenarios for every pin
 		for (var entry : vertexInstances.entrySet()) { // go over vertices
-			// group CharacteristicValue lists by pin (DataCharacteristic.variableName)
-			DFDVertex vert = null;
-			HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToCharacteristics = new HashMap<>();
-			for (var vertBase : entry.getValue()) {
-				// Go through the instances of the vertex from every TFG, and add the grouped
-				// information of their pins
-				if (vert == null) {
-					vert = (DFDVertex) vertBase;
+
+			boolean nodeRepresentsUser = nodeRepresentsUser(entry.getValue().getFirst().getAllVertexCharacteristics());
+
+			if (nodeRepresentsUser) {
+				// The vertex represents a user: group vertex instances by their functionalities
+				// and check if the received data is allowed. Don't check for consent (will
+				// always be met) or inference
+
+				// Group by functionalities. A single user can generate multiple TFGs due to
+				// branching
+				HashMap<HashSet<ConsentLabel>, ArrayList<AbstractVertex>> verticesByFunctionalities = groupByFunctionalities(
+						entry.getValue());
+				
+				for(var vertexGroup: verticesByFunctionalities.entrySet()) {
+					HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToCharacteristics = new HashMap<>();
+					for(var vertex: vertexGroup.getValue()) {
+						var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(
+								((DFDVertex) vertex).getAllIncomingDataCharacteristics());
+						
+						for (var newCharacteristics : newCharacteristicsPerPin.entrySet()) {
+							pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(),
+									k -> new HashSet<HashSet<CharacteristicValue>>());
+							pinToCharacteristics.get(newCharacteristics.getKey()).add(newCharacteristics.getValue());
+						}
+					}
+					
+					for (var pin : pinToCharacteristics.entrySet()) {
+						var dataItemToDataState = groupDataInformationByItem(pin.getValue());
+
+						var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
+						// Check that each of the possible combinations is allowed
+						var vertexFunctionalities = vertexGroup.getKey().stream().map(v -> v.getConsentOption()).toList();
+						String vertexName = ((DFDVertex) vertexGroup.getValue().get(0)).getName();
+						for (var combination : possibleCombinations) {
+							if (!combinationAllowedByConsentOptions(combination, vertexFunctionalities)) {
+								violations.add(new PrivacyConstraintViolation(vertexName, "The user-representing vertex " + vertexName
+										+ " has received a data combination in pin " + pin.getKey()
+										+ " not allowed for any of its functionalities.\nReceived combination: "
+										+ itemInformationToString(combination) + "\nConsent options of the vertex: "
+										+ vertexFunctionalities.stream().map(co -> consentOptionToString(co)).toList()));
+							}
+						}
+
+					}
+					
 				}
 
-				List<ConsentLabel> vertexFunctionalities = extractConsentLabels(vertBase.getAllVertexCharacteristics());
+			} else { // Logic for normal nodes: all instance have the same associated functionalities
+				// group CharacteristicValue lists by pin (DataCharacteristic.variableName)
+				HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToCharacteristics = new HashMap<>();
+				DFDVertex vert = null;
 
-				var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(
-						((DFDVertex) vertBase).getAllIncomingDataCharacteristics());
-				for (var newCharacteristics : newCharacteristicsPerPin.entrySet()) {
-					pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(),
-							k -> new HashSet<HashSet<CharacteristicValue>>());
-					pinToCharacteristics.get(newCharacteristics.getKey()).add(newCharacteristics.getValue());
+				for (var vertBase : entry.getValue()) {
+					// Go through the instances of the vertex from every TFG, and add the grouped
+					// information of their pins
+					if (vert == null) {
+						vert = (DFDVertex) vertBase;
+					}
 
-					// Go through the lists of CharacteristicValues, and check that all
-					// functionalities of the node (in form of ConsentOptions)
-					// are present in it -> check that the user has consented to all functionalities
-					// of this node
-					if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalities,
-							vert.getName())) {
-						violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
-								+ " can receive data from a user which has not consented to its functionalities. \nFunctionalities consented to by user: "
-								+ extractConsentLabels(newCharacteristics.getValue()).stream()
-										.map(label -> label.getConsentOption().getEntityName()).toList()
-								+ "\nFunctionalities of the vertex: "
-								+ vertexFunctionalities.stream().map(label -> label.getConsentOption().getEntityName())
-										.toList()
-								+ "\nReceived input labels: "
-								+ newCharacteristics.getValue().stream().map(i -> i.toString()).toList()));
+					List<ConsentLabel> vertexFunctionalities = extractConsentLabels(
+							vertBase.getAllVertexCharacteristics());
+
+					var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(
+							((DFDVertex) vertBase).getAllIncomingDataCharacteristics());
+					for (var newCharacteristics : newCharacteristicsPerPin.entrySet()) {
+						pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(),
+								k -> new HashSet<HashSet<CharacteristicValue>>());
+						pinToCharacteristics.get(newCharacteristics.getKey()).add(newCharacteristics.getValue());
+
+						// Go through the lists of CharacteristicValues, and check that all
+						// functionalities of the node (in form of ConsentOptions)
+						// are present in it -> check that the user has consented to all functionalities
+						// of this node
+						if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalities,
+								vert.getName())) {
+							violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
+									+ " can receive data from a user which has not consented to its functionalities. \nFunctionalities consented to by user: "
+									+ extractConsentLabels(newCharacteristics.getValue()).stream()
+											.map(label -> label.getConsentOption().getEntityName()).toList()
+									+ "\nFunctionalities of the vertex: "
+									+ vertexFunctionalities.stream()
+											.map(label -> label.getConsentOption().getEntityName()).toList()
+									+ "\nReceived input labels: "
+									+ newCharacteristics.getValue().stream().map(i -> i.toString()).toList()));
+						}
 					}
 				}
-			}
 
-			// Get all consent options
-			List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics()).stream()
-					.map(label -> label.getConsentOption()).toList();
+				// Get all consent options
+				List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics()).stream()
+						.map(label -> label.getConsentOption()).toList();
 
-			// List of all combinations from the pins
-			List<HashMap<DataItem, ItemInformation>> nodeLevelCombinations = new LinkedList<>();
+				// List of all combinations from the pins
+				List<HashMap<DataItem, ItemInformation>> nodeLevelCombinations = new LinkedList<>();
 
-			// Evaluate every pin by itself: check that only data from users who have
-			// consented to this node's functionalities reached this pin,
-			// and that the data combinations are allowed as part of this node's
-			// functionalities
-			for (var pin : pinToCharacteristics.entrySet()) {
-				// Create worst-case scenarios for this pin by creating the smallest subset of
-				// DataStates possible for each data item, using the following rule:
-				// Two DataState sets can be combined to their intersection, if their
-				// intersection is not empty.
-				// If two sets contain DataStates that can not be related to each other, those
-				// sets can not be unified
-				var dataItemToDataState = groupDataInformationByItem(pin.getValue());
-				dataItemToDataState.keySet().forEach(item -> {
-					dataItemToDataState.put(item, reduceDataStateSets(dataItemToDataState.get(item)));
-				});
+				// Evaluate every pin by itself: check that only data from users who have
+				// consented to this node's functionalities reached this pin,
+				// and that the data combinations are allowed as part of this node's
+				// functionalities
+				for (var pin : pinToCharacteristics.entrySet()) {
+					// Create worst-case scenarios for this pin by creating the smallest subset of
+					// DataStates possible for each data item, using the following rule:
+					// Two DataState sets can be combined to their intersection, if their
+					// intersection is not empty.
+					// If two sets contain DataStates that can not be related to each other, those
+					// sets can not be unified
+					var dataItemToDataState = groupDataInformationByItem(pin.getValue());
+					dataItemToDataState.keySet().forEach(item -> {
+						dataItemToDataState.put(item, reduceDataStateSets(dataItemToDataState.get(item)));
+					});
 
-				var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
-				nodeLevelCombinations.addAll(possibleCombinations);
-				// Check that each of the possible combinations is allowed
-				for (var combination : possibleCombinations) {
-					if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
-						violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
-								+ " has received a data combination in pin " + pin.getKey()
-								+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
-								+ itemInformationToString(combination) + "\nConsent options of the vertex: "
-								+ consentOptions.stream().map(co -> consentOptionToString(co)).toList()));
+					var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
+					nodeLevelCombinations.addAll(possibleCombinations);
+					// Check that each of the possible combinations is allowed
+					
+					for (var combination : possibleCombinations) {
+						
+							if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
+								violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
+										+ " has received a data combination in pin " + pin.getKey()
+										+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
+										+ itemInformationToString(combination) + "\nConsent options of the vertex: "
+										+ consentOptions.stream().map(co -> consentOptionToString(co)).toList()));
+							}
+						
 					}
+
 				}
 
+				// Evaluate inference at the node level
+				if (checkNodeLevelInference) {
+					violations.addAll(verifyDataTupleConformance(uniteItemTuples(nodeLevelCombinations), consentOptions,
+							vert.getName()));
+				}
 			}
 
-			// Evaluate inference at the node level
-			if (checkNodeLevelInference) {
-				violations.addAll(verifyDataTupleConformance(uniteItemTuples(nodeLevelCombinations), consentOptions,
-						vert.getName()));
-			}
 		}
 
 		return violations;
@@ -206,7 +262,6 @@ public class PrivacyDataFlowConstraint {
 	 */
 	public static boolean allFunctionalitiesConsentedTo(HashSet<CharacteristicValue> pinIncomingCharacteristics,
 			List<ConsentLabel> vertexFunctionalities, String vertexName) {
-		HashSet<PrivacyConstraintViolation> violations = new HashSet<>();
 
 		// Check that the incoming labels contain at least one data item
 		if (pinIncomingCharacteristics.stream()
@@ -255,6 +310,17 @@ public class PrivacyDataFlowConstraint {
 		}
 
 		return itemToStates;
+	}
+
+	/**
+	 * * Checks if a node represents a user (has a role associated) * * @param
+	 * labels List of characteristicValues * @return True when the labels contain at
+	 * least one role label
+	 */
+	private static boolean nodeRepresentsUser(Collection<CharacteristicValue> labels) {
+		return labels.stream().map(cv -> ((DFDCharacteristicValue) cv)).filter(cv -> {
+			return cv.getLabel() instanceof RoleLabel;
+		}).count() > 0;
 	}
 
 	/**
@@ -449,6 +515,10 @@ public class PrivacyDataFlowConstraint {
 	 */
 	public static boolean combinationAllowedByConsentOptions(HashMap<DataItem, ItemInformation> dataCombination,
 			List<ConsentOption> nodeConsentOptions) {
+		if(dataCombination.isEmpty()) {
+			return true;
+		}
+		
 		var consentOptionCopy = (List<ConsentOption>) new LinkedList<>(nodeConsentOptions);
 
 		// Filter all consent options, removing those that don't have a data combination
@@ -608,6 +678,25 @@ public class PrivacyDataFlowConstraint {
 				if (stateChanged)
 					break;
 			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Groups the passed vertices by their functionalities
+	 * 
+	 * @param vertices The vertices to group
+	 * @return The grouped vertices
+	 */
+	public static HashMap<HashSet<ConsentLabel>, ArrayList<AbstractVertex>> groupByFunctionalities(
+			List<AbstractVertex> vertices) {
+		HashMap<HashSet<ConsentLabel>, ArrayList<AbstractVertex>> result = new HashMap<>();
+		for (var vertex : vertices) {
+			var labels = new HashSet<ConsentLabel>(extractConsentLabels(vertex.getAllVertexCharacteristics()));
+			result.computeIfAbsent(labels, k -> new ArrayList<>());
+
+			result.get(labels).add(vertex);
 		}
 
 		return result;

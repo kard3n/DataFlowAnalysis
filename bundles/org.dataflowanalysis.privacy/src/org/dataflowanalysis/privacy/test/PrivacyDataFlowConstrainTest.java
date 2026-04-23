@@ -668,4 +668,28 @@ public class PrivacyDataFlowConstrainTest {
 			assertTrue(violation.message().contains("ItemTwo: {state: {[]}"));
 		}
 	}
+	
+	@Test
+	public void testUserNodeLogic() {
+		// UserNodeTest
+		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"UserNodeTest.dataflowdiagram");
+		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"UserNodeTest.datadictionary");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"UserNodeTest.consentmodel");
+
+		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
+				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
+				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
+				.useConsentModel(consentModelPath.toString()).build();
+		analysis.initializeAnalysis();
+		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
+		flowGraphCollection.evaluate();
+		
+		logger.info(flowGraphCollection.getTransposeFlowGraphs().size());
+
+		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
+		assertEquals(1, violations.size());
+	}
 }

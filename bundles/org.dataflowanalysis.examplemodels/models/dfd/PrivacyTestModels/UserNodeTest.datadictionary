@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_lKMkwD73EfG_pYb-GtLmHg">
+  <labelTypes id="_ySzZwD73EfG_pYb-GtLmHg" entityName="Labels">
+    <label id="_z0TowD73EfG_pYb-GtLmHg" entityName="DummyLabel"/>
+  </labelTypes>
+  <behavior id="_oMX8UT73EfG_pYb-GtLmHg" entityName="User">
+    <inPin id="_9qWg0D73EfG_pYb-GtLmHg" entityName="UserIn"/>
+    <outPin id="_twMKMT73EfG_pYb-GtLmHg" entityName="UserOut"/>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_4mGj1D73EfG_pYb-GtLmHg" entityName="SetDummyLabel" outputPin="_twMKMT73EfG_pYb-GtLmHg" outputLabels="_z0TowD73EfG_pYb-GtLmHg"/>
+  </behavior>
+  <behavior id="_qXlPoT73EfG_pYb-GtLmHg" entityName="Process">
+    <inPin id="_TJaqcD74EfG_pYb-GtLmHg" entityName="ProcessIn"/>
+    <outPin id="_WeBOwT74EfG_pYb-GtLmHg" entityName="ProcessOut"/>
+    <assignment xsi:type="datadictionary:Assignment" id="_YGdzQj74EfG_pYb-GtLmHg" entityName="ProcessSend" outputPin="_WeBOwT74EfG_pYb-GtLmHg" inputPins="_TJaqcD74EfG_pYb-GtLmHg">
+      <term xsi:type="datadictionary:TRUE" id="_s54lkD79EfG8DckemIlXLg"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="UserNodeTest.consentmodel#_tfR10D72EfG_pYb-GtLmHg"/>
+    </assignment>
+  </behavior>
+</datadictionary:DataDictionary>

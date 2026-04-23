@@ -17,6 +17,7 @@ import org.dataflowanalysis.analysis.core.FlowGraphCollection;
 import org.dataflowanalysis.analysis.dfd.core.DFDCharacteristicValue;
 import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
+import org.dataflowanalysis.dfd.datadictionary.PinRelation;
 import org.dataflowanalysis.dfd.dataflowdiagram.Node;
 import org.dataflowanalysis.privacy.consentmodel.ConsentLabel;
 import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
@@ -78,39 +79,42 @@ public class PrivacyDataFlowConstraint {
 				// branching
 				HashMap<HashSet<ConsentLabel>, ArrayList<AbstractVertex>> verticesByFunctionalities = groupByFunctionalities(
 						entry.getValue());
-				
-				for(var vertexGroup: verticesByFunctionalities.entrySet()) {
+
+				for (var vertexGroup : verticesByFunctionalities.entrySet()) {
 					HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToCharacteristics = new HashMap<>();
-					for(var vertex: vertexGroup.getValue()) {
+					for (var vertex : vertexGroup.getValue()) {
 						var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(
 								((DFDVertex) vertex).getAllIncomingDataCharacteristics());
-						
+
 						for (var newCharacteristics : newCharacteristicsPerPin.entrySet()) {
 							pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(),
 									k -> new HashSet<HashSet<CharacteristicValue>>());
 							pinToCharacteristics.get(newCharacteristics.getKey()).add(newCharacteristics.getValue());
 						}
 					}
-					
+
 					for (var pin : pinToCharacteristics.entrySet()) {
 						var dataItemToDataState = groupDataInformationByItem(pin.getValue());
 
 						var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
 						// Check that each of the possible combinations is allowed
-						var vertexFunctionalities = vertexGroup.getKey().stream().map(v -> v.getConsentOption()).toList();
+						var vertexFunctionalities = vertexGroup.getKey().stream().map(v -> v.getConsentOption())
+								.toList();
 						String vertexName = ((DFDVertex) vertexGroup.getValue().get(0)).getName();
 						for (var combination : possibleCombinations) {
 							if (!combinationAllowedByConsentOptions(combination, vertexFunctionalities)) {
-								violations.add(new PrivacyConstraintViolation(vertexName, "The user-representing vertex " + vertexName
-										+ " has received a data combination in pin " + pin.getKey()
-										+ " not allowed for any of its functionalities.\nReceived combination: "
-										+ itemInformationToString(combination) + "\nConsent options of the vertex: "
-										+ vertexFunctionalities.stream().map(co -> consentOptionToString(co)).toList()));
+								violations.add(new PrivacyConstraintViolation(vertexName,
+										"The user-representing vertex " + vertexName
+												+ " has received a data combination in pin " + pin.getKey()
+												+ " not allowed for any of its functionalities.\nReceived combination: "
+												+ itemInformationToString(combination)
+												+ "\nConsent options of the vertex: " + vertexFunctionalities.stream()
+														.map(co -> consentOptionToString(co)).toList()));
 							}
 						}
 
 					}
-					
+
 				}
 
 			} else { // Logic for normal nodes: all instance have the same associated functionalities
@@ -158,8 +162,9 @@ public class PrivacyDataFlowConstraint {
 				List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics()).stream()
 						.map(label -> label.getConsentOption()).toList();
 
-				// List of all combinations from the pins
-				List<HashMap<DataItem, ItemInformation>> nodeLevelCombinations = new LinkedList<>();
+				// List of all combinations from the pins, grouped by the pin they originate
+				// from
+				HashMap<String, List<HashMap<DataItem, ItemInformation>>> nodeLevelCombinations = new HashMap<>();
 
 				// Evaluate every pin by itself: check that only data from users who have
 				// consented to this node's functionalities reached this pin,
@@ -172,32 +177,60 @@ public class PrivacyDataFlowConstraint {
 					// intersection is not empty.
 					// If two sets contain DataStates that can not be related to each other, those
 					// sets can not be unified
+
 					var dataItemToDataState = groupDataInformationByItem(pin.getValue());
 					dataItemToDataState.keySet().forEach(item -> {
 						dataItemToDataState.put(item, reduceDataStateSets(dataItemToDataState.get(item)));
 					});
 
 					var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
-					nodeLevelCombinations.addAll(possibleCombinations);
+					nodeLevelCombinations.put(pin.getKey(), possibleCombinations);
 					// Check that each of the possible combinations is allowed
-					
+
 					for (var combination : possibleCombinations) {
-						
-							if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
-								violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
-										+ " has received a data combination in pin " + pin.getKey()
-										+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
-										+ itemInformationToString(combination) + "\nConsent options of the vertex: "
-										+ consentOptions.stream().map(co -> consentOptionToString(co)).toList()));
-							}
-						
+
+						if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
+							violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
+									+ " has received a data combination in pin " + pin.getKey()
+									+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
+									+ itemInformationToString(combination) + "\nConsent options of the vertex: "
+									+ consentOptions.stream().map(co -> consentOptionToString(co)).toList()));
+						}
+
 					}
 
 				}
+				
+				// Calculate all groups of related pins
+				List<HashSet<String>> pinGroups = calculatePinRelationGroups(vert.getReferencedElement().getBehavior().getPinRelations());
+				
+
+				// For all pins marked as related, combine their combinations
+				List<HashMap<DataItem, ItemInformation>> finalCombinations = new LinkedList<>();
+				
+				// Unite the combinations of related pins
+				for(var pinGroup: pinGroups) {
+					List<HashMap<DataItem, ItemInformation>> newCombinations = new LinkedList<>();
+					for(String pin: pinGroup) {
+						if(newCombinations.isEmpty()) {
+							newCombinations.addAll(nodeLevelCombinations.get(pin));
+						}
+						else {
+							newCombinations = dataCombinationProduct(newCombinations, nodeLevelCombinations.get(pin));
+						}
+						nodeLevelCombinations.remove(pin);
+					}
+				}
+				
+				// Add all combinations from pins that are not in a relation
+				for(var remainingPinCombinations: nodeLevelCombinations.values()) {
+					finalCombinations.addAll(remainingPinCombinations);
+				}
+				
 
 				// Evaluate inference at the node level
 				if (checkNodeLevelInference) {
-					violations.addAll(verifyDataTupleConformance(uniteItemTuples(nodeLevelCombinations), consentOptions,
+					violations.addAll(verifyDataTupleConformance(uniteItemTuples(finalCombinations), consentOptions,
 							vert.getName()));
 				}
 			}
@@ -205,6 +238,86 @@ public class PrivacyDataFlowConstraint {
 		}
 
 		return violations;
+	}
+	
+	private static List<HashSet<String>> calculatePinRelationGroups(List<PinRelation> relations) {
+		LinkedList<HashSet<String>> pinGroups = new LinkedList<>();
+		for (var relation : relations) {
+			boolean wasAdded = false;
+			String nameOne = relation.getInputPin().getEntityName();
+			String nameTwo = relation.getOutputPin().getEntityName();
+			for(var group: pinGroups) {
+				
+				if(group.contains(nameOne) || group.contains(nameTwo)) {
+					wasAdded = false;
+					group.add(nameOne);
+					group.add(nameTwo);
+					break;
+				}
+			}
+			if(!wasAdded) {
+				HashSet<String> newGroup = new HashSet<>();
+				newGroup.add(nameOne);
+				newGroup.add(nameTwo);
+			}
+		}
+		
+		return pinGroups;
+	}
+
+	/**
+	 * Calculates the cartesian product of the two combinations, combining each
+	 * combination with all of those from the other set.
+	 * 
+	 * @param combinationsOne
+	 * @param combinationsTwo
+	 * @return
+	 */
+	private static List<HashMap<DataItem, ItemInformation>> dataCombinationProduct(
+			List<HashMap<DataItem, ItemInformation>> combinationsOne,
+			List<HashMap<DataItem, ItemInformation>> combinationsTwo) {
+
+		List<HashMap<DataItem, ItemInformation>> result = new LinkedList<>();
+
+		// Return if either list is empty
+		if (combinationsOne.isEmpty() || combinationsTwo.isEmpty()) {
+			return result;
+		}
+
+		for (HashMap<DataItem, ItemInformation> combOne : combinationsOne) {
+			for (HashMap<DataItem, ItemInformation> combTwo : combinationsTwo) {
+
+				HashMap<DataItem, ItemInformation> mergedComb = new HashMap<>();
+
+				combOne.forEach((key, value) -> mergedComb.put(key, value.cloneShallow()));
+
+				// Iterate through the second set to either merge or add items
+				combTwo.forEach((key, infoTwo) -> {
+					if (mergedComb.containsKey(key)) {
+						ItemInformation infoOne = mergedComb.get(key);
+
+						// State: Calculate the intersection
+						Set<DataState> joinedState = new HashSet<>(infoOne.state());
+						joinedState.retainAll(infoTwo.state());
+
+						// Context: Simply add the sets together
+						Set<Set<DataContext>> joinedContext = new HashSet<>(infoOne.context());
+						joinedContext.addAll(infoTwo.context());
+
+						// Replace the item with the newly joined ItemInformation
+						mergedComb.put(key, new ItemInformation(joinedState, joinedContext));
+					} else {
+						// The item only exists in the second combination, just add its clone
+						mergedComb.put(key, infoTwo.cloneShallow());
+					}
+				});
+
+				// Add the resulting combined HashMap to the final list
+				result.add(mergedComb);
+			}
+		}
+
+		return result;
 	}
 
 	/**
@@ -515,10 +628,10 @@ public class PrivacyDataFlowConstraint {
 	 */
 	public static boolean combinationAllowedByConsentOptions(HashMap<DataItem, ItemInformation> dataCombination,
 			List<ConsentOption> nodeConsentOptions) {
-		if(dataCombination.isEmpty()) {
+		if (dataCombination.isEmpty()) {
 			return true;
 		}
-		
+
 		var consentOptionCopy = (List<ConsentOption>) new LinkedList<>(nodeConsentOptions);
 
 		// Filter all consent options, removing those that don't have a data combination

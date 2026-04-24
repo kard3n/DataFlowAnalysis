@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.core.AbstractTransposeFlowGraph;
@@ -34,8 +35,8 @@ public class PrivacyDataFlowConstraint {
 	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstraint.class);
 
 	public static HashSet<PrivacyConstraintViolation> findViolations(FlowGraphCollection flowGraphs,
-			boolean checkNodeLevelInference) {
-		return findViolations(flowGraphs.getTransposeFlowGraphs(), checkNodeLevelInference);
+			boolean checkNodeLevelInference, boolean considerOutputPins) {
+		return findViolations(flowGraphs.getTransposeFlowGraphs(), checkNodeLevelInference, considerOutputPins);
 	}
 
 	/**
@@ -56,8 +57,20 @@ public class PrivacyDataFlowConstraint {
 		}
 	}
 
+	/**
+	 * Detects and returns all privacy violations over the given flow graphs
+	 * 
+	 * @param flowGraphs
+	 * @param checkNodeLevelInference If inference should be simulated on a node
+	 *                                level
+	 * @param considerOutputPins      If the data from output pins should be checked
+	 *                                for validity. Output pins part of a pin
+	 *                                relations will always be considered
+	 * @return
+	 */
 	public static HashSet<PrivacyConstraintViolation> findViolations(
-			List<? extends AbstractTransposeFlowGraph> flowGraphs, boolean checkNodeLevelInference) {
+			List<? extends AbstractTransposeFlowGraph> flowGraphs, boolean checkNodeLevelInference,
+			boolean considerOutputPins) {
 		HashSet<PrivacyConstraintViolation> violations = new HashSet<>();
 
 		// # Step 1: determine all vertices (by their ID) of the flow graphs
@@ -83,8 +96,14 @@ public class PrivacyDataFlowConstraint {
 				for (var vertexGroup : verticesByFunctionalities.entrySet()) {
 					HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToCharacteristics = new HashMap<>();
 					for (var vertex : vertexGroup.getValue()) {
-						var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(
-								((DFDVertex) vertex).getAllIncomingDataCharacteristics());
+
+						List<DataCharacteristic> currentCharacteristics = ((DFDVertex) vertex)
+								.getAllIncomingDataCharacteristics();
+						if (considerOutputPins) {
+							currentCharacteristics.addAll(((DFDVertex) vertex).getAllOutgoingDataCharacteristics());
+						}
+
+						var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(currentCharacteristics);
 
 						for (var newCharacteristics : newCharacteristicsPerPin.entrySet()) {
 							pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(),
@@ -121,19 +140,35 @@ public class PrivacyDataFlowConstraint {
 				// group CharacteristicValue lists by pin (DataCharacteristic.variableName)
 				HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToCharacteristics = new HashMap<>();
 				DFDVertex vert = null;
+				// Calculate all groups of related pins
+				List<HashSet<String>> pinRelationGroups = null;
+				Set<String> pinsInGroups = null;
 
 				for (var vertBase : entry.getValue()) {
 					// Go through the instances of the vertex from every TFG, and add the grouped
 					// information of their pins
 					if (vert == null) {
 						vert = (DFDVertex) vertBase;
+						pinRelationGroups = calculatePinRelationGroups(
+								vert.getReferencedElement().getBehavior().getPinRelations());
+						pinsInGroups = pinRelationGroups.stream().flatMap(Set::stream).collect(Collectors.toSet());
 					}
 
 					List<ConsentLabel> vertexFunctionalities = extractConsentLabels(
 							vertBase.getAllVertexCharacteristics());
 
-					var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(
-							((DFDVertex) vertBase).getAllIncomingDataCharacteristics());
+					List<DataCharacteristic> currentCharacteristics = ((DFDVertex) vertBase)
+							.getAllIncomingDataCharacteristics();
+					if (considerOutputPins) {
+						currentCharacteristics.addAll(((DFDVertex) vertBase).getAllOutgoingDataCharacteristics());
+					} else {
+						// Only add pins that are in a pin relation group
+						var pinsInGroupsFinal = pinsInGroups;
+						currentCharacteristics.addAll(((DFDVertex) vertBase).getAllOutgoingDataCharacteristics()
+								.stream().filter(i -> pinsInGroupsFinal.contains(i.getVariableName())).toList());
+					}
+
+					var newCharacteristicsPerPin = groupIncomingCharacteristicsByPin(currentCharacteristics);
 					for (var newCharacteristics : newCharacteristicsPerPin.entrySet()) {
 						pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(),
 								k -> new HashSet<HashSet<CharacteristicValue>>());
@@ -200,33 +235,28 @@ public class PrivacyDataFlowConstraint {
 					}
 
 				}
-				
-				// Calculate all groups of related pins
-				List<HashSet<String>> pinGroups = calculatePinRelationGroups(vert.getReferencedElement().getBehavior().getPinRelations());
-				
 
 				// For all pins marked as related, combine their combinations
 				List<HashMap<DataItem, ItemInformation>> finalCombinations = new LinkedList<>();
-				
+
 				// Unite the combinations of related pins
-				for(var pinGroup: pinGroups) {
+				for (var pinGroup : pinRelationGroups) {
 					List<HashMap<DataItem, ItemInformation>> newCombinations = new LinkedList<>();
-					for(String pin: pinGroup) {
-						if(newCombinations.isEmpty()) {
+					for (String pin : pinGroup) {
+						if (newCombinations.isEmpty()) {
 							newCombinations.addAll(nodeLevelCombinations.get(pin));
-						}
-						else {
+						} else {
 							newCombinations = dataCombinationProduct(newCombinations, nodeLevelCombinations.get(pin));
 						}
 						nodeLevelCombinations.remove(pin);
 					}
+					finalCombinations.addAll(newCombinations);
 				}
-				
+
 				// Add all combinations from pins that are not in a relation
-				for(var remainingPinCombinations: nodeLevelCombinations.values()) {
+				for (var remainingPinCombinations : nodeLevelCombinations.values()) {
 					finalCombinations.addAll(remainingPinCombinations);
 				}
-				
 
 				// Evaluate inference at the node level
 				if (checkNodeLevelInference) {
@@ -239,29 +269,30 @@ public class PrivacyDataFlowConstraint {
 
 		return violations;
 	}
-	
+
 	private static List<HashSet<String>> calculatePinRelationGroups(List<PinRelation> relations) {
 		LinkedList<HashSet<String>> pinGroups = new LinkedList<>();
 		for (var relation : relations) {
 			boolean wasAdded = false;
-			String nameOne = relation.getInputPin().getEntityName();
-			String nameTwo = relation.getOutputPin().getEntityName();
-			for(var group: pinGroups) {
-				
-				if(group.contains(nameOne) || group.contains(nameTwo)) {
-					wasAdded = false;
+			String nameOne = relation.getInputPin().getId();
+			String nameTwo = relation.getOutputPin().getId();
+			for (var group : pinGroups) {
+
+				if (group.contains(nameOne) || group.contains(nameTwo)) {
+					wasAdded = true;
 					group.add(nameOne);
 					group.add(nameTwo);
 					break;
 				}
 			}
-			if(!wasAdded) {
+			if (!wasAdded) {
 				HashSet<String> newGroup = new HashSet<>();
 				newGroup.add(nameOne);
 				newGroup.add(nameTwo);
+				pinGroups.add(newGroup);
 			}
 		}
-		
+
 		return pinGroups;
 	}
 

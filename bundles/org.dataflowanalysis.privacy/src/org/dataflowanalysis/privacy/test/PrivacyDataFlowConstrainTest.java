@@ -487,7 +487,7 @@ public class PrivacyDataFlowConstrainTest {
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
 
-		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
+		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false, false);
 		logger.info(result.size());
 		for (var res : result) {
 			logger.info(res.message());
@@ -527,7 +527,7 @@ public class PrivacyDataFlowConstrainTest {
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
 
-		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
+		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false, false);
 		assertEquals(1, result.size());
 		for (var violation : result) {
 			assertTrue(violation.message().contains(
@@ -552,7 +552,7 @@ public class PrivacyDataFlowConstrainTest {
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
 
-		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false);
+		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false, false);
 		assertEquals(1, result.size());
 		for (var violation : result) {
 			logger.info(violation.message());
@@ -636,7 +636,7 @@ public class PrivacyDataFlowConstrainTest {
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
 
-		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
+		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 		assertEquals(1, violations.size());
 		for (var violation : violations) {
 			assertTrue(violation.message().contains("information not authorized by its consent options."));
@@ -661,7 +661,7 @@ public class PrivacyDataFlowConstrainTest {
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
 
-		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
+		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 		assertEquals(1, violations.size());
 		for (var violation : violations) {
 			assertTrue(violation.message().contains("information not authorized by its consent options."));
@@ -686,10 +686,37 @@ public class PrivacyDataFlowConstrainTest {
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
-		
-		logger.info(flowGraphCollection.getTransposeFlowGraphs().size());
 
-		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
+		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 		assertEquals(1, violations.size());
+		for(var violation: violations) {
+			assertTrue(violation.message().startsWith("The user-representing vertex"));
+		}
+	}
+	
+	@Test
+	public void testPinRelation() {
+		// UserNodeTest
+		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"PinRelationTest.dataflowdiagram");
+		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"PinRelationTest.datadictionary");
+		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"PinRelationTest.consentmodel");
+
+		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
+				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
+				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
+				.useConsentModel(consentModelPath.toString()).build();
+		analysis.initializeAnalysis();
+		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
+		flowGraphCollection.evaluate();
+
+		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
+		assertEquals(1, violations.size());
+		
+		for(var violation: violations) {
+			assertTrue(violation.message().contains("\"Middle\" received or could derive information not authorized"));
+		}
 	}
 }

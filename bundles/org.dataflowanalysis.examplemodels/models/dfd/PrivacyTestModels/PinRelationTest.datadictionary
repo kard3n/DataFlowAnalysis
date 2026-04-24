@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_WCXXQD8pEfGBBNTzvKuwwQ">
+  <behavior id="_WryHsD8pEfGBBNTzvKuwwQ" entityName="Source">
+    <outPin id="_b61mgT8pEfGBBNTzvKuwwQ" entityName="SourceOut"/>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_d_RjdD8pEfGBBNTzvKuwwQ" entityName="SetValue" outputPin="_b61mgT8pEfGBBNTzvKuwwQ">
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="PinRelationTest.consentmodel#_rH_ioD8oEfGBBNTzvKuwwQ"/>
+    </assignment>
+  </behavior>
+  <behavior id="_YTIgAT8pEfGBBNTzvKuwwQ" entityName="Middle">
+    <inPin id="_jVjroD8pEfGBBNTzvKuwwQ" entityName="MiddleIn"/>
+    <inPin id="_U9QOQD-2EfGk0sFbKoKHyQ" entityName="MiddleIn_Return"/>
+    <outPin id="_lmdXQT8pEfGBBNTzvKuwwQ" entityName="MiddleOut"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_qF2Tsz8pEfGBBNTzvKuwwQ" entityName="Forward" outputPin="_lmdXQT8pEfGBBNTzvKuwwQ" inputPins="_jVjroD8pEfGBBNTzvKuwwQ"/>
+    <pinRelations id="_m8U-Bj8pEfGBBNTzvKuwwQ" inputPin="_lmdXQT8pEfGBBNTzvKuwwQ" outputPin="_U9QOQD-2EfGk0sFbKoKHyQ"/>
+  </behavior>
+  <behavior id="_aATMcT8pEfGBBNTzvKuwwQ" entityName="End">
+    <inPin id="_xLaBID8pEfGBBNTzvKuwwQ" entityName="EndIn"/>
+    <outPin id="_zAAyUT8pEfGBBNTzvKuwwQ" entityName="EndOut"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_0EqtQz8pEfGBBNTzvKuwwQ" entityName="Forward" outputPin="_zAAyUT8pEfGBBNTzvKuwwQ" inputPins="_xLaBID8pEfGBBNTzvKuwwQ"/>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_3QphFT8pEfGBBNTzvKuwwQ" entityName="UnsetItemOne" outputPin="_zAAyUT8pEfGBBNTzvKuwwQ">
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="PinRelationTest.consentmodel#_rH_ioD8oEfGBBNTzvKuwwQ"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_7l2mxD8pEfGBBNTzvKuwwQ" entityName="SetItemTwo" outputPin="_zAAyUT8pEfGBBNTzvKuwwQ">
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="PinRelationTest.consentmodel#_uQ_T4D8oEfGBBNTzvKuwwQ"/>
+    </assignment>
+  </behavior>
+</datadictionary:DataDictionary>

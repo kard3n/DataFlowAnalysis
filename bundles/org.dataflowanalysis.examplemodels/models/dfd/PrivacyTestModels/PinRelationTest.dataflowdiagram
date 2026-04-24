@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_bskbYD-1EfGk0sFbKoKHyQ">
+  <flows id="_FvAicD-2EfGk0sFbKoKHyQ" entityName="Source_Middle" sourceNode="_clJpMD-1EfGk0sFbKoKHyQ" destinationNode="_qNIh0z-1EfGk0sFbKoKHyQ">
+    <destinationPin href="PinRelationTest.datadictionary#_jVjroD8pEfGBBNTzvKuwwQ"/>
+    <sourcePin href="PinRelationTest.datadictionary#_b61mgT8pEfGBBNTzvKuwwQ"/>
+  </flows>
+  <flows id="_K_SJQD-2EfGk0sFbKoKHyQ" entityName="Middle_End" sourceNode="_qNIh0z-1EfGk0sFbKoKHyQ" destinationNode="_9fT9Iz-1EfGk0sFbKoKHyQ">
+    <destinationPin href="PinRelationTest.datadictionary#_xLaBID8pEfGBBNTzvKuwwQ"/>
+    <sourcePin href="PinRelationTest.datadictionary#_lmdXQT8pEfGBBNTzvKuwwQ"/>
+  </flows>
+  <flows id="_YZTeYD-2EfGk0sFbKoKHyQ" entityName="End_Middle" sourceNode="_9fT9Iz-1EfGk0sFbKoKHyQ" destinationNode="_qNIh0z-1EfGk0sFbKoKHyQ">
+    <destinationPin href="PinRelationTest.datadictionary#_U9QOQD-2EfGk0sFbKoKHyQ"/>
+    <sourcePin href="PinRelationTest.datadictionary#_zAAyUT8pEfGBBNTzvKuwwQ"/>
+  </flows>
+  <nodes xsi:type="dataflowdiagram:External" id="_clJpMD-1EfGk0sFbKoKHyQ" entityName="Source">
+    <behavior href="PinRelationTest.datadictionary#_WryHsD8pEfGBBNTzvKuwwQ"/>
+    <properties xsi:type="consentmodel:RoleLabel" href="PinRelationTest.consentmodel#_OdNjwD8pEfGBBNTzvKuwwQ"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Process" id="_qNIh0z-1EfGk0sFbKoKHyQ" entityName="Middle">
+    <behavior href="PinRelationTest.datadictionary#_YTIgAT8pEfGBBNTzvKuwwQ"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="PinRelationTest.consentmodel#_Ark_4D8pEfGBBNTzvKuwwQ"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Process" id="_9fT9Iz-1EfGk0sFbKoKHyQ" entityName="End">
+    <behavior href="PinRelationTest.datadictionary#_aATMcT8pEfGBBNTzvKuwwQ"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="PinRelationTest.consentmodel#_Ark_4D8pEfGBBNTzvKuwwQ"/>
+  </nodes>
+</dataflowdiagram:DataFlowDiagram>

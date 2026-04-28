@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<consentmodel:ConsentModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" id="_UqNa0D1jEfGmFKwwtJJekw" entityName="ConsentModel">
+  <roleLabelType id="_MxHEsD1wEfGmFKwwtJJekw" entityName="Roles">
+    <labels id="_O6VbAD1wEfGmFKwwtJJekw" entityName="Inspector">
+      <role id="_RVxisD1wEfGmFKwwtJJekw" entityName="Inspector"/>
+    </labels>
+    <labels id="_U05U8D1wEfGmFKwwtJJekw" entityName="Customer">
+      <role id="_WA1joD1wEfGmFKwwtJJekw" entityName="Customer"/>
+    </labels>
+    <labels id="_ZSvZQD1wEfGmFKwwtJJekw" entityName="AnalysisStaff">
+      <role id="_bOD2cD1wEfGmFKwwtJJekw" entityName="AnalysisStaff"/>
+    </labels>
+  </roleLabelType>
+  <consentLabelType id="_JLbiAT1xEfGmFKwwtJJekw" entityName="Functionalities">
+    <labels id="_mchdgD1xEfGtevHBcNoGlQ" entityName="InspectCustomer">
+      <consentOption id="_qlihUD1xEfGtevHBcNoGlQ" entityName="InspectCustomer"/>
+    </labels>
+    <labels id="_tvLy0D1xEfGtevHBcNoGlQ" entityName="CheckIn">
+      <consentOption id="_uzKYUD1xEfGtevHBcNoGlQ" entityName="CheckOut"/>
+    </labels>
+    <labels id="_xaC7AD1xEfGtevHBcNoGlQ" entityName="CheckOut">
+      <consentOption id="_zCGd8D1xEfGtevHBcNoGlQ" entityName="CheckOut"/>
+    </labels>
+    <labels id="_0OGXAD1xEfGtevHBcNoGlQ" entityName="TripHistory">
+      <consentOption id="_5NYfAD1yEfGtevHBcNoGlQ" entityName="TripHistory"/>
+    </labels>
+    <labels id="_4qU1QD1yEfGtevHBcNoGlQ" entityName="UserManagement">
+      <consentOption id="_8hpFED1yEfGtevHBcNoGlQ" entityName="UserManagement"/>
+    </labels>
+    <labels id="_-afdED1yEfGtevHBcNoGlQ" entityName="Analysis">
+      <consentOption id="__6GOoD1yEfGtevHBcNoGlQ" entityName="Analysis"/>
+    </labels>
+  </consentLabelType>
+  <dataItemLabelType id="_U0NDUT1uEfGmFKwwtJJekw" entityName="Customer">
+    <labels id="_W8uPAD1uEfGmFKwwtJJekw" entityName="TripUID">
+      <dataItem id="_YlzFoD1uEfGmFKwwtJJekw" entityName="TripUID"/>
+    </labels>
+    <labels id="_Z-xDsD1uEfGmFKwwtJJekw" entityName="CustomerUID">
+      <dataItem id="_bfWFoD1uEfGmFKwwtJJekw" entityName="CustomerUID"/>
+    </labels>
+    <labels id="_jUQzcD1uEfGmFKwwtJJekw" entityName="Name">
+      <dataItem id="_kYyykD1uEfGmFKwwtJJekw" entityName="Name"/>
+    </labels>
+    <labels id="_m21iUD1uEfGmFKwwtJJekw" entityName="Address">
+      <dataItem id="_oWD5YD1uEfGmFKwwtJJekw" entityName="Address"/>
+    </labels>
+  </dataItemLabelType>
+  <dataItemLabelType id="_151AYj1uEfGmFKwwtJJekw" entityName="Vehicle">
+    <labels id="_3OV8QD1uEfGmFKwwtJJekw" entityName="VehicleUID">
+      <dataItem id="_5Oq1QD1uEfGmFKwwtJJekw" entityName="VehicleUID"/>
+    </labels>
+    <labels id="_74q9YD1uEfGmFKwwtJJekw" entityName="VehiclePublicKey">
+      <dataItem id="_9VWWwD1uEfGmFKwwtJJekw" entityName="VehiclePublicKey"/>
+    </labels>
+    <labels id="_CZ3ZgD1vEfGmFKwwtJJekw" entityName="VehicleSignature">
+      <dataItem id="_EJ8QAD1vEfGmFKwwtJJekw" entityName="VehicleSignature"/>
+    </labels>
+  </dataItemLabelType>
+  <dataItemLabelType id="_GQwykj1vEfGmFKwwtJJekw" entityName="Staff">
+    <labels id="_HvrAkD1vEfGmFKwwtJJekw" entityName="StaffAuthCredentials">
+      <dataItem id="_KCGWMD1vEfGmFKwwtJJekw" entityName="StaffAuthCredentials"/>
+    </labels>
+    <labels id="_Mf51YD1vEfGmFKwwtJJekw" entityName="StaffAuthResult">
+      <dataItem id="_N5oBYD1vEfGmFKwwtJJekw" entityName="StaffAuthResult"/>
+    </labels>
+  </dataItemLabelType>
+  <dataItemLabelType id="_Qj2L8j1vEfGmFKwwtJJekw" entityName="Data">
+    <labels id="_Rw508D1vEfGmFKwwtJJekw" entityName="InspectionResult">
+      <dataItem id="_UtlBcD1vEfGmFKwwtJJekw" entityName="InspectionResult"/>
+    </labels>
+    <labels id="_WkDa4D1vEfGmFKwwtJJekw" entityName="Location">
+      <dataItem id="_YgerUD1vEfGmFKwwtJJekw" entityName="Location"/>
+    </labels>
+    <labels id="_chnlgD1vEfGmFKwwtJJekw" entityName="CheckInReport">
+      <dataItem id="_eO_tUD1vEfGmFKwwtJJekw" entityName="CheckInReport"/>
+    </labels>
+    <labels id="_gaEdwD1vEfGmFKwwtJJekw" entityName="CheckOutReport">
+      <dataItem id="_prFWID1vEfGmFKwwtJJekw" entityName="CheckOutReport"/>
+    </labels>
+    <labels id="_sDW1ED1vEfGmFKwwtJJekw" entityName="ResetReport">
+      <dataItem id="_uDbPYD1vEfGmFKwwtJJekw" entityName="ResetReport"/>
+    </labels>
+    <labels id="_xC54QD1vEfGmFKwwtJJekw" entityName="AnalysisFunction">
+      <dataItem id="_yoGUcD1vEfGmFKwwtJJekw" entityName="AnalysisFunction"/>
+    </labels>
+    <labels id="_1q8aYD1vEfGmFKwwtJJekw" entityName="CAck">
+      <dataItem id="_2nI84D1vEfGmFKwwtJJekw" entityName="CAck"/>
+    </labels>
+    <labels id="_9jSPoD1vEfGmFKwwtJJekw" entityName="Provider">
+      <dataItem id="_-7pwwD1vEfGmFKwwtJJekw" entityName="ProviderUID"/>
+    </labels>
+  </dataItemLabelType>
+  <dataContextLabelType id="_tYC6pD1wEfGmFKwwtJJekw" entityName="DataContext">
+    <labels id="_t5NuAD1wEfGmFKwwtJJekw" entityName="Old">
+      <dataContext id="_xpjzID1wEfGmFKwwtJJekw" entityName="Old"/>
+    </labels>
+    <labels id="_y4C_gD1wEfGmFKwwtJJekw" entityName="TripStartEnd">
+      <dataContext id="_0WpEcD1wEfGmFKwwtJJekw" entityName="TripStartEnd"/>
+    </labels>
+    <labels id="_2Gf4gD1wEfGmFKwwtJJekw" entityName="Registration">
+      <dataContext id="_4GFKoD1wEfGmFKwwtJJekw" entityName="Registration"/>
+    </labels>
+    <labels id="_6QoWoD1wEfGmFKwwtJJekw" entityName="RegistrationReport">
+      <dataContext id="_7tsKgD1wEfGmFKwwtJJekw" entityName="RegistrationReport"/>
+    </labels>
+    <labels id="_jSDt0D2LEfGtevHBcNoGlQ" entityName="New">
+      <dataContext id="_ksazAD2LEfGtevHBcNoGlQ" entityName="New"/>
+    </labels>
+  </dataContextLabelType>
+</consentmodel:ConsentModel>

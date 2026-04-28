@@ -27,9 +27,9 @@ public class UserScalerTest {
 
 		String outputDir = "scaled_models";
 		String scaledModelNameBase = "scaled_users_";
-		int numberWarmupRuns = 1; // How many times each scenario should be run before starting the evaluation
-		int numberEvaluationRuns = 5; // How many times each scenario should be ran to determine the result
-		int[] numberUsers = { 1, 100, 1000, 2000, 5000 };
+		int numberWarmupRuns = 3; // How many times each scenario should be run before starting the evaluation
+		int numberEvaluationRuns = 10; // How many times each scenario should be ran to determine the result
+		int[] numberUsers = { 1, 100, 1000, 2000, 5000, 10000 };
 
 		ModelManager manager = new ModelManager();
 
@@ -88,7 +88,7 @@ public class UserScalerTest {
 				flowGraphCollection.evaluate();
 				endLabelPropagation = System.nanoTime();
 				startAnalysis = System.nanoTime();
-				var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
+				var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 				endAnalysis = System.nanoTime();
 
 				findGraphsTime = endFindGraphs - startFindGraphs;
@@ -125,6 +125,8 @@ public class UserScalerTest {
 		            
 		    logger.info("\tAverage time for privacy analysis: " + resultAnalysis[x] + "ns ("
 		            + String.format("%.4f", resultAnalysis[x] / 1000000000.0) + "s)");
+		    
+		    logger.info("Average Total: " + (resultAnalysis[x] + resultPropagation[x] + resultGraphFind[x])/1000000000.0 + "s");
 		}
 
 	}

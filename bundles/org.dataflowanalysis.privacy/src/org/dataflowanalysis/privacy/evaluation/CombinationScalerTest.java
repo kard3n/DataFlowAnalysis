@@ -27,9 +27,9 @@ public class CombinationScalerTest {
 
 		String outputDir = "scaled_models";
 		String scaledModelNameBase = "scaled_comb_";
-		int numberWarmupRuns = 1; // How many times each scenario should be run before starting the evaluation
-		int numberEvaluationRuns = 5; // How many times each scenario should be ran to determine the result
-		int[] numberCombinations = { 1, 100, 1000, 2000, 5000 };
+		int numberWarmupRuns = 3; // How many times each scenario should be run before starting the evaluation
+		int numberEvaluationRuns = 10; // How many times each scenario should be ran to determine the result
+		int[] numberCombinations = { 1, 100, 1000, 2000};
 
 		ModelManager manager = new ModelManager();
 
@@ -37,7 +37,7 @@ public class CombinationScalerTest {
 				consentModelPath, TEST_MODEL_PROJECT_NAME);
 
 		for (int currentAmount : numberCombinations) {
-			PrivacyModelPackage modifiedPackage = PrivacyContractGenerator.generateSourceNodes(originalPackage, "Source", currentAmount, 6, 2);
+			PrivacyModelPackage modifiedPackage = PrivacyContractGenerator.generateSourceNodes(originalPackage, "Source", currentAmount, 6, 0);
 			// save model to a directory
 			manager.savePrivacyPackage(modifiedPackage, Path.of(outputDir), scaledModelNameBase + currentAmount);
 		}
@@ -87,7 +87,7 @@ public class CombinationScalerTest {
 				flowGraphCollection.evaluate();
 				endLabelPropagation = System.nanoTime();
 				startAnalysis = System.nanoTime();
-				var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
+				var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 				endAnalysis = System.nanoTime();
 
 				findGraphsTime = endFindGraphs - startFindGraphs;
@@ -124,6 +124,8 @@ public class CombinationScalerTest {
 		            
 		    logger.info("\tAverage time for privacy analysis: " + resultAnalysis[x] + "ns ("
 		            + String.format("%.4f", resultAnalysis[x] / 1000000000.0) + "s)");
+		    
+		    logger.info("Average Total: " + (resultAnalysis[x] + resultPropagation[x] + resultGraphFind[x])/1000000000.0 + "s");
 		}
 
 	}

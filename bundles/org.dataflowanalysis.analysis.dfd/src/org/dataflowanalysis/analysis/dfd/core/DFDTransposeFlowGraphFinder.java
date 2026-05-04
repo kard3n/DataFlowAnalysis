@@ -192,14 +192,13 @@ public class DFDTransposeFlowGraphFinder implements TransposeFlowGraphFinder {
                     .toList();
         }
 
-        if (inputPins.stream()
-                .anyMatch(pin -> dataFlowDiagram.getFlows()
-                        .stream()
-                        .noneMatch(flow -> flow.getDestinationPin()
-                                .equals(pin)))) {
-            logger.warn("TFG skipped since input pin has no incoming flow");
-            return vertices;
-        }
+		if (inputPins.stream().anyMatch(
+				pin -> dataFlowDiagram.getFlows().stream().noneMatch(flow -> flow.getDestinationPin().equals(pin)))) {
+			logger.warn("TFG skipped since input pins " + inputPins.stream().filter(
+					pin -> dataFlowDiagram.getFlows().stream().noneMatch(flow -> flow.getDestinationPin().equals(pin)))
+					.map(pin -> pin.getEntityName()).toList() + " have no incoming flow.");
+			return vertices;
+		}
 
         if (vertices == null || vertices.isEmpty()) {
             vertices = new ArrayList<>();

@@ -109,7 +109,7 @@ public class PinRelationItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PinRelation) object).getId();
+		String label = ((PinRelation) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_PinRelation_type")
 				: getString("_UI_PinRelation_type") + " " + label;
 	}

@@ -64,7 +64,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="datadictionary.ecore#//AbstractLabel"/>
     <genClasses image="false" ecoreClass="datadictionary.ecore#//AbstractLabelType"/>
-    <genClasses ecoreClass="datadictionary.ecore#//PinRelation">
+    <genClasses ecoreClass="datadictionary.ecore#//PinRelation" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//PinRelation/inputPin"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//PinRelation/outputPin"/>
     </genClasses>

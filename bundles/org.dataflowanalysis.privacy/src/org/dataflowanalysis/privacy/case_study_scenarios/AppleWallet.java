@@ -32,7 +32,7 @@ public class AppleWallet {
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
 
-		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true);
+		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 
 		logger.info("Detected violations: " + violations.size());
 

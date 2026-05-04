@@ -98,6 +98,7 @@
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_jUQzcD1uEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataContextLabel" href="default.consentmodel#_2Gf4gD1wEfGmFKwwtJJekw"/>
     </assignment>
+    <pinRelations id="_cP9MJkeTEfGyLfhotDOSOw" entityName="SignInteraction" inputPin="_2Ug8wD4oEfGG0e8jVwanbw" outputPin="_Oo6UwT4pEfGG0e8jVwanbw"/>
   </behavior>
   <behavior id="_ift7kT4zEfGG0e8jVwanbw" entityName="Inspector">
     <inPin id="_jrPTgD4zEfGG0e8jVwanbw" entityName="Inspector_InspectCustomer_In"/>
@@ -106,6 +107,7 @@
     <assignment xsi:type="datadictionary:Assignment" id="_zoVCUj4zEfGG0e8jVwanbw" entityName="Inspector_InspectCustomer_Out" outputPin="_jrPTgD4zEfGG0e8jVwanbw" inputPins="_jrPTgD4zEfGG0e8jVwanbw">
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_HvrAkD1vEfGmFKwwtJJekw"/>
     </assignment>
+    <pinRelations id="_R0oARkeUEfGuoO7AtQNzqQ" entityName="InspectCustomer" inputPin="_wOhN4T4zEfGG0e8jVwanbw" outputPin="_tlMbMD4zEfGG0e8jVwanbw"/>
   </behavior>
   <behavior id="__a1AAD4zEfGG0e8jVwanbw" entityName="ExternalSystemInterface">
     <inPin id="_DLMTQD40EfGG0e8jVwanbw" entityName="ESI_InspectCustomer_In"/>
@@ -144,6 +146,12 @@
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_D65Q4z4_EfGVYMl93-15Bw" entityName="ESI_ResetSTS_Out_Result" outputPin="_Cz5zoT4_EfGVYMl93-15Bw" inputPins="_Wg3ugD40EfGG0e8jVwanbw"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_LCj3Iz4_EfGVYMl93-15Bw" entityName="ESI_Register_Out" outputPin="_JwJNAT4_EfGVYMl93-15Bw" inputPins="_aepLoD40EfGG0e8jVwanbw"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Wa6Pcz4_EfGVYMl93-15Bw" entityName="ESI_Register_Out_Result" outputPin="_U3YnMT4_EfGVYMl93-15Bw" inputPins="_cYxWAD40EfGG0e8jVwanbw"/>
+    <pinRelations id="_Ka5SRkeXEfGuoO7AtQNzqQ" entityName="InspectCustomer" inputPin="_HmyU0D40EfGG0e8jVwanbw" outputPin="_i6sK4T40EfGG0e8jVwanbw"/>
+    <pinRelations id="_XLU31keXEfGuoO7AtQNzqQ" entityName="CheckIn" inputPin="_KzjLwD40EfGG0e8jVwanbw" outputPin="_6yiJwT40EfGG0e8jVwanbw"/>
+    <pinRelations id="_o7iKFkeXEfGuoO7AtQNzqQ" entityName="CheckOut" inputPin="_O-T8AD40EfGG0e8jVwanbw" outputPin="_SX5RgT41EfGG0e8jVwanbw"/>
+    <pinRelations id="_0FgvNkeXEfGuoO7AtQNzqQ" entityName="TripHistory" inputPin="_TOCEwD40EfGG0e8jVwanbw" outputPin="_qoBNgT41EfGG0e8jVwanbw"/>
+    <pinRelations id="_BHdilkeYEfGuoO7AtQNzqQ" entityName="ResetSTS" inputPin="_Wg3ugD40EfGG0e8jVwanbw" outputPin="_p8U2ED4-EfGVYMl93-15Bw"/>
+    <pinRelations id="_RhBK9keYEfGuoO7AtQNzqQ" entityName="Register" inputPin="_cYxWAD40EfGG0e8jVwanbw" outputPin="_JwJNAT4_EfGVYMl93-15Bw"/>
   </behavior>
   <behavior id="_vast0T4_EfGVYMl93-15Bw" entityName="AtomicBroadcastMiddleware">
     <inPin id="_yUtn4D4_EfGVYMl93-15Bw" entityName="ABM_InspectCustomer_In"/>
@@ -155,14 +163,13 @@
     <inPin id="_IxEgMD5AEfGVYMl93-15Bw" entityName="ABM_ResetSTS_In"/>
     <inPin id="_KbDVwD5AEfGVYMl93-15Bw" entityName="ABM_Register_In"/>
     <inPin id="_MAHPED5AEfGVYMl93-15Bw" entityName="ABM_Analysis_In"/>
+    <inPin id="_fT6YcEerEfGAVZzVLrAidA" entityName="ABM_AuthenticateStaff_In_Result"/>
     <outPin id="_KyBiwUMLEfGKhpyu5lUXYw" entityName="ABM_AuthenticateStaff_Out"/>
     <outPin id="_cDIeMUMLEfGKhpyu5lUXYw" entityName="ABM_InspectCustomer_Out"/>
     <outPin id="_rKGdUUMLEfGKhpyu5lUXYw" entityName="ABM_InspectCustomer_Out_Result"/>
-    <outPin id="_2Ul_0UMLEfGKhpyu5lUXYw" entityName="ABM_CheckIn_Out_Broadcast"/>
     <outPin id="_SLFlkUMMEfGKhpyu5lUXYw" entityName="ABM_CheckIn_Out_Trip"/>
     <outPin id="_jxQyEUMMEfGKhpyu5lUXYw" entityName="ABM_InvalidateUID_Out"/>
     <outPin id="_GuXOIUMNEfGKhpyu5lUXYw" entityName="ABM_CheckIn_Out_Result"/>
-    <outPin id="_muHvUUMNEfGKhpyu5lUXYw" entityName="ABM_CheckOut_Out_Broadcast"/>
     <outPin id="_xABc8UMNEfGKhpyu5lUXYw" entityName="ABM_CheckOut_Out_Trip"/>
     <outPin id="__z79MUMNEfGKhpyu5lUXYw" entityName="ABM_CheckOut_Out_Result"/>
     <outPin id="_kCuDkUMOEfGKhpyu5lUXYw" entityName="ABM_TripHistory_Out"/>
@@ -181,12 +188,11 @@
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_HvrAkD1vEfGmFKwwtJJekw"/>
     </assignment>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_uzwro0MLEfGKhpyu5lUXYw" entityName="ABM_InspectCustomer_Out_Result" outputPin="_rKGdUUMLEfGKhpyu5lUXYw" inputPins="_1GsnUD4_EfGVYMl93-15Bw"/>
-    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_4cSsI0MLEfGKhpyu5lUXYw" entityName="ABM_CheckIn_Out_Broadcast" outputPin="_2Ul_0UMLEfGKhpyu5lUXYw" inputPins="_2zAYID4_EfGVYMl93-15Bw"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_ToO5A0MMEfGKhpyu5lUXYw" entityName="ABM_CheckIn_Out_Trip" outputPin="_SLFlkUMMEfGKhpyu5lUXYw" inputPins="_2zAYID4_EfGVYMl93-15Bw"/>
     <assignment xsi:type="datadictionary:UnsetAssignment" id="_Ya0eRUMMEfGKhpyu5lUXYw" entityName="ABM_CheckIn_Out_Trip" outputPin="_2zAYID4_EfGVYMl93-15Bw">
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_Z-xDsD1uEfGmFKwwtJJekw"/>
     </assignment>
-    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_wggE00MMEfGKhpyu5lUXYw" entityName="ABM_InvalidateUID_Out" outputPin="_jxQyEUMMEfGKhpyu5lUXYw" inputPins="_2zAYID4_EfGVYMl93-15Bw"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_wggE00MMEfGKhpyu5lUXYw" entityName="ABM_InvalidateUID_Out" outputPin="_jxQyEUMMEfGKhpyu5lUXYw" inputPins="_2zAYID4_EfGVYMl93-15Bw _4g_j8D4_EfGVYMl93-15Bw"/>
     <assignment xsi:type="datadictionary:UnsetAssignment" id="_0_lfRUMMEfGKhpyu5lUXYw" entityName="ABM_InvalidateUID_Out" outputPin="_jxQyEUMMEfGKhpyu5lUXYw">
       <outputLabels xsi:type="consentmodel:DataContextLabel" href="default.consentmodel#_y4C_gD1wEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_Z-xDsD1uEfGmFKwwtJJekw"/>
@@ -209,7 +215,6 @@
       <outputLabels xsi:type="consentmodel:DataContextLabel" href="default.consentmodel#_y4C_gD1wEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_WkDa4D1vEfGmFKwwtJJekw"/>
     </assignment>
-    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_pkPn40MNEfGKhpyu5lUXYw" entityName="ABM_CheckOut_Out_Broadcast" outputPin="_muHvUUMNEfGKhpyu5lUXYw" inputPins="_4g_j8D4_EfGVYMl93-15Bw"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_z1B7M0MNEfGKhpyu5lUXYw" entityName="ABM_CheckOut_Out_Trip" outputPin="_xABc8UMNEfGKhpyu5lUXYw" inputPins="_4g_j8D4_EfGVYMl93-15Bw"/>
     <assignment xsi:type="datadictionary:UnsetAssignment" id="_4b4KhUMNEfGKhpyu5lUXYw" entityName="ABM_CheckOut_Out_Trip" outputPin="_xABc8UMNEfGKhpyu5lUXYw">
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_Z-xDsD1uEfGmFKwwtJJekw"/>
@@ -248,6 +253,8 @@
     <assignment xsi:type="datadictionary:UnsetAssignment" id="_hkq3VUMPEfGKhpyu5lUXYw" entityName="ABM_Register_Out_Result" outputPin="_YmT1MUMPEfGKhpyu5lUXYw">
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_1q8aYD1vEfGmFKwwtJJekw"/>
     </assignment>
+    <pinRelations id="_buGqBkeYEfGuoO7AtQNzqQ" entityName="InspectCustomer" inputPin="_1GsnUD4_EfGVYMl93-15Bw" outputPin="_cDIeMUMLEfGKhpyu5lUXYw"/>
+    <pinRelations id="_ACawpkeZEfGuoO7AtQNzqQ" entityName="TripHistory" inputPin="_GxGMgD5AEfGVYMl93-15Bw" outputPin="_kCuDkUMOEfGKhpyu5lUXYw"/>
   </behavior>
   <behavior id="_cVnuYUOlEfGLX6SAL3wxkw" entityName="CustomerTableAccess">
     <inPin id="_fN8mYEOlEfGLX6SAL3wxkw" entityName="CTA_ResetTripUID_In"/>
@@ -306,6 +313,7 @@
     <outPin id="_bjkNEUOqEfGLX6SAL3wxkw" entityName="CIS_CheckIn_Out_Result"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_LdEqoEOqEfGLX6SAL3wxkw" entityName="CIS_CheckIn_Out" outputPin="_J_Qo0UOqEfGLX6SAL3wxkw" inputPins="_1Ug4EEOpEfGLX6SAL3wxkw"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_c1yC40OqEfGLX6SAL3wxkw" entityName="CIS_CheckIn_Out_Result" outputPin="_bjkNEUOqEfGLX6SAL3wxkw" inputPins="_HyyKMEOqEfGLX6SAL3wxkw"/>
+    <pinRelations id="_TMp7dkeaEfGuoO7AtQNzqQ" entityName="CheckIn" inputPin="_HyyKMEOqEfGLX6SAL3wxkw" outputPin="_J_Qo0UOqEfGLX6SAL3wxkw"/>
   </behavior>
   <behavior id="_ouadwUOqEfGLX6SAL3wxkw" entityName="CheckOutService">
     <inPin id="_gBEdsEOrEfGLX6SAL3wxkw" entityName="COS_CheckOut_In"/>
@@ -314,6 +322,7 @@
     <outPin id="_yVw9EUOrEfGLX6SAL3wxkw" entityName="COS_CheckOut_Out_Result"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_mJLrc0OrEfGLX6SAL3wxkw" entityName="COS_CheckOut_Out" outputPin="_lEoeMUOrEfGLX6SAL3wxkw" inputPins="_gBEdsEOrEfGLX6SAL3wxkw"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_zlSEM0OrEfGLX6SAL3wxkw" entityName="COS_CheckOut_Out_Result" outputPin="_yVw9EUOrEfGLX6SAL3wxkw" inputPins="_jJ2zkEOrEfGLX6SAL3wxkw"/>
+    <pinRelations id="_ZZ6u9keaEfGuoO7AtQNzqQ" entityName="CheckOut" inputPin="_jJ2zkEOrEfGLX6SAL3wxkw" outputPin="_lEoeMUOrEfGLX6SAL3wxkw"/>
   </behavior>
   <behavior id="_AdV7wUOsEfGLX6SAL3wxkw" entityName="TripHistoryService">
     <inPin id="_BkH9oEOsEfGLX6SAL3wxkw" entityName="TH_TripHistory_In"/>
@@ -322,6 +331,7 @@
     <outPin id="_W9kAYUOsEfGLX6SAL3wxkw" entityName="TH_TripHistory_Out_Result"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_bzvFI0OsEfGLX6SAL3wxkw" entityName="TH_TripHistory_Out" outputPin="_Ux6oMUOsEfGLX6SAL3wxkw" inputPins="_BkH9oEOsEfGLX6SAL3wxkw"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_kTgt00OsEfGLX6SAL3wxkw" entityName="TH_TripHistory_Out_Result" outputPin="_W9kAYUOsEfGLX6SAL3wxkw" inputPins="_E7wn0EOsEfGLX6SAL3wxkw"/>
+    <pinRelations id="_iOjNVkeaEfGuoO7AtQNzqQ" entityName="TripHistory" inputPin="_E7wn0EOsEfGLX6SAL3wxkw" outputPin="_Ux6oMUOsEfGLX6SAL3wxkw"/>
   </behavior>
   <behavior id="_3upQ0UOsEfGLX6SAL3wxkw" entityName="ResetShortTermSecretService">
     <inPin id="_4oDlEEOsEfGLX6SAL3wxkw" entityName="RSTSS_ResetSTS_In"/>
@@ -330,6 +340,7 @@
     <outPin id="_I3oyEUOtEfGLX6SAL3wxkw" entityName="RSTSS_ResetSTS_Out_Result"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_DMAsA0OtEfGLX6SAL3wxkw" entityName="RSTSS_ResetSTS_Out" outputPin="_CGE-sUOtEfGLX6SAL3wxkw" inputPins="_4oDlEEOsEfGLX6SAL3wxkw"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_J-58I0OtEfGLX6SAL3wxkw" entityName="RSTSS_ResetSTS_Out_Result" outputPin="_I3oyEUOtEfGLX6SAL3wxkw" inputPins="_7f8YMEOsEfGLX6SAL3wxkw"/>
+    <pinRelations id="_qkC4pkeaEfGuoO7AtQNzqQ" entityName="ResetSTS" inputPin="_7f8YMEOsEfGLX6SAL3wxkw" outputPin="_CGE-sUOtEfGLX6SAL3wxkw"/>
   </behavior>
   <behavior id="_jGqqwUOtEfGLX6SAL3wxkw" entityName="CustomerRegisterService">
     <inPin id="_j7s1UEOtEfGLX6SAL3wxkw" entityName="CRS_Register_In"/>
@@ -351,5 +362,49 @@
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_jUQzcD1uEfGmFKwwtJJekw"/>
     </assignment>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_1S58Q0OuEfGLX6SAL3wxkw" entityName="CRS_Register_Out_Result" outputPin="_xRf8UUOuEfGLX6SAL3wxkw" inputPins="_m4uAEEOtEfGLX6SAL3wxkw"/>
+    <pinRelations id="_6k00pkeaEfGuoO7AtQNzqQ" entityName="Register_Provider" inputPin="_m4uAEEOtEfGLX6SAL3wxkw" outputPin="_pv7dwUOtEfGLX6SAL3wxkw"/>
+  </behavior>
+  <behavior id="_HNfw4UeREfGyLfhotDOSOw" entityName="ProviderSystemManagementService">
+    <inPin id="_MLTusEeREfGyLfhotDOSOw" entityName="PSMS_Register_In"/>
+    <outPin id="_R9DD0UeREfGyLfhotDOSOw" entityName="PSMS_Register_Out"/>
+    <assignment xsi:type="datadictionary:Assignment" id="_UTTJgkeREfGyLfhotDOSOw" entityName="PSMS_Register_Out" outputPin="_R9DD0UeREfGyLfhotDOSOw" inputPins="_MLTusEeREfGyLfhotDOSOw">
+      <term xsi:type="datadictionary:TRUE" id="_7sv_oEeSEfGyLfhotDOSOw"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_Z-xDsD1uEfGmFKwwtJJekw"/>
+    </assignment>
+  </behavior>
+  <behavior id="_gK30cUeREfGyLfhotDOSOw" entityName="ProviderCustomerDatabase">
+    <inPin id="_h-a1sEeREfGyLfhotDOSOw" entityName="PCD_Register_In"/>
+  </behavior>
+  <behavior id="_l8spIUeREfGyLfhotDOSOw" entityName="AnalysisStaff">
+    <inPin id="_pb6iAEeREfGyLfhotDOSOw" entityName="AS_Analysis_In_Result"/>
+    <outPin id="_rzrqoUeREfGyLfhotDOSOw" entityName="AS_Analysis_Out"/>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_x1c_1EeREfGyLfhotDOSOw" entityName="AS_Analysis_Out" outputPin="_rzrqoUeREfGyLfhotDOSOw">
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_xC54QD1vEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_HvrAkD1vEfGmFKwwtJJekw"/>
+    </assignment>
+    <pinRelations id="_HfIu9kebEfGuoO7AtQNzqQ" entityName="Analysis" inputPin="_pb6iAEeREfGyLfhotDOSOw" outputPin="_rzrqoUeREfGyLfhotDOSOw"/>
+  </behavior>
+  <behavior id="_5gxFsUeREfGyLfhotDOSOw" entityName="ProviderSystemOperationService">
+    <inPin id="_IwBeIEeSEfGyLfhotDOSOw" entityName="PSOS_Analysis_In"/>
+    <inPin id="_KtTDIEeSEfGyLfhotDOSOw" entityName="PSOS_Analysis_In_Result"/>
+    <outPin id="_NW4UgUeSEfGyLfhotDOSOw" entityName="PSOS_Analysis_Out"/>
+    <outPin id="_Wq0lEUeSEfGyLfhotDOSOw" entityName="PSOS_Analysis_Out_Result"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_PZnBQ0eSEfGyLfhotDOSOw" entityName="PSOS_Analysis_Out" outputPin="_NW4UgUeSEfGyLfhotDOSOw" inputPins="_IwBeIEeSEfGyLfhotDOSOw"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_bOPs80eSEfGyLfhotDOSOw" entityName="PSOS_Analysis_Out_Result" outputPin="_Wq0lEUeSEfGyLfhotDOSOw" inputPins="_KtTDIEeSEfGyLfhotDOSOw"/>
+    <pinRelations id="_PgSh9kebEfGuoO7AtQNzqQ" entityName="Analysis" inputPin="_KtTDIEeSEfGyLfhotDOSOw" outputPin="_NW4UgUeSEfGyLfhotDOSOw"/>
+  </behavior>
+  <behavior id="_ifshUUeSEfGyLfhotDOSOw" entityName="ProviderSystemInterface">
+    <inPin id="_kPr4QEeSEfGyLfhotDOSOw" entityName="PSI_Analysis_In"/>
+    <outPin id="_rTM-UUeSEfGyLfhotDOSOw" entityName="PSI_Analysis_Out"/>
+    <outPin id="_4CpscUeSEfGyLfhotDOSOw" entityName="PSI_Analysis_Out_Result"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_tLJXY0eSEfGyLfhotDOSOw" entityName="PSI_Analysis_Out" outputPin="_rTM-UUeSEfGyLfhotDOSOw" inputPins="_kPr4QEeSEfGyLfhotDOSOw"/>
+    <assignment xsi:type="datadictionary:Assignment" id="_5qXRIkeSEfGyLfhotDOSOw" entityName="PSI_Analysis_Out_Result" outputPin="_4CpscUeSEfGyLfhotDOSOw" inputPins="_kPr4QEeSEfGyLfhotDOSOw">
+      <term xsi:type="datadictionary:TRUE" id="_9-oisEeSEfGyLfhotDOSOw"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_IgNrEEeTEfGyLfhotDOSOw"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_QHiBxUeTEfGyLfhotDOSOw" entityName="PSI_Analysis_Out_Result" outputPin="_4CpscUeSEfGyLfhotDOSOw">
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_xC54QD1vEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_HvrAkD1vEfGmFKwwtJJekw"/>
+    </assignment>
   </behavior>
 </datadictionary:DataDictionary>

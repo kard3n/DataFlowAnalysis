@@ -89,6 +89,7 @@
     <labels id="_9jSPoD1vEfGmFKwwtJJekw" entityName="Provider">
       <dataItem id="_-7pwwD1vEfGmFKwwtJJekw" entityName="ProviderUID"/>
     </labels>
+    <labels id="_IgNrEEeTEfGyLfhotDOSOw" entityName="AnalysisResult"/>
   </dataItemLabelType>
   <dataContextLabelType id="_tYC6pD1wEfGmFKwwtJJekw" entityName="DataContext">
     <labels id="_t5NuAD1wEfGmFKwwtJJekw" entityName="Old">

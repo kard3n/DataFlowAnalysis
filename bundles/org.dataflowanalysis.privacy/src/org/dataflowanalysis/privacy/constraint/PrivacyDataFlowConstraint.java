@@ -894,7 +894,7 @@ public class PrivacyDataFlowConstraint {
 	 * Converts a consent option to a human-readable form
 	 */
 	public static String consentOptionToString(ConsentOption input) {
-		return "\n" + input.getEntityName() + ":\n\tAllowsFor: " + input.getAllowsFor().stream().map(af -> af
+		return "\n\t" + input.getEntityName() + ". Allows for: " + input.getAllowsFor().stream().map(af -> "\n\t\t" + af
 				.getEntityName()
 				+ ":"
 				+ af.getMembers().stream().map(member -> member.getItem().getEntityName() + ": {state: {"

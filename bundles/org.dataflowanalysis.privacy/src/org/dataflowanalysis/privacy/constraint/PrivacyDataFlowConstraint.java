@@ -243,6 +243,11 @@ public class PrivacyDataFlowConstraint {
 				for (var pinGroup : pinRelationGroups) {
 					List<HashMap<DataItem, ItemInformation>> newCombinations = new LinkedList<>();
 					for (String pin : pinGroup) {
+						var combination = nodeLevelCombinations.get(pin);
+						if(combination == null) {
+							logger.warn("The pin " + pin + " in node " + vert.getName() + " is a member of a pin relation, but no information for it was received as part of the node's incoming or outgoing data characteristics.");
+							continue;
+						}
 						if (newCombinations.isEmpty()) {
 							newCombinations.addAll(nodeLevelCombinations.get(pin));
 						} else {

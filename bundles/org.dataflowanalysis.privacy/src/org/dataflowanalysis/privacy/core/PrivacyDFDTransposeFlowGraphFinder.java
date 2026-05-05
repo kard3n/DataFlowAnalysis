@@ -82,7 +82,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 			Role role = roleLabel.getRole();
 
 			// Skip the role if no source node with the role exists
-			if (sources.stream().filter(node -> node.getProperties().contains(roleLabel)).count() == 0)
+			if (sources.stream().anyMatch(node -> node.getProperties().contains(roleLabel)))
 				continue;
 
 			// calculate all consent combinations for the current role

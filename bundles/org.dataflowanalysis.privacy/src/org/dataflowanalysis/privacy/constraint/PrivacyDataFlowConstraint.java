@@ -181,7 +181,7 @@ public class PrivacyDataFlowConstraint {
 						if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalities,
 								vert.getName())) {
 							violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
-									+ " can receive data from a user which has not consented to its functionalities. \nFunctionalities consented to by user: "
+									+ " can receive data from a user who has not consented to its functionalities. \nFunctionalities consented to by user: "
 									+ extractConsentLabels(newCharacteristics.getValue()).stream()
 											.map(label -> label.getConsentOption().getEntityName()).toList()
 									+ "\nFunctionalities of the vertex: "

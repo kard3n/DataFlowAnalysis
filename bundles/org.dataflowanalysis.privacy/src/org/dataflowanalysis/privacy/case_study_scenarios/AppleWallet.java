@@ -28,7 +28,6 @@ public class AppleWallet {
 				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
 				.useConsentModel(consentModelPath.toString()).build();
 		analysis.initializeAnalysis();
-		PrivacyDFDTransposeFlowGraphFinder.setAssigmnentAutoConsentOptions(true);
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
 

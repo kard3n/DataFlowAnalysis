@@ -22,8 +22,6 @@ public class OnlineShop {
 		final var dataFlowDiagramPath = Paths.get("scenarios", "privacy_dfd", "PrivacyOnlineShop", "online_shop.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("scenarios", "privacy_dfd", "PrivacyOnlineShop", "online_shop.datadictionary");
 		final var consentModelPath = Paths.get("scenarios", "privacy_dfd", "PrivacyOnlineShop", "online_shop.consentmodel");
-
-		PrivacyDFDTransposeFlowGraphFinder.setAssigmnentAutoConsentOptions(true);
 		
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)

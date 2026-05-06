@@ -2,33 +2,109 @@
 <consentmodel:ConsentModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" id="_UqNa0D1jEfGmFKwwtJJekw" entityName="ConsentModel">
   <roleLabelType id="_MxHEsD1wEfGmFKwwtJJekw" entityName="Roles">
     <labels id="_O6VbAD1wEfGmFKwwtJJekw" entityName="Inspector">
-      <role id="_RVxisD1wEfGmFKwwtJJekw" entityName="Inspector"/>
+      <role id="_RVxisD1wEfGmFKwwtJJekw" entityName="Inspector" requires="_qlihUD1xEfGtevHBcNoGlQ"/>
     </labels>
     <labels id="_U05U8D1wEfGmFKwwtJJekw" entityName="Customer">
-      <role id="_WA1joD1wEfGmFKwwtJJekw" entityName="Customer"/>
+      <role id="_WA1joD1wEfGmFKwwtJJekw" entityName="Customer" requires="__6GOoD1yEfGtevHBcNoGlQ _uzKYUD1xEfGtevHBcNoGlQ _zCGd8D1xEfGtevHBcNoGlQ _5NYfAD1yEfGtevHBcNoGlQ _8hpFED1yEfGtevHBcNoGlQ _qlihUD1xEfGtevHBcNoGlQ _s0bjoEhaEfGzrqe1i1LqUQ _qxmO0EfOEfGZw_-C8A2RPA"/>
     </labels>
     <labels id="_ZSvZQD1wEfGmFKwwtJJekw" entityName="AnalysisStaff">
-      <role id="_bOD2cD1wEfGmFKwwtJJekw" entityName="AnalysisStaff"/>
+      <role id="_bOD2cD1wEfGmFKwwtJJekw" entityName="AnalysisStaff" requires="__6GOoD1yEfGtevHBcNoGlQ"/>
     </labels>
   </roleLabelType>
   <consentLabelType id="_JLbiAT1xEfGmFKwwtJJekw" entityName="Functionalities">
     <labels id="_mchdgD1xEfGtevHBcNoGlQ" entityName="InspectCustomer">
-      <consentOption id="_qlihUD1xEfGtevHBcNoGlQ" entityName="InspectCustomer"/>
+      <consentOption id="_qlihUD1xEfGtevHBcNoGlQ" entityName="InspectCustomer">
+        <allowsFor id="_pXBjsEfNEfGZw_-C8A2RPA" entityName="input">
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+          <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
+          <members item="_KCGWMD1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+        <allowsFor id="_aOzx8EfOEfGZw_-C8A2RPA" entityName="result">
+          <members item="_UtlBcD1vEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </consentOption>
     </labels>
     <labels id="_tvLy0D1xEfGtevHBcNoGlQ" entityName="CheckIn">
-      <consentOption id="_uzKYUD1xEfGtevHBcNoGlQ" entityName="CheckOut"/>
+      <consentOption id="_uzKYUD1xEfGtevHBcNoGlQ" entityName="CheckOut" requires="_qxmO0EfOEfGZw_-C8A2RPA _s0bjoEhaEfGzrqe1i1LqUQ">
+        <allowsFor id="__YCHUEfOEfGZw_-C8A2RPA">
+          <members item="_bfWFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_xpjzID1wEfGmFKwwtJJekw"/>
+          <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
+          <members item="_EJ8QAD1vEfGmFKwwtJJekw"/>
+          <members item="_9VWWwD1uEfGmFKwwtJJekw"/>
+          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
+          <members item="_eO_tUD1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </consentOption>
     </labels>
     <labels id="_xaC7AD1xEfGtevHBcNoGlQ" entityName="CheckOut">
-      <consentOption id="_zCGd8D1xEfGtevHBcNoGlQ" entityName="CheckOut"/>
+      <consentOption id="_zCGd8D1xEfGtevHBcNoGlQ" entityName="CheckOut" requires="_qxmO0EfOEfGZw_-C8A2RPA _s0bjoEhaEfGzrqe1i1LqUQ">
+        <allowsFor id="_mnE5sEfPEfGZw_-C8A2RPA">
+          <members item="_bfWFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_xpjzID1wEfGmFKwwtJJekw"/>
+          <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
+          <members item="_EJ8QAD1vEfGmFKwwtJJekw"/>
+          <members item="_9VWWwD1uEfGmFKwwtJJekw"/>
+          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
+          <members item="_prFWID1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </consentOption>
     </labels>
     <labels id="_0OGXAD1xEfGtevHBcNoGlQ" entityName="TripHistory">
-      <consentOption id="_5NYfAD1yEfGtevHBcNoGlQ" entityName="TripHistory"/>
+      <consentOption id="_5NYfAD1yEfGtevHBcNoGlQ" entityName="TripHistory">
+        <allowsFor id="_DwfsMEhaEfGzrqe1i1LqUQ">
+          <members item="_bfWFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </consentOption>
     </labels>
     <labels id="_4qU1QD1yEfGtevHBcNoGlQ" entityName="UserManagement">
-      <consentOption id="_8hpFED1yEfGtevHBcNoGlQ" entityName="UserManagement"/>
+      <consentOption id="_8hpFED1yEfGtevHBcNoGlQ" entityName="UserManagement">
+        <allowsFor id="_a7ucsEhaEfGzrqe1i1LqUQ" entityName="register">
+          <members item="_kYyykD1uEfGmFKwwtJJekw" context="_4GFKoD1wEfGmFKwwtJJekw"/>
+          <members item="_oWD5YD1uEfGmFKwwtJJekw" context="_4GFKoD1wEfGmFKwwtJJekw"/>
+          <members item="_2nI84D1vEfGmFKwwtJJekw"/>
+          <members item="_-7pwwD1vEfGmFKwwtJJekw"/>
+          <members item="_bfWFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+          <members item="_bfWFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_7tsKgD1wEfGmFKwwtJJekw"/>
+          <members item="_-7pwwD1vEfGmFKwwtJJekw" context="_7tsKgD1wEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </consentOption>
     </labels>
     <labels id="_-afdED1yEfGtevHBcNoGlQ" entityName="Analysis">
-      <consentOption id="__6GOoD1yEfGtevHBcNoGlQ" entityName="Analysis"/>
+      <consentOption id="__6GOoD1yEfGtevHBcNoGlQ" entityName="Analysis">
+        <allowsFor id="_KqpwAEhcEfGzrqe1i1LqUQ">
+          <members item="_yoGUcD1vEfGmFKwwtJJekw"/>
+          <members item="_KCGWMD1vEfGmFKwwtJJekw"/>
+          <members item="_N5oBYD1vEfGmFKwwtJJekw"/>
+          <members item="_eeGsYEhcEfGzrqe1i1LqUQ"/>
+        </allowsFor>
+      </consentOption>
+    </labels>
+    <labels id="_owiWAEfOEfGZw_-C8A2RPA" entityName="VehicleSign">
+      <consentOption id="_qxmO0EfOEfGZw_-C8A2RPA" entityName="VehicleSign">
+        <allowsFor id="_sOnmcEfOEfGZw_-C8A2RPA">
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+          <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
+          <members item="_EJ8QAD1vEfGmFKwwtJJekw"/>
+          <members item="_9VWWwD1uEfGmFKwwtJJekw"/>
+          <members item="_YgerUD1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </consentOption>
+    </labels>
+    <labels id="_rkCSwEhaEfGzrqe1i1LqUQ" entityName="ResetSTS">
+      <consentOption id="_s0bjoEhaEfGzrqe1i1LqUQ" entityName="ResetSTS">
+        <allowsFor id="_uFzE4EhaEfGzrqe1i1LqUQ">
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_ksazAD2LEfGtevHBcNoGlQ"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_xpjzID1wEfGmFKwwtJJekw"/>
+          <members item="_uDbPYD1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </consentOption>
     </labels>
   </consentLabelType>
   <dataItemLabelType id="_U0NDUT1uEfGmFKwwtJJekw" entityName="Customer">
@@ -89,7 +165,9 @@
     <labels id="_9jSPoD1vEfGmFKwwtJJekw" entityName="Provider">
       <dataItem id="_-7pwwD1vEfGmFKwwtJJekw" entityName="ProviderUID"/>
     </labels>
-    <labels id="_IgNrEEeTEfGyLfhotDOSOw" entityName="AnalysisResult"/>
+    <labels id="_IgNrEEeTEfGyLfhotDOSOw" entityName="AnalysisResult">
+      <dataItem id="_eeGsYEhcEfGzrqe1i1LqUQ" entityName="AnalysisResult"/>
+    </labels>
   </dataItemLabelType>
   <dataContextLabelType id="_tYC6pD1wEfGmFKwwtJJekw" entityName="DataContext">
     <labels id="_t5NuAD1wEfGmFKwwtJJekw" entityName="Old">

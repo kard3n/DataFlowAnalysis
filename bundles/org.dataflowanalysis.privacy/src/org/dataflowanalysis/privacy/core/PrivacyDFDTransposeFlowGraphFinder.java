@@ -28,10 +28,6 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	protected final ConsentModel consentModel;
 	private boolean hasCycles = false;
 	private final DataDictionary dataDictionary;
-	// If this is set to true, SetAssignments and Assignments are adapted to always
-	// send the user's
-	// chosen consent options and role
-	private static boolean assigmnentAutoConsentOptions;
 
 	public PrivacyDFDTransposeFlowGraphFinder(DFDResourceProvider resourceProvider) {
 		if (!(resourceProvider instanceof PrivacyDFDResourceProvider)) {
@@ -52,10 +48,6 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 		this.consentModel = consentModel;
 	}
 
-	public static void setAssigmnentAutoConsentOptions(boolean value) {
-		assigmnentAutoConsentOptions = value;
-	}
-
 	/**
 	 * Finds all transpose flow graphs in a dataflowdiagram model instance
 	 * 
@@ -73,97 +65,123 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 	@Override
 	public List<? extends AbstractTransposeFlowGraph> findTransposeFlowGraphs(List<?> sinkNodes, List<?> sourceNodes) {
-		List<DFDTransposeFlowGraph> transposeFlowGraphs = new ArrayList<>();
 
 		List<Node> sources = this.getSourceNodes(dataFlowDiagram.getNodes());
 
-		// Go over all roles
-		for (RoleLabel roleLabel : this.consentModel.getRoleLabelType().getLabels()) {
-			Role role = roleLabel.getRole();
+		HashMap<RoleLabel, Set<Set<ConsentOption>>> roleToCombinations = new HashMap<>();
 
-			// Skip the role if no source node with the role exists
-			if (sources.stream().anyMatch(node -> node.getProperties().contains(roleLabel)))
-				continue;
+		List<Flow> flowsToRemove = new LinkedList<>();
 
-			// calculate all consent combinations for the current role
-			Set<Set<ConsentOption>> combinations = this.calculateRoleConsentOptions(role);
+		List<Node> nodesToAdd = new LinkedList<>();
+		List<Behavior> behaviorToAdd = new LinkedList<>();
+		List<Flow> flowsToAdd = new LinkedList<>();
 
-			logger.debug("Final amount of consent combinations for role " + role.getEntityName() + " : "
-					+ combinations.size());
-			if (assigmnentAutoConsentOptions) {
-				logger.info(
-						"AssigmnentAutoConsentOptions is set to true. All set assignments will also set the user's consent options and role.");
-			}
+		// Go over all source nodes and replicate them by role x consent options
+		for (Node source : sources) {
 
-			// Adapt source nodes
-			combinations.forEach(combination -> {
-				// Clone the diagram
-				Copier copier = new Copier();
-				DataFlowDiagram clonedDiagram = (DataFlowDiagram) copier.copy(this.dataFlowDiagram);
-				DataDictionary clonedDictionary = (DataDictionary) copier.copy(this.dataDictionary);
-				copier.copyReferences();
+			List<Flow> flowsFromNode = this.dataFlowDiagram.getFlows().stream()
+					.filter(flow -> flow.getSourceNode() == source).toList();
+			List<Flow> flowsToNode = this.dataFlowDiagram.getFlows().stream()
+					.filter(flow -> flow.getDestinationNode() == source).toList();
+			flowsToRemove.addAll(flowsToNode);
+			flowsToRemove.addAll(flowsFromNode);
 
-				List<Node> clonedSources = this.getSourceNodes(clonedDiagram.getNodes());
+			List<RoleLabel> roles = source.getProperties().stream().filter(label -> label instanceof RoleLabel)
+					.map(label -> (RoleLabel) label).toList();
+			for (RoleLabel roleLabel : roles) {
+				if (!roleToCombinations.containsKey(roleLabel)) {
+					roleToCombinations.put(roleLabel, this.calculateRoleConsentOptions(roleLabel.getRole()));
+					logger.debug("Final amount of consent combinations for role " + roleLabel.getRole().getEntityName()
+							+ " : " + roleToCombinations.get(roleLabel).size());
+				}
 
-				// Make a list of all labels that should be added to each data item for the
-				// current consent combination
-				ArrayList<AbstractLabel> consentLabelsToAdd = new ArrayList<>(this.consentModel.getConsentLabelType()
-						.getLabels().stream().filter(label -> combination.contains(label.getConsentOption()))
-						.map(label -> (AbstractLabel) label).toList());
-				// labelsToAdd.add((AbstractLabel) roleLabel);
+				Set<Set<ConsentOption>> currentCombinations = roleToCombinations.get(roleLabel);
+				for (Set<ConsentOption> combination : currentCombinations) {
+					// Copier is created here to prevent it from rewiring everything (including
+					// those created by previous iterations) every time
+					Copier copier = new Copier();
 
-				// Adapt nodes with the labels
+					Node clonedSource = (Node) copier.copy(source); // Copy node
+					// this.dataFlowDiagram.getNodes().add(clonedSource);
+					nodesToAdd.add(clonedSource);
 
-				clonedSources.forEach(source -> {
-					source.getBehavior().getAssignment().forEach(assignment -> {
-						if (!assigmnentAutoConsentOptions) {
-							// Add new labels to the Assignment behaviors of source nodes
-							if (assignment instanceof Assignment) {
-								((Assignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
-								((Assignment) assignment).getOutputLabels().add(roleLabel);
-							}
+					ArrayList<AbstractLabel> consentLabelsToAdd = new ArrayList<>(
+							this.consentModel.getConsentLabelType().getLabels().stream()
+									.filter(label -> combination.contains(label.getConsentOption()))
+									.map(label -> (AbstractLabel) label).toList());
 
-							// Set assignments need to also set user data -> add all user labels to it
-							if (assignment instanceof SetAssignment) {
-								((SetAssignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
-								((SetAssignment) assignment).getOutputLabels().add(roleLabel);
-							}
+					// Add consent labels to the node's properties
+					clonedSource.getProperties().addAll(consentLabelsToAdd);
+
+					// Change behavior
+					Behavior clonedBehavior = (Behavior) copier.copy(source.getBehavior());
+					clonedSource.setBehavior(clonedBehavior);
+					// this.dataDictionary.getBehavior().add(clonedBehavior);
+					behaviorToAdd.add(clonedBehavior);
+
+					// Modify behavior
+					clonedBehavior.getAssignment().forEach(assignment -> {
+						if (assignment instanceof Assignment) {
+							((Assignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
+							((Assignment) assignment).getOutputLabels().add(roleLabel);
+						}
+
+						// Set assignments need to also set user data -> add all user labels to it
+						if (assignment instanceof SetAssignment) {
+							((SetAssignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
+							((SetAssignment) assignment).getOutputLabels().add(roleLabel);
 						}
 
 					});
 
-					// Add consent labels to the node's properties
-					source.getProperties().addAll(consentLabelsToAdd);
-				});
-
-				if (assigmnentAutoConsentOptions) {
-					for (var node : clonedDiagram.getNodes()) {
-						node.getBehavior().getAssignment().forEach(assignment -> {
-							// Add new labels to the Assignment behaviors
-							if (assignment instanceof Assignment) {
-								((Assignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
-								((Assignment) assignment).getOutputLabels().add(roleLabel);
-							}
-							// Set assignments need to also set user data -> add all user labels to it
-							if (assignment instanceof SetAssignment) {
-								((SetAssignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
-								((SetAssignment) assignment).getOutputLabels().add(roleLabel);
-							}
-						});
+					for (Flow flow : flowsFromNode) {
+						Flow clonedFlow = (Flow) copier.copy(flow);
+						clonedFlow.setSourceNode(clonedSource);
+						clonedFlow.setSourcePin(clonedBehavior.getOutPin().stream()
+								.filter(pin -> pin.getId().equals(flow.getSourcePin().getId())).findFirst().get());
+						// clonedFlow.setDestinationNode(flow.getDestinationNode());
+						// clonedFlow.setDestinationPin(flow.getDestinationPin());
+						flowsToAdd.add(clonedFlow);
 					}
+					for (Flow flow : flowsToNode) {
+						Flow clonedFlow = (Flow) copier.copy(flow);
+						clonedFlow.setDestinationNode(clonedSource);
+						clonedFlow.setDestinationPin(clonedBehavior.getInPin().stream()
+								.filter(pin -> pin.getId().equals(flow.getDestinationPin().getId())).findFirst().get());
+						// clonedFlow.setSourceNode(flow.getSourceNode());
+						// clonedFlow.setSourcePin(flow.getSourcePin());
+						flowsToAdd.add(clonedFlow);
+					}
+
+					// Wires flows, so that they can be seen in the next iteration
+					// If this is executed later, some flow's in- or output pins
+					// will be null, since EMF does not consider the different copies to be distinct
+					// (even if, from a logical perspective, they are)
+					copier.copyReferences();
 				}
 
-				// Compute and add new DFDs.
-				DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(clonedDictionary, clonedDiagram);
-				transposeFlowGraphs.addAll(
-						finder.findTransposeFlowGraphs().stream().filter(DFDTransposeFlowGraph.class::isInstance)
-								.map(DFDTransposeFlowGraph.class::cast).toList());
-
-			});
-
+			}
 		}
 
-		return transposeFlowGraphs;
+		this.dataDictionary.getBehavior().addAll(behaviorToAdd);
+		this.dataFlowDiagram.getNodes().addAll(nodesToAdd);
+		this.dataFlowDiagram.getFlows().addAll(flowsToAdd);
+
+		// Delete sources and their behavior
+		for (var source : sources) {
+			this.dataFlowDiagram.getNodes().remove(source);
+			this.dataDictionary.getBehavior().remove(source.getBehavior());
+		}
+
+		// Delete old flows
+		this.dataFlowDiagram.getFlows().removeAll(flowsToRemove);
+
+		DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(this.dataDictionary, this.dataFlowDiagram);
+		var result = finder.findTransposeFlowGraphs().stream().filter(DFDTransposeFlowGraph.class::isInstance)
+				.map(DFDTransposeFlowGraph.class::cast).toList();
+
+		return result;
+
 	}
 
 	protected Set<Set<ConsentOption>> calculateRoleConsentOptions(Role role) {
@@ -187,8 +205,8 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 * @param allowed         All allowed functionalities that combinations can be
 	 *                        created with
 	 */
-	protected void createOptionalCombinations(Set<ConsentOption> startingEntry,
-			Set<Set<ConsentOption>> existingEntries, List<ConsentOption> allowed) {
+	protected void createOptionalCombinations(Set<ConsentOption> startingEntry, Set<Set<ConsentOption>> existingEntries,
+			List<ConsentOption> allowed) {
 		allowed.forEach(addition -> {
 			if (!startingEntry.contains(addition) && isCompatible(startingEntry, addition)) {
 				Set<ConsentOption> newCombination = new HashSet<>(startingEntry); // Copy

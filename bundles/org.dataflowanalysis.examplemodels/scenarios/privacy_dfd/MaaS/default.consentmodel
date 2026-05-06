@@ -26,7 +26,7 @@
       </consentOption>
     </labels>
     <labels id="_tvLy0D1xEfGtevHBcNoGlQ" entityName="CheckIn">
-      <consentOption id="_uzKYUD1xEfGtevHBcNoGlQ" entityName="CheckOut" requires="_qxmO0EfOEfGZw_-C8A2RPA _s0bjoEhaEfGzrqe1i1LqUQ">
+      <consentOption id="_uzKYUD1xEfGtevHBcNoGlQ" entityName="CheckIn" requires="_qxmO0EfOEfGZw_-C8A2RPA _s0bjoEhaEfGzrqe1i1LqUQ">
         <allowsFor id="__YCHUEfOEfGZw_-C8A2RPA">
           <members item="_bfWFoD1uEfGmFKwwtJJekw"/>
           <members item="_YlzFoD1uEfGmFKwwtJJekw"/>

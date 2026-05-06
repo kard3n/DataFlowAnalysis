@@ -488,10 +488,7 @@ public class PrivacyDataFlowConstrainTest {
 		flowGraphCollection.evaluate();
 
 		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false, false);
-		logger.info(result.size());
-		for (var res : result) {
-			logger.info(res.message());
-		}
+
 		assertEquals(3, result.size());
 		boolean foundCOne = false;
 		boolean foundCTwo = false;

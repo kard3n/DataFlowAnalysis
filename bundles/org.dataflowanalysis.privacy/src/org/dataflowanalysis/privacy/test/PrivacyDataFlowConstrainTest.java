@@ -347,7 +347,7 @@ public class PrivacyDataFlowConstrainTest {
 		combination.getMembers().add(itemOne);
 		// Scenario one: combination allows for the item
 		assertTrue(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
-				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of(dataContextOne, dataContextTwo)))));
+				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of(dataContextOne)))));
 		// Scenario two: the passed item doesn't have the required context
 		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
 				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of(dataContextTwo)))));
@@ -356,6 +356,29 @@ public class PrivacyDataFlowConstrainTest {
 				new ItemInformation(Set.of(dataStateOne), Set.of())));
 		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
 				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of()))));
+
+	}
+	
+	@Test
+	public void testCombinationAllowsItemWithContextMultiple() {
+		UserDataCombination combination = consentmodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemOne.setItem(dataItemOne);
+		itemOne.getState().add(dataStateOne);
+		itemOne.getContext().add(dataContextOne);
+		combination.getMembers().add(itemOne);
+		
+		StatefulItem itemTwo = consentmodelFactory.eINSTANCE.createStatefulItem();
+		itemTwo.setItem(dataItemOne);
+		itemTwo.getState().add(dataStateOne);
+		itemTwo.getContext().add(dataContextTwo);
+		combination.getMembers().add(itemTwo);
+		// Scenario one: combination allows for the item
+		assertTrue(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
+				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of(dataContextOne), Set.of(dataContextTwo)))));
+		// Scenario two: no item has the correct context
+		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
+				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of(dataContextOne, dataContextTwo)))));
 
 	}
 
@@ -552,7 +575,7 @@ public class PrivacyDataFlowConstrainTest {
 		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false, false);
 		assertEquals(1, result.size());
 		for (var violation : result) {
-			logger.info(violation.message());
+			logger.debug(violation.message());
 			assertTrue(violation.message().contains(
 					"has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its consent options/functionalities."));
 			assertTrue(violation.message().contains("[DataItemOne: {state: {[]}, context: {[[]]}}]")); // State has been

@@ -181,7 +181,8 @@ public class PrivacyDataFlowConstraint {
 						if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalities,
 								vert.getName())) {
 							violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
-									+ " can receive data in pin " + newCharacteristics.getKey() + " from a user who has not consented to its functionalities. \nFunctionalities consented to by user: "
+									+ " can receive data in pin " + newCharacteristics.getKey()
+									+ " from a user who has not consented to its functionalities. \nFunctionalities consented to by user: "
 									+ extractConsentLabels(newCharacteristics.getValue()).stream()
 											.map(label -> label.getConsentOption().getEntityName()).toList()
 									+ "\nFunctionalities of the vertex: "
@@ -244,8 +245,9 @@ public class PrivacyDataFlowConstraint {
 					List<HashMap<DataItem, ItemInformation>> newCombinations = new LinkedList<>();
 					for (String pin : pinGroup) {
 						var combination = nodeLevelCombinations.get(pin);
-						if(combination == null) {
-							logger.warn("The pin " + pin + " in node " + vert.getName() + " is a member of a pin relation, but no information for it was received as part of the node's incoming or outgoing data characteristics.");
+						if (combination == null) {
+							logger.warn("The pin " + pin + " in node " + vert.getName()
+									+ " is a member of a pin relation, but no information for it was received as part of the node's incoming or outgoing data characteristics.");
 							continue;
 						}
 						if (newCombinations.isEmpty()) {
@@ -702,24 +704,22 @@ public class PrivacyDataFlowConstraint {
 	 */
 	public static boolean combinationAllowsItem(UserDataCombination combination, DataItem item,
 			ItemInformation itemInfo) {
-		var combinationMembersOfItem = combination.getMembers().stream().filter(member -> member.getItem().equals(item))
+		var combinationMembersOfItemWithState = combination.getMembers().stream()
+				.filter(member -> member.getItem().equals(item) && itemInfo.state.containsAll(member.getState()))
 				.toList();
-		if (combinationMembersOfItem.size() == 0)
+		if (combinationMembersOfItemWithState.size() == 0)
 			return false;
-		for (var member : combinationMembersOfItem) {
-
-			long numCompatibleContextSets = itemInfo.context.stream()
-					.filter(con -> con.containsAll(member.getContext())).count();
-			// Check that for every item:
-			// * Its states contain all defined by the UDC
-			// * Every context set is a subset of the context set of the UDC
-			// * If a context is defined by the UDC, then at least one of the item's context
-			// sets is compatible
-			if (itemInfo.state.containsAll(member.getState()) && numCompatibleContextSets == itemInfo.context.size()
-					&& numCompatibleContextSets >= Math.min(1, member.getContext().size()))
-				return true;
+		
+		// Special case: empty context
+		if(itemInfo.context.isEmpty()) {
+			return combinationMembersOfItemWithState.stream()
+					.anyMatch(combMember -> combMember.getContext().isEmpty());
 		}
-		return false;
+
+		return itemInfo.context.stream().filter(contexts -> {
+			return combinationMembersOfItemWithState.stream()
+					.anyMatch(combMember -> contexts.equals(new HashSet<DataContext>(combMember.getContext())));
+		}).count() == itemInfo.context.size();
 	}
 
 	/**
@@ -894,9 +894,8 @@ public class PrivacyDataFlowConstraint {
 	 * Converts a consent option to a human-readable form
 	 */
 	public static String consentOptionToString(ConsentOption input) {
-		return "\n\t" + input.getEntityName() + ". Allows for: " + input.getAllowsFor().stream().map(af -> "\n\t\t" + af
-				.getEntityName()
-				+ ":"
+		return "\n\t" + input.getEntityName() + ". Allows for: " + input.getAllowsFor().stream().map(af -> "\n\t\t"
+				+ af.getEntityName() + ":"
 				+ af.getMembers().stream().map(member -> member.getItem().getEntityName() + ": {state: {"
 						+ member.getState().stream().map(state -> state.getEntityName()).toList() + "}, context: {"
 						+ member.getContext().stream().map(contl -> contl.getEntityName()).toList() + "}}").toList())

@@ -2,18 +2,18 @@ package org.dataflowanalysis.privacy.resource;
 
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.dataflowdiagram.DataFlowDiagram;
-import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
+import org.dataflowanalysis.privacy.privacymodel.PrivacyModel;
 
 public class PrivacyDFDModelResourceProvider extends PrivacyDFDResourceProvider {
 
     DataDictionary dataDictionary;
     DataFlowDiagram dataFlowDiagram;
-    ConsentModel consentModel;
+    PrivacyModel privacyModel;
 
-    public PrivacyDFDModelResourceProvider(DataDictionary dataDictionary, DataFlowDiagram dataFlowDiagram, ConsentModel consentModel) {
+    public PrivacyDFDModelResourceProvider(DataDictionary dataDictionary, DataFlowDiagram dataFlowDiagram, PrivacyModel privacyModel) {
         this.dataDictionary = dataDictionary;
         this.dataFlowDiagram = dataFlowDiagram;
-        this.consentModel = consentModel;
+        this.privacyModel = privacyModel;
     }
 
     @Override
@@ -27,8 +27,8 @@ public class PrivacyDFDModelResourceProvider extends PrivacyDFDResourceProvider 
     }
     
     @Override
-	public ConsentModel getConsentModel() {
-		return this.consentModel;
+	public PrivacyModel getPrivacyModel() {
+		return this.privacyModel;
 	}
 
     @Override

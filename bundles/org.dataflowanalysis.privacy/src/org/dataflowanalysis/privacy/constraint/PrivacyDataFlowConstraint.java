@@ -20,16 +20,16 @@ import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.dfd.datadictionary.PinRelation;
 import org.dataflowanalysis.dfd.dataflowdiagram.Node;
-import org.dataflowanalysis.privacy.consentmodel.ConsentLabel;
-import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
-import org.dataflowanalysis.privacy.consentmodel.DataContext;
-import org.dataflowanalysis.privacy.consentmodel.DataContextLabel;
-import org.dataflowanalysis.privacy.consentmodel.DataItem;
-import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
-import org.dataflowanalysis.privacy.consentmodel.DataState;
-import org.dataflowanalysis.privacy.consentmodel.DataStateLabel;
-import org.dataflowanalysis.privacy.consentmodel.RoleLabel;
-import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
+import org.dataflowanalysis.privacy.privacymodel.DataContext;
+import org.dataflowanalysis.privacy.privacymodel.DataContextLabel;
+import org.dataflowanalysis.privacy.privacymodel.DataItem;
+import org.dataflowanalysis.privacy.privacymodel.DataItemLabel;
+import org.dataflowanalysis.privacy.privacymodel.DataState;
+import org.dataflowanalysis.privacy.privacymodel.DataStateLabel;
+import org.dataflowanalysis.privacy.privacymodel.Functionality;
+import org.dataflowanalysis.privacy.privacymodel.FunctionalityLabel;
+import org.dataflowanalysis.privacy.privacymodel.RoleLabel;
+import org.dataflowanalysis.privacy.privacymodel.UserDataCombination;
 
 public class PrivacyDataFlowConstraint {
 	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstraint.class);
@@ -90,7 +90,7 @@ public class PrivacyDataFlowConstraint {
 
 				// Group by functionalities. A single user can generate multiple TFGs due to
 				// branching
-				HashMap<HashSet<ConsentLabel>, ArrayList<AbstractVertex>> verticesByFunctionalities = groupByFunctionalities(
+				HashMap<HashSet<FunctionalityLabel>, ArrayList<AbstractVertex>> verticesByFunctionalities = groupByFunctionalities(
 						entry.getValue());
 
 				for (var vertexGroup : verticesByFunctionalities.entrySet()) {
@@ -117,18 +117,18 @@ public class PrivacyDataFlowConstraint {
 
 						var possibleCombinations = calculateItemToDataStateCombinations(dataItemToDataState);
 						// Check that each of the possible combinations is allowed
-						var vertexFunctionalities = vertexGroup.getKey().stream().map(v -> v.getConsentOption())
+						var vertexFunctionalities = vertexGroup.getKey().stream().map(v -> v.getFunctionality())
 								.toList();
 						String vertexName = ((DFDVertex) vertexGroup.getValue().get(0)).getName();
 						for (var combination : possibleCombinations) {
-							if (!combinationAllowedByConsentOptions(combination, vertexFunctionalities)) {
+							if (!combinationAllowedByFunctionalities(combination, vertexFunctionalities)) {
 								violations.add(new PrivacyConstraintViolation(vertexName,
 										"The user-representing vertex " + vertexName
 												+ " has received a data combination in pin " + pin.getKey()
 												+ " not allowed for any of its functionalities.\nReceived combination: "
 												+ itemInformationToString(combination)
-												+ "\nConsent options of the vertex: " + vertexFunctionalities.stream()
-														.map(co -> consentOptionToString(co)).toList()));
+												+ "\nFunctionalities of the vertex: " + vertexFunctionalities.stream()
+														.map(co -> functionalityToString(co)).toList()));
 							}
 						}
 
@@ -154,7 +154,7 @@ public class PrivacyDataFlowConstraint {
 						pinsInGroups = pinRelationGroups.stream().flatMap(Set::stream).collect(Collectors.toSet());
 					}
 
-					List<ConsentLabel> vertexFunctionalities = extractConsentLabels(
+					List<FunctionalityLabel> vertexFunctionalities = extractFunctionalityLabels(
 							vertBase.getAllVertexCharacteristics());
 
 					List<DataCharacteristic> currentCharacteristics = ((DFDVertex) vertBase)
@@ -175,7 +175,7 @@ public class PrivacyDataFlowConstraint {
 						pinToCharacteristics.get(newCharacteristics.getKey()).add(newCharacteristics.getValue());
 
 						// Go through the lists of CharacteristicValues, and check that all
-						// functionalities of the node (in form of ConsentOptions)
+						// functionalities of the node (in form of functionalities)
 						// are present in it -> check that the user has consented to all functionalities
 						// of this node
 						if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalities,
@@ -183,11 +183,11 @@ public class PrivacyDataFlowConstraint {
 							violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
 									+ " can receive data in pin " + newCharacteristics.getKey()
 									+ " from a user who has not consented to its functionalities. \nFunctionalities consented to by user: "
-									+ extractConsentLabels(newCharacteristics.getValue()).stream()
-											.map(label -> label.getConsentOption().getEntityName()).toList()
+									+ extractFunctionalityLabels(newCharacteristics.getValue()).stream()
+											.map(label -> label.getFunctionality().getEntityName()).toList()
 									+ "\nFunctionalities of the vertex: "
 									+ vertexFunctionalities.stream()
-											.map(label -> label.getConsentOption().getEntityName()).toList()
+											.map(label -> label.getFunctionality().getEntityName()).toList()
 									+ "\nReceived input labels: "
 									+ newCharacteristics.getValue().stream().map(i -> i.toString()).toList()));
 						}
@@ -195,8 +195,8 @@ public class PrivacyDataFlowConstraint {
 				}
 
 				// Get all consent options
-				List<ConsentOption> consentOptions = extractConsentLabels(vert.getAllVertexCharacteristics()).stream()
-						.map(label -> label.getConsentOption()).toList();
+				List<Functionality> functionalities = extractFunctionalityLabels(vert.getAllVertexCharacteristics())
+						.stream().map(label -> label.getFunctionality()).toList();
 
 				// List of all combinations from the pins, grouped by the pin they originate
 				// from
@@ -225,12 +225,12 @@ public class PrivacyDataFlowConstraint {
 
 					for (var combination : possibleCombinations) {
 
-						if (!combinationAllowedByConsentOptions(combination, consentOptions)) {
+						if (!combinationAllowedByFunctionalities(combination, functionalities)) {
 							violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
 									+ " has received a data combination in pin " + pin.getKey()
-									+ " or could infere one not allowed for any of its consent options/functionalities.\nReceived combination: "
-									+ itemInformationToString(combination) + "\nConsent options of the vertex: "
-									+ consentOptions.stream().map(co -> consentOptionToString(co)).toList()));
+									+ " or could infere one not allowed for any of its functionalities.\nReceived combination: "
+									+ itemInformationToString(combination) + "\nFunctionalities of the vertex: "
+									+ functionalities.stream().map(co -> functionalityToString(co)).toList()));
 						}
 
 					}
@@ -267,7 +267,7 @@ public class PrivacyDataFlowConstraint {
 
 				// Evaluate inference at the node level
 				if (checkNodeLevelInference) {
-					violations.addAll(verifyDataTupleConformance(uniteItemTuples(finalCombinations), consentOptions,
+					violations.addAll(verifyDataTupleConformance(uniteItemTuples(finalCombinations), functionalities,
 							vert.getName()));
 				}
 			}
@@ -403,7 +403,7 @@ public class PrivacyDataFlowConstraint {
 
 	/**
 	 * Given a list of a pin's incoming characteristics, checks that the passed
-	 * Node's consent options are included for each of the incoming items.
+	 * Node's functionalities are included for each of the incoming items.
 	 * 
 	 * @param pinIncomingCharacteristics The incoming characteristics of a pin
 	 * @param vertexFunctionalities      The functionalities of the vertex
@@ -412,7 +412,7 @@ public class PrivacyDataFlowConstraint {
 	 * @return False if a violation is found, otherwise true
 	 */
 	public static boolean allFunctionalitiesConsentedTo(HashSet<CharacteristicValue> pinIncomingCharacteristics,
-			List<ConsentLabel> vertexFunctionalities, String vertexName) {
+			List<FunctionalityLabel> vertexFunctionalities, String vertexName) {
 
 		// Check that the incoming labels contain at least one data item
 		if (pinIncomingCharacteristics.stream()
@@ -420,7 +420,7 @@ public class PrivacyDataFlowConstraint {
 			return true;
 		}
 
-		if (!extractConsentLabels(pinIncomingCharacteristics).containsAll(vertexFunctionalities)) {
+		if (!extractFunctionalityLabels(pinIncomingCharacteristics).containsAll(vertexFunctionalities)) {
 			return false;
 		}
 		return true;
@@ -433,10 +433,10 @@ public class PrivacyDataFlowConstraint {
 	 * @return The labels of type ConsentLabel part of a CharacteristicValue of the
 	 *         passed list
 	 */
-	private static List<ConsentLabel> extractConsentLabels(Collection<CharacteristicValue> labels) {
+	private static List<FunctionalityLabel> extractFunctionalityLabels(Collection<CharacteristicValue> labels) {
 		return labels.stream().map(cv -> ((DFDCharacteristicValue) cv)).filter(cv -> {
-			return cv.getLabel() instanceof ConsentLabel;
-		}).map(cv -> ((ConsentLabel) cv.getLabel())).toList();
+			return cv.getLabel() instanceof FunctionalityLabel;
+		}).map(cv -> ((FunctionalityLabel) cv.getLabel())).toList();
 	}
 
 	/**
@@ -656,26 +656,27 @@ public class PrivacyDataFlowConstraint {
 
 	/**
 	 * Checks that the dataCombination is compatible with at least one of the
-	 * consentOptions
+	 * functionalities
 	 * 
-	 * @param dataCombination    The combination that should be checked for
-	 *                           compatibility
-	 * @param nodeConsentOptions The consent options, with which the combination
-	 *                           should be compatible with
-	 * @return True is the combination is allowed by the consent options
+	 * @param dataCombination     The combination that should be checked for
+	 *                            compatibility
+	 * @param nodeFunctionalities The functionalities, the combination should be
+	 *                            compatible with
+	 * @return True if the combination is allowed by the functionalities
 	 */
-	public static boolean combinationAllowedByConsentOptions(HashMap<DataItem, ItemInformation> dataCombination,
-			List<ConsentOption> nodeConsentOptions) {
+	public static boolean combinationAllowedByFunctionalities(HashMap<DataItem, ItemInformation> dataCombination,
+			List<Functionality> nodeFunctionalities) {
 		if (dataCombination.isEmpty()) {
 			return true;
 		}
 
-		var consentOptionCopy = (List<ConsentOption>) new LinkedList<>(nodeConsentOptions);
+		var functionalityCopy = (List<Functionality>) new LinkedList<>(nodeFunctionalities);
 
-		// Filter all consent options, removing those that don't have a data combination
+		// Filter all functionalities, removing those that don't have a data combination
 		// that allows for all items of the received data combinations
-		consentOptionCopy = consentOptionCopy.stream().filter(co -> {
-			// Check that the CO has at least one permitted data combination that is
+		functionalityCopy = functionalityCopy.stream().filter(co -> {
+			// Check that the current functionality has at least one permitted data
+			// combination that is
 			// compatible with the received one
 			return co.getAllowsFor().stream().filter(udc -> {
 				for (var receivedItem : dataCombination.entrySet()) {
@@ -686,7 +687,7 @@ public class PrivacyDataFlowConstraint {
 			}).count() > 0;
 		}).toList();
 
-		return !consentOptionCopy.isEmpty();
+		return !functionalityCopy.isEmpty();
 	}
 
 	/**
@@ -696,7 +697,7 @@ public class PrivacyDataFlowConstraint {
 	 * combination's list of contexts must be a subset of all context sets of the
 	 * item.
 	 * 
-	 * @param combination A data combination of the consent model
+	 * @param combination A data combination of the privacy model
 	 * @param item        The item to check for
 	 * @param itemInfo    The information of the item. Contains both state and
 	 *                    context
@@ -709,11 +710,10 @@ public class PrivacyDataFlowConstraint {
 				.toList();
 		if (combinationMembersOfItemWithState.size() == 0)
 			return false;
-		
+
 		// Special case: empty context
-		if(itemInfo.context.isEmpty()) {
-			return combinationMembersOfItemWithState.stream()
-					.anyMatch(combMember -> combMember.getContext().isEmpty());
+		if (itemInfo.context.isEmpty()) {
+			return combinationMembersOfItemWithState.stream().anyMatch(combMember -> combMember.getContext().isEmpty());
 		}
 
 		return itemInfo.context.stream().filter(contexts -> {
@@ -838,11 +838,12 @@ public class PrivacyDataFlowConstraint {
 	 * @param vertices The vertices to group
 	 * @return The grouped vertices
 	 */
-	public static HashMap<HashSet<ConsentLabel>, ArrayList<AbstractVertex>> groupByFunctionalities(
+	public static HashMap<HashSet<FunctionalityLabel>, ArrayList<AbstractVertex>> groupByFunctionalities(
 			List<AbstractVertex> vertices) {
-		HashMap<HashSet<ConsentLabel>, ArrayList<AbstractVertex>> result = new HashMap<>();
+		HashMap<HashSet<FunctionalityLabel>, ArrayList<AbstractVertex>> result = new HashMap<>();
 		for (var vertex : vertices) {
-			var labels = new HashSet<ConsentLabel>(extractConsentLabels(vertex.getAllVertexCharacteristics()));
+			var labels = new HashSet<FunctionalityLabel>(
+					extractFunctionalityLabels(vertex.getAllVertexCharacteristics()));
 			result.computeIfAbsent(labels, k -> new ArrayList<>());
 
 			result.get(labels).add(vertex);
@@ -852,26 +853,26 @@ public class PrivacyDataFlowConstraint {
 	}
 
 	/**
-	 * Verifies that all data item tuples are allowed by the consent options
+	 * Verifies that all data item tuples are allowed by the functionalities
 	 * 
-	 * @param combinationTuples  The combination tuples as received or derived by
-	 *                           the node
-	 * @param nodeConsentOptions The consent options of the node
+	 * @param combinationTuples   The combination tuples as received or derived by
+	 *                            the node
+	 * @param nodeFunctionalities The functionalities options of the node
 	 * @return
 	 */
 	public static List<PrivacyConstraintViolation> verifyDataTupleConformance(
-			List<HashMap<DataItem, ItemInformation>> combinationTuples, List<ConsentOption> nodeConsentOptions,
+			List<HashMap<DataItem, ItemInformation>> combinationTuples, List<Functionality> nodeFunctionalities,
 			String vertexName) {
 		List<PrivacyConstraintViolation> detectedViolations = new LinkedList<>();
 
 		for (var combination : combinationTuples) {
-			if (!combinationAllowedByConsentOptions(combination, nodeConsentOptions)) {
+			if (!combinationAllowedByFunctionalities(combination, nodeFunctionalities)) {
 				detectedViolations.add(new PrivacyConstraintViolation(vertexName,
 						"The vertex/node \"" + vertexName
-								+ "\" received or could derive information not authorized by its consent options."
+								+ "\" received or could derive information not authorized by its functionalities."
 								+ "\n\tDetected combination: " + itemInformationToString(combination)
-								+ "\n\tVertex consent options: "
-								+ nodeConsentOptions.stream().map(co -> consentOptionToString(co)).toList()));
+								+ "\n\tVertex functionalities: "
+								+ nodeFunctionalities.stream().map(co -> functionalityToString(co)).toList()));
 			}
 		}
 		return detectedViolations;
@@ -891,9 +892,9 @@ public class PrivacyDataFlowConstraint {
 	}
 
 	/**
-	 * Converts a consent option to a human-readable form
+	 * Converts a functionality to a human-readable form
 	 */
-	public static String consentOptionToString(ConsentOption input) {
+	public static String functionalityToString(Functionality input) {
 		return "\n\t" + input.getEntityName() + ". Allows for: " + input.getAllowsFor().stream().map(af -> "\n\t\t"
 				+ af.getEntityName() + ":"
 				+ af.getMembers().stream().map(member -> member.getItem().getEntityName() + ": {state: {"

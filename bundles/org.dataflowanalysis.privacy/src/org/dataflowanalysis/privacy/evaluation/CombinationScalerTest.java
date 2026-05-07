@@ -19,7 +19,7 @@ public class CombinationScalerTest {
 
 	@Test
 	public void testGenerateCombinations() {
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyScalingModels", "base.consentmodel");
+		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyScalingModels", "base.privacymodel");
 		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyScalingModels",
 				"simple_forward.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyScalingModels",
@@ -34,7 +34,7 @@ public class CombinationScalerTest {
 		ModelManager manager = new ModelManager();
 
 		PrivacyModelPackage originalPackage = manager.loadModel(dataFlowDiagramPath, dataDictionaryPath,
-				consentModelPath, TEST_MODEL_PROJECT_NAME);
+				privacyModelPath, TEST_MODEL_PROJECT_NAME);
 
 		for (int currentAmount : numberCombinations) {
 			PrivacyModelPackage modifiedPackage = PrivacyContractGenerator.generateSourceNodes(originalPackage, "Source", currentAmount, 6, 0);
@@ -77,7 +77,7 @@ public class CombinationScalerTest {
 						.modelProjectName("org.dataflowanalysis.privacy").usePluginActivator(Activator.class)
 						.useDataFlowDiagram(outputDir + "/" + scaledModelName + ".dataflowdiagram")
 						.useDataDictionary(outputDir + "/" + scaledModelName + ".datadictionary")
-						.useConsentModel(outputDir + "/" + scaledModelName + ".consentmodel").build();
+						.usePrivacyModel(outputDir + "/" + scaledModelName + ".privacymodel").build();
 				analysis.initializeAnalysis();
 
 				startFindGraphs = System.nanoTime();

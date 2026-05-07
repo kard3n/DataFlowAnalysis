@@ -19,14 +19,17 @@ public class OnlineShopRework {
 
 	@Test
 	public void createsGraphsForRole() {
-		final var dataFlowDiagramPath = Paths.get("scenarios", "privacy_dfd", "OnlineShopRework", "online_shop.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("scenarios", "privacy_dfd", "OnlineShopRework", "online_shop.datadictionary");
-		final var consentModelPath = Paths.get("scenarios", "privacy_dfd", "OnlineShopRework", "online_shop.consentmodel");
+		final var dataFlowDiagramPath = Paths.get("scenarios", "privacy_dfd", "OnlineShopRework",
+				"online_shop.dataflowdiagram");
+		final var dataDictionaryPath = Paths.get("scenarios", "privacy_dfd", "OnlineShopRework",
+				"online_shop.datadictionary");
+		final var privacyModelPath = Paths.get("scenarios", "privacy_dfd", "OnlineShopRework",
+				"online_shop.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
 				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
-				.useConsentModel(consentModelPath.toString()).build();
+				.usePrivacyModel(privacyModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();

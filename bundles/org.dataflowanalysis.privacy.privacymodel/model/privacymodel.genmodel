@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/org.dataflowanalysis.privacy.privacymodel/src-gen"
+    creationIcons="false" editDirectory="/org.dataflowanalysis.privacy.privacymodel.edit/src-gen"
+    editorDirectory="/org.dataflowanalysis.privacy.privacymodel.editor/src-gen" modelPluginID="org.dataflowanalysis.privacy.privacymodel"
+    modelName="privacymodel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="17.0"
+    copyrightFields="false" usedGenPackages="../../org.dataflowanalysis.dfd.datadictionary/model/datadictionary.genmodel#//datadictionary ../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>privacymodel.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="privacymodel" basePackage="org.dataflowanalysis.privacy" disposableProviderFactory="true"
+      ecorePackage="privacymodel.ecore#/">
+    <genClasses ecoreClass="privacymodel.ecore#//DataItem" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
+    <genClasses ecoreClass="privacymodel.ecore#//DataState" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference privacymodel.ecore#//DataState/notRelatableWith"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//UserDataCombination" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference privacymodel.ecore#//UserDataCombination/members"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//Functionality">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference privacymodel.ecore#//Functionality/requires"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference privacymodel.ecore#//Functionality/excludes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//Functionality/allowsFor"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//Role" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference privacymodel.ecore#//Role/alwaysAllows"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference privacymodel.ecore#//Role/optionallyAllows"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//PrivacyModel" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//PrivacyModel/roleLabelType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//PrivacyModel/functionalityLabelType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//PrivacyModel/dataItemLabelType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//PrivacyModel/dataStateLabelType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//PrivacyModel/dataContextLabelType"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//RoleLabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//RoleLabelType/labels"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//FunctionalityLabelType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//FunctionalityLabelType/labels"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//RoleLabel" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//RoleLabel/role"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//FunctionalityLabel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//FunctionalityLabel/functionality"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//DataItemLabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//DataItemLabelType/labels"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//DataItemLabel" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//DataItemLabel/dataItem"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//StatefulItem">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference privacymodel.ecore#//StatefulItem/state"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference privacymodel.ecore#//StatefulItem/item"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference privacymodel.ecore#//StatefulItem/context"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//DataStateLabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//DataStateLabelType/labels"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//DataStateLabel" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//DataStateLabel/dataState"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//DataContextLabelType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//DataContextLabelType/labels"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//DataContextLabel" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference privacymodel.ecore#//DataContextLabel/dataContext"/>
+    </genClasses>
+    <genClasses ecoreClass="privacymodel.ecore#//DataContext" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
+  </genPackages>
+</genmodel:GenModel>

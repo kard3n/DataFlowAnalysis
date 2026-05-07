@@ -10,10 +10,10 @@ import org.dataflowanalysis.analysis.dfd.resource.DFDResourceProvider;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.dfd.datadictionary.*;
 import org.dataflowanalysis.dfd.dataflowdiagram.*;
-import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
-import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
-import org.dataflowanalysis.privacy.consentmodel.Role;
-import org.dataflowanalysis.privacy.consentmodel.RoleLabel;
+import org.dataflowanalysis.privacy.privacymodel.Functionality;
+import org.dataflowanalysis.privacy.privacymodel.PrivacyModel;
+import org.dataflowanalysis.privacy.privacymodel.Role;
+import org.dataflowanalysis.privacy.privacymodel.RoleLabel;
 import org.dataflowanalysis.privacy.resource.PrivacyDFDResourceProvider;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFinder {
 	private static final Logger logger = LoggerManager.getLogger(PrivacyDFDTransposeFlowGraphFinder.class);
 	protected final DataFlowDiagram dataFlowDiagram;
-	protected final ConsentModel consentModel;
+	protected final PrivacyModel privacyModel;
 	private boolean hasCycles = false;
 	private final DataDictionary dataDictionary;
 
@@ -36,16 +36,15 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 		}
 
 		this.dataFlowDiagram = ((PrivacyDFDResourceProvider) resourceProvider).getDataFlowDiagram();
-		this.consentModel = ((PrivacyDFDResourceProvider) resourceProvider).getConsentModel();
+		this.privacyModel = ((PrivacyDFDResourceProvider) resourceProvider).getPrivacyModel();
 		this.dataDictionary = ((PrivacyDFDResourceProvider) resourceProvider).getDataDictionary();
 	}
 
-	public PrivacyDFDTransposeFlowGraphFinder(DataDictionary dataDictionary, DataFlowDiagram dataFlowDiagram,
-			ConsentModel consentModel) {
+	public PrivacyDFDTransposeFlowGraphFinder(DataDictionary dataDictionary, DataFlowDiagram dataFlowDiagram, PrivacyModel privacyModel) {
 
 		this.dataDictionary = dataDictionary;
 		this.dataFlowDiagram = dataFlowDiagram;
-		this.consentModel = consentModel;
+		this.privacyModel = privacyModel;
 	}
 
 	/**
@@ -68,7 +67,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 		List<Node> sources = this.getSourceNodes(dataFlowDiagram.getNodes());
 
-		HashMap<RoleLabel, Set<Set<ConsentOption>>> roleToCombinations = new HashMap<>();
+		HashMap<RoleLabel, Set<Set<Functionality>>> roleToCombinations = new HashMap<>();
 
 		List<Flow> flowsToRemove = new LinkedList<>();
 
@@ -76,7 +75,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 		List<Behavior> behaviorToAdd = new LinkedList<>();
 		List<Flow> flowsToAdd = new LinkedList<>();
 
-		// Go over all source nodes and replicate them by role x consent options
+		// Go over all source nodes and replicate them by role x functionalities (consent options)
 		for (Node source : sources) {
 
 			List<Flow> flowsFromNode = this.dataFlowDiagram.getFlows().stream()
@@ -90,13 +89,13 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 					.map(label -> (RoleLabel) label).toList();
 			for (RoleLabel roleLabel : roles) {
 				if (!roleToCombinations.containsKey(roleLabel)) {
-					roleToCombinations.put(roleLabel, this.calculateRoleConsentOptions(roleLabel.getRole()));
-					logger.debug("Final amount of consent combinations for role " + roleLabel.getRole().getEntityName()
+					roleToCombinations.put(roleLabel, this.calculateRoleFunctionalityOptions(roleLabel.getRole()));
+					logger.debug("Final amount of consented functionality combinations for role " + roleLabel.getRole().getEntityName()
 							+ " : " + roleToCombinations.get(roleLabel).size());
 				}
 
-				Set<Set<ConsentOption>> currentCombinations = roleToCombinations.get(roleLabel);
-				for (Set<ConsentOption> combination : currentCombinations) {
+				Set<Set<Functionality>> currentCombinations = roleToCombinations.get(roleLabel);
+				for (Set<Functionality> combination : currentCombinations) {
 					// Copier is created here to prevent it from rewiring everything (including
 					// those created by previous iterations) every time
 					Copier copier = new Copier();
@@ -105,13 +104,13 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 					// this.dataFlowDiagram.getNodes().add(clonedSource);
 					nodesToAdd.add(clonedSource);
 
-					ArrayList<AbstractLabel> consentLabelsToAdd = new ArrayList<>(
-							this.consentModel.getConsentLabelType().getLabels().stream()
-									.filter(label -> combination.contains(label.getConsentOption()))
+					ArrayList<AbstractLabel> functionalityLabelsToAdd = new ArrayList<>(
+							this.privacyModel.getFunctionalityLabelType().getLabels().stream()
+									.filter(label -> combination.contains(label.getFunctionality()))
 									.map(label -> (AbstractLabel) label).toList());
 
-					// Add consent labels to the node's properties
-					clonedSource.getProperties().addAll(consentLabelsToAdd);
+					// Add functionality labels to the node's properties
+					clonedSource.getProperties().addAll(functionalityLabelsToAdd);
 
 					// Change behavior
 					Behavior clonedBehavior = (Behavior) copier.copy(source.getBehavior());
@@ -122,13 +121,13 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 					// Modify behavior
 					clonedBehavior.getAssignment().forEach(assignment -> {
 						if (assignment instanceof Assignment) {
-							((Assignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
+							((Assignment) assignment).getOutputLabels().addAll(functionalityLabelsToAdd);
 							((Assignment) assignment).getOutputLabels().add(roleLabel);
 						}
 
 						// Set assignments need to also set user data -> add all user labels to it
 						if (assignment instanceof SetAssignment) {
-							((SetAssignment) assignment).getOutputLabels().addAll(consentLabelsToAdd);
+							((SetAssignment) assignment).getOutputLabels().addAll(functionalityLabelsToAdd);
 							((SetAssignment) assignment).getOutputLabels().add(roleLabel);
 						}
 
@@ -184,13 +183,13 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 	}
 
-	protected Set<Set<ConsentOption>> calculateRoleConsentOptions(Role role) {
-		Set<ConsentOption> required = calculateRequiredFunctionalities(role);
+	protected Set<Set<Functionality>> calculateRoleFunctionalityOptions(Role role) {
+		Set<Functionality> required = calculateRequiredFunctionalities(role);
 
-		// Calculate all combinations taking into account optional consent options
-		Set<Set<ConsentOption>> combinations = new HashSet<>();
+		// Calculate all combinations taking into account optional functionalities
+		Set<Set<Functionality>> combinations = new HashSet<>();
 		combinations.add(required);
-		this.createOptionalCombinations(required, combinations, role.getAllows());
+		this.createOptionalCombinations(required, combinations, role.getOptionallyAllows());
 
 		return combinations;
 	}
@@ -205,11 +204,11 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 * @param allowed         All allowed functionalities that combinations can be
 	 *                        created with
 	 */
-	protected void createOptionalCombinations(Set<ConsentOption> startingEntry, Set<Set<ConsentOption>> existingEntries,
-			List<ConsentOption> allowed) {
+	protected void createOptionalCombinations(Set<Functionality> startingEntry, Set<Set<Functionality>> existingEntries,
+			List<Functionality> allowed) {
 		allowed.forEach(addition -> {
 			if (!startingEntry.contains(addition) && isCompatible(startingEntry, addition)) {
-				Set<ConsentOption> newCombination = new HashSet<>(startingEntry); // Copy
+				Set<Functionality> newCombination = new HashSet<>(startingEntry); // Copy
 				newCombination.add(addition);
 				if (!existingEntries.contains(newCombination)) {
 					existingEntries.add(newCombination);
@@ -227,12 +226,12 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 * @param addition New addition to the set
 	 * @return True if the new addition is compatible with the set
 	 */
-	protected boolean isCompatible(Set<ConsentOption> set, ConsentOption addition) {
-		for (ConsentOption exclude : addition.getExcludes()) {
+	protected boolean isCompatible(Set<Functionality> set, Functionality addition) {
+		for (Functionality exclude : addition.getExcludes()) {
 			if (set.contains(exclude))
 				return false;
 		}
-		for (ConsentOption entry : set) {
+		for (Functionality entry : set) {
 			if (entry.getExcludes().contains(addition))
 				return false;
 		}
@@ -246,9 +245,9 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 * @param set The set to check
 	 * @return Whether all entries of the set have their requirements met or not.
 	 */
-	protected boolean containsRequired(Set<ConsentOption> set) {
-		for (ConsentOption entry : set) {
-			for (ConsentOption requriement : entry.getRequires()) {
+	protected boolean containsRequired(Set<Functionality> set) {
+		for (Functionality entry : set) {
+			for (Functionality requriement : entry.getRequires()) {
 				if (!set.contains(requriement))
 					return false;
 			}
@@ -262,10 +261,10 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 * @param role The role whose required functionalities to calculate
 	 * @return The role's required functionalities, including recursive ones
 	 */
-	protected Set<ConsentOption> calculateRequiredFunctionalities(Role role) {
-		Set<ConsentOption> result = new HashSet<>();
+	protected Set<Functionality> calculateRequiredFunctionalities(Role role) {
+		Set<Functionality> result = new HashSet<>();
 
-		role.getRequires().forEach(func -> {
+		role.getAlwaysAllows().forEach(func -> {
 			result.add(func);
 		});
 
@@ -279,8 +278,8 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	 * @param functionality The functionality whose required dependencies to get
 	 * @return List of all required dependencies
 	 */
-	protected Set<ConsentOption> getRequired(ConsentOption functionality) {
-		Set<ConsentOption> result = new HashSet<>();
+	protected Set<Functionality> getRequired(Functionality functionality) {
+		Set<Functionality> result = new HashSet<>();
 		result.add(functionality);
 		functionality.getRequires().forEach(other -> {
 			result.addAll(getRequired(other));

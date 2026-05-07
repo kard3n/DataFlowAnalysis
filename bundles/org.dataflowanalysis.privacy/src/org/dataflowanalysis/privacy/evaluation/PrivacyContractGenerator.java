@@ -17,15 +17,14 @@ import org.dataflowanalysis.dfd.dataflowdiagram.DataFlowDiagram;
 import org.dataflowanalysis.dfd.dataflowdiagram.Flow;
 import org.dataflowanalysis.dfd.dataflowdiagram.Node;
 import org.dataflowanalysis.dfd.dataflowdiagram.dataflowdiagramFactory;
-import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
-import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
-import org.dataflowanalysis.privacy.consentmodel.DataItem;
-import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
-import org.dataflowanalysis.privacy.consentmodel.DataItemLabelType;
-import org.dataflowanalysis.privacy.consentmodel.Role;
-import org.dataflowanalysis.privacy.consentmodel.RoleLabel;
-import org.dataflowanalysis.privacy.consentmodel.RoleLabelType;
-import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
+import org.dataflowanalysis.privacy.privacymodel.DataItem;
+import org.dataflowanalysis.privacy.privacymodel.DataItemLabel;
+import org.dataflowanalysis.privacy.privacymodel.DataItemLabelType;
+import org.dataflowanalysis.privacy.privacymodel.Functionality;
+import org.dataflowanalysis.privacy.privacymodel.Role;
+import org.dataflowanalysis.privacy.privacymodel.RoleLabel;
+import org.dataflowanalysis.privacy.privacymodel.RoleLabelType;
+import org.dataflowanalysis.privacy.privacymodel.privacymodelFactory;
 import org.dataflowanalysis.privacy.test.PrivacyDataFlowConstrainTest;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -51,8 +50,8 @@ public class PrivacyContractGenerator {
 			throw new RuntimeException("Could not find the defined source node in the DFD.");
 		}
 
-		List<ConsentOption> consentOptions = input.cm().getConsentLabelType().getLabels().stream()
-				.map(it -> it.getConsentOption()).toList();
+		List<Functionality> consentOptions = input.cm().getFunctionalityLabelType().getLabels().stream()
+				.map(it -> it.getFunctionality()).toList();
 		if (consentOptions.size() < maxLabelsPerRole) {
 			throw new RuntimeException("The consent model must provide at least maxLabelsPerRole consent options.");
 		}
@@ -73,14 +72,14 @@ public class PrivacyContractGenerator {
 		for (int i = maxLabelsPerRole; i >= 0; i--) {
 			long numberResultingUsers = numLabelsToUsers.get(i);
 			while (numberResultingUsers + usersAdded <= amount) {
-				Role newRole = consentmodelFactory.eINSTANCE.createRole();
+				Role newRole = privacymodelFactory.eINSTANCE.createRole();
 				newRole.setEntityName(String.valueOf(usersAdded));
 
 				// Add i labels to the role
 				for (int coPos = 0; coPos < i; coPos++) {
 					newRole.getAllows().add(consentOptions.get(coPos));
 				}
-				RoleLabel newRoleLabel = consentmodelFactory.eINSTANCE.createRoleLabel();
+				RoleLabel newRoleLabel = privacymodelFactory.eINSTANCE.createRoleLabel();
 				newRoleLabel.setRole(newRole);
 				input.cm().getRoleLabelType().getLabels().add(newRoleLabel);
 				source.getProperties().add(newRoleLabel);
@@ -109,7 +108,7 @@ public class PrivacyContractGenerator {
 			int numberSourceNodes, int dataCombinationSize, int dataCombinationOverlap) {
 		var ddFactory = datadictionaryFactory.eINSTANCE;
 		var dfdFactory = dataflowdiagramFactory.eINSTANCE;
-		var cmFactory = consentmodelFactory.eINSTANCE;
+		var pmFactory = privacymodelFactory.eINSTANCE;
 		
 		
 		if (dataCombinationOverlap*2 > dataCombinationSize) {
@@ -147,9 +146,9 @@ public class PrivacyContractGenerator {
 			overlap.add(createUniqueDataItemLabel(itemLabelType));
 		}
 		
-		Role defaultRole = cmFactory.createRole();
+		Role defaultRole = pmFactory.createRole();
 		defaultRole.setEntityName("defaultRole");
-		RoleLabel defaultRoleLabel = cmFactory.createRoleLabel();
+		RoleLabel defaultRoleLabel = pmFactory.createRoleLabel();
 		defaultRoleLabel.setEntityName("defaultRoleLabel");
 		defaultRoleLabel.setRole(defaultRole);
 		roleLabelType.getLabels().add(defaultRoleLabel);
@@ -222,9 +221,9 @@ public class PrivacyContractGenerator {
 	 */
 	public static DataItemLabel createUniqueDataItemLabel(DataItemLabelType labelType) {
 		String name = generateRandomString(10);
-		DataItemLabel label = consentmodelFactory.eINSTANCE.createDataItemLabel();
+		DataItemLabel label = privacymodelFactory.eINSTANCE.createDataItemLabel();
 		label.setEntityName(name + "_label");
-		DataItem item = consentmodelFactory.eINSTANCE.createDataItem();
+		DataItem item = privacymodelFactory.eINSTANCE.createDataItem();
 		item.setEntityName(name);
 		label.setDataItem(item);
 		labelType.getLabels().add(label);

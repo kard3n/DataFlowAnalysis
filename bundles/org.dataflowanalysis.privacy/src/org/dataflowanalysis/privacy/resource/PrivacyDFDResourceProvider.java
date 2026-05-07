@@ -1,8 +1,8 @@
 package org.dataflowanalysis.privacy.resource;
 
 import org.dataflowanalysis.analysis.dfd.resource.DFDResourceProvider;
-import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
-import org.dataflowanalysis.privacy.consentmodel.consentmodelPackage;
+import org.dataflowanalysis.privacy.privacymodel.PrivacyModel;
+import org.dataflowanalysis.privacy.privacymodel.privacymodelPackage;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 /**
@@ -13,17 +13,17 @@ public abstract class PrivacyDFDResourceProvider extends DFDResourceProvider {
     public void setupResources() {
         super.setupResources();
         this.resources.getPackageRegistry()
-        		.put(consentmodelPackage.eNS_URI, consentmodelPackage.eINSTANCE);
+        		.put(privacymodelPackage.eNS_URI, privacymodelPackage.eINSTANCE);
         this.resources.getResourceFactoryRegistry()
 		        .getExtensionToFactoryMap()
-		        .put(consentmodelPackage.eNAME, new XMIResourceFactoryImpl());
+		        .put(privacymodelPackage.eNAME, new XMIResourceFactoryImpl());
     }
     
     /**
-     * Returns the consent model that the resource loader has loaded
-     * @return Consent model saved in the resources
+     * Returns the privacy model that the resource loader has loaded
+     * @return Privacy model saved in the resources
      */
-    public abstract ConsentModel getConsentModel();
+    public abstract PrivacyModel getPrivacyModel();
     
     /**
      * Determines, whether the resource loader has sufficient resources to run the analysis
@@ -32,6 +32,6 @@ public abstract class PrivacyDFDResourceProvider extends DFDResourceProvider {
      */
     @Override
     public boolean sufficientResourcesLoaded() {
-        return this.getDataFlowDiagram() != null && this.getDataDictionary() != null && this.getConsentModel() != null;
+        return this.getDataFlowDiagram() != null && this.getDataDictionary() != null && this.getPrivacyModel() != null;
     }
 }

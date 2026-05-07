@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<privacymodel:PrivacyModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_8YXIsBYfEfGKdrlX6gB9XA" entityName="SimpleSourceSink">
+  <roleLabelType id="_ld3bgBYiEfGKdrlX6gB9XA" entityName="RoleLabelType">
+    <labels id="_nizuwBYiEfGKdrlX6gB9XA" entityName="RoleLabelOne">
+      <role id="_tQ2PoBYiEfGKdrlX6gB9XA" entityName="RoleA" optionallyAllows="_JougoBYiEfGKdrlX6gB9XA _ahrawBYiEfGKdrlX6gB9XA"/>
+    </labels>
+  </roleLabelType>
+  <functionalityLabelType id="_0fKiYRYgEfGKdrlX6gB9XA" entityName="FunctionalityLabelType">
+    <labels id="_3ZwrQBYgEfGKdrlX6gB9XA" entityName="FunctionalityLabelOne">
+      <functionality id="_JougoBYiEfGKdrlX6gB9XA" entityName="ConsentOptionOne">
+        <allowsFor id="_N66HgBYiEfGKdrlX6gB9XA" entityName="CombinationOne">
+          <members item="_pmkoMBYgEfGKdrlX6gB9XA"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_X_5agBYiEfGKdrlX6gB9XA" entityName="FunctionalityLabelTwo">
+      <functionality id="_ahrawBYiEfGKdrlX6gB9XA" entityName="ConsentOptionTwo">
+        <allowsFor id="_c20GIBYiEfGKdrlX6gB9XA" entityName="FunctionalityLabelTwo">
+          <members state="_xoLHIBYgEfGKdrlX6gB9XA" item="_pmkoMBYgEfGKdrlX6gB9XA"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+  </functionalityLabelType>
+  <dataItemLabelType id="_AFC10hYgEfGKdrlX6gB9XA" entityName="DataItemLabelType">
+    <labels id="_lFaxMBYgEfGKdrlX6gB9XA" entityName="DataLabelOne">
+      <dataItem id="_pmkoMBYgEfGKdrlX6gB9XA" entityName="ItemOne"/>
+    </labels>
+  </dataItemLabelType>
+  <dataStateLabelType id="_Db6D8xYgEfGKdrlX6gB9XA" entityName="DataStateLabelType">
+    <labels id="_vVxmsBYgEfGKdrlX6gB9XA" entityName="DataStateLabelOne">
+      <dataState id="_xoLHIBYgEfGKdrlX6gB9XA" entityName="StateOne"/>
+    </labels>
+  </dataStateLabelType>
+</privacymodel:PrivacyModel>

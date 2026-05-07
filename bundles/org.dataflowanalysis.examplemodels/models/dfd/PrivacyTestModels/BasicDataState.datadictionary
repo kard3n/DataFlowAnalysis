@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="__nyi8BbsEfGwgKscrQsGUg">
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="__nyi8BbsEfGwgKscrQsGUg">
   <behavior id="_i7uxsRbtEfGwgKscrQsGUg" entityName="SourceOut">
     <outPin id="_3npnIRbtEfGwgKscrQsGUg" entityName="sourceOutOne"/>
     <outPin id="_gEozURbuEfGwgKscrQsGUg" entityName="sourceOutTwo"/>
     <assignment xsi:type="datadictionary:Assignment" id="_sIqbUhbtEfGwgKscrQsGUg" entityName="sourceOutOne" outputPin="_3npnIRbtEfGwgKscrQsGUg">
       <term xsi:type="datadictionary:TRUE" id="_DXvKABbuEfGwgKscrQsGUg"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="BasicDataState.consentmodel#_KGHYcBbsEfGwgKscrQsGUg"/>
-      <outputLabels xsi:type="consentmodel:DataStateLabel" href="BasicDataState.consentmodel#_RWG0QBbsEfGwgKscrQsGUg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="BasicDataState.privacymodel#_KGHYcBbsEfGwgKscrQsGUg"/>
+      <outputLabels xsi:type="privacymodel:DataStateLabel" href="BasicDataState.privacymodel#_RWG0QBbsEfGwgKscrQsGUg"/>
     </assignment>
     <assignment xsi:type="datadictionary:Assignment" id="_ioTp8hbuEfGwgKscrQsGUg" entityName="sourceOutTwo" outputPin="_gEozURbuEfGwgKscrQsGUg">
       <term xsi:type="datadictionary:TRUE" id="_oOkH0BbuEfGwgKscrQsGUg"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="BasicDataState.consentmodel#_KGHYcBbsEfGwgKscrQsGUg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="BasicDataState.privacymodel#_KGHYcBbsEfGwgKscrQsGUg"/>
     </assignment>
   </behavior>
   <behavior id="_7xdfsRbuEfGwgKscrQsGUg" entityName="SinkOne">

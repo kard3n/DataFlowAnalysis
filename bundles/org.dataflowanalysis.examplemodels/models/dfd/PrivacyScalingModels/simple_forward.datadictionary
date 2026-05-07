@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_eHQmkDS8EfG3Y--YywfPmQ">
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_eHQmkDS8EfG3Y--YywfPmQ">
   <behavior id="_eu7DgTS8EfG3Y--YywfPmQ" entityName="Source">
     <outPin id="_oNVesTS8EfG3Y--YywfPmQ" entityName="SourceOut"/>
     <assignment xsi:type="datadictionary:SetAssignment" id="_0HCQlDS8EfG3Y--YywfPmQ" entityName="SourceOut" outputPin="_oNVesTS8EfG3Y--YywfPmQ">
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="base.consentmodel#_i4YBoDS7EfG3Y--YywfPmQ"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="base.privacymodel#_i4YBoDS7EfG3Y--YywfPmQ"/>
     </assignment>
   </behavior>
   <behavior id="_jma99zS8EfG3Y--YywfPmQ" entityName="Middle">

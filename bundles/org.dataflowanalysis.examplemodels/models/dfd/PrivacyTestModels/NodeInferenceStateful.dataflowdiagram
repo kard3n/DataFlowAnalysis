@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_Ylwp4B7kEfGPjLFNxG_peA">
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_Ylwp4B7kEfGPjLFNxG_peA">
   <flows id="_llR0UB7kEfGPjLFNxG_peA" entityName="OneOne" sourceNode="_ZYVWUR7kEfGPjLFNxG_peA" destinationNode="_it8a0h7kEfGPjLFNxG_peA">
     <destinationPin href="NodeInferenceStateful.datadictionary#__bbIYB7jEfGPjLFNxG_peA"/>
     <sourcePin href="NodeInferenceStateful.datadictionary#_LEU6oR7jEfGPjLFNxG_peA"/>
@@ -18,10 +18,10 @@
   </flows>
   <nodes xsi:type="dataflowdiagram:External" id="_ZYVWUR7kEfGPjLFNxG_peA" entityName="Source">
     <behavior href="NodeInferenceStateful.datadictionary#_JoE_ER7jEfGPjLFNxG_peA"/>
-    <properties xsi:type="consentmodel:RoleLabel" href="NodeInferenceStateful.consentmodel#_8xj_oB7iEfGPjLFNxG_peA"/>
+    <properties xsi:type="privacymodel:RoleLabel" href="NodeInferenceStateful.privacymodel#_8xj_oB7iEfGPjLFNxG_peA"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="_it8a0h7kEfGPjLFNxG_peA" entityName="Sink">
     <behavior href="NodeInferenceStateful.datadictionary#_92kqcR7jEfGPjLFNxG_peA"/>
-    <properties xsi:type="consentmodel:ConsentLabel" href="NodeInferenceStateful.consentmodel#_pDJUQB7iEfGPjLFNxG_peA"/>
+    <properties xsi:type="privacymodel:FunctionalityLabel" href="NodeInferenceStateful.privacymodel#_pDJUQB7iEfGPjLFNxG_peA"/>
   </nodes>
 </dataflowdiagram:DataFlowDiagram>

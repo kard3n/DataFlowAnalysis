@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_Ct0s0YMeEfCvx4l13OBupA">
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_Ct0s0YMeEfCvx4l13OBupA">
   <labelTypes id="d4caqh" entityName="CardholderStatus">
     <label id="7hos2d" entityName="Authenticated"/>
     <label id="n0k7vj" entityName="Authorized"/>
@@ -62,7 +62,7 @@
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Ct1UHYMeEfCvx4l13OBupA" outputPin="7s1u3" inputPins="knrijg"/>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UHoMeEfCvx4l13OBupA" outputPin="7s1u3">
       <outputLabels xsi:type="datadictionary:Label" href="#7jtrdj"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_8gR2gCLAEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_8gR2gCLAEfGj9ZYXX-Blpg"/>
     </assignment>
   </behavior>
   <behavior id="_Ct0tA4MeEfCvx4l13OBupA" entityName="Token Service">
@@ -70,7 +70,7 @@
     <outPin id="6vfxki" entityName="Token Service_out_pan"/>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UJ4MeEfCvx4l13OBupA" outputPin="6vfxki">
       <outputLabels xsi:type="datadictionary:Label" href="#udzht"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_5NYbACLDEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_5NYbACLDEfGj9ZYXX-Blpg"/>
     </assignment>
   </behavior>
   <behavior id="_Ct0tB4MeEfCvx4l13OBupA" entityName="Cardholder">
@@ -81,19 +81,19 @@
     <outPin id="4vcx7k" entityName="Cardholder_out_card_information"/>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UIYMeEfCvx4l13OBupA" outputPin="4vcx7k">
       <outputLabels xsi:type="datadictionary:Label" href="#kf2e49"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_DlOVYCLAEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_DlOVYCLAEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UIoMeEfCvx4l13OBupA" outputPin="4vcx7k">
       <outputLabels xsi:type="datadictionary:Label" href="#7jtrdj"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_8gR2gCLAEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_8gR2gCLAEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UI4MeEfCvx4l13OBupA" outputPin="4vcx7k">
       <outputLabels xsi:type="datadictionary:Label" href="#xlh73s"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_4uQ9cCLAEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_4uQ9cCLAEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UJIMeEfCvx4l13OBupA" outputPin="4vcx7k">
       <outputLabels xsi:type="datadictionary:Label" href="#dfjj3"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_1IeigCLAEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_1IeigCLAEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UJYMeEfCvx4l13OBupA" outputPin="qxsitr" outputLabels="uqlnyq"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Ct1UJoMeEfCvx4l13OBupA" outputPin="q7ez3m" inputPins="41yehb"/>
@@ -115,7 +115,7 @@
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Ct1UDYMeEfCvx4l13OBupA" outputPin="zphr0b" inputPins="baak9n"/>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UDoMeEfCvx4l13OBupA" outputPin="qutwtd">
       <outputLabels xsi:type="datadictionary:Label" href="#7jtrdj"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_8gR2gCLAEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_8gR2gCLAEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UD4MeEfCvx4l13OBupA" outputPin="ie87h" outputLabels="700q8q"/>
   </behavior>
@@ -161,7 +161,7 @@
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Ct1UEYMeEfCvx4l13OBupA" outputPin="enpb14" inputPins="0484vs"/>
     <assignment xsi:type="datadictionary:UnsetAssignment" id="_Ct1UEoMeEfCvx4l13OBupA" outputPin="enpb14">
       <outputLabels xsi:type="datadictionary:Label" href="#okrkiu"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_2ED5oCLDEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_2ED5oCLDEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Ct1UE4MeEfCvx4l13OBupA" outputPin="kmp2vk" inputPins="0484vs"/>
   </behavior>
@@ -170,15 +170,15 @@
     <outPin id="bgmfdc" entityName="Link &amp; Provision_out_device_information"/>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UGoMeEfCvx4l13OBupA" outputPin="bgmfdc">
       <outputLabels xsi:type="datadictionary:Label" href="#z0gqy"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_gUXIcCLCEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_gUXIcCLCEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UG4MeEfCvx4l13OBupA" outputPin="bgmfdc">
       <outputLabels xsi:type="datadictionary:Label" href="#4krnt"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_dm5coCLCEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_dm5coCLCEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UHIMeEfCvx4l13OBupA" outputPin="bgmfdc">
       <outputLabels xsi:type="datadictionary:Label" href="#aid3tyb"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_W3XpkCLCEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_W3XpkCLCEfGj9ZYXX-Blpg"/>
     </assignment>
   </behavior>
   <behavior id="_Ct0tQIMeEfCvx4l13OBupA" entityName="Issuer Bank">
@@ -200,19 +200,19 @@
     <outPin id="xsmuo" entityName="Terminal App_out_payment_authorization"/>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UFIMeEfCvx4l13OBupA" outputPin="ekamp9">
       <outputLabels xsi:type="datadictionary:Label" href="#zg3dor"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_rrCs0CLCEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_rrCs0CLCEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UFYMeEfCvx4l13OBupA" outputPin="ekamp9">
       <outputLabels xsi:type="datadictionary:Label" href="#3qccpi"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_xLxxgCLCEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_xLxxgCLCEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UFoMeEfCvx4l13OBupA" outputPin="ekamp9">
       <outputLabels xsi:type="datadictionary:Label" href="#w4b2m9"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_0Z0a0CLCEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_0Z0a0CLCEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UF4MeEfCvx4l13OBupA" outputPin="ekamp9">
       <outputLabels xsi:type="datadictionary:Label" href="#y1q5w"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_u75ZkCLCEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_u75ZkCLCEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Ct1UGIMeEfCvx4l13OBupA" outputPin="xsmuo"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Ct1UGYMeEfCvx4l13OBupA" outputPin="dqy6d" inputPins="l1xfl"/>
@@ -225,7 +225,7 @@
     <outPin id="0kqs6h" entityName="Apple Pay App_out_otpotpotp"/>
     <assignment xsi:type="datadictionary:SetAssignment" id="_Ct1UCIMeEfCvx4l13OBupA" outputPin="0kqs6h">
       <outputLabels xsi:type="datadictionary:Label" href="#okrkiu"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="AppleWallet.consentmodel#_2ED5oCLDEfGj9ZYXX-Blpg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="AppleWallet.privacymodel#_2ED5oCLDEfGj9ZYXX-Blpg"/>
     </assignment>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Ct1UCYMeEfCvx4l13OBupA" outputPin="lftf7i" inputPins="3ktpfb"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Ct1UCoMeEfCvx4l13OBupA" outputPin="5vpyo6" inputPins="17tcwr"/>

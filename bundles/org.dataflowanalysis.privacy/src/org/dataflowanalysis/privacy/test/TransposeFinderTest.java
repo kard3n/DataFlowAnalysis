@@ -31,11 +31,11 @@ public class TransposeFinderTest {
 	public void initAnalysis() {
 		final var basicDataFlowDiagramPath = Paths.get("models", "dfd", "SuperBasicPrivacy", "sbp.dataflowdiagram");
 		final var basicDataDictionaryPath = Paths.get("models", "dfd", "SuperBasicPrivacy", "sbp.datadictionary");
-		final var basicConsentModelPath = Paths.get("models", "dfd", "SuperBasicPrivacy", "sbp.consentmodel");
+		final var basicConsentModelPath = Paths.get("models", "dfd", "SuperBasicPrivacy", "sbp.privacymodel");
 
 		this.analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone().modelProjectName(TEST_MODEL_PROJECT_NAME)
 				.usePluginActivator(Activator.class).useDataFlowDiagram(basicDataFlowDiagramPath.toString())
-				.useDataDictionary(basicDataDictionaryPath.toString()).useConsentModel(basicConsentModelPath.toString())
+				.useDataDictionary(basicDataDictionaryPath.toString()).usePrivacyModel(basicConsentModelPath.toString())
 				.build();
 	}
 

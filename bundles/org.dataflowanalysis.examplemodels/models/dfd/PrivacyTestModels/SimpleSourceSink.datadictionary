@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_cPGJYBYjEfGKdrlX6gB9XA" entityName="SimpleSourceSink">
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_cPGJYBYjEfGKdrlX6gB9XA" entityName="SimpleSourceSink">
   <labelTypes id="_HGwt0BZcEfGsJKBeQ4gDsQ" entityName="UselessLabelType">
     <label id="_JPvzkBZcEfGsJKBeQ4gDsQ" entityName="UselessLabel"/>
   </labelTypes>
@@ -7,7 +7,7 @@
     <outPin id="_h2w8gRYjEfGKdrlX6gB9XA" entityName="SourceOut"/>
     <assignment xsi:type="datadictionary:Assignment" id="_k2pOAhYjEfGKdrlX6gB9XA" entityName="SourceAssignment" outputPin="_h2w8gRYjEfGKdrlX6gB9XA">
       <term xsi:type="datadictionary:TRUE" id="_ekVykBZcEfGsJKBeQ4gDsQ"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="SimpleSourceSink.consentmodel#_lFaxMBYgEfGKdrlX6gB9XA"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="SimpleSourceSink.privacymodel#_lFaxMBYgEfGKdrlX6gB9XA"/>
       <outputLabels xsi:type="datadictionary:Label" href="#_JPvzkBZcEfGsJKBeQ4gDsQ"/>
     </assignment>
   </behavior>

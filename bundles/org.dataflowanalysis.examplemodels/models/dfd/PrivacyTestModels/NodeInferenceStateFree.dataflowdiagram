@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_vjWioB7GEfGbaP9QEy34OQ">
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_vjWioB7GEfGbaP9QEy34OQ">
   <flows id="_MfPqMB7HEfGbaP9QEy34OQ" entityName="SourceToSinkOne" sourceNode="_Bc-2oR7HEfGbaP9QEy34OQ" destinationNode="_Khm40h7HEfGbaP9QEy34OQ">
     <destinationPin href="NodeInferenceStateFree.datadictionary#_eFTz4B7FEfGbaP9QEy34OQ"/>
     <sourcePin href="NodeInferenceStateFree.datadictionary#_AuwwoR7FEfGbaP9QEy34OQ"/>
@@ -10,10 +10,10 @@
   </flows>
   <nodes xsi:type="dataflowdiagram:External" id="_Bc-2oR7HEfGbaP9QEy34OQ" entityName="Source">
     <behavior href="NodeInferenceStateFree.datadictionary#_6rsa8R7EEfGbaP9QEy34OQ"/>
-    <properties xsi:type="consentmodel:RoleLabel" href="NodeInferenceStateFree.consentmodel#_vEvl8B7EEfGbaP9QEy34OQ"/>
+    <properties xsi:type="privacymodel:RoleLabel" href="NodeInferenceStateFree.privacymodel#_vEvl8B7EEfGbaP9QEy34OQ"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="_Khm40h7HEfGbaP9QEy34OQ" entityName="Sink">
     <behavior href="NodeInferenceStateFree.datadictionary#_cQ-vgR7FEfGbaP9QEy34OQ"/>
-    <properties xsi:type="consentmodel:ConsentLabel" href="NodeInferenceStateFree.consentmodel#_dC-poB7EEfGbaP9QEy34OQ"/>
+    <properties xsi:type="privacymodel:FunctionalityLabel" href="NodeInferenceStateFree.privacymodel#_dC-poB7EEfGbaP9QEy34OQ"/>
   </nodes>
 </dataflowdiagram:DataFlowDiagram>

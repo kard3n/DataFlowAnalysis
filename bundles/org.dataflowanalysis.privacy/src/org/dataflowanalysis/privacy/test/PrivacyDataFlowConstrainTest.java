@@ -22,20 +22,20 @@ import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.examplemodels.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
 import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
-import org.dataflowanalysis.privacy.consentmodel.ConsentLabel;
-import org.dataflowanalysis.privacy.consentmodel.ConsentLabelType;
-import org.dataflowanalysis.privacy.consentmodel.ConsentOption;
-import org.dataflowanalysis.privacy.consentmodel.DataContext;
-import org.dataflowanalysis.privacy.consentmodel.DataItem;
-import org.dataflowanalysis.privacy.consentmodel.DataItemLabel;
-import org.dataflowanalysis.privacy.consentmodel.DataItemLabelType;
-import org.dataflowanalysis.privacy.consentmodel.DataState;
-import org.dataflowanalysis.privacy.consentmodel.StatefulItem;
-import org.dataflowanalysis.privacy.consentmodel.UserDataCombination;
-import org.dataflowanalysis.privacy.consentmodel.consentmodelFactory;
 import org.dataflowanalysis.privacy.constraint.PrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint.ItemInformation;
+import org.dataflowanalysis.privacy.privacymodel.DataContext;
+import org.dataflowanalysis.privacy.privacymodel.DataItem;
+import org.dataflowanalysis.privacy.privacymodel.DataItemLabel;
+import org.dataflowanalysis.privacy.privacymodel.DataItemLabelType;
+import org.dataflowanalysis.privacy.privacymodel.DataState;
+import org.dataflowanalysis.privacy.privacymodel.Functionality;
+import org.dataflowanalysis.privacy.privacymodel.FunctionalityLabel;
+import org.dataflowanalysis.privacy.privacymodel.FunctionalityLabelType;
+import org.dataflowanalysis.privacy.privacymodel.StatefulItem;
+import org.dataflowanalysis.privacy.privacymodel.UserDataCombination;
+import org.dataflowanalysis.privacy.privacymodel.privacymodelFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -55,93 +55,93 @@ public class PrivacyDataFlowConstrainTest {
 	// Data contexts
 	private DataContext dataContextOne;
 	private DataContext dataContextTwo;
-	// Consent options
-	private ConsentOption consentOptionOne;
-	private ConsentOption consentOptionTwo;
-	private ConsentOption consentOptionThree;
+	// Privacy options
+	private Functionality privacyOptionOne;
+	private Functionality privacyOptionTwo;
+	private Functionality privacyOptionThree;
 	// Label types
 	private DataItemLabelType dataItemLabelType;
-	private ConsentLabelType consentLabelType;
+	private FunctionalityLabelType privacyLabelType;
 	// Item labels
 	private DataItemLabel dataItemLabelOne;
 	private DataItemLabel dataItemLabelTwo;
 	private DataItemLabel dataItemLabelThree;
 	private DataItemLabel dataItemLabelFour;
-	// Consent labels
-	private ConsentLabel consentLabelOne;
-	private ConsentLabel consentLabelTwo;
-	private ConsentLabel consentLabelThree;
+	// Privacy labels
+	private FunctionalityLabel privacyLabelOne;
+	private FunctionalityLabel privacyLabelTwo;
+	private FunctionalityLabel privacyLabelThree;
 
 	@BeforeEach
 	public void setup() {
 		// Data items
-		dataItemOne = consentmodelFactory.eINSTANCE.createDataItem();
+		dataItemOne = privacymodelFactory.eINSTANCE.createDataItem();
 		dataItemOne.setEntityName("dOne");
-		dataItemTwo = consentmodelFactory.eINSTANCE.createDataItem();
+		dataItemTwo = privacymodelFactory.eINSTANCE.createDataItem();
 		dataItemTwo.setEntityName("dTwo");
-		dataItemThree = consentmodelFactory.eINSTANCE.createDataItem();
+		dataItemThree = privacymodelFactory.eINSTANCE.createDataItem();
 		dataItemThree.setEntityName("dThree");
-		dataItemFour = consentmodelFactory.eINSTANCE.createDataItem();
+		dataItemFour = privacymodelFactory.eINSTANCE.createDataItem();
 		dataItemFour.setEntityName("dFour");
 
 		// Data states
-		dataStateOne = consentmodelFactory.eINSTANCE.createDataState();
+		dataStateOne = privacymodelFactory.eINSTANCE.createDataState();
 		dataStateOne.setEntityName("sOne");
-		dataStateTwo = consentmodelFactory.eINSTANCE.createDataState();
+		dataStateTwo = privacymodelFactory.eINSTANCE.createDataState();
 		dataStateTwo.setEntityName("sTwo");
-		dataStateThree = consentmodelFactory.eINSTANCE.createDataState();
+		dataStateThree = privacymodelFactory.eINSTANCE.createDataState();
 		dataStateThree.setEntityName("sThree");
-		dataStateFour = consentmodelFactory.eINSTANCE.createDataState();
+		dataStateFour = privacymodelFactory.eINSTANCE.createDataState();
 		dataStateFour.setEntityName("sFour");
 
 		// Data context
-		dataContextOne = consentmodelFactory.eINSTANCE.createDataContext();
+		dataContextOne = privacymodelFactory.eINSTANCE.createDataContext();
 		dataContextOne.setEntityName("cOne");
-		dataContextTwo = consentmodelFactory.eINSTANCE.createDataContext();
+		dataContextTwo = privacymodelFactory.eINSTANCE.createDataContext();
 		dataContextTwo.setEntityName("cTwo");
 
-		// Consent options
-		consentOptionOne = consentmodelFactory.eINSTANCE.createConsentOption();
-		consentOptionOne.setEntityName("consentOptionOne");
-		consentOptionTwo = consentmodelFactory.eINSTANCE.createConsentOption();
-		consentOptionTwo.setEntityName("consentOptionTwo");
-		consentOptionThree = consentmodelFactory.eINSTANCE.createConsentOption();
-		consentOptionThree.setEntityName("consentOptionThree");
+		// Privacy options
+		privacyOptionOne = privacymodelFactory.eINSTANCE.createFunctionality();
+		privacyOptionOne.setEntityName("privacyOptionOne");
+		privacyOptionTwo = privacymodelFactory.eINSTANCE.createFunctionality();
+		privacyOptionTwo.setEntityName("privacyOptionTwo");
+		privacyOptionThree = privacymodelFactory.eINSTANCE.createFunctionality();
+		privacyOptionThree.setEntityName("privacyOptionThree");
 
 		// Label types
-		dataItemLabelType = consentmodelFactory.eINSTANCE.createDataItemLabelType();
+		dataItemLabelType = privacymodelFactory.eINSTANCE.createDataItemLabelType();
 		dataItemLabelType.setEntityName("DataItemLabelType");
-		consentLabelType = consentmodelFactory.eINSTANCE.createConsentLabelType();
-		consentLabelType.setEntityName("ConsentLabelType");
+		privacyLabelType = privacymodelFactory.eINSTANCE.createFunctionalityLabelType();
+		privacyLabelType.setEntityName("PrivacyLabelType");
 
 		// Item labels
-		dataItemLabelOne = consentmodelFactory.eINSTANCE.createDataItemLabel();
+		dataItemLabelOne = privacymodelFactory.eINSTANCE.createDataItemLabel();
 		dataItemLabelOne.setEntityName("dataItemLabelOne");
 		dataItemLabelOne.setDataItem(dataItemOne);
 		dataItemLabelType.getLabels().add(dataItemLabelOne);
-		dataItemLabelTwo = consentmodelFactory.eINSTANCE.createDataItemLabel();
+		dataItemLabelTwo = privacymodelFactory.eINSTANCE.createDataItemLabel();
 		dataItemLabelTwo.setEntityName("dataItemLabelTwo");
 		dataItemLabelTwo.setDataItem(dataItemTwo);
 		dataItemLabelType.getLabels().add(dataItemLabelTwo);
-		dataItemLabelThree = consentmodelFactory.eINSTANCE.createDataItemLabel();
+		dataItemLabelThree = privacymodelFactory.eINSTANCE.createDataItemLabel();
 		dataItemLabelThree.setEntityName("dataItemLabelThree");
 		dataItemLabelThree.setDataItem(dataItemThree);
 		dataItemLabelType.getLabels().add(dataItemLabelThree);
-		dataItemLabelFour = consentmodelFactory.eINSTANCE.createDataItemLabel();
+		dataItemLabelFour = privacymodelFactory.eINSTANCE.createDataItemLabel();
 		dataItemLabelFour.setEntityName("dataItemLabelFour");
 		dataItemLabelFour.setDataItem(dataItemFour);
 		dataItemLabelType.getLabels().add(dataItemLabelFour);
 
-		// Consent labels
-		consentLabelOne = consentmodelFactory.eINSTANCE.createConsentLabel();
-		consentLabelOne.setEntityName("consentLabelOne");
-		consentLabelOne.setConsentOption(consentOptionOne);
-		consentLabelTwo = consentmodelFactory.eINSTANCE.createConsentLabel();
-		consentLabelTwo.setEntityName("consentLabelTwo");
-		consentLabelTwo.setConsentOption(consentOptionTwo);
-		consentLabelThree = consentmodelFactory.eINSTANCE.createConsentLabel();
-		consentLabelThree.setEntityName("consentLabelThree");
-		consentLabelThree.setConsentOption(consentOptionThree);
+		// Privacy labels
+		privacyLabelOne = privacymodelFactory.eINSTANCE.createFunctionalityLabel();
+		privacyLabelOne.setEntityName("privacyLabelOne");
+		privacyLabelOne.setFunctionality(privacyOptionOne);
+		privacyLabelTwo = privacymodelFactory.eINSTANCE.createFunctionalityLabel();
+		privacyLabelTwo.setEntityName("privacyLabelTwo");
+		privacyLabelTwo.setFunctionality(privacyOptionTwo);
+		privacyLabelThree = privacymodelFactory.eINSTANCE.createFunctionalityLabel();
+		privacyLabelThree.setEntityName("privacyLabelThree");
+		privacyLabelThree.setFunctionality(privacyOptionThree);
 
 	}
 
@@ -256,8 +256,8 @@ public class PrivacyDataFlowConstrainTest {
 
 	@Test
 	public void testExtractDataItems() {
-		var otherLabelType = consentmodelFactory.eINSTANCE.createConsentLabelType();
-		var otherLabel = consentmodelFactory.eINSTANCE.createDataStateLabel();
+		var otherLabelType = privacymodelFactory.eINSTANCE.createFunctionalityLabelType();
+		var otherLabel = privacymodelFactory.eINSTANCE.createDataStateLabel();
 		var input = List.of(new DFDCharacteristicValue(dataItemLabelType, dataItemLabelOne),
 				new DFDCharacteristicValue(otherLabelType, otherLabel),
 				new DFDCharacteristicValue(dataItemLabelType, dataItemLabelTwo));
@@ -267,24 +267,24 @@ public class PrivacyDataFlowConstrainTest {
 	}
 
 	@Test
-	public void testAllFunctionalitiesConsentedTo() {
-		// Scenario one: all consent options met
+	public void testAllFunctionalitiesPrivacyedTo() {
+		// Scenario one: all privacy options met
 		Set<Set<CharacteristicValue>> pinIncoming = Set.of(
-				Set.of(new DFDCharacteristicValue(consentLabelType, consentLabelOne),
-						new DFDCharacteristicValue(consentLabelType, consentLabelTwo),
+				Set.of(new DFDCharacteristicValue(privacyLabelType, privacyLabelOne),
+						new DFDCharacteristicValue(privacyLabelType, privacyLabelTwo),
 						new DFDCharacteristicValue(this.dataItemLabelType, this.dataItemLabelOne)),
-				Set.of(new DFDCharacteristicValue(consentLabelType, consentLabelTwo),
+				Set.of(new DFDCharacteristicValue(privacyLabelType, privacyLabelTwo),
 						new DFDCharacteristicValue(this.dataItemLabelType, this.dataItemLabelOne)));
 
-		var vertexCharacteristicsOne = List.of(consentLabelTwo);
+		var vertexCharacteristicsOne = List.of(privacyLabelTwo);
 
 		pinIncoming.forEach(incoming -> {
 			assertEquals(true, PrivacyDataFlowConstraint.allFunctionalitiesConsentedTo(new HashSet<>(incoming),
 					vertexCharacteristicsOne, "testVertex"));
 		});
 
-		// Scenario two: one consent option is not met
-		var vertexCharacteristicsTwo = List.of(consentLabelTwo, consentLabelThree);
+		// Scenario two: one privacy option is not met
+		var vertexCharacteristicsTwo = List.of(privacyLabelTwo, privacyLabelThree);
 
 		int detectedViolations = 0;
 		for (var incoming : pinIncoming) {
@@ -302,12 +302,12 @@ public class PrivacyDataFlowConstrainTest {
 	public void testGroupIncomingCharacteristicsByPin() {
 		List<DataCharacteristic> incomingCharacteristics = List.of(
 				new DataCharacteristic("pinOne",
-						List.of(new DFDCharacteristicValue(consentLabelType, consentLabelOne),
-								new DFDCharacteristicValue(consentLabelType, consentLabelTwo))),
+						List.of(new DFDCharacteristicValue(privacyLabelType, privacyLabelOne),
+								new DFDCharacteristicValue(privacyLabelType, privacyLabelTwo))),
 				new DataCharacteristic("pinTwo",
-						List.of(new DFDCharacteristicValue(consentLabelType, consentLabelThree))),
+						List.of(new DFDCharacteristicValue(privacyLabelType, privacyLabelThree))),
 				new DataCharacteristic("pinThree",
-						List.of(new DFDCharacteristicValue(consentLabelType, consentLabelThree))));
+						List.of(new DFDCharacteristicValue(privacyLabelType, privacyLabelThree))));
 
 		HashMap<String, HashSet<CharacteristicValue>> expectedResult = new HashMap<>();
 		expectedResult.put("pinOne", new HashSet<>(incomingCharacteristics.get(0).getAllCharacteristics()));
@@ -320,8 +320,8 @@ public class PrivacyDataFlowConstrainTest {
 
 	@Test
 	public void testCombinationAllowsItem() {
-		UserDataCombination combination = consentmodelFactory.eINSTANCE.createUserDataCombination();
-		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		UserDataCombination combination = privacymodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemOne.setItem(dataItemOne);
 		itemOne.getState().add(dataStateOne);
 		combination.getMembers().add(itemOne);
@@ -339,8 +339,8 @@ public class PrivacyDataFlowConstrainTest {
 
 	@Test
 	public void testCombinationAllowsItemWithContext() {
-		UserDataCombination combination = consentmodelFactory.eINSTANCE.createUserDataCombination();
-		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		UserDataCombination combination = privacymodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemOne.setItem(dataItemOne);
 		itemOne.getState().add(dataStateOne);
 		itemOne.getContext().add(dataContextOne);
@@ -358,17 +358,17 @@ public class PrivacyDataFlowConstrainTest {
 				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of()))));
 
 	}
-	
+
 	@Test
 	public void testCombinationAllowsItemWithContextMultiple() {
-		UserDataCombination combination = consentmodelFactory.eINSTANCE.createUserDataCombination();
-		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		UserDataCombination combination = privacymodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemOne.setItem(dataItemOne);
 		itemOne.getState().add(dataStateOne);
 		itemOne.getContext().add(dataContextOne);
 		combination.getMembers().add(itemOne);
-		
-		StatefulItem itemTwo = consentmodelFactory.eINSTANCE.createStatefulItem();
+
+		StatefulItem itemTwo = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemTwo.setItem(dataItemOne);
 		itemTwo.getState().add(dataStateOne);
 		itemTwo.getContext().add(dataContextTwo);
@@ -383,115 +383,115 @@ public class PrivacyDataFlowConstrainTest {
 	}
 
 	@Test
-	public void testCombinationAllowedByConsentOptionsNoStateNonAllowedItem() {
+	public void testCombinationAllowedByPrivacyOptionsNoStateNonAllowedItem() {
 		// Passed combination (received data)
 		HashMap<DataItem, ItemInformation> dataCombinationOne = new HashMap<>(Map.of(dataItemOne,
 				new ItemInformation(Set.of(), Set.of()), dataItemTwo, new ItemInformation(Set.of(), Set.of())));
-		// Consent combination
-		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
-		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		// Privacy combination
+		UserDataCombination privacyCombination = privacymodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemOne.setItem(dataItemOne);
-		consentCombination.getMembers().add(itemOne);
-		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
-		consentOption.getAllowsFor().add(consentCombination);
+		privacyCombination.getMembers().add(itemOne);
+		Functionality privacyOption = privacymodelFactory.eINSTANCE.createFunctionality();
+		privacyOption.getAllowsFor().add(privacyCombination);
 
-		// Scenario one: neither passed combination nor consent option have state.
-		// Consent options not allow for dataItemTwo
-		assertFalse(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
-				List.of(consentOption)));
+		// Scenario one: neither passed combination nor privacy option have state.
+		// Privacy options not allow for dataItemTwo
+		assertFalse(PrivacyDataFlowConstraint.combinationAllowedByFunctionalities(dataCombinationOne,
+				List.of(privacyOption)));
 
 	}
 
 	@Test
-	public void testCombinationAllowedByConsentOptionsTwoNoStateItemsAllowed() {
+	public void testCombinationAllowedByPrivacyOptionsTwoNoStateItemsAllowed() {
 		// Passed combination (received data)
 		HashMap<DataItem, ItemInformation> dataCombinationOne = new HashMap<>(Map.of(dataItemOne,
 				new ItemInformation(Set.of(), Set.of()), dataItemTwo, new ItemInformation(Set.of(), Set.of())));
-		// Consent combination
-		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
-		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		// Privacy combination
+		UserDataCombination privacyCombination = privacymodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemOne.setItem(dataItemOne);
-		consentCombination.getMembers().add(itemOne);
-		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
-		consentOption.getAllowsFor().add(consentCombination);
+		privacyCombination.getMembers().add(itemOne);
+		Functionality privacyOption = privacymodelFactory.eINSTANCE.createFunctionality();
+		privacyOption.getAllowsFor().add(privacyCombination);
 
-		// Scenario two: neither passed combination nor consent option have state. Data
+		// Scenario two: neither passed combination nor privacy option have state. Data
 		// combination allows for both items
-		StatefulItem itemTwo = consentmodelFactory.eINSTANCE.createStatefulItem();
+		StatefulItem itemTwo = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemTwo.setItem(dataItemTwo);
-		consentCombination.getMembers().add(itemTwo);
-		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
-				List.of(consentOption)));
+		privacyCombination.getMembers().add(itemTwo);
+		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByFunctionalities(dataCombinationOne,
+				List.of(privacyOption)));
 	}
 
 	@Test
-	public void testCombinationAllowedByConsentOptionsStateIncorrect() {
+	public void testCombinationAllowedByPrivacyOptionsStateIncorrect() {
 		// Passed combination (received data)
 		HashMap<DataItem, ItemInformation> dataCombinationOne = new HashMap<>(Map.of(dataItemOne,
 				new ItemInformation(Set.of(), Set.of()), dataItemTwo, new ItemInformation(Set.of(), Set.of())));
-		// Consent combination
-		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
-		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		// Privacy combination
+		UserDataCombination privacyCombination = privacymodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemOne.setItem(dataItemOne);
-		consentCombination.getMembers().add(itemOne);
-		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
-		consentOption.getAllowsFor().add(consentCombination);
+		privacyCombination.getMembers().add(itemOne);
+		Functionality privacyOption = privacymodelFactory.eINSTANCE.createFunctionality();
+		privacyOption.getAllowsFor().add(privacyCombination);
 
-		StatefulItem itemTwo = consentmodelFactory.eINSTANCE.createStatefulItem();
+		StatefulItem itemTwo = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemTwo.setItem(dataItemTwo);
-		consentCombination.getMembers().add(itemTwo);
+		privacyCombination.getMembers().add(itemTwo);
 
-		// Scenario 3: consent option dictates state, passed item has another one
+		// Scenario 3: privacy option dictates state, passed item has another one
 		itemOne.getState().add(dataStateOne);
-		assertFalse(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
-				List.of(consentOption)));
+		assertFalse(PrivacyDataFlowConstraint.combinationAllowedByFunctionalities(dataCombinationOne,
+				List.of(privacyOption)));
 	}
 
 	@Test
-	public void testCombinationAllowedByConsentOptionsStateAdditionalButCorrect() {
+	public void testCombinationAllowedByPrivacyOptionsStateAdditionalButCorrect() {
 		// Passed combination (received data)
 		HashMap<DataItem, ItemInformation> dataCombinationOne = new HashMap<>(Map.of(dataItemOne,
 				new ItemInformation(Set.of(), Set.of()), dataItemTwo, new ItemInformation(Set.of(), Set.of())));
-		// Consent combination
-		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
-		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		// Privacy combination
+		UserDataCombination privacyCombination = privacymodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemOne.setItem(dataItemOne);
-		consentCombination.getMembers().add(itemOne);
-		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
-		consentOption.getAllowsFor().add(consentCombination);
+		privacyCombination.getMembers().add(itemOne);
+		Functionality privacyOption = privacymodelFactory.eINSTANCE.createFunctionality();
+		privacyOption.getAllowsFor().add(privacyCombination);
 
-		StatefulItem itemTwo = consentmodelFactory.eINSTANCE.createStatefulItem();
+		StatefulItem itemTwo = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemTwo.setItem(dataItemTwo);
-		consentCombination.getMembers().add(itemTwo);
+		privacyCombination.getMembers().add(itemTwo);
 		itemOne.getState().add(dataStateOne);
 
-		// Scenario 4: passed item has more states than required by the consent option.
-		// Consent option requires two states simultaneously
+		// Scenario 4: passed item has more states than required by the privacy option.
+		// Privacy option requires two states simultaneously
 		itemOne.getState().add(dataStateTwo);
 		dataCombinationOne.put(dataItemOne,
 				new ItemInformation(Set.of(dataStateOne, dataStateTwo, dataStateThree), Set.of()));
-		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
-				List.of(consentOption)));
+		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByFunctionalities(dataCombinationOne,
+				List.of(privacyOption)));
 	}
 
 	@Test
-	public void testEmptyCombinationAllowedByConsentOptions() {
+	public void testEmptyCombinationAllowedByPrivacyOptions() {
 		// Passed combination (received data)
 		HashMap<DataItem, ItemInformation> dataCombinationOne = new HashMap<>();
-		// Consent combination
-		UserDataCombination consentCombination = consentmodelFactory.eINSTANCE.createUserDataCombination();
-		StatefulItem itemOne = consentmodelFactory.eINSTANCE.createStatefulItem();
+		// Privacy combination
+		UserDataCombination privacyCombination = privacymodelFactory.eINSTANCE.createUserDataCombination();
+		StatefulItem itemOne = privacymodelFactory.eINSTANCE.createStatefulItem();
 		itemOne.setItem(dataItemOne);
-		consentCombination.getMembers().add(itemOne);
-		ConsentOption consentOption = consentmodelFactory.eINSTANCE.createConsentOption();
-		consentOption.getAllowsFor().add(consentCombination);
+		privacyCombination.getMembers().add(itemOne);
+		Functionality privacyOption = privacymodelFactory.eINSTANCE.createFunctionality();
+		privacyOption.getAllowsFor().add(privacyCombination);
 
 		// Scenario The passed item combination is empty
 		itemOne.getState().add(dataStateTwo);
 		dataCombinationOne.put(dataItemOne,
 				new ItemInformation(Set.of(dataStateOne, dataStateTwo, dataStateThree), Set.of()));
-		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByConsentOptions(dataCombinationOne,
-				List.of(consentOption)));
+		assertTrue(PrivacyDataFlowConstraint.combinationAllowedByFunctionalities(dataCombinationOne,
+				List.of(privacyOption)));
 	}
 
 	@Test
@@ -500,12 +500,12 @@ public class PrivacyDataFlowConstrainTest {
 				"SimpleSourceSink.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"SimpleSourceSink.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "SimpleSourceSink.consentmodel");
+		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "SimpleSourceSink.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
 				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
-				.useConsentModel(consentModelPath.toString()).build();
+				.usePrivacyModel(privacyModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
@@ -537,12 +537,12 @@ public class PrivacyDataFlowConstrainTest {
 		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"BasicDataState.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels", "BasicDataState.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "BasicDataState.consentmodel");
+		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "BasicDataState.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
 				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
-				.useConsentModel(consentModelPath.toString()).build();
+				.usePrivacyModel(privacyModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
@@ -551,7 +551,7 @@ public class PrivacyDataFlowConstrainTest {
 		assertEquals(1, result.size());
 		for (var violation : result) {
 			assertTrue(violation.message().contains(
-					"received a data combination in pin _C-ypEBbvEfGwgKscrQsGUg or could infere one not allowed for any of its consent options/functionalities."));
+					"received a data combination in pin _C-ypEBbvEfGwgKscrQsGUg or could infere one not allowed for any of its functionalities."));
 			logger.debug(violation.message());
 		}
 	}
@@ -562,12 +562,12 @@ public class PrivacyDataFlowConstrainTest {
 				"PinLevelInference.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"PinLevelInference.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "PinLevelInference.consentmodel");
+		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "PinLevelInference.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
 				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
-				.useConsentModel(consentModelPath.toString()).build();
+				.usePrivacyModel(privacyModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
@@ -577,7 +577,7 @@ public class PrivacyDataFlowConstrainTest {
 		for (var violation : result) {
 			logger.debug(violation.message());
 			assertTrue(violation.message().contains(
-					"has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its consent options/functionalities."));
+					"has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its functionalities."));
 			assertTrue(violation.message().contains("[DataItemOne: {state: {[]}, context: {[[]]}}]")); // State has been
 																										// reduced to
 																										// the empty set
@@ -645,13 +645,13 @@ public class PrivacyDataFlowConstrainTest {
 				"NodeInferenceStateFree.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"NodeInferenceStateFree.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"NodeInferenceStateFree.consentmodel");
+		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"NodeInferenceStateFree.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
 				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
-				.useConsentModel(consentModelPath.toString()).build();
+				.usePrivacyModel(privacyModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
@@ -659,7 +659,7 @@ public class PrivacyDataFlowConstrainTest {
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 		assertEquals(1, violations.size());
 		for (var violation : violations) {
-			assertTrue(violation.message().contains("information not authorized by its consent options."));
+			assertTrue(violation.message().contains("information not authorized by its functionalities."));
 		}
 	}
 
@@ -670,13 +670,13 @@ public class PrivacyDataFlowConstrainTest {
 				"NodeInferenceStateful.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"NodeInferenceStateful.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"NodeInferenceStateful.consentmodel");
+		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+				"NodeInferenceStateful.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
 				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
-				.useConsentModel(consentModelPath.toString()).build();
+				.usePrivacyModel(privacyModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
@@ -684,36 +684,33 @@ public class PrivacyDataFlowConstrainTest {
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 		assertEquals(1, violations.size());
 		for (var violation : violations) {
-			assertTrue(violation.message().contains("information not authorized by its consent options."));
+			assertTrue(violation.message().contains("information not authorized by its functionalities."));
 			assertTrue(violation.message().contains("ItemTwo: {state: {[]}"));
 		}
 	}
-	
+
 	@Test
 	public void testUserNodeLogic() {
 		// UserNodeTest
-		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"UserNodeTest.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"UserNodeTest.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"UserNodeTest.consentmodel");
+		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels", "UserNodeTest.dataflowdiagram");
+		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels", "UserNodeTest.datadictionary");
+		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "UserNodeTest.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
 				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
-				.useConsentModel(consentModelPath.toString()).build();
+				.usePrivacyModel(privacyModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
 
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 		assertEquals(1, violations.size());
-		for(var violation: violations) {
+		for (var violation : violations) {
 			assertTrue(violation.message().startsWith("The user-representing vertex"));
 		}
 	}
-	
+
 	@Test
 	public void testPinRelation() {
 		// UserNodeTest
@@ -721,21 +718,20 @@ public class PrivacyDataFlowConstrainTest {
 				"PinRelationTest.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
 				"PinRelationTest.datadictionary");
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
-				"PinRelationTest.consentmodel");
+		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "PinRelationTest.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
 				.useDataFlowDiagram(dataFlowDiagramPath.toString()).useDataDictionary(dataDictionaryPath.toString())
-				.useConsentModel(consentModelPath.toString()).build();
+				.usePrivacyModel(privacyModelPath.toString()).build();
 		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
 		flowGraphCollection.evaluate();
 
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 		assertEquals(1, violations.size());
-		
-		for(var violation: violations) {
+
+		for (var violation : violations) {
 			assertTrue(violation.message().contains("\"Middle\" received or could derive information not authorized"));
 		}
 	}

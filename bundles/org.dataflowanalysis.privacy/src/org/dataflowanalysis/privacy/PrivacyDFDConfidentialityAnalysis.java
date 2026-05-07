@@ -18,70 +18,69 @@ import tools.mdsd.library.standalone.initialization.StandaloneInitializerBuilder
  */
 public class PrivacyDFDConfidentialityAnalysis extends DataFlowConfidentialityAnalysis {
 	public static final String PLUGIN_PATH = "org.dataflowanalysis.privacy";
-	
-    private final Logger logger = LoggerManager.getLogger(PrivacyDFDConfidentialityAnalysis.class);
 
-    protected final PrivacyDFDResourceProvider resourceProvider;
-    protected final Optional<Class<? extends Plugin>> modelProjectActivator;
-    protected final String modelProjectName;
-    protected final Class<? extends PrivacyDFDTransposeFlowGraphFinder> transposeFlowGraphFinderClass;
+	private final Logger logger = LoggerManager.getLogger(PrivacyDFDConfidentialityAnalysis.class);
 
-    public PrivacyDFDConfidentialityAnalysis(PrivacyDFDResourceProvider resourceProvider, Optional<Class<? extends Plugin>> modelProjectActivator,
-            String modelProjectName, Class<? extends PrivacyDFDTransposeFlowGraphFinder> transposeFlowGraphFinderClass) {
-        this.resourceProvider = resourceProvider;
-        this.modelProjectActivator = modelProjectActivator;
-        this.modelProjectName = modelProjectName;
-        this.transposeFlowGraphFinderClass = transposeFlowGraphFinderClass;
-    }
+	protected final PrivacyDFDResourceProvider resourceProvider;
+	protected final Optional<Class<? extends Plugin>> modelProjectActivator;
+	protected final String modelProjectName;
+	protected final Class<? extends PrivacyDFDTransposeFlowGraphFinder> transposeFlowGraphFinderClass;
 
-    public PrivacyDFDConfidentialityAnalysis(PrivacyDFDResourceProvider resourceProvider, Optional<Class<? extends Plugin>> modelProjectActivator,
-            String modelProjectName) {
-        this.resourceProvider = resourceProvider;
-        this.modelProjectActivator = modelProjectActivator;
-        this.modelProjectName = modelProjectName;
-        this.transposeFlowGraphFinderClass = PrivacyDFDTransposeFlowGraphFinder.class;
-    }
+	public PrivacyDFDConfidentialityAnalysis(PrivacyDFDResourceProvider resourceProvider,
+			Optional<Class<? extends Plugin>> modelProjectActivator, String modelProjectName,
+			Class<? extends PrivacyDFDTransposeFlowGraphFinder> transposeFlowGraphFinderClass) {
+		this.resourceProvider = resourceProvider;
+		this.modelProjectActivator = modelProjectActivator;
+		this.modelProjectName = modelProjectName;
+		this.transposeFlowGraphFinderClass = transposeFlowGraphFinderClass;
+	}
 
-    @Override
-    public void initializeAnalysis() {
-        this.resourceProvider.setupResources();
+	public PrivacyDFDConfidentialityAnalysis(PrivacyDFDResourceProvider resourceProvider,
+			Optional<Class<? extends Plugin>> modelProjectActivator, String modelProjectName) {
+		this.resourceProvider = resourceProvider;
+		this.modelProjectActivator = modelProjectActivator;
+		this.modelProjectName = modelProjectName;
+		this.transposeFlowGraphFinderClass = PrivacyDFDTransposeFlowGraphFinder.class;
+	}
 
-        EcorePlugin.ExtensionProcessor.process(null);
+	@Override
+	public void initializeAnalysis() {
+		this.resourceProvider.setupResources();
 
-        try {
-            super.setupLoggers();
-            var initializationBuilder = StandaloneInitializerBuilder.builder()
-                    .registerProjectURI(PrivacyDFDConfidentialityAnalysis.class, PrivacyDFDConfidentialityAnalysis.PLUGIN_PATH);
+		EcorePlugin.ExtensionProcessor.process(null);
 
-            this.modelProjectActivator
-                    .ifPresent(projectActivator -> initializationBuilder.registerProjectURI(projectActivator, this.modelProjectName));
+		try {
+			super.setupLoggers();
+			var initializationBuilder = StandaloneInitializerBuilder.builder().registerProjectURI(
+					PrivacyDFDConfidentialityAnalysis.class, PrivacyDFDConfidentialityAnalysis.PLUGIN_PATH);
 
-            initializationBuilder.build()
-                    .init();
+			this.modelProjectActivator.ifPresent(projectActivator -> initializationBuilder
+					.registerProjectURI(projectActivator, this.modelProjectName));
 
-            logger.info("Successfully initialized standalone environment for the data flow analysis.");
+			initializationBuilder.build().init();
 
-        } catch (StandaloneInitializationException e) {
-            logger.error("Could not initialize analysis", e);
-            throw new IllegalStateException("Could not initialize analysis");
-        }
-        this.resourceProvider.loadRequiredResources();
-        this.resourceProvider.validate();
-        if (!this.resourceProvider.sufficientResourcesLoaded()) {
-            logger.error("Insufficient amount of resources loaded");
-            throw new IllegalStateException("Could not initialize analysis");
-        }
-    }
+			logger.info("Successfully initialized standalone environment for the data flow analysis.");
 
-    @Override
-    public DFDFlowGraphCollection findFlowGraphs() {
+		} catch (StandaloneInitializationException e) {
+			logger.error("Could not initialize analysis", e);
+			throw new IllegalStateException("Could not initialize analysis");
+		}
+		this.resourceProvider.loadRequiredResources();
+		this.resourceProvider.validate();
+		if (!this.resourceProvider.sufficientResourcesLoaded()) {
+			logger.error("Insufficient amount of resources loaded");
+			throw new IllegalStateException("Could not initialize analysis");
+		}
+	}
 
-        return new DFDFlowGraphCollection(this.resourceProvider, this.transposeFlowGraphFinderClass);
-    }
+	@Override
+	public DFDFlowGraphCollection findFlowGraphs() {
 
-    @Override
-    public void setLoggerLevel(Level level) {
-        LoggerManager.getInstance()
-                .setLevel(level);
-    }
+		return new DFDFlowGraphCollection(this.resourceProvider, this.transposeFlowGraphFinderClass);
+	}
+
+	@Override
+	public void setLoggerLevel(Level level) {
+		LoggerManager.getInstance().setLevel(level);
+	}
 }

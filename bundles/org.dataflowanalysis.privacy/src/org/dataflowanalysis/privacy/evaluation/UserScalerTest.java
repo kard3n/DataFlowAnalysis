@@ -19,7 +19,7 @@ public class UserScalerTest {
 
 	@Test
 	public void testGenerateUsers() {
-		final var consentModelPath = Paths.get("models", "dfd", "PrivacyScalingModels", "base.consentmodel");
+		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyScalingModels", "base.privacymodel");
 		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyScalingModels",
 				"simple_forward.dataflowdiagram");
 		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyScalingModels",
@@ -34,7 +34,7 @@ public class UserScalerTest {
 		ModelManager manager = new ModelManager();
 
 		PrivacyModelPackage originalPackage = manager.loadModel(dataFlowDiagramPath, dataDictionaryPath,
-				consentModelPath, TEST_MODEL_PROJECT_NAME);
+				privacyModelPath, TEST_MODEL_PROJECT_NAME);
 
 		for (int currentAmount : numberUsers) {
 			PrivacyModelPackage modifiedPackage = PrivacyContractGenerator.generateUsers(originalPackage, currentAmount,
@@ -78,7 +78,7 @@ public class UserScalerTest {
 						.modelProjectName("org.dataflowanalysis.privacy").usePluginActivator(Activator.class)
 						.useDataFlowDiagram(outputDir + "/" + scaledModelName + ".dataflowdiagram")
 						.useDataDictionary(outputDir + "/" + scaledModelName + ".datadictionary")
-						.useConsentModel(outputDir + "/" + scaledModelName + ".consentmodel").build();
+						.usePrivacyModel(outputDir + "/" + scaledModelName + ".privacymodel").build();
 				analysis.initializeAnalysis();
 
 				startFindGraphs = System.nanoTime();

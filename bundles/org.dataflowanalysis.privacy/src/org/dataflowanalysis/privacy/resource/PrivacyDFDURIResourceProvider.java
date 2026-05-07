@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.dataflowdiagram.DataFlowDiagram;
-import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
+import org.dataflowanalysis.privacy.privacymodel.PrivacyModel;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -20,29 +20,29 @@ public class PrivacyDFDURIResourceProvider extends PrivacyDFDResourceProvider {
 
 	private final URI dataFlowDiagramURI;
 	private final URI dataDictionaryURI;
-	private final URI consentModelURI;
+	private final URI privacyModelURI;
 	private DataFlowDiagram dataFlowDiagram;
 	private DataDictionary dataDictionary;
-	private ConsentModel consentModel;
+	private PrivacyModel privacyModel;
 
 	/**
 	 * Creates a new resource loader with the given model URIs
 	 * 
 	 * @param dataFlowDiagramURI URI to the data flow diagram model
 	 * @param dataDictionaryURI  URI to the data dictionary model
-	 * @param consentModelURI    URI to the consent model
+	 * @param privacyModelURI    URI to the privacy model
 	 */
-	public PrivacyDFDURIResourceProvider(URI dataFlowDiagramURI, URI dataDictionaryURI, URI consentModelURI) {
+	public PrivacyDFDURIResourceProvider(URI dataFlowDiagramURI, URI dataDictionaryURI, URI privacyModelURI) {
 		this.dataFlowDiagramURI = dataFlowDiagramURI;
 		this.dataDictionaryURI = dataDictionaryURI;
-		this.consentModelURI = consentModelURI;
+		this.privacyModelURI = privacyModelURI;
 	}
 
 	@Override
 	public void loadRequiredResources() {
 		this.dataFlowDiagram = (DataFlowDiagram) this.loadModelContent(dataFlowDiagramURI);
 		this.dataDictionary = (DataDictionary) this.loadModelContent(dataDictionaryURI);
-		this.consentModel = (ConsentModel) this.loadModelContent(consentModelURI);
+		this.privacyModel = (PrivacyModel) this.loadModelContent(privacyModelURI);
 		List<Resource> loadedResources;
 		do {
 			loadedResources = new ArrayList<>(this.resources.getResources());
@@ -68,7 +68,7 @@ public class PrivacyDFDURIResourceProvider extends PrivacyDFDResourceProvider {
 	}
 
 	@Override
-	public ConsentModel getConsentModel() {
-		return this.consentModel;
+	public PrivacyModel getPrivacyModel() {
+		return this.privacyModel;
 	}
 }

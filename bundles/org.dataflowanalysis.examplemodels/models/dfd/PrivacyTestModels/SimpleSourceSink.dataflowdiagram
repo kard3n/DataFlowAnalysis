@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_HTIQUBYkEfGKdrlX6gB9XA" entityName="SimpleSourceSink">
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_HTIQUBYkEfGKdrlX6gB9XA" entityName="SimpleSourceSink">
   <flows id="_48AkUBYkEfGKdrlX6gB9XA" entityName="SourceToSink" sourceNode="_JvPGYRYkEfGKdrlX6gB9XA" destinationNode="_sNu64hYkEfGKdrlX6gB9XA">
     <destinationPin href="SimpleSourceSink.datadictionary#_-z8dgBYjEfGKdrlX6gB9XA"/>
     <sourcePin href="SimpleSourceSink.datadictionary#_h2w8gRYjEfGKdrlX6gB9XA"/>
   </flows>
   <nodes xsi:type="dataflowdiagram:External" id="_JvPGYRYkEfGKdrlX6gB9XA" entityName="Source">
     <behavior href="SimpleSourceSink.datadictionary#_d7Ns8RYjEfGKdrlX6gB9XA"/>
-    <properties xsi:type="consentmodel:RoleLabel" href="SimpleSourceSink.consentmodel#_nizuwBYiEfGKdrlX6gB9XA"/>
+    <properties xsi:type="privacymodel:RoleLabel" href="SimpleSourceSink.privacymodel#_nizuwBYiEfGKdrlX6gB9XA"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Store" id="_sNu64hYkEfGKdrlX6gB9XA" entityName="Sink">
     <behavior href="SimpleSourceSink.datadictionary#_7C2KcRYjEfGKdrlX6gB9XA"/>
-    <properties xsi:type="consentmodel:ConsentLabel" href="SimpleSourceSink.consentmodel#_X_5agBYiEfGKdrlX6gB9XA"/>
-    <properties xsi:type="consentmodel:ConsentLabel" href="SimpleSourceSink.consentmodel#_3ZwrQBYgEfGKdrlX6gB9XA"/>
+    <properties xsi:type="privacymodel:FunctionalityLabel" href="SimpleSourceSink.privacymodel#_X_5agBYiEfGKdrlX6gB9XA"/>
+    <properties xsi:type="privacymodel:FunctionalityLabel" href="SimpleSourceSink.privacymodel#_3ZwrQBYgEfGKdrlX6gB9XA"/>
   </nodes>
 </dataflowdiagram:DataFlowDiagram>

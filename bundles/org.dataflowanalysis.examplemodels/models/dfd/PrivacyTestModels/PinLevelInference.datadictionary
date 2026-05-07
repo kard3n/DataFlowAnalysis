@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:consentmodel="http://www.dataflowanalysis.org/consentmodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_DO2HMBcDEfGz3ruJdcnl1A">
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_DO2HMBcDEfGz3ruJdcnl1A">
   <behavior id="_DvA1ARcDEfGz3ruJdcnl1A" entityName="SourceBehavior">
     <outPin id="_iTfD8RcDEfGz3ruJdcnl1A" entityName="SourceOutOne"/>
     <outPin id="_kaeloRcDEfGz3ruJdcnl1A" entityName="SourceOutTwo"/>
     <outPin id="_HVS30RcGEfGz3ruJdcnl1A" entityName="SourceOutThree"/>
     <assignment xsi:type="datadictionary:Assignment" id="_Jh4rMhcGEfGz3ruJdcnl1A" entityName="ForSinkTwoStateThree" outputPin="_HVS30RcGEfGz3ruJdcnl1A">
       <term xsi:type="datadictionary:TRUE" id="_PFalMBcGEfGz3ruJdcnl1A"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="PinLevelInference.consentmodel#_W8VF0BcAEfGz3ruJdcnl1A"/>
-      <outputLabels xsi:type="consentmodel:DataStateLabel" href="PinLevelInference.consentmodel#_p_LEoBcAEfGz3ruJdcnl1A"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="PinLevelInference.privacymodel#_W8VF0BcAEfGz3ruJdcnl1A"/>
+      <outputLabels xsi:type="privacymodel:DataStateLabel" href="PinLevelInference.privacymodel#_p_LEoBcAEfGz3ruJdcnl1A"/>
     </assignment>
     <assignment xsi:type="datadictionary:Assignment" id="_bvJNMhcDEfGz3ruJdcnl1A" entityName="ForSinkOne" outputPin="_iTfD8RcDEfGz3ruJdcnl1A">
       <term xsi:type="datadictionary:TRUE" id="_gfO4EBcDEfGz3ruJdcnl1A"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="PinLevelInference.consentmodel#_W8VF0BcAEfGz3ruJdcnl1A"/>
-      <outputLabels xsi:type="consentmodel:DataStateLabel" href="PinLevelInference.consentmodel#_dqkfcBcAEfGz3ruJdcnl1A"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="PinLevelInference.privacymodel#_W8VF0BcAEfGz3ruJdcnl1A"/>
+      <outputLabels xsi:type="privacymodel:DataStateLabel" href="PinLevelInference.privacymodel#_dqkfcBcAEfGz3ruJdcnl1A"/>
     </assignment>
     <assignment xsi:type="datadictionary:Assignment" id="_0LqmchcDEfGz3ruJdcnl1A" entityName="ForSinkTwoStateTwo" outputPin="_kaeloRcDEfGz3ruJdcnl1A">
       <term xsi:type="datadictionary:TRUE" id="_9Z53oBcDEfGz3ruJdcnl1A"/>
-      <outputLabels xsi:type="consentmodel:DataItemLabel" href="PinLevelInference.consentmodel#_W8VF0BcAEfGz3ruJdcnl1A"/>
-      <outputLabels xsi:type="consentmodel:DataStateLabel" href="PinLevelInference.consentmodel#_h2yoQBcAEfGz3ruJdcnl1A"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="PinLevelInference.privacymodel#_W8VF0BcAEfGz3ruJdcnl1A"/>
+      <outputLabels xsi:type="privacymodel:DataStateLabel" href="PinLevelInference.privacymodel#_h2yoQBcAEfGz3ruJdcnl1A"/>
     </assignment>
   </behavior>
   <behavior id="_GsvKYRcDEfGz3ruJdcnl1A" entityName="SinkOneBehavior">

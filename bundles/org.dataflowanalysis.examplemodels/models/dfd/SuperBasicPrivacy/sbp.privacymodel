@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<privacymodel:PrivacyModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_U0_CUA5OEfGPjL6qQZv--g">
+  <roleLabelType id="_VV7MMA5OEfGPjL6qQZv--g" entityName="RoleLabelType">
+    <labels id="_ZeBqAA5OEfGPjL6qQZv--g" entityName="RoleLabel">
+      <role id="_amd4wA5OEfGPjL6qQZv--g" entityName="BasicRole" optionallyAllows="_hsp4UA5OEfGPjL6qQZv--g"/>
+    </labels>
+  </roleLabelType>
+  <functionalityLabelType id="_dkKY8g5OEfGPjL6qQZv--g" entityName="ConsentLabelType">
+    <labels id="_fxqyUA5OEfGPjL6qQZv--g" entityName="BasicConsentLabel">
+      <functionality id="_hsp4UA5OEfGPjL6qQZv--g" entityName="BasicConsentOption"/>
+    </labels>
+  </functionalityLabelType>
+</privacymodel:PrivacyModel>

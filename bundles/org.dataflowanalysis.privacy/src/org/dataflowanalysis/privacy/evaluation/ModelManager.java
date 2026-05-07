@@ -7,7 +7,6 @@ import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.dataflowdiagram.DataFlowDiagram;
 import org.dataflowanalysis.examplemodels.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
-import org.dataflowanalysis.privacy.consentmodel.ConsentModel;
 import org.dataflowanalysis.privacy.resource.PrivacyDFDURIResourceProvider;
 import org.dataflowanalysis.privacy.test.PrivacyDataFlowConstrainTest;
 import org.eclipse.core.runtime.Plugin;
@@ -39,16 +38,16 @@ public class ModelManager {
 		modelProjectActivator = Optional.of(Activator.class);
 	}
 	
-	public PrivacyModelPackage loadModel(Path dataFlowDiagramPath, Path dataDictionaryPath, Path consentModelPath, String modelProjectName) {
+	public PrivacyModelPackage loadModel(Path dataFlowDiagramPath, Path dataDictionaryPath, Path privacyModelPath, String modelProjectName) {
 		URI dataFlowDiagramUri = modelProjectName.isEmpty() ? URI.createFileURI(dataFlowDiagramPath
                 .toAbsolutePath()
                 .toString()) : ResourceUtils.createRelativePluginURI(dataFlowDiagramPath.toString(), modelProjectName);
 		URI dataDictionaryUri = modelProjectName.isEmpty() ? URI.createFileURI(dataDictionaryPath
                 .toAbsolutePath()
                 .toString()) : ResourceUtils.createRelativePluginURI(dataDictionaryPath.toString(), modelProjectName);
-        URI consentModelUri = modelProjectName.isEmpty() ? URI.createFileURI(consentModelPath
+        URI privacyModelUri = modelProjectName.isEmpty() ? URI.createFileURI(privacyModelPath
                 .toAbsolutePath()
-                .toString()) : ResourceUtils.createRelativePluginURI(consentModelPath.toString(), modelProjectName);
+                .toString()) : ResourceUtils.createRelativePluginURI(privacyModelPath.toString(), modelProjectName);
         
         
         // Setup environment
@@ -70,13 +69,13 @@ public class ModelManager {
             throw new IllegalStateException("Could not initialize analysis");
         }
         
-        PrivacyDFDURIResourceProvider provider = new PrivacyDFDURIResourceProvider(dataFlowDiagramUri, dataDictionaryUri, consentModelUri);
+        PrivacyDFDURIResourceProvider provider = new PrivacyDFDURIResourceProvider(dataFlowDiagramUri, dataDictionaryUri, privacyModelUri);
         provider.setupResources();
         provider.loadRequiredResources();
         logger.info(provider.sufficientResourcesLoaded());
         provider.validate();
         
-        return new PrivacyModelPackage(provider.getDataFlowDiagram(), provider.getDataDictionary(), provider.getConsentModel());
+        return new PrivacyModelPackage(provider.getDataFlowDiagram(), provider.getDataDictionary(), provider.getPrivacyModel());
 	}
 
 	    /**
@@ -97,12 +96,12 @@ public class ModelManager {
 	            // Register the XMI factory for your file extensions (Crucial for standalone Java)
 	            resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("dataflowdiagram", new XMIResourceFactoryImpl());
 	            resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("datadictionary", new XMIResourceFactoryImpl());
-	            resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("consentmodel", new XMIResourceFactoryImpl());
+	            resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("privacymodel", new XMIResourceFactoryImpl());
 
 	            // 3. Define the URIs (file paths) for the new files
 	            URI dfdUri = URI.createFileURI(outputDirectory.resolve(baseFilename + ".dataflowdiagram").toAbsolutePath().toString());
 	            URI ddUri = URI.createFileURI(outputDirectory.resolve(baseFilename + ".datadictionary").toAbsolutePath().toString());
-	            URI cmUri = URI.createFileURI(outputDirectory.resolve(baseFilename + ".consentmodel").toAbsolutePath().toString());
+	            URI cmUri = URI.createFileURI(outputDirectory.resolve(baseFilename + ".privacymodel").toAbsolutePath().toString());
 
 	            // 4. Create the Resources
 	            Resource dfdResource = resourceSet.createResource(dfdUri);

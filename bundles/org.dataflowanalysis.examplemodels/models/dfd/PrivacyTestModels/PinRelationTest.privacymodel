@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<privacymodel:PrivacyModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_p7TtED8oEfGBBNTzvKuwwQ">
+  <roleLabelType id="_NK3LED8pEfGBBNTzvKuwwQ">
+    <labels id="_OdNjwD8pEfGBBNTzvKuwwQ" entityName="RoleOne">
+      <role id="_PmFQUD8pEfGBBNTzvKuwwQ" entityName="RoleOne" alwaysAllows="_CgG4kD8pEfGBBNTzvKuwwQ"/>
+    </labels>
+  </roleLabelType>
+  <functionalityLabelType id="_-wt1sT8oEfGBBNTzvKuwwQ">
+    <labels id="_Ark_4D8pEfGBBNTzvKuwwQ" entityName="ConsentOptionOne">
+      <functionality id="_CgG4kD8pEfGBBNTzvKuwwQ" entityName="ConsentOptionOne">
+        <allowsFor id="_D3fiQD8pEfGBBNTzvKuwwQ" entityName="CombinationOne">
+          <members item="_syv0QD8oEfGBBNTzvKuwwQ"/>
+        </allowsFor>
+        <allowsFor id="_H4Pa4D8pEfGBBNTzvKuwwQ" entityName="CombinationTwo">
+          <members item="_vrKL0D8oEfGBBNTzvKuwwQ"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+  </functionalityLabelType>
+  <dataItemLabelType id="_qbZiYj8oEfGBBNTzvKuwwQ">
+    <labels id="_rH_ioD8oEfGBBNTzvKuwwQ" entityName="ItemOne">
+      <dataItem id="_syv0QD8oEfGBBNTzvKuwwQ" entityName="ItemOne"/>
+    </labels>
+    <labels id="_uQ_T4D8oEfGBBNTzvKuwwQ" entityName="ItemTwo">
+      <dataItem id="_vrKL0D8oEfGBBNTzvKuwwQ" entityName="ItemTwo"/>
+    </labels>
+  </dataItemLabelType>
+</privacymodel:PrivacyModel>

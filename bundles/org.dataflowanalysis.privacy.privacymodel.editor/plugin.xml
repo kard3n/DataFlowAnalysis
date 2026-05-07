@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated privacymodel -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.dataflowanalysis.privacy.privacymodel.presentation.privacymodelModelWizardID"
+            name="%_UI_privacymodelModelWizard_label"
+            class="org.dataflowanalysis.privacy.privacymodel.presentation.privacymodelModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/privacymodelModelFile.gif">
+         <description>%_UI_privacymodelModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated privacymodel -->
+      <editor
+            id="org.dataflowanalysis.privacy.privacymodel.presentation.privacymodelEditorID"
+            name="%_UI_privacymodelEditor_label"
+            icon="icons/full/obj16/privacymodelModelFile.gif"
+            extensions="privacymodel"
+            class="org.dataflowanalysis.privacy.privacymodel.presentation.privacymodelEditor"
+            contributorClass="org.dataflowanalysis.privacy.privacymodel.presentation.privacymodelActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

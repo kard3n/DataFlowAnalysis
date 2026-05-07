@@ -43,7 +43,7 @@ public class PrivacyDFDAnalysisCLI {
 	public static void main(String[] args) {
 		if (args.length < 3) {
 			logger.error(
-					"Please provide either no arguments, or a path to a .dataflowdiagram, .datadictionary and .consentmodel file!");
+					"Please provide either no arguments, or a path to a .dataflowdiagram, .datadictionary and .privacymodel file!");
 			System.exit(-1);
 		}
 
@@ -55,24 +55,30 @@ public class PrivacyDFDAnalysisCLI {
 			logger.error("The second argument should be a path to a .datadictionary file");
 			System.exit(-1);
 		}
-		if (!args[2].endsWith(".consentmodel")) {
-			logger.error("The third argument should be a path to a .consentmodel file");
+		if (!args[2].endsWith(".privacymodel")) {
+			logger.error("The third argument should be a path to a .privacymodel file");
 			System.exit(-1);
 		}
 		
-		boolean autoConsentOptions = false;
-		if(args[3].startsWith("-aco")) {
-			autoConsentOptions = Boolean.valueOf(args[3].split("=")[1]);
+		boolean nodeInference = false;
+		boolean considerOutputPins = false;
+		for(int i = 3; i < args.length; i++) {
+			if(args[i].startsWith("-nodeInference")) {
+				nodeInference = Boolean.valueOf(args[3].split("=")[1]);
+			}
+			else if(args[i].startsWith("-considerOutputPins")) {
+				considerOutputPins = Boolean.valueOf(args[3].split("=")[1]);
+			}
 		}
 		
-		PrivacyDFDTransposeFlowGraphFinder.setAssigmnentAutoConsentOptions(autoConsentOptions);
+		
 
 		PrivacyDFDConfidentialityAnalysis analysis = createAnalysis(args[0], args[1], args[2]);
 
 		analysis.initializeAnalysis();
 		FlowGraphCollection flowGraphs = analysis.findFlowGraphs();
 		flowGraphs.evaluate();
-		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphs, true);
+		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphs, nodeInference, considerOutputPins);
 		logger.info("### Detected " + violations.size() + " violations ###");
 		int i = 0;
 		for (var violation: violations) {
@@ -91,8 +97,8 @@ public class PrivacyDFDAnalysisCLI {
 	 * @return Returns a confidentiality analysis using the two provided paths
 	 */
 	private static PrivacyDFDConfidentialityAnalysis createAnalysis(String dataFlowDiagramPath,
-			String dataDictionaryPath, String consentModelPath) {
+			String dataDictionaryPath, String privacyModelPath) {
 		return new PrivacyDFDDataFlowAnalysisBuilder().standalone().useDataFlowDiagram(dataFlowDiagramPath)
-				.useDataDictionary(dataDictionaryPath).useConsentModel(consentModelPath).build();
+				.useDataDictionary(dataDictionaryPath).usePrivacyModel(privacyModelPath).build();
 	}
 }

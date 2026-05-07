@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<privacymodel:PrivacyModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_AHiSYB7iEfGPjLFNxG_peA">
+  <roleLabelType id="_61TuUB7iEfGPjLFNxG_peA" entityName="RoleLabelType">
+    <labels id="_8xj_oB7iEfGPjLFNxG_peA" entityName="RoleLabelOne">
+      <role id="_-JjtUB7iEfGPjLFNxG_peA" entityName="RoleOne" alwaysAllows="_qz9xoB7iEfGPjLFNxG_peA"/>
+    </labels>
+  </roleLabelType>
+  <functionalityLabelType id="_mqZUMR7iEfGPjLFNxG_peA" entityName="FunctionalityLabelType">
+    <labels id="_pDJUQB7iEfGPjLFNxG_peA" entityName="FunctionalityLabelOne">
+      <functionality id="_qz9xoB7iEfGPjLFNxG_peA" entityName="ConsentOptionOne">
+        <allowsFor id="_sfPnsB7iEfGPjLFNxG_peA" entityName="CombinationOne">
+          <members item="_MPEr8B7iEfGPjLFNxG_peA"/>
+          <members state="_focUYB7iEfGPjLFNxG_peA" item="_QPKdQB7iEfGPjLFNxG_peA"/>
+        </allowsFor>
+        <allowsFor id="_ylyIIB7iEfGPjLFNxG_peA" entityName="CombinationTwo">
+          <members state="_i2ousB7iEfGPjLFNxG_peA" item="_QPKdQB7iEfGPjLFNxG_peA"/>
+          <members item="_UEuZkB7iEfGPjLFNxG_peA"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+  </functionalityLabelType>
+  <dataItemLabelType id="_BJ4gMh7iEfGPjLFNxG_peA" entityName="DataItemLabelType">
+    <labels id="_KtK0UB7iEfGPjLFNxG_peA" entityName="ItemLabelOne">
+      <dataItem id="_MPEr8B7iEfGPjLFNxG_peA" entityName="ItemOne"/>
+    </labels>
+    <labels id="_OdwKAR7iEfGPjLFNxG_peA" entityName="ItemLabelTwo">
+      <dataItem id="_QPKdQB7iEfGPjLFNxG_peA" entityName="ItemTwo"/>
+    </labels>
+    <labels id="_SPOQgB7iEfGPjLFNxG_peA" entityName="ItemLabelThree">
+      <dataItem id="_UEuZkB7iEfGPjLFNxG_peA" entityName="ItemThree"/>
+    </labels>
+  </dataItemLabelType>
+  <dataStateLabelType id="_WfwRkx7iEfGPjLFNxG_peA" entityName="StateLabelType">
+    <labels id="_c6sUsB7iEfGPjLFNxG_peA" entityName="StateLabelOne">
+      <dataState id="_focUYB7iEfGPjLFNxG_peA" entityName="StateOne" notRelatableWith="_i2ousB7iEfGPjLFNxG_peA"/>
+    </labels>
+    <labels id="_hOUGAB7iEfGPjLFNxG_peA" entityName="StateLabelTwo">
+      <dataState id="_i2ousB7iEfGPjLFNxG_peA" entityName="StateTwo"/>
+    </labels>
+  </dataStateLabelType>
+</privacymodel:PrivacyModel>

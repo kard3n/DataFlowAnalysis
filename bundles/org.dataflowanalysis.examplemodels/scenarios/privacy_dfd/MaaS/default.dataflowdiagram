@@ -287,6 +287,8 @@
   <nodes xsi:type="dataflowdiagram:Process" id="_OLm8E0edEfGuoO7AtQNzqQ" entityName="CustomerTableAccess">
     <behavior href="default.datadictionary#_cVnuYUOlEfGLX6SAL3wxkw"/>
     <properties xsi:type="consentmodel:ConsentLabel" href="default.consentmodel#_4qU1QD1yEfGtevHBcNoGlQ"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="default.consentmodel#_tvLy0D1xEfGtevHBcNoGlQ"/>
+    <properties xsi:type="consentmodel:ConsentLabel" href="default.consentmodel#_xaC7AD1xEfGtevHBcNoGlQ"/>
   </nodes>
   <nodes xsi:type="dataflowdiagram:Process" id="_aaCAw0edEfGuoO7AtQNzqQ" entityName="StaffTableAccess">
     <behavior href="default.datadictionary#_nvJycUOlEfGLX6SAL3wxkw"/>

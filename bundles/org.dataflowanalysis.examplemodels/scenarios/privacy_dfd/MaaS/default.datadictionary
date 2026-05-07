@@ -56,6 +56,7 @@
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_74q9YD1uEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_CZ3ZgD1vEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_3OV8QD1uEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:DataContextLabel" href="default.consentmodel#_t5NuAD1wEfGmFKwwtJJekw"/>
     </assignment>
     <assignment xsi:type="datadictionary:Assignment" id="_QUtdUj4rEfGG0e8jVwanbw" entityName="Customer_CheckOut_Out_Base" outputPin="_2AcfUT4qEfGG0e8jVwanbw" inputPins="_2Ug8wD4oEfGG0e8jVwanbw">
       <term xsi:type="datadictionary:TRUE" id="_X2TmgD4rEfGG0e8jVwanbw"/>
@@ -87,6 +88,7 @@
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_74q9YD1uEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_CZ3ZgD1vEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_3OV8QD1uEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:DataContextLabel" href="default.consentmodel#_t5NuAD1wEfGmFKwwtJJekw"/>
     </assignment>
     <assignment xsi:type="datadictionary:SetAssignment" id="_7y3QRD4yEfGG0e8jVwanbw" entityName="Customer_TripHistory_Out" outputPin="_6Dm5IT4yEfGG0e8jVwanbw">
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_Z-xDsD1uEfGmFKwwtJJekw"/>
@@ -195,7 +197,7 @@
     </assignment>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_uzwro0MLEfGKhpyu5lUXYw" entityName="ABM_InspectCustomer_Out_Result" outputPin="_rKGdUUMLEfGKhpyu5lUXYw" inputPins="_1GsnUD4_EfGVYMl93-15Bw"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_ToO5A0MMEfGKhpyu5lUXYw" entityName="ABM_CheckIn_Out_Trip" outputPin="_SLFlkUMMEfGKhpyu5lUXYw" inputPins="_2zAYID4_EfGVYMl93-15Bw"/>
-    <assignment xsi:type="datadictionary:UnsetAssignment" id="_Ya0eRUMMEfGKhpyu5lUXYw" entityName="ABM_CheckIn_Out_Trip" outputPin="_2zAYID4_EfGVYMl93-15Bw">
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_Ya0eRUMMEfGKhpyu5lUXYw" entityName="ABM_CheckIn_Out_Trip" outputPin="_SLFlkUMMEfGKhpyu5lUXYw">
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_Z-xDsD1uEfGmFKwwtJJekw"/>
     </assignment>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_wggE00MMEfGKhpyu5lUXYw" entityName="ABM_InvalidateUID_Out" outputPin="_jxQyEUMMEfGKhpyu5lUXYw" inputPins="_2zAYID4_EfGVYMl93-15Bw _4g_j8D4_EfGVYMl93-15Bw"/>
@@ -288,13 +290,25 @@
     <inPin id="_ptuQkEOoEfGLX6SAL3wxkw" entityName="TTA_AddTripEnd_In"/>
     <outPin id="_1Wt-4UOmEfGLX6SAL3wxkw" entityName="TTA_InspectCustomer_Out_Result"/>
     <outPin id="_NiwFEUOnEfGLX6SAL3wxkw" entityName="TTA_TripHistory_Out_Result"/>
-    <assignment xsi:type="datadictionary:Assignment" id="_3aEWskOmEfGLX6SAL3wxkw" entityName="TTA_InspectCustomer_Out_Result" outputPin="_1Wt-4UOmEfGLX6SAL3wxkw">
-      <term xsi:type="datadictionary:TRUE" id="_FPgxoEOpEfGLX6SAL3wxkw"/>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_AsKg-Un5EfGYN7yYuPMLMA" entityName="TTA_InspectCustomer_Out_Result" outputPin="_1Wt-4UOmEfGLX6SAL3wxkw">
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_Rw508D1vEfGmFKwwtJJekw"/>
     </assignment>
-    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_KHClaElIEfGsrNF97Mh4jg" entityName="TTA_InspectCustomer_Out_Result" outputPin="_1Wt-4UOmEfGLX6SAL3wxkw" inputPins="_pM7ikEOmEfGLX6SAL3wxkw"/>
-    <assignment xsi:type="datadictionary:UnsetAssignment" id="_HHhuFUOnEfGLX6SAL3wxkw" entityName="TTA_InspectCustomer_Out_Result" outputPin="_1Wt-4UOmEfGLX6SAL3wxkw">
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_9EqZU0n5EfGYN7yYuPMLMA" entityName="TTA_InspectCustomer_Out_Result" outputPin="_1Wt-4UOmEfGLX6SAL3wxkw" inputPins="_pM7ikEOmEfGLX6SAL3wxkw _ptuQkEOoEfGLX6SAL3wxkw _n3wNcEOoEfGLX6SAL3wxkw"/>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_cLJJJUn6EfGYN7yYuPMLMA" entityName="TTA_InspectCustomer_Out_Result" outputPin="_1Wt-4UOmEfGLX6SAL3wxkw">
+      <outputLabels xsi:type="consentmodel:DataContextLabel" href="default.consentmodel#_t5NuAD1wEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:DataContextLabel" href="default.consentmodel#_y4C_gD1wEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_WkDa4D1vEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_W8uPAD1uEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_74q9YD1uEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_CZ3ZgD1vEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_3OV8QD1uEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:ConsentLabel" href="default.consentmodel#_-afdED1yEfGtevHBcNoGlQ"/>
+      <outputLabels xsi:type="consentmodel:ConsentLabel" href="default.consentmodel#_tvLy0D1xEfGtevHBcNoGlQ"/>
+      <outputLabels xsi:type="consentmodel:ConsentLabel" href="default.consentmodel#_xaC7AD1xEfGtevHBcNoGlQ"/>
+      <outputLabels xsi:type="consentmodel:ConsentLabel" href="default.consentmodel#_rkCSwEhaEfGzrqe1i1LqUQ"/>
+      <outputLabels xsi:type="consentmodel:ConsentLabel" href="default.consentmodel#_0OGXAD1xEfGtevHBcNoGlQ"/>
+      <outputLabels xsi:type="consentmodel:ConsentLabel" href="default.consentmodel#_4qU1QD1yEfGtevHBcNoGlQ"/>
+      <outputLabels xsi:type="consentmodel:ConsentLabel" href="default.consentmodel#_owiWAEfOEfGZw_-C8A2RPA"/>
     </assignment>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_jYFkM0OoEfGLX6SAL3wxkw" entityName="TTA_TripHistory_Out_Result" outputPin="_NiwFEUOnEfGLX6SAL3wxkw" inputPins="_ptuQkEOoEfGLX6SAL3wxkw _n3wNcEOoEfGLX6SAL3wxkw _rU24YEOmEfGLX6SAL3wxkw"/>
     <assignment xsi:type="datadictionary:UnsetAssignment" id="_z0H41UOoEfGLX6SAL3wxkw" entityName="TTA_TripHistory_Out_Result" outputPin="_NiwFEUOnEfGLX6SAL3wxkw">
@@ -303,6 +317,8 @@
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_74q9YD1uEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_CZ3ZgD1vEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_3OV8QD1uEfGmFKwwtJJekw"/>
+      <outputLabels xsi:type="consentmodel:DataContextLabel" href="default.consentmodel#_jSDt0D2LEfGtevHBcNoGlQ"/>
+      <outputLabels xsi:type="consentmodel:DataContextLabel" href="default.consentmodel#_t5NuAD1wEfGmFKwwtJJekw"/>
     </assignment>
   </behavior>
   <behavior id="_C5FFwEOpEfGLX6SAL3wxkw" entityName="Vehicle">
@@ -315,6 +331,7 @@
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_CZ3ZgD1vEfGmFKwwtJJekw"/>
       <outputLabels xsi:type="consentmodel:DataItemLabel" href="default.consentmodel#_3OV8QD1uEfGmFKwwtJJekw"/>
     </assignment>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_B4QsOEnvEfGYN7yYuPMLMA" entityName="Vehicle_Interact_Out_Result" outputPin="_gpgBkUOpEfGLX6SAL3wxkw" inputPins="_IXE_gEOpEfGLX6SAL3wxkw"/>
   </behavior>
   <behavior id="_y1EaIUOpEfGLX6SAL3wxkw" entityName="CheckInService">
     <inPin id="_1Ug4EEOpEfGLX6SAL3wxkw" entityName="CIS_CheckIn_In"/>

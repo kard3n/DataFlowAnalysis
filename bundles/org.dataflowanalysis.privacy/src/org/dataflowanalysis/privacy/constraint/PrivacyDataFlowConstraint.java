@@ -76,7 +76,7 @@ public class PrivacyDataFlowConstraint {
 		// # Step 1: determine all vertices (by their ID) of the flow graphs
 		// Map ID of the vertex (ID of the referenced element), with the versions that
 		// exist in the flowgraphs
-		HashMap<String, LinkedList<AbstractVertex>> vertexInstances = computeVertices(flowGraphs);
+		HashMap<String, LinkedList<AbstractVertex<?>>> vertexInstances = computeVertices(flowGraphs);
 
 		// Step two: calculate worst-case scenarios for every pin
 		for (var entry : vertexInstances.entrySet()) { // go over vertices
@@ -90,7 +90,7 @@ public class PrivacyDataFlowConstraint {
 
 				// Group by functionalities. A single user can generate multiple TFGs due to
 				// branching
-				HashMap<HashSet<FunctionalityLabel>, ArrayList<AbstractVertex>> verticesByFunctionalities = groupByFunctionalities(
+				HashMap<HashSet<FunctionalityLabel>, ArrayList<AbstractVertex<?>>> verticesByFunctionalities = groupByFunctionalities(
 						entry.getValue());
 
 				for (var vertexGroup : verticesByFunctionalities.entrySet()) {
@@ -373,9 +373,9 @@ public class PrivacyDataFlowConstraint {
 	 * @return A Map, which for every vertex ID contains a list of vertex instances
 	 *         with that same ID
 	 */
-	private static HashMap<String, LinkedList<AbstractVertex>> computeVertices(
+	private static HashMap<String, LinkedList<AbstractVertex<?>>> computeVertices(
 			List<? extends AbstractTransposeFlowGraph> tfgs) {
-		HashMap<String, LinkedList<AbstractVertex>> vertexInstances = new HashMap<>();
+		HashMap<String, LinkedList<AbstractVertex<?>>> vertexInstances = new HashMap<>();
 		tfgs.forEach(tfg -> {
 			tfg.getVertices().forEach(vertex -> {
 				// Note: this only works if a Node is referenced. Might not work with PCM models
@@ -846,9 +846,9 @@ public class PrivacyDataFlowConstraint {
 	 * @param vertices The vertices to group
 	 * @return The grouped vertices
 	 */
-	public static HashMap<HashSet<FunctionalityLabel>, ArrayList<AbstractVertex>> groupByFunctionalities(
-			List<AbstractVertex> vertices) {
-		HashMap<HashSet<FunctionalityLabel>, ArrayList<AbstractVertex>> result = new HashMap<>();
+	public static HashMap<HashSet<FunctionalityLabel>, ArrayList<AbstractVertex<?>>> groupByFunctionalities(
+			List<AbstractVertex<?>> vertices) {
+		HashMap<HashSet<FunctionalityLabel>, ArrayList<AbstractVertex<?>>> result = new HashMap<>();
 		for (var vertex : vertices) {
 			var labels = new HashSet<FunctionalityLabel>(
 					extractFunctionalityLabels(vertex.getAllVertexCharacteristics()));

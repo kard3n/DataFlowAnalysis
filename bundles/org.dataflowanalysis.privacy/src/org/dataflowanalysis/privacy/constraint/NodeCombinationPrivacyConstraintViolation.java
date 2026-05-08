@@ -8,7 +8,6 @@ import org.dataflowanalysis.privacy.privacymodel.DataItem;
 import org.dataflowanalysis.privacy.privacymodel.Functionality;
 
 public class NodeCombinationPrivacyConstraintViolation extends AbstractPrivacyConstraintViolation {
-	String pin;
 	Map<DataItem, ItemInformation> receivedCombination;
 	List<Functionality> nodeFunctionalities;
 
@@ -26,9 +25,5 @@ public class NodeCombinationPrivacyConstraintViolation extends AbstractPrivacyCo
 
 	public List<Functionality> getNodeFunctionalities() {
 		return nodeFunctionalities;
-	}
-
-	public String getPin() {
-		return pin;
 	}
 }

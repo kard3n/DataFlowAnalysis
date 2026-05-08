@@ -7,6 +7,7 @@ import org.dataflowanalysis.privacy.privacymodel.Functionality;
 public class ConsentPrivacyConstraintViolation extends AbstractPrivacyConstraintViolation {
 	List<Functionality> consentedFunctionalities;
 	List<Functionality> vertexFunctionalities;
+	String pin;
 
 	public ConsentPrivacyConstraintViolation(String vertexID, String message, String pin,
 			List<Functionality> consentedFunctionalities, List<Functionality> vertexFunctionalities) {
@@ -14,6 +15,7 @@ public class ConsentPrivacyConstraintViolation extends AbstractPrivacyConstraint
 
 		this.consentedFunctionalities = consentedFunctionalities;
 		this.vertexFunctionalities = vertexFunctionalities;
+		this.pin = pin;
 	}
 
 	public List<Functionality> getConsentedFunctionalities() {
@@ -22,6 +24,10 @@ public class ConsentPrivacyConstraintViolation extends AbstractPrivacyConstraint
 
 	public List<Functionality> getVertexFunctionalities() {
 		return vertexFunctionalities;
+	}
+	
+	public String getPin() {
+		return this.pin;
 	}
 
 }

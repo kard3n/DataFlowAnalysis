@@ -7,7 +7,7 @@ import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint.ItemInf
 import org.dataflowanalysis.privacy.privacymodel.DataItem;
 import org.dataflowanalysis.privacy.privacymodel.Functionality;
 
-public class PinCombinationPrivacyConstraintViolation extends PrivacyConstraintViolation {
+public class PinCombinationPrivacyConstraintViolation extends AbstractPrivacyConstraintViolation {
 	String pin;
 	Map<DataItem, ItemInformation> receivedCombination;
 	List<Functionality> nodeFunctionalities;

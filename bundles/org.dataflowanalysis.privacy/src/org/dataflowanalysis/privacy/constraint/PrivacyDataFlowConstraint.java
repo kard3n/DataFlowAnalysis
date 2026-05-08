@@ -34,7 +34,7 @@ import org.dataflowanalysis.privacy.privacymodel.UserDataCombination;
 public class PrivacyDataFlowConstraint {
 	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstraint.class);
 
-	public static HashSet<PrivacyConstraintViolation> findViolations(FlowGraphCollection flowGraphs,
+	public static HashSet<AbstractPrivacyConstraintViolation> findViolations(FlowGraphCollection flowGraphs,
 			boolean checkNodeLevelInference, boolean considerOutputPins) {
 		return findViolations(flowGraphs.getTransposeFlowGraphs(), checkNodeLevelInference, considerOutputPins);
 	}
@@ -68,10 +68,10 @@ public class PrivacyDataFlowConstraint {
 	 *                                relations will always be considered
 	 * @return
 	 */
-	public static HashSet<PrivacyConstraintViolation> findViolations(
+	public static HashSet<AbstractPrivacyConstraintViolation> findViolations(
 			List<? extends AbstractTransposeFlowGraph> flowGraphs, boolean checkNodeLevelInference,
 			boolean considerOutputPins) {
-		HashSet<PrivacyConstraintViolation> violations = new HashSet<>();
+		HashSet<AbstractPrivacyConstraintViolation> violations = new HashSet<>();
 
 		// # Step 1: determine all vertices (by their ID) of the flow graphs
 		// Map ID of the vertex (ID of the referenced element), with the versions that
@@ -868,10 +868,10 @@ public class PrivacyDataFlowConstraint {
 	 * @param nodeFunctionalities The functionalities options of the node
 	 * @return
 	 */
-	public static List<PrivacyConstraintViolation> verifyDataTupleConformance(
+	public static List<AbstractPrivacyConstraintViolation> verifyDataTupleConformance(
 			List<HashMap<DataItem, ItemInformation>> combinationTuples, List<Functionality> nodeFunctionalities,
 			String vertexName) {
-		List<PrivacyConstraintViolation> detectedViolations = new LinkedList<>();
+		List<AbstractPrivacyConstraintViolation> detectedViolations = new LinkedList<>();
 
 		for (var combination : combinationTuples) {
 			if (!combinationAllowedByFunctionalities(combination, nodeFunctionalities)) {

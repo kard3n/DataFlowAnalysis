@@ -25,7 +25,7 @@ import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.privacy.constraint.ConsentPrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.NodeCombinationPrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.PinCombinationPrivacyConstraintViolation;
-import org.dataflowanalysis.privacy.constraint.PrivacyConstraintViolation;
+import org.dataflowanalysis.privacy.constraint.AbstractPrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint.ItemInformation;
 import org.dataflowanalysis.privacy.privacymodel.DataContext;

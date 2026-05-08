@@ -1,10 +1,10 @@
 package org.dataflowanalysis.privacy.constraint;
 
-public abstract class PrivacyConstraintViolation{
+public abstract class AbstractPrivacyConstraintViolation{
 	private String vertexID;
 	private String message;
 	
-	public PrivacyConstraintViolation(String vertexID, String message) {
+	public AbstractPrivacyConstraintViolation(String vertexID, String message) {
 		this.vertexID = vertexID;
 		this.message = message;
 	}

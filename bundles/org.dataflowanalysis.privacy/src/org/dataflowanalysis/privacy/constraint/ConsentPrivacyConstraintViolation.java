@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.dataflowanalysis.privacy.privacymodel.Functionality;
 
-public class ConsentPrivacyConstraintViolation extends PrivacyConstraintViolation {
+public class ConsentPrivacyConstraintViolation extends AbstractPrivacyConstraintViolation {
 	List<Functionality> consentedFunctionalities;
 	List<Functionality> vertexFunctionalities;
 

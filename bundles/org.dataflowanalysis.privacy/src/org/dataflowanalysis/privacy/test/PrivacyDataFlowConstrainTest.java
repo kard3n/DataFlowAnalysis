@@ -22,6 +22,9 @@ import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.examplemodels.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
 import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
+import org.dataflowanalysis.privacy.constraint.ConsentPrivacyConstraintViolation;
+import org.dataflowanalysis.privacy.constraint.NodeCombinationPrivacyConstraintViolation;
+import org.dataflowanalysis.privacy.constraint.PinCombinationPrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.PrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint.ItemInformation;
@@ -517,15 +520,19 @@ public class PrivacyDataFlowConstrainTest {
 		boolean foundCTwo = false;
 		boolean foundCEmpty = false;
 		for (var violation : result) {
-			logger.debug(violation.message());
-			assertEquals("Sink", violation.vertexID());
-			if (violation.message().contains("user: [ConsentOptionOne]")) {
+			logger.debug(violation.getMessage());
+			assertEquals("Sink", violation.getVertexID());
+			assertTrue(violation instanceof ConsentPrivacyConstraintViolation);
+			ConsentPrivacyConstraintViolation castViolation = (ConsentPrivacyConstraintViolation) violation;
+			if (castViolation.getConsentedFunctionalities().stream()
+					.anyMatch(func -> func.getEntityName().equals("ConsentOptionOne"))) {
 				foundCOne = true;
 			}
-			if (violation.message().contains("user: [ConsentOptionTwo]")) {
+			if (castViolation.getConsentedFunctionalities().stream()
+					.anyMatch(func -> func.getEntityName().equals("ConsentOptionTwo"))) {
 				foundCTwo = true;
 			}
-			if (violation.message().contains("user: []")) {
+			if (castViolation.getConsentedFunctionalities().isEmpty()) {
 				foundCEmpty = true;
 			}
 		}
@@ -550,9 +557,10 @@ public class PrivacyDataFlowConstrainTest {
 		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false, false);
 		assertEquals(1, result.size());
 		for (var violation : result) {
-			assertTrue(violation.message().contains(
-					"received a data combination in pin _C-ypEBbvEfGwgKscrQsGUg or could infere one not allowed for any of its functionalities."));
-			logger.debug(violation.message());
+			assertTrue(violation instanceof PinCombinationPrivacyConstraintViolation);
+			assertTrue(
+					((PinCombinationPrivacyConstraintViolation) violation).getPin().equals("_C-ypEBbvEfGwgKscrQsGUg"));
+			logger.debug(violation.getMessage());
 		}
 	}
 
@@ -575,12 +583,14 @@ public class PrivacyDataFlowConstrainTest {
 		var result = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, false, false);
 		assertEquals(1, result.size());
 		for (var violation : result) {
-			logger.debug(violation.message());
-			assertTrue(violation.message().contains(
-					"has received a data combination in pin _MYqLYBcDEfGz3ruJdcnl1A or could infere one not allowed for any of its functionalities."));
-			assertTrue(violation.message().contains("[DataItemOne: {state: {[]}, context: {[[]]}}]")); // State has been
-																										// reduced to
-																										// the empty set
+			logger.debug(violation.getMessage());
+			assertTrue(violation instanceof PinCombinationPrivacyConstraintViolation);
+			assertTrue(
+					((PinCombinationPrivacyConstraintViolation) violation).getPin().equals("_MYqLYBcDEfGz3ruJdcnl1A"));
+			// State has been reduced to the empty set
+			assertTrue(((PinCombinationPrivacyConstraintViolation) violation).getReceivedCombination().entrySet()
+					.stream().allMatch(item -> item.getKey().getEntityName().equals("DataItemOne")
+							&& item.getValue().state().isEmpty()));
 		}
 	}
 
@@ -659,7 +669,7 @@ public class PrivacyDataFlowConstrainTest {
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 		assertEquals(1, violations.size());
 		for (var violation : violations) {
-			assertTrue(violation.message().contains("information not authorized by its functionalities."));
+			assertTrue(violation instanceof NodeCombinationPrivacyConstraintViolation);
 		}
 	}
 
@@ -684,8 +694,10 @@ public class PrivacyDataFlowConstrainTest {
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 		assertEquals(1, violations.size());
 		for (var violation : violations) {
-			assertTrue(violation.message().contains("information not authorized by its functionalities."));
-			assertTrue(violation.message().contains("ItemTwo: {state: {[]}"));
+			assertTrue(violation instanceof NodeCombinationPrivacyConstraintViolation);
+			assertTrue(((NodeCombinationPrivacyConstraintViolation) violation).getReceivedCombination().entrySet()
+					.stream().anyMatch(item -> item.getKey().getEntityName().equals("ItemTwo")
+							&& item.getValue().state().isEmpty()));
 		}
 	}
 
@@ -707,7 +719,7 @@ public class PrivacyDataFlowConstrainTest {
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 		assertEquals(1, violations.size());
 		for (var violation : violations) {
-			assertTrue(violation.message().startsWith("The user-representing vertex"));
+			assertTrue(violation.getMessage().startsWith("The user-representing vertex"));
 		}
 	}
 
@@ -732,7 +744,8 @@ public class PrivacyDataFlowConstrainTest {
 		assertEquals(1, violations.size());
 
 		for (var violation : violations) {
-			assertTrue(violation.message().contains("\"Middle\" received or could derive information not authorized"));
+			assertTrue(violation instanceof NodeCombinationPrivacyConstraintViolation);
+			assertTrue(((NodeCombinationPrivacyConstraintViolation) violation).getVertexID().equals("Middle"));
 		}
 	}
 }

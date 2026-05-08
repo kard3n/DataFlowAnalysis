@@ -39,7 +39,7 @@ public class OnlineShopRework {
 		logger.info("Detected violations: " + violations.size());
 
 		for (var violation : violations) {
-			logger.info(violation.message());
+			logger.info("\n" + violation.getMessage() + "\n\n");
 		}
 	}
 

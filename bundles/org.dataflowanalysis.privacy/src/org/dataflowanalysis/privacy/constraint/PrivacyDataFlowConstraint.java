@@ -122,13 +122,14 @@ public class PrivacyDataFlowConstraint {
 						String vertexName = ((DFDVertex) vertexGroup.getValue().get(0)).getName();
 						for (var combination : possibleCombinations) {
 							if (!combinationAllowedByFunctionalities(combination, vertexFunctionalities)) {
-								violations.add(new PrivacyConstraintViolation(vertexName,
+								violations.add(new NodeCombinationPrivacyConstraintViolation(vertexName,
 										"The user-representing vertex " + vertexName
 												+ " has received a data combination in pin " + pin.getKey()
 												+ " not allowed for any of its functionalities.\nReceived combination: "
 												+ itemInformationToString(combination)
 												+ "\nFunctionalities of the vertex: " + vertexFunctionalities.stream()
-														.map(co -> functionalityToString(co)).toList()));
+														.map(co -> functionalityToString(co)).toList(),
+										combination, vertexFunctionalities));
 							}
 						}
 
@@ -154,7 +155,7 @@ public class PrivacyDataFlowConstraint {
 						pinsInGroups = pinRelationGroups.stream().flatMap(Set::stream).collect(Collectors.toSet());
 					}
 
-					List<FunctionalityLabel> vertexFunctionalities = extractFunctionalityLabels(
+					List<FunctionalityLabel> vertexFunctionalityLabels = extractFunctionalityLabels(
 							vertBase.getAllVertexCharacteristics());
 
 					List<DataCharacteristic> currentCharacteristics = ((DFDVertex) vertBase)
@@ -178,18 +179,23 @@ public class PrivacyDataFlowConstraint {
 						// functionalities of the node (in form of functionalities)
 						// are present in it -> check that the user has consented to all functionalities
 						// of this node
-						if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalities,
+						if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalityLabels,
 								vert.getName())) {
-							violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
-									+ " can receive data in pin " + newCharacteristics.getKey()
+							List<Functionality> consentedFunctionalities = extractFunctionalityLabels(
+									newCharacteristics.getValue()).stream().map(label -> label.getFunctionality())
+									.toList();
+							List<Functionality> vertexFunctionalities = vertexFunctionalityLabels.stream()
+									.map(label -> label.getFunctionality()).toList();
+
+							violations.add(new ConsentPrivacyConstraintViolation(vert.getName(), "The vertex "
+									+ vert.getName() + " can receive data in pin " + newCharacteristics.getKey()
 									+ " from a user who has not consented to its functionalities. \nFunctionalities consented to by user: "
-									+ extractFunctionalityLabels(newCharacteristics.getValue()).stream()
-											.map(label -> label.getFunctionality().getEntityName()).toList()
+									+ consentedFunctionalities.stream().map(func -> func.getEntityName()).toList()
 									+ "\nFunctionalities of the vertex: "
-									+ vertexFunctionalities.stream()
-											.map(label -> label.getFunctionality().getEntityName()).toList()
+									+ vertexFunctionalities.stream().map(func -> func.getEntityName()).toList()
 									+ "\nReceived input labels: "
-									+ newCharacteristics.getValue().stream().map(i -> i.toString()).toList()));
+									+ newCharacteristics.getValue().stream().map(i -> i.toString()).toList(),
+									newCharacteristics.getKey(), consentedFunctionalities, vertexFunctionalities));
 						}
 					}
 				}
@@ -226,11 +232,13 @@ public class PrivacyDataFlowConstraint {
 					for (var combination : possibleCombinations) {
 
 						if (!combinationAllowedByFunctionalities(combination, functionalities)) {
-							violations.add(new PrivacyConstraintViolation(vert.getName(), "The vertex " + vert.getName()
-									+ " has received a data combination in pin " + pin.getKey()
+
+							violations.add(new PinCombinationPrivacyConstraintViolation(vert.getName(), "The vertex "
+									+ vert.getName() + " has received a data combination in pin " + pin.getKey()
 									+ " or could infere one not allowed for any of its functionalities.\nReceived combination: "
 									+ itemInformationToString(combination) + "\nFunctionalities of the vertex: "
-									+ functionalities.stream().map(co -> functionalityToString(co)).toList()));
+									+ functionalities.stream().map(co -> functionalityToString(co)).toList(),
+									pin.getKey(), combination, functionalities));
 						}
 
 					}
@@ -867,12 +875,13 @@ public class PrivacyDataFlowConstraint {
 
 		for (var combination : combinationTuples) {
 			if (!combinationAllowedByFunctionalities(combination, nodeFunctionalities)) {
-				detectedViolations.add(new PrivacyConstraintViolation(vertexName,
+				detectedViolations.add(new NodeCombinationPrivacyConstraintViolation(vertexName,
 						"The vertex/node \"" + vertexName
 								+ "\" received or could derive information not authorized by its functionalities."
 								+ "\n\tDetected combination: " + itemInformationToString(combination)
 								+ "\n\tVertex functionalities: "
-								+ nodeFunctionalities.stream().map(co -> functionalityToString(co)).toList()));
+								+ nodeFunctionalities.stream().map(co -> functionalityToString(co)).toList(),
+						combination, nodeFunctionalities));
 			}
 		}
 		return detectedViolations;

@@ -36,7 +36,7 @@ public class MaaS {
 		logger.info("Detected violations: " + violations.size());
 
 		for (var violation : violations) {
-			logger.info("\n" + violation.message() + "\n\n");
+			logger.info("\n" + violation.getMessage() + "\n\n");
 		}
 	}
 

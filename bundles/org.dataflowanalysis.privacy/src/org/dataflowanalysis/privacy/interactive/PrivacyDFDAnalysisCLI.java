@@ -59,19 +59,16 @@ public class PrivacyDFDAnalysisCLI {
 			logger.error("The third argument should be a path to a .privacymodel file");
 			System.exit(-1);
 		}
-		
+
 		boolean nodeInference = false;
 		boolean considerOutputPins = false;
-		for(int i = 3; i < args.length; i++) {
-			if(args[i].startsWith("-nodeInference")) {
+		for (int i = 3; i < args.length; i++) {
+			if (args[i].startsWith("-nodeInference")) {
 				nodeInference = Boolean.valueOf(args[3].split("=")[1]);
-			}
-			else if(args[i].startsWith("-considerOutputPins")) {
+			} else if (args[i].startsWith("-considerOutputPins")) {
 				considerOutputPins = Boolean.valueOf(args[3].split("=")[1]);
 			}
 		}
-		
-		
 
 		PrivacyDFDConfidentialityAnalysis analysis = createAnalysis(args[0], args[1], args[2]);
 
@@ -81,9 +78,9 @@ public class PrivacyDFDAnalysisCLI {
 		var violations = PrivacyDataFlowConstraint.findViolations(flowGraphs, nodeInference, considerOutputPins);
 		logger.info("### Detected " + violations.size() + " violations ###");
 		int i = 0;
-		for (var violation: violations) {
+		for (var violation : violations) {
 			i++;
-			logger.info("Violation #" + i + ": " + violation.message());
+			logger.info("\nViolation #" + i + ":\n" + violation.getMessage() + "\n\n");
 		}
 		System.exit(0);
 	}

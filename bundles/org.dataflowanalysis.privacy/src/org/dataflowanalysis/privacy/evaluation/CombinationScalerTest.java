@@ -30,6 +30,8 @@ public class CombinationScalerTest {
 		int numberWarmupRuns = 3; // How many times each scenario should be run before starting the evaluation
 		int numberEvaluationRuns = 10; // How many times each scenario should be ran to determine the result
 		int[] numberCombinations = { 1, 100, 1000, 2000};
+		int combinationSize = 6;
+		int overlap = 0;
 
 		ModelManager manager = new ModelManager();
 
@@ -37,7 +39,7 @@ public class CombinationScalerTest {
 				privacyModelPath, TEST_MODEL_PROJECT_NAME);
 
 		for (int currentAmount : numberCombinations) {
-			PrivacyModelPackage modifiedPackage = PrivacyContractGenerator.generateSourceNodes(originalPackage, "Source", currentAmount, 6, 0);
+			PrivacyModelPackage modifiedPackage = PrivacyContractGenerator.generateSourceNodes(originalPackage, "Source", currentAmount, combinationSize, overlap);
 			// save model to a directory
 			manager.savePrivacyPackage(modifiedPackage, Path.of(outputDir), scaledModelNameBase + currentAmount);
 		}

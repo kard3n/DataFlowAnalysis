@@ -283,7 +283,7 @@ public class PrivacyDataFlowConstrainTest {
 
 		pinIncoming.forEach(incoming -> {
 			assertEquals(true, PrivacyDataFlowConstraint.allFunctionalitiesConsentedTo(new HashSet<>(incoming),
-					vertexCharacteristicsOne, "testVertex"));
+					vertexCharacteristicsOne));
 		});
 
 		// Scenario two: one privacy option is not met
@@ -292,7 +292,7 @@ public class PrivacyDataFlowConstrainTest {
 		int detectedViolations = 0;
 		for (var incoming : pinIncoming) {
 			if (!PrivacyDataFlowConstraint.allFunctionalitiesConsentedTo(new HashSet<>(incoming),
-					vertexCharacteristicsTwo, "testVertex")) {
+					vertexCharacteristicsTwo)) {
 				detectedViolations++;
 			}
 		}

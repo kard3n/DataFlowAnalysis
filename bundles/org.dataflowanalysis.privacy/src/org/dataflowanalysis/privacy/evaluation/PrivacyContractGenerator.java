@@ -77,7 +77,7 @@ public class PrivacyContractGenerator {
 
 				// Add i labels to the role
 				for (int coPos = 0; coPos < i; coPos++) {
-					newRole.getAllows().add(consentOptions.get(coPos));
+					newRole.getOptionallyAllows().add(consentOptions.get(coPos));
 				}
 				RoleLabel newRoleLabel = privacymodelFactory.eINSTANCE.createRoleLabel();
 				newRoleLabel.setRole(newRole);

@@ -174,27 +174,33 @@ public class PrivacyDataFlowConstraint {
 						pinToCharacteristics.computeIfAbsent(newCharacteristics.getKey(),
 								k -> new HashSet<HashSet<CharacteristicValue>>());
 						pinToCharacteristics.get(newCharacteristics.getKey()).add(newCharacteristics.getValue());
-
+					}
+				}
+				
+				// Check for missing consent
+				for(var characteristicsOfPin: pinToCharacteristics.entrySet()) {
+					for(var receivedCombination: characteristicsOfPin.getValue()) {
 						// Go through the lists of CharacteristicValues, and check that all
 						// functionalities of the node (in form of functionalities)
 						// are present in it -> check that the user has consented to all functionalities
 						// of this node
-						if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalityLabels)) {
+						if (!allFunctionalitiesConsentedTo(receivedCombination, vertexFunctionalityLabels)) {
+							logger.info(21);
 							List<Functionality> consentedFunctionalities = extractFunctionalityLabels(
-									newCharacteristics.getValue()).stream().map(label -> label.getFunctionality())
+									receivedCombination).stream().map(label -> label.getFunctionality())
 									.toList();
 							List<Functionality> vertexFunctionalities = vertexFunctionalityLabels.stream()
 									.map(label -> label.getFunctionality()).toList();
 
 							violations.add(new ConsentPrivacyConstraintViolation(vert.getName(), "The vertex "
-									+ vert.getName() + " can receive data in pin " + newCharacteristics.getKey()
+									+ vert.getName() + " can receive data in pin " + characteristicsOfPin.getKey()
 									+ " from a user who has not consented to its functionalities. \nFunctionalities consented to by user: "
 									+ consentedFunctionalities.stream().map(func -> func.getEntityName()).toList()
 									+ "\nFunctionalities of the vertex: "
 									+ vertexFunctionalities.stream().map(func -> func.getEntityName()).toList()
 									+ "\nReceived input labels: "
-									+ newCharacteristics.getValue().stream().map(i -> i.toString()).toList(),
-									newCharacteristics.getKey(), consentedFunctionalities, vertexFunctionalities));
+									+ receivedCombination.stream().map(i -> i.toString()).toList(),
+									characteristicsOfPin.getKey(), consentedFunctionalities, vertexFunctionalities));
 						}
 					}
 				}

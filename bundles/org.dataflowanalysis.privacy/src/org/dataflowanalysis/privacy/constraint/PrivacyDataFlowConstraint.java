@@ -185,7 +185,6 @@ public class PrivacyDataFlowConstraint {
 						// are present in it -> check that the user has consented to all functionalities
 						// of this node
 						if (!allFunctionalitiesConsentedTo(receivedCombination, vertexFunctionalityLabels)) {
-							logger.info(21);
 							List<Functionality> consentedFunctionalities = extractFunctionalityLabels(
 									receivedCombination).stream().map(label -> label.getFunctionality())
 									.toList();

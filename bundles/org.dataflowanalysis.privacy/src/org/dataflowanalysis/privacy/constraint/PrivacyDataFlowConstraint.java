@@ -137,13 +137,15 @@ public class PrivacyDataFlowConstraint {
 
 				}
 
-			} else { // Logic for normal nodes: all instances have the same associated functionalities
+			} else { // Logic for normal nodes: all instances have the same associated
+						// functionalities
 				// group CharacteristicValue lists by pin (DataCharacteristic.variableName)
 				HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToCharacteristics = new HashMap<>();
 				DFDVertex vert = null;
 				// Calculate all groups of related pins
 				List<HashSet<String>> pinRelationGroups = null;
 				Set<String> pinsInGroups = null;
+				List<FunctionalityLabel> vertexFunctionalityLabels = null;
 
 				for (var vertBase : entry.getValue()) {
 					// Go through the instances of the vertex from every TFG, and add the grouped
@@ -153,10 +155,8 @@ public class PrivacyDataFlowConstraint {
 						pinRelationGroups = calculatePinRelationGroups(
 								vert.getReferencedElement().getBehavior().getPinRelations());
 						pinsInGroups = pinRelationGroups.stream().flatMap(Set::stream).collect(Collectors.toSet());
+						vertexFunctionalityLabels = extractFunctionalityLabels(vertBase.getAllVertexCharacteristics());
 					}
-
-					List<FunctionalityLabel> vertexFunctionalityLabels = extractFunctionalityLabels(
-							vertBase.getAllVertexCharacteristics());
 
 					List<DataCharacteristic> currentCharacteristics = ((DFDVertex) vertBase)
 							.getAllIncomingDataCharacteristics();
@@ -179,8 +179,7 @@ public class PrivacyDataFlowConstraint {
 						// functionalities of the node (in form of functionalities)
 						// are present in it -> check that the user has consented to all functionalities
 						// of this node
-						if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalityLabels,
-								vert.getName())) {
+						if (!allFunctionalitiesConsentedTo(newCharacteristics.getValue(), vertexFunctionalityLabels)) {
 							List<Functionality> consentedFunctionalities = extractFunctionalityLabels(
 									newCharacteristics.getValue()).stream().map(label -> label.getFunctionality())
 									.toList();

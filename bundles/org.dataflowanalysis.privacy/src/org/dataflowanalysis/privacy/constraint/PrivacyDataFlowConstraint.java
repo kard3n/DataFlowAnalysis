@@ -137,7 +137,7 @@ public class PrivacyDataFlowConstraint {
 
 				}
 
-			} else { // Logic for normal nodes: all instance have the same associated functionalities
+			} else { // Logic for normal nodes: all instances have the same associated functionalities
 				// group CharacteristicValue lists by pin (DataCharacteristic.variableName)
 				HashMap<String, HashSet<HashSet<CharacteristicValue>>> pinToCharacteristics = new HashMap<>();
 				DFDVertex vert = null;
@@ -415,12 +415,10 @@ public class PrivacyDataFlowConstraint {
 	 * 
 	 * @param pinIncomingCharacteristics The incoming characteristics of a pin
 	 * @param vertexFunctionalities      The functionalities of the vertex
-	 * @param vertexName                 The name of the vertex (for including it in
-	 *                                   the violations)
 	 * @return False if a violation is found, otherwise true
 	 */
 	public static boolean allFunctionalitiesConsentedTo(HashSet<CharacteristicValue> pinIncomingCharacteristics,
-			List<FunctionalityLabel> vertexFunctionalities, String vertexName) {
+			List<FunctionalityLabel> vertexFunctionalities) {
 
 		// Check that the incoming labels contain at least one data item
 		if (pinIncomingCharacteristics.stream()

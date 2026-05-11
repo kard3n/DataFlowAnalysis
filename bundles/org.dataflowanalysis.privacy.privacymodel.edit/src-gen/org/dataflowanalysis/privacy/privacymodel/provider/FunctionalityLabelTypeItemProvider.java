@@ -112,7 +112,7 @@ public class FunctionalityLabelTypeItemProvider extends AbstractLabelTypeItemPro
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FunctionalityLabelType) object).getId();
+		String label = ((FunctionalityLabelType) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_FunctionalityLabelType_type")
 				: getString("_UI_FunctionalityLabelType_type") + " " + label;
 	}

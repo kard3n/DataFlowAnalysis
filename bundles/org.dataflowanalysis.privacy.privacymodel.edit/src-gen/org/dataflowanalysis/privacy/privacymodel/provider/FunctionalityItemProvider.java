@@ -145,7 +145,7 @@ public class FunctionalityItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Functionality) object).getId();
+		String label = ((Functionality) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_Functionality_type")
 				: getString("_UI_Functionality_type") + " " + label;
 	}

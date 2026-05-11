@@ -22,5 +22,17 @@ public abstract class AbstractPrivacyConstraintViolation{
 		return message;
 	}
 	
-	
+	@Override
+	public final boolean equals(Object other) {
+		if (this == other) return true;
+		
+		if (!(other instanceof AbstractPrivacyConstraintViolation)) return false;
+		
+		return message.equals(((AbstractPrivacyConstraintViolation) other).message);
+	}
+
+	@Override
+	public final int hashCode() {
+		return message.hashCode();
+	}
 };

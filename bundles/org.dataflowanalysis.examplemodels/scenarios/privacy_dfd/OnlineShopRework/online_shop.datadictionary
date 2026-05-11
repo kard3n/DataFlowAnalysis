@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_sd8HACxSEfGY9NwNwqb70Q">
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_sd8HACxSEfGY9NwNwqb70Q">
   <behavior id="_tCuPESxSEfGY9NwNwqb70Q" entityName="Customer">
     <inPin id="_2LTkMCxSEfGY9NwNwqb70Q" entityName="Customer_In_LoginSignupResult"/>
     <inPin id="_8-iLgCxSEfGY9NwNwqb70Q" entityName="Customer_In_SearchResult"/>
@@ -188,7 +188,9 @@
     <inPin id="_DTg_ECzsEfGNV_Cy3dkeSg" entityName="BasicRecommendations_In_Data"/>
     <outPin id="_dLaKISzsEfGNV_Cy3dkeSg" entityName="BasicRecommendations_Out_Result"/>
     <assignment xsi:type="datadictionary:Assignment" id="_yXpQsi6UEfGYst92ovUroA" entityName="BasicRecommendations_Out_Result" outputPin="_dLaKISzsEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg">
-      <term xsi:type="datadictionary:TRUE" id="_2m8isC6UEfGYst92ovUroA"/>
+      <term xsi:type="datadictionary:LabelReference" id="_-HmwFE1GEfG7QOPB_Wci6g">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_w9DokCxQEfGY9NwNwqb70Q"/>
+      </term>
       <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_Tv9OgCxLEfGY9NwNwqb70Q"/>
       <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
     </assignment>

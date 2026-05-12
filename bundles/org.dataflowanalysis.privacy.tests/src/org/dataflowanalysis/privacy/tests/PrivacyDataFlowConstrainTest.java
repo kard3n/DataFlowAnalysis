@@ -497,11 +497,11 @@ public class PrivacyDataFlowConstrainTest {
 
 	@Test
 	public void testPinLevelFindViolationBasic() {
-		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataFlowDiagramPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"SimpleSourceSink.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataDictionaryPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"SimpleSourceSink.datadictionary");
-		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "SimpleSourceSink.privacymodel");
+		final var privacyModelPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels", "SimpleSourceSink.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
@@ -539,10 +539,10 @@ public class PrivacyDataFlowConstrainTest {
 
 	@Test
 	public void testPinLevelMissingAndCorrectDataState() {
-		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataFlowDiagramPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"BasicDataState.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels", "BasicDataState.datadictionary");
-		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "BasicDataState.privacymodel");
+		final var dataDictionaryPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels", "BasicDataState.datadictionary");
+		final var privacyModelPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels", "BasicDataState.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
@@ -564,11 +564,11 @@ public class PrivacyDataFlowConstrainTest {
 
 	@Test
 	public void testPinLevelInference() {
-		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataFlowDiagramPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"PinLevelInference.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataDictionaryPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"PinLevelInference.datadictionary");
-		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "PinLevelInference.privacymodel");
+		final var privacyModelPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels", "PinLevelInference.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
@@ -649,11 +649,11 @@ public class PrivacyDataFlowConstrainTest {
 	@Test
 	public void testNodeInferenceStateFree() {
 		// NodeInferenceStateFree
-		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataFlowDiagramPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"NodeInferenceStateFree.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataDictionaryPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"NodeInferenceStateFree.datadictionary");
-		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var privacyModelPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"NodeInferenceStateFree.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
@@ -674,11 +674,11 @@ public class PrivacyDataFlowConstrainTest {
 	@Test
 	public void testNodeInferenceStateful() {
 		// NodeInferenceStateFree
-		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataFlowDiagramPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"NodeInferenceStateful.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataDictionaryPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"NodeInferenceStateful.datadictionary");
-		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var privacyModelPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"NodeInferenceStateful.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
@@ -702,9 +702,9 @@ public class PrivacyDataFlowConstrainTest {
 	@Test
 	public void testUserNodeLogic() {
 		// UserNodeTest
-		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels", "UserNodeTest.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels", "UserNodeTest.datadictionary");
-		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "UserNodeTest.privacymodel");
+		final var dataFlowDiagramPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels", "UserNodeTest.dataflowdiagram");
+		final var dataDictionaryPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels", "UserNodeTest.datadictionary");
+		final var privacyModelPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels", "UserNodeTest.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)
@@ -724,11 +724,11 @@ public class PrivacyDataFlowConstrainTest {
 	@Test
 	public void testPinRelation() {
 		// UserNodeTest
-		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataFlowDiagramPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"PinRelationTest.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyTestModels",
+		final var dataDictionaryPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels",
 				"PinRelationTest.datadictionary");
-		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyTestModels", "PinRelationTest.privacymodel");
+		final var privacyModelPath = Paths.get("models", "privacy_dfd", "PrivacyTestModels", "PinRelationTest.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)

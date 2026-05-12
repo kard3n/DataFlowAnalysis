@@ -24,24 +24,20 @@ public class TransposeFinderTest {
 	public static final String TEST_MODEL_PROJECT_NAME = "org.dataflowanalysis.examplemodels";
 	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstrainTest.class);
 
-	PrivacyDFDConfidentialityAnalysis analysis;
+	@Test
+	public void createsGraphsForRole() {
+		final var basicDataFlowDiagramPath = Paths.get("models", "privacy_dfd", "TransposeFinderTestModel", "sbp.dataflowdiagram");
+		final var basicDataDictionaryPath = Paths.get("models", "privacy_dfd", "TransposeFinderTestModel", "sbp.datadictionary");
+		final var basicConsentModelPath = Paths.get("models", "privacy_dfd", "TransposeFinderTestModel", "sbp.privacymodel");
 
-	@BeforeEach
-	public void initAnalysis() {
-		final var basicDataFlowDiagramPath = Paths.get("models", "dfd", "SuperBasicPrivacy", "sbp.dataflowdiagram");
-		final var basicDataDictionaryPath = Paths.get("models", "dfd", "SuperBasicPrivacy", "sbp.datadictionary");
-		final var basicConsentModelPath = Paths.get("models", "dfd", "SuperBasicPrivacy", "sbp.privacymodel");
-
-		this.analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone().modelProjectName(TEST_MODEL_PROJECT_NAME)
+		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone().modelProjectName(TEST_MODEL_PROJECT_NAME)
 				.usePluginActivator(Activator.class).useDataFlowDiagram(basicDataFlowDiagramPath.toString())
 				.useDataDictionary(basicDataDictionaryPath.toString()).usePrivacyModel(basicConsentModelPath.toString())
 				.build();
-	}
-
-	@Test
-	public void createsGraphsForRole() {
-		this.analysis.initializeAnalysis();
+		analysis.initializeAnalysis();
 		DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
+		
+		
 
 		flowGraphCollection.evaluate();
 

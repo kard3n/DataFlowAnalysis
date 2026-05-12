@@ -1,14 +1,11 @@
-package org.dataflowanalysis.privacy.evaluation;
+package org.dataflowanalysis.privacy.evaluation.scaling;
 
 import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.analysis.utils.ResourceUtils;
-import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
-import org.dataflowanalysis.dfd.dataflowdiagram.DataFlowDiagram;
 import org.dataflowanalysis.examplemodels.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
 import org.dataflowanalysis.privacy.resource.PrivacyDFDURIResourceProvider;
-import org.dataflowanalysis.privacy.test.PrivacyDataFlowConstrainTest;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -23,7 +20,6 @@ import tools.mdsd.library.standalone.initialization.StandaloneInitializerBuilder
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -31,7 +27,7 @@ import java.util.Optional;
  * Class for loading and saving models
  */
 public class ModelManager {
-	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstrainTest.class);
+	private static final Logger logger = LoggerManager.getLogger(ModelManager.class);
 	protected final Optional<Class<? extends Plugin>> modelProjectActivator;
 	
 	public ModelManager() {

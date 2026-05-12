@@ -3,6 +3,7 @@
 package org.dataflowanalysis.privacy.privacymodel.impl;
 
 import org.dataflowanalysis.dfd.datadictionary.datadictionaryPackage;
+
 import org.dataflowanalysis.privacy.privacymodel.DataContext;
 import org.dataflowanalysis.privacy.privacymodel.DataContextLabel;
 import org.dataflowanalysis.privacy.privacymodel.DataContextLabelType;

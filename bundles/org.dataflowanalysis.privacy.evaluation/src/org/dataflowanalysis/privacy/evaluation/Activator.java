@@ -1,4 +1,4 @@
-package org.dataflowanalysis.privacy;
+package org.dataflowanalysis.privacy.evaluation;
 
 import org.eclipse.core.runtime.Plugin;
 

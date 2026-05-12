@@ -1,4 +1,4 @@
-package org.dataflowanalysis.privacy.evaluation;
+package org.dataflowanalysis.privacy.evaluation.scaling;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,13 +7,10 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
-import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
 import org.dataflowanalysis.dfd.datadictionary.Behavior;
-import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.Pin;
 import org.dataflowanalysis.dfd.datadictionary.SetAssignment;
 import org.dataflowanalysis.dfd.datadictionary.datadictionaryFactory;
-import org.dataflowanalysis.dfd.dataflowdiagram.DataFlowDiagram;
 import org.dataflowanalysis.dfd.dataflowdiagram.Flow;
 import org.dataflowanalysis.dfd.dataflowdiagram.Node;
 import org.dataflowanalysis.dfd.dataflowdiagram.dataflowdiagramFactory;
@@ -25,14 +22,9 @@ import org.dataflowanalysis.privacy.privacymodel.Role;
 import org.dataflowanalysis.privacy.privacymodel.RoleLabel;
 import org.dataflowanalysis.privacy.privacymodel.RoleLabelType;
 import org.dataflowanalysis.privacy.privacymodel.privacymodelFactory;
-import org.dataflowanalysis.privacy.test.PrivacyDataFlowConstrainTest;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
 public class PrivacyContractGenerator {
-	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstrainTest.class);
+	private static final Logger logger = LoggerManager.getLogger(PrivacyContractGenerator.class);
 	public static Random random = new Random(System.currentTimeMillis());
 	public static String charPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 

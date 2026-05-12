@@ -1,4 +1,4 @@
-package org.dataflowanalysis.privacy.evaluation;
+package org.dataflowanalysis.privacy.evaluation.scaling;
 
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.dataflowdiagram.DataFlowDiagram;

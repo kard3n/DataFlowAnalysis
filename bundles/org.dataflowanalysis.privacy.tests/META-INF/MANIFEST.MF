@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests
+Bundle-SymbolicName: org.dataflowanalysis.privacy.tests
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.dataflowanalysis.privacy;bundle-version="1.0.0",
+ org.dataflowanalysis.privacy.privacymodel;bundle-version="0.1.0",
+ org.apache.log4j,
+ org.dataflowanalysis.analysis,
+ junit-jupiter-api,
+ org.dataflowanalysis.analysis.dfd,
+ org.dataflowanalysis.examplemodels,
+ org.eclipse.core.runtime;bundle-version="3.29.0",
+ org.dataflowanalysis.dfd.dataflowdiagram;bundle-version="4.0.0"
+Automatic-Module-Name: org.dataflowanalysis.privacy.tests
+Bundle-RequiredExecutionEnvironment: JavaSE-17

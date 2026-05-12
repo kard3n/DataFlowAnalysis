@@ -1,4 +1,5 @@
-package org.dataflowanalysis.privacy.test;
+package org.dataflowanalysis.privacy.tests;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,11 +14,9 @@ import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.dfd.core.DFDFlowGraphCollection;
 import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
-import org.dataflowanalysis.dfd.dataflowdiagram.Node;
 import org.dataflowanalysis.examplemodels.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
 import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
-import org.dataflowanalysis.privacy.core.PrivacyDFDTransposeFlowGraphFinder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +52,7 @@ public class TransposeFinderTest {
 		boolean sourceWithConsentOptionFound = false;
 		for (var fg : flowGraphs) {
 			for (var vert : fg.getVertices()) {
-				logger.info(((DFDVertex) vert).getName());
+				//logger.info(((DFDVertex) vert).getName());
 				if (((DFDVertex) vert).getName().equals("source") && vert.getAllVertexCharacteristics().stream()
 						.filter(it -> it.getValueName().equals("BasicConsentLabel")).count() > 0) {
 					sourceWithConsentOptionFound = true;

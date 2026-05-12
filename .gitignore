@@ -62,3 +62,6 @@ xtend-gen/
 .idea/
 /out
 *.iml
+
+# Scaling output
+bundles/org.dataflowanalysis.privacy.evaluation/scaled_models/*

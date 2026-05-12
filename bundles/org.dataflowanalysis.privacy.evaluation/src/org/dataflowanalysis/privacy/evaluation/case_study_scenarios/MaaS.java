@@ -1,4 +1,4 @@
-package org.dataflowanalysis.privacy.case_study_scenarios;
+package org.dataflowanalysis.privacy.evaluation.case_study_scenarios;
 
 import java.nio.file.Paths;
 
@@ -9,13 +9,11 @@ import org.dataflowanalysis.examplemodels.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
 import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
-import org.dataflowanalysis.privacy.core.PrivacyDFDTransposeFlowGraphFinder;
-import org.dataflowanalysis.privacy.test.PrivacyDataFlowConstrainTest;
 import org.junit.jupiter.api.Test;
 
 public class MaaS {
 	public static final String TEST_MODEL_PROJECT_NAME = "org.dataflowanalysis.examplemodels";
-	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstrainTest.class);
+	private static final Logger logger = LoggerManager.getLogger(MaaS.class);
 
 	@Test
 	public void createsGraphsForRole() {

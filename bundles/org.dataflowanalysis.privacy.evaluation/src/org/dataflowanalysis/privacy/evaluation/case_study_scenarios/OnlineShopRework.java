@@ -1,4 +1,4 @@
-package org.dataflowanalysis.privacy.case_study_scenarios;
+package org.dataflowanalysis.privacy.evaluation.case_study_scenarios;
 
 import java.nio.file.Paths;
 
@@ -9,18 +9,20 @@ import org.dataflowanalysis.examplemodels.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
 import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
-import org.dataflowanalysis.privacy.test.PrivacyDataFlowConstrainTest;
 import org.junit.jupiter.api.Test;
 
-public class AppleWallet {
+public class OnlineShopRework {
 	public static final String TEST_MODEL_PROJECT_NAME = "org.dataflowanalysis.examplemodels";
-	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstrainTest.class);
+	private static final Logger logger = LoggerManager.getLogger(OnlineShopRework.class);
 
 	@Test
 	public void createsGraphsForRole() {
-		final var dataFlowDiagramPath = Paths.get("scenarios", "privacy_dfd", "AppleWallet", "diagram.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("scenarios", "privacy_dfd", "AppleWallet", "diagram.datadictionary");
-		final var privacyModelPath = Paths.get("scenarios", "privacy_dfd", "AppleWallet", "AppleWallet.privacymodel");
+		final var dataFlowDiagramPath = Paths.get("scenarios", "privacy_dfd", "OnlineShopRework",
+				"online_shop.dataflowdiagram");
+		final var dataDictionaryPath = Paths.get("scenarios", "privacy_dfd", "OnlineShopRework",
+				"online_shop.datadictionary");
+		final var privacyModelPath = Paths.get("scenarios", "privacy_dfd", "OnlineShopRework",
+				"online_shop.privacymodel");
 
 		PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
 				.modelProjectName("org.dataflowanalysis.examplemodels").usePluginActivator(Activator.class)

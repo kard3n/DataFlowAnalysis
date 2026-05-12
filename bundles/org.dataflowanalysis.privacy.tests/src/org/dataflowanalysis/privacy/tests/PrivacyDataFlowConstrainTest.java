@@ -1,4 +1,5 @@
-package org.dataflowanalysis.privacy.test;
+package org.dataflowanalysis.privacy.tests;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -7,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +17,6 @@ import org.dataflowanalysis.analysis.core.CharacteristicValue;
 import org.dataflowanalysis.analysis.core.DataCharacteristic;
 import org.dataflowanalysis.analysis.dfd.core.DFDCharacteristicValue;
 import org.dataflowanalysis.analysis.dfd.core.DFDFlowGraphCollection;
-import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.examplemodels.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
@@ -25,7 +24,6 @@ import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.privacy.constraint.ConsentPrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.NodeCombinationPrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.PinCombinationPrivacyConstraintViolation;
-import org.dataflowanalysis.privacy.constraint.AbstractPrivacyConstraintViolation;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint.ItemInformation;
 import org.dataflowanalysis.privacy.privacymodel.DataContext;

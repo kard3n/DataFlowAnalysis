@@ -1,4 +1,4 @@
-package org.dataflowanalysis.privacy.evaluation;
+package org.dataflowanalysis.privacy.evaluation.scaling;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -6,16 +6,15 @@ import java.nio.file.Paths;
 import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.dfd.core.DFDFlowGraphCollection;
 import org.dataflowanalysis.analysis.utils.LoggerManager;
-import org.dataflowanalysis.privacy.Activator;
 import org.dataflowanalysis.privacy.PrivacyDFDConfidentialityAnalysis;
 import org.dataflowanalysis.privacy.PrivacyDFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.privacy.constraint.PrivacyDataFlowConstraint;
-import org.dataflowanalysis.privacy.test.PrivacyDataFlowConstrainTest;
+import org.dataflowanalysis.privacy.evaluation.Activator;
 import org.junit.jupiter.api.Test;
 
 public class CombinationScalerTest {
 	public static final String TEST_MODEL_PROJECT_NAME = "org.dataflowanalysis.examplemodels";
-	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstrainTest.class);
+	private static final Logger logger = LoggerManager.getLogger(CombinationScalerTest.class);
 
 	@Test
 	public void testGenerateCombinations() {
@@ -76,7 +75,7 @@ public class CombinationScalerTest {
 				}
 
 				PrivacyDFDConfidentialityAnalysis analysis = new PrivacyDFDDataFlowAnalysisBuilder().standalone()
-						.modelProjectName("org.dataflowanalysis.privacy").usePluginActivator(Activator.class)
+						.modelProjectName("org.dataflowanalysis.privacy.evaluation").usePluginActivator(Activator.class)
 						.useDataFlowDiagram(outputDir + "/" + scaledModelName + ".dataflowdiagram")
 						.useDataDictionary(outputDir + "/" + scaledModelName + ".datadictionary")
 						.usePrivacyModel(outputDir + "/" + scaledModelName + ".privacymodel").build();

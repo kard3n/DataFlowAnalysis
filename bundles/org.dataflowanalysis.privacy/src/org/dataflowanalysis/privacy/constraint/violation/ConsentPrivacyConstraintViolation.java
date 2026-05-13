@@ -1,4 +1,4 @@
-package org.dataflowanalysis.privacy.constraint;
+package org.dataflowanalysis.privacy.constraint.violation;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.dataflowanalysis.privacy.constraint;
+package org.dataflowanalysis.privacy.constraint.violation;
 
 public abstract class AbstractPrivacyConstraintViolation{
 	private String vertexID;

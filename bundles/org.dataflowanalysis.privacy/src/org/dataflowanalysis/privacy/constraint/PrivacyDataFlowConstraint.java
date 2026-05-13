@@ -879,7 +879,7 @@ public class PrivacyDataFlowConstraint {
 			if (!combinationAllowedByFunctionalities(combination, nodeFunctionalities)) {
 				detectedViolations.add(new NodeCombinationPrivacyConstraintViolation(vertexName,
 						"The vertex/node \"" + vertexName
-								+ "\" received or could derive information not authorized by its functionalities."
+								+ "\" could derive information not authorized by ano of its functionalities."
 								+ "\n\tDetected combination: " + itemInformationToString(combination)
 								+ "\n\tVertex functionalities: "
 								+ nodeFunctionalities.stream().map(co -> functionalityToString(co)).toList(),

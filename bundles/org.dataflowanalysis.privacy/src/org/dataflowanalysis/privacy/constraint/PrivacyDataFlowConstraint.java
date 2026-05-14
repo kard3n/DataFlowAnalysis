@@ -189,6 +189,11 @@ public class PrivacyDataFlowConstraint {
 						// are present in it -> check that the user has consented to all functionalities
 						// of this node
 						if (!allFunctionalitiesConsentedTo(receivedCombination, vertexFunctionalityLabels)) {
+							// Ignore output pins if considerOutputPins is disabled
+							if(!considerOutputPins && vert.getAllOutgoingDataCharacteristics().stream().anyMatch(ch -> ch.getVariableName().equals(characteristicsOfPin.getKey()))) {
+								continue;
+							}
+							
 							List<Functionality> consentedFunctionalities = extractFunctionalityLabels(
 									receivedCombination).stream().map(label -> label.getFunctionality())
 									.toList();

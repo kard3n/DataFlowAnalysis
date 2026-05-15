@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" id="_rUSA8Cz6EfGNV_Cy3dkeSg" entityName="OnlineShop">
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_rUSA8Cz6EfGNV_Cy3dkeSg" entityName="OnlineShop">
   <flows id="_FGFlQC5zEfGTosUH5llL5A" entityName="AuthService_Customer_LSR" sourceNode="_8Mm4ky5xEfGTosUH5llL5A" destinationNode="_bE-JUS5xEfGTosUH5llL5A">
     <destinationPin href="online_shop.datadictionary#_2LTkMCxSEfGY9NwNwqb70Q"/>
     <sourcePin href="online_shop.datadictionary#_5OOH4SzcEfGNV_Cy3dkeSg"/>
@@ -24,13 +24,9 @@
     <destinationPin href="online_shop.datadictionary#_uJrcYCzcEfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#_V1rEMSxTEfGY9NwNwqb70Q"/>
   </flows>
-  <flows id="_TdujwC50EfGTosUH5llL5A" entityName="AuthService_UserDB_SD_NameEmail" sourceNode="_8Mm4ky5xEfGTosUH5llL5A" destinationNode="_MADjMi5yEfGTosUH5llL5A">
+  <flows id="_TdujwC50EfGTosUH5llL5A" entityName="AuthService_UserDB_SD" sourceNode="_8Mm4ky5xEfGTosUH5llL5A" destinationNode="_MADjMi5yEfGTosUH5llL5A">
     <destinationPin href="online_shop.datadictionary#_HINZsCzhEfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#_8QUm8SzcEfGNV_Cy3dkeSg"/>
-  </flows>
-  <flows id="_1hgLIC50EfGTosUH5llL5A" entityName="AuthService_UserDB_SD_Password" sourceNode="_8Mm4ky5xEfGTosUH5llL5A" destinationNode="_Qh6k0y5yEfGTosUH5llL5A">
-    <destinationPin href="online_shop.datadictionary#_HINZsCzhEfGNV_Cy3dkeSg"/>
-    <sourcePin href="online_shop.datadictionary#_WOW2QSzdEfGNV_Cy3dkeSg"/>
   </flows>
   <flows id="_JIh1EC51EfGTosUH5llL5A" entityName="Customer_ProductSearch_USR_ID" sourceNode="_bE-JUS5xEfGTosUH5llL5A" destinationNode="_Qh6k0y5yEfGTosUH5llL5A">
     <destinationPin href="online_shop.datadictionary#_l5ShQCzhEfGNV_Cy3dkeSg"/>
@@ -39,10 +35,6 @@
   <flows id="_QrRNwC51EfGTosUH5llL5A" entityName="Customer_ProductSearch_USR_Term" sourceNode="_bE-JUS5xEfGTosUH5llL5A" destinationNode="_Qh6k0y5yEfGTosUH5llL5A">
     <destinationPin href="online_shop.datadictionary#_l5ShQCzhEfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#_c5g6YSxTEfGY9NwNwqb70Q"/>
-  </flows>
-  <flows id="_a9kkAC51EfGTosUH5llL5A" entityName="PurchaseDB_ProductSearch_PP_ID" sourceNode="_WrhAUi5yEfGTosUH5llL5A" destinationNode="_Qh6k0y5yEfGTosUH5llL5A">
-    <destinationPin href="online_shop.datadictionary#_oYw0YCzhEfGNV_Cy3dkeSg"/>
-    <sourcePin href="online_shop.datadictionary#_d_fZ0SzpEfGNV_Cy3dkeSg"/>
   </flows>
   <flows id="_mz4DoC51EfGTosUH5llL5A" entityName="PurchaseDB_ProductSearch_PP_Products" sourceNode="_WrhAUi5yEfGTosUH5llL5A" destinationNode="_Qh6k0y5yEfGTosUH5llL5A">
     <destinationPin href="online_shop.datadictionary#_oYw0YCzhEfGNV_Cy3dkeSg"/>
@@ -72,10 +64,6 @@
     <destinationPin href="online_shop.datadictionary#_DTg_ECzsEfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#_JA150SziEfGNV_Cy3dkeSg"/>
   </flows>
-  <flows id="_3PJ4YC53EfGTosUH5llL5A" entityName="ProductSearch_BasicRecommendations_D_Term" sourceNode="_Qh6k0y5yEfGTosUH5llL5A" destinationNode="_j4Sjoy5yEfGTosUH5llL5A">
-    <destinationPin href="online_shop.datadictionary#_DTg_ECzsEfGNV_Cy3dkeSg"/>
-    <sourcePin href="online_shop.datadictionary#_WZFtUSziEfGNV_Cy3dkeSg"/>
-  </flows>
   <flows id="_XKAEYC54EfGTosUH5llL5A" entityName="ProductSearch_BasicRecommendations_D_ProductPurchased" sourceNode="_Qh6k0y5yEfGTosUH5llL5A" destinationNode="_Qh6k0y5yEfGTosUH5llL5A">
     <destinationPin href="online_shop.datadictionary#_feB4kSziEfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#_feB4kSziEfGNV_Cy3dkeSg"/>
@@ -87,10 +75,6 @@
   <flows id="_zON9EC54EfGTosUH5llL5A" entityName="ProductSearch_PersonalizedRecommendations_D_ID" sourceNode="_Qh6k0y5yEfGTosUH5llL5A" destinationNode="_qQrCAy5yEfGTosUH5llL5A">
     <destinationPin href="online_shop.datadictionary#_Rk7ZwCztEfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#_lM-YYSziEfGNV_Cy3dkeSg"/>
-  </flows>
-  <flows id="_8QJ3oC54EfGTosUH5llL5A" entityName="ProductSearch_PersonalizedRecommendations_D_Term" sourceNode="_Qh6k0y5yEfGTosUH5llL5A" destinationNode="_qQrCAy5yEfGTosUH5llL5A">
-    <destinationPin href="online_shop.datadictionary#_Rk7ZwCztEfGNV_Cy3dkeSg"/>
-    <sourcePin href="online_shop.datadictionary#_oxoK4SziEfGNV_Cy3dkeSg"/>
   </flows>
   <flows id="_GRWPwC55EfGTosUH5llL5A" entityName="ProductSearch_PersonalizedRecommendations_D_ProductsPurchased" sourceNode="_Qh6k0y5yEfGTosUH5llL5A" destinationNode="_qQrCAy5yEfGTosUH5llL5A">
     <destinationPin href="online_shop.datadictionary#_Rk7ZwCztEfGNV_Cy3dkeSg"/>
@@ -119,14 +103,6 @@
   <flows id="_7R1YwC55EfGTosUH5llL5A" entityName="PersonalizedRecommendations_RecommenderDB_UD_ID" sourceNode="_qQrCAy5yEfGTosUH5llL5A" destinationNode="_vK1O4i5yEfGTosUH5llL5A">
     <destinationPin href="online_shop.datadictionary#_ZaXD8Cz4EfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#_-dTzMSztEfGNV_Cy3dkeSg"/>
-  </flows>
-  <flows id="_BARiQC56EfGTosUH5llL5A" entityName="PersonalizedRecommendations_RecommenderDB_UD_Product" sourceNode="_qQrCAy5yEfGTosUH5llL5A" destinationNode="_vK1O4i5yEfGTosUH5llL5A">
-    <destinationPin href="online_shop.datadictionary#_ZaXD8Cz4EfGNV_Cy3dkeSg"/>
-    <sourcePin href="online_shop.datadictionary#_BALYkSzuEfGNV_Cy3dkeSg"/>
-  </flows>
-  <flows id="_HncqkC56EfGTosUH5llL5A" entityName="PersonalizedRecommendations_RecommenderDB_UD_Term" sourceNode="_qQrCAy5yEfGTosUH5llL5A" destinationNode="_vK1O4i5yEfGTosUH5llL5A">
-    <destinationPin href="online_shop.datadictionary#_ZaXD8Cz4EfGNV_Cy3dkeSg"/>
-    <sourcePin href="online_shop.datadictionary#_Bz4GYSzuEfGNV_Cy3dkeSg"/>
   </flows>
   <nodes xsi:type="dataflowdiagram:External" id="_bE-JUS5xEfGTosUH5llL5A" entityName="Customer">
     <behavior href="online_shop.datadictionary#_tCuPESxSEfGY9NwNwqb70Q"/>

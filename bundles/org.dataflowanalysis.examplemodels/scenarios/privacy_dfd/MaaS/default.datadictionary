@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" id="_wniy4D4oEfGG0e8jVwanbw" entityName="DataDictionary">
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_wniy4D4oEfGG0e8jVwanbw" entityName="DataDictionary">
   <behavior id="_x841MT4oEfGG0e8jVwanbw" entityName="Customer">
     <inPin id="_2Ug8wD4oEfGG0e8jVwanbw" entityName="Customer_SignInteraction_In_Result"/>
     <inPin id="_2rvxAD4oEfGG0e8jVwanbw" entityName="Customer_CheckIn_In_Result"/>
@@ -109,10 +109,9 @@
     <pinRelations id="_cP9MJkeTEfGyLfhotDOSOw" entityName="SignInteraction" inputPin="_2Ug8wD4oEfGG0e8jVwanbw" outputPin="_Oo6UwT4pEfGG0e8jVwanbw"/>
   </behavior>
   <behavior id="_ift7kT4zEfGG0e8jVwanbw" entityName="Inspector">
-    <inPin id="_jrPTgD4zEfGG0e8jVwanbw" entityName="Inspector_InspectCustomer_In"/>
     <inPin id="_tlMbMD4zEfGG0e8jVwanbw" entityName="Inspector_InspectCustomer_In_Result"/>
     <outPin id="_wOhN4T4zEfGG0e8jVwanbw" entityName="Inspector_InspectCustomer_Out"/>
-    <assignment xsi:type="datadictionary:Assignment" id="_zoVCUj4zEfGG0e8jVwanbw" entityName="Inspector_InspectCustomer_Out" outputPin="_jrPTgD4zEfGG0e8jVwanbw" inputPins="_jrPTgD4zEfGG0e8jVwanbw">
+    <assignment xsi:type="datadictionary:SetAssignment" id="_AhVthFA6EfGTR9ryzHSFWg" entityName="Inspector_InspectCustomer_Out" outputPin="_wOhN4T4zEfGG0e8jVwanbw">
       <outputLabels xsi:type="privacymodel:DataItemLabel" href="default.privacymodel#_HvrAkD1vEfGmFKwwtJJekw"/>
     </assignment>
     <pinRelations id="_R0oARkeUEfGuoO7AtQNzqQ" entityName="InspectCustomer" inputPin="_wOhN4T4zEfGG0e8jVwanbw" outputPin="_tlMbMD4zEfGG0e8jVwanbw"/>

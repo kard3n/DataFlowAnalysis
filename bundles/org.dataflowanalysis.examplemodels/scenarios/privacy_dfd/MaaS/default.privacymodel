@@ -2,13 +2,13 @@
 <privacymodel:PrivacyModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_UqNa0D1jEfGmFKwwtJJekw" entityName="PrivacyModel">
   <roleLabelType id="_MxHEsD1wEfGmFKwwtJJekw" entityName="Roles">
     <labels id="_O6VbAD1wEfGmFKwwtJJekw" entityName="Inspector">
-      <role id="_RVxisD1wEfGmFKwwtJJekw" entityName="Inspector" alwaysAllows="_qlihUD1xEfGtevHBcNoGlQ"/>
+      <role id="_RVxisD1wEfGmFKwwtJJekw" entityName="Inspector" alwaysAllows="_qlihUD1xEfGtevHBcNoGlQ _aXi2gFA6EfGTR9ryzHSFWg"/>
     </labels>
     <labels id="_U05U8D1wEfGmFKwwtJJekw" entityName="Customer">
       <role id="_WA1joD1wEfGmFKwwtJJekw" entityName="Customer" alwaysAllows="__6GOoD1yEfGtevHBcNoGlQ _uzKYUD1xEfGtevHBcNoGlQ _zCGd8D1xEfGtevHBcNoGlQ _5NYfAD1yEfGtevHBcNoGlQ _8hpFED1yEfGtevHBcNoGlQ _qlihUD1xEfGtevHBcNoGlQ _s0bjoEhaEfGzrqe1i1LqUQ _qxmO0EfOEfGZw_-C8A2RPA"/>
     </labels>
     <labels id="_ZSvZQD1wEfGmFKwwtJJekw" entityName="AnalysisStaff">
-      <role id="_bOD2cD1wEfGmFKwwtJJekw" entityName="AnalysisStaff" alwaysAllows="__6GOoD1yEfGtevHBcNoGlQ"/>
+      <role id="_bOD2cD1wEfGmFKwwtJJekw" entityName="AnalysisStaff" alwaysAllows="__6GOoD1yEfGtevHBcNoGlQ _aXi2gFA6EfGTR9ryzHSFWg"/>
     </labels>
   </roleLabelType>
   <functionalityLabelType id="_JLbiAT1xEfGmFKwwtJJekw" entityName="Functionalities">
@@ -73,6 +73,14 @@
           <members item="_bfWFoD1uEfGmFKwwtJJekw"/>
           <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_7tsKgD1wEfGmFKwwtJJekw"/>
           <members item="_-7pwwD1vEfGmFKwwtJJekw" context="_7tsKgD1wEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_YieyUFA6EfGTR9ryzHSFWg" entityName="StaffAuthentication">
+      <functionality id="_aXi2gFA6EfGTR9ryzHSFWg" entityName="StaffAuthentication">
+        <allowsFor id="_b9ReMFA6EfGTR9ryzHSFWg">
+          <members item="_KCGWMD1vEfGmFKwwtJJekw"/>
+          <members item="_N5oBYD1vEfGmFKwwtJJekw"/>
         </allowsFor>
       </functionality>
     </labels>

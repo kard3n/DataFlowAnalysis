@@ -20,7 +20,7 @@
   </behavior>
   <behavior id="_4dxM8U36EfGKdqFEChFimQ" entityName="UserDatabase">
     <inPin id="_7NosgE36EfGKdqFEChFimQ" entityName="UserDatabase_RegisterInformation_In"/>
-    <outPin id="_Sy2_cU39EfGKdqFEChFimQ" entityName="UserDatabase_GetUserInfo_In"/>
+    <inPin id="_Sy2_cU39EfGKdqFEChFimQ" entityName="UserDatabase_GetUserInfo_In"/>
     <outPin id="_ZnZ1YU39EfGKdqFEChFimQ" entityName="UserDatabase_GetUserInfo_Out_Result"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Fbdjs04BEfGKdqFEChFimQ" entityName="GetUserInfo_Result" outputPin="_ZnZ1YU39EfGKdqFEChFimQ" inputPins="_Sy2_cU39EfGKdqFEChFimQ _7NosgE36EfGKdqFEChFimQ"/>
   </behavior>

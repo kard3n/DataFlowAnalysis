@@ -190,7 +190,7 @@ public class PrivacyDataFlowConstraint {
 						// of this node
 						if (!allFunctionalitiesConsentedTo(receivedCombination, vertexFunctionalityLabels)) {
 							// Ignore output pins if considerOutputPins is disabled
-							if(!considerOutputPins && vert.getAllOutgoingDataCharacteristics().stream().anyMatch(ch -> ch.getVariableName().equals(characteristicsOfPin.getKey()))) {
+							if(!considerOutputPins && vert.getReferencedElement().getBehavior().getOutPin().stream().anyMatch(ch -> ch.getId().equals(characteristicsOfPin.getKey()))) {
 								continue;
 							}
 							

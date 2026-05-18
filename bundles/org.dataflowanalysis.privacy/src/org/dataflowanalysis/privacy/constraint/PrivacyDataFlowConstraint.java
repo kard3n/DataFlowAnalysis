@@ -245,6 +245,10 @@ public class PrivacyDataFlowConstraint {
 					for (var combination : possibleCombinations) {
 
 						if (!combinationAllowedByFunctionalities(combination, functionalities)) {
+							// Ignore output pins if considerOutputPins is disabled
+							if(!considerOutputPins && vert.getReferencedElement().getBehavior().getOutPin().stream().anyMatch(ch -> ch.getId().equals(pin.getKey()))) {
+								continue;
+							}
 
 							violations.add(new PinCombinationPrivacyConstraintViolation(vert.getName(), "The vertex "
 									+ vert.getName() + " has received a data combination in pin " + pin.getKey()

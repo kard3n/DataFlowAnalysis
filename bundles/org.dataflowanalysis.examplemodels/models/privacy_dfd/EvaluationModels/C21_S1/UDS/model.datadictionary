@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_nyjUME33EfGKdqFEChFimQ">
+  <behavior id="_ISt-UU35EfGKdqFEChFimQ" entityName="User">
+    <inPin id="_ugaBYE35EfGKdqFEChFimQ" entityName="User_GetUserInfo_In_Result"/>
+    <outPin id="_xec7UU4DEfGKdqFEChFimQ" entityName="User_GetUserInfo_Out"/>
+    <outPin id="_3weTAU4DEfGKdqFEChFimQ" entityName="User_RegisterInformation_Out"/>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_YsmyVE4DEfGKdqFEChFimQ" entityName="RegisterInformation" outputPin="_3weTAU4DEfGKdqFEChFimQ">
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="model.privacymodel#_9jcEEE3rEfGAqc68XEY7zA"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="model.privacymodel#_CaPa8E3sEfGAqc68XEY7zA"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="model.privacymodel#_TVpkQFKvEfGRWIbPzxSckw"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_mUI_BE4DEfGKdqFEChFimQ" entityName="GetUserInfo" outputPin="_xec7UU4DEfGKdqFEChFimQ">
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="model.privacymodel#_9jcEEE3rEfGAqc68XEY7zA"/>
+    </assignment>
+  </behavior>
+  <behavior id="_6Rm-kU35EfGKdqFEChFimQ" entityName="RegisterService">
+    <inPin id="_82sxgE35EfGKdqFEChFimQ" entityName="RegisterService_In_RegisterInformation"/>
+    <outPin id="_fW5PIU36EfGKdqFEChFimQ" entityName="RegisterService_Out_RegisterInformation"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_qgbIU036EfGKdqFEChFimQ" entityName="RegisterInformation" outputPin="_fW5PIU36EfGKdqFEChFimQ" inputPins="_82sxgE35EfGKdqFEChFimQ"/>
+    <pinRelations id="_ABiKRk4EEfGKdqFEChFimQ" entityName="RegisterInformation" inputPin="_82sxgE35EfGKdqFEChFimQ" outputPin="_fW5PIU36EfGKdqFEChFimQ"/>
+  </behavior>
+  <behavior id="_4dxM8U36EfGKdqFEChFimQ" entityName="UserDatabase">
+    <inPin id="_7NosgE36EfGKdqFEChFimQ" entityName="UserDatabase_RegisterInformation_In"/>
+    <inPin id="_Sy2_cU39EfGKdqFEChFimQ" entityName="UserDatabase_GetUserInfo_In"/>
+    <outPin id="_ZnZ1YU39EfGKdqFEChFimQ" entityName="UserDatabase_GetUserInfo_Out_Result"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_Fbdjs04BEfGKdqFEChFimQ" entityName="GetUserInfo_Result" outputPin="_ZnZ1YU39EfGKdqFEChFimQ" inputPins="_Sy2_cU39EfGKdqFEChFimQ _7NosgE36EfGKdqFEChFimQ"/>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_u8PQVVKwEfGRWIbPzxSckw" entityName="GetUserInfo_Result" outputPin="_ZnZ1YU39EfGKdqFEChFimQ">
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="model.privacymodel#_TVpkQFKvEfGRWIbPzxSckw"/>
+    </assignment>
+  </behavior>
+  <behavior id="_kFUo8U4BEfGKdqFEChFimQ" entityName="UserInfoService">
+    <inPin id="_m1it0E4BEfGKdqFEChFimQ" entityName="UserInfoService_GetUserInfo_In"/>
+    <inPin id="_0v-oYE4BEfGKdqFEChFimQ" entityName="UserInfoService_GetUserInfo_In_Result"/>
+    <outPin id="_pcdFsE4BEfGKdqFEChFimQ" entityName="UserInfoService_GetUserInfo_Out"/>
+    <outPin id="_5rguQU4BEfGKdqFEChFimQ" entityName="UserInfoService_GetUserInfo_Out_Result"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_7VTWk04BEfGKdqFEChFimQ" entityName="GetUserInfo_Request" outputPin="_pcdFsE4BEfGKdqFEChFimQ" inputPins="_m1it0E4BEfGKdqFEChFimQ"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_BWPlU04CEfGKdqFEChFimQ" entityName="GetUserInfo_Result" outputPin="_5rguQU4BEfGKdqFEChFimQ" inputPins="_0v-oYE4BEfGKdqFEChFimQ"/>
+    <pinRelations id="_YFm5Nk4CEfGKdqFEChFimQ" entityName="GetUserInfo_Request" inputPin="_m1it0E4BEfGKdqFEChFimQ" outputPin="_pcdFsE4BEfGKdqFEChFimQ"/>
+    <pinRelations id="_bwVehk4CEfGKdqFEChFimQ" entityName="GetUserInfo_Result" inputPin="_0v-oYE4BEfGKdqFEChFimQ" outputPin="_5rguQU4BEfGKdqFEChFimQ"/>
+  </behavior>
+</datadictionary:DataDictionary>

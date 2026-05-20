@@ -740,8 +740,6 @@ public class PrivacyDataFlowConstraint {
 		}
 
 		return itemInfo.context.stream().allMatch(contextSet -> {
-			logger.error(contextSet);
-			combinationMembersOfItemWithCorrectState.stream().forEach(combMember -> logger.warn(combMember.getContext()));
 			return combinationMembersOfItemWithCorrectState.stream()
 					.anyMatch(combMember -> contextSet.containsAll(combMember.getContext()));
 		});

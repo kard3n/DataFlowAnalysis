@@ -378,8 +378,9 @@ public class PrivacyDataFlowConstrainTest {
 		assertTrue(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
 				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of(dataContextOne), Set.of(dataContextTwo)))));
 		// Scenario two: no item has the correct context
+		itemOne.getContext().add(dataContextTwo);
 		assertFalse(PrivacyDataFlowConstraint.combinationAllowsItem(combination, dataItemOne,
-				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of(dataContextOne, dataContextTwo)))));
+				new ItemInformation(Set.of(dataStateOne), Set.of(Set.of(dataContextOne)))));
 
 	}
 

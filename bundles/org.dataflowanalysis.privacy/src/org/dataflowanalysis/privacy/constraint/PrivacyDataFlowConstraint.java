@@ -728,21 +728,23 @@ public class PrivacyDataFlowConstraint {
 	 */
 	public static boolean combinationAllowsItem(UserDataCombination combination, DataItem item,
 			ItemInformation itemInfo) {
-		var combinationMembersOfItemWithState = combination.getMembers().stream()
+		var combinationMembersOfItemWithCorrectState = combination.getMembers().stream()
 				.filter(member -> member.getItem().equals(item) && itemInfo.state.containsAll(member.getState()))
 				.toList();
-		if (combinationMembersOfItemWithState.size() == 0)
+		if (combinationMembersOfItemWithCorrectState.size() == 0)
 			return false;
 
 		// Special case: empty context
 		if (itemInfo.context.isEmpty()) {
-			return combinationMembersOfItemWithState.stream().anyMatch(combMember -> combMember.getContext().isEmpty());
+			return combinationMembersOfItemWithCorrectState.stream().anyMatch(combMember -> combMember.getContext().isEmpty());
 		}
 
-		return itemInfo.context.stream().filter(contexts -> {
-			return combinationMembersOfItemWithState.stream()
-					.anyMatch(combMember -> contexts.equals(new HashSet<DataContext>(combMember.getContext())));
-		}).count() == itemInfo.context.size();
+		return itemInfo.context.stream().allMatch(contextSet -> {
+			logger.error(contextSet);
+			combinationMembersOfItemWithCorrectState.stream().forEach(combMember -> logger.warn(combMember.getContext()));
+			return combinationMembersOfItemWithCorrectState.stream()
+					.anyMatch(combMember -> contextSet.containsAll(combMember.getContext()));
+		});
 	}
 
 	/**

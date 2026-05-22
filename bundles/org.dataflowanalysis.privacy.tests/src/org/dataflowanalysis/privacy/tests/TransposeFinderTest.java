@@ -49,8 +49,8 @@ public class TransposeFinderTest {
 		for (var fg : flowGraphs) {
 			for (var vert : fg.getVertices()) {
 				//logger.info(((DFDVertex) vert).getName());
-				if (((DFDVertex) vert).getName().equals("source") && vert.getAllVertexCharacteristics().stream()
-						.filter(it -> it.getValueName().equals("BasicConsentLabel")).count() > 0) {
+				if (((DFDVertex) vert).getName().startsWith("source") && vert.getAllVertexCharacteristics().stream()
+						.filter(it -> it.getValueName().startsWith("BasicConsentLabel")).count() > 0) {
 					sourceWithConsentOptionFound = true;
 				}
 				logger.debug("Vert " + ((DFDVertex) vert).getName() + "  char: " + vert

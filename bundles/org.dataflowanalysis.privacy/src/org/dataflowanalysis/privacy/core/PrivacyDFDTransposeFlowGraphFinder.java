@@ -90,23 +90,28 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 			List<RoleLabel> roles = source.getProperties().stream().filter(label -> label instanceof RoleLabel)
 					.map(label -> (RoleLabel) label).toList();
-			for (RoleLabel roleLabel : roles) {
+			for (int r = 0; r < roles.size(); r++) {
+				var roleLabel = roles.get(r);
 				if (!roleToCombinations.containsKey(roleLabel)) {
 					roleToCombinations.put(roleLabel, this.calculateRoleFunctionalityOptions(roleLabel.getRole()));
 					logger.debug("Final amount of consented functionality combinations for role "
 							+ roleLabel.getRole().getEntityName() + " : " + roleToCombinations.get(roleLabel).size());
 				}
 
-				Set<Set<Functionality>> currentCombinations = roleToCombinations.get(roleLabel);
-				for (Set<Functionality> combination : currentCombinations) {
+				List<Set<Functionality>> currentCombinations = new ArrayList<>(roleToCombinations.get(roleLabel));
+				for (int c = 0; c < currentCombinations.size(); c++) {
+					Set<Functionality> combination = currentCombinations.get(c);
+					boolean lastReplication = r == roles.size() - 1 && c == currentCombinations.size() - 1;
 					// Copier is created here to prevent it from rewiring everything (including
 					// those created by previous iterations) every time
 					Copier copier = new Copier();
 
-					Node clonedSource = (Node) copier.copy(source); // Copy node
+					Node clonedSource = (lastReplication) ? source : (Node) copier.copy(source); // Copy node
+					if (!lastReplication) {
+						nodesToAdd.add(clonedSource);
+					}
 					clonedSource.setEntityName(clonedSource.getEntityName() + "_" + instanceNumber);
-					// this.dataFlowDiagram.getNodes().add(clonedSource);
-					nodesToAdd.add(clonedSource);
+					clonedSource.setId(clonedSource.getId() + "_" + instanceNumber);
 
 					ArrayList<AbstractLabel> functionalityLabelsToAdd = new ArrayList<>(
 							this.privacyModel.getFunctionalityLabelType().getLabels().stream()
@@ -117,11 +122,14 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 					clonedSource.getProperties().addAll(functionalityLabelsToAdd);
 
 					// Change behavior
-					Behavior clonedBehavior = (Behavior) copier.copy(source.getBehavior());
+					Behavior clonedBehavior = (lastReplication) ? source.getBehavior()
+							: (Behavior) copier.copy(source.getBehavior());
 					clonedBehavior.setEntityName(clonedBehavior.getEntityName() + "_" + instanceNumber);
-					clonedSource.setBehavior(clonedBehavior);
-					// this.dataDictionary.getBehavior().add(clonedBehavior);
-					behaviorToAdd.add(clonedBehavior);
+					clonedBehavior.setId(clonedBehavior.getId() + "_" + instanceNumber);
+					if (!lastReplication) {
+						clonedSource.setBehavior(clonedBehavior);
+						behaviorToAdd.add(clonedBehavior);
+					}
 
 					// Modify behavior
 					clonedBehavior.getAssignment().forEach(assignment -> {
@@ -138,32 +146,33 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 
 					});
 
-					for (var pin : clonedBehavior.getInPin()) {
+					if (!lastReplication) {
+						for (Flow flow : flowsFromNode) {
+							Flow clonedFlow = (Flow) copier.copy(flow);
+							clonedFlow.setSourceNode(clonedSource);
+							clonedFlow.setSourcePin(clonedBehavior.getOutPin().stream()
+									.filter(pin -> pin.getId().equals(flow.getSourcePin().getId())).findFirst().get());
+							flowsToAdd.add(clonedFlow);
+						}
+						for (Flow flow : flowsToNode) {
+							Flow clonedFlow = (Flow) copier.copy(flow);
+							clonedFlow.setDestinationNode(clonedSource);
+							clonedFlow.setDestinationPin(clonedBehavior.getInPin().stream()
+									.filter(pin -> pin.getId().equals(flow.getDestinationPin().getId())).findFirst()
+									.get());
+							flowsToAdd.add(clonedFlow);
+						}
+					}
+					
+					
+					for(var pin: clonedBehavior.getInPin()) {
 						pin.setEntityName(pin.getEntityName() + "_" + instanceNumber);
+						pin.setId(pin.getId() + "_" + instanceNumber);
 					}
-					for (var pin : clonedBehavior.getOutPin()) {
+					
+					for(var pin: clonedBehavior.getOutPin()) {
 						pin.setEntityName(pin.getEntityName() + "_" + instanceNumber);
-					}
-
-					for (Flow flow : flowsFromNode) {
-						Flow clonedFlow = (Flow) copier.copy(flow);
-						clonedFlow.setEntityName(clonedFlow.getEntityName() + "_" + instanceNumber);
-						clonedFlow.setSourceNode(clonedSource);
-						clonedFlow.setSourcePin(clonedBehavior.getOutPin().stream()
-								.filter(pin -> pin.getId().equals(flow.getSourcePin().getId())).findFirst().get());
-						// clonedFlow.setDestinationNode(flow.getDestinationNode());
-						// clonedFlow.setDestinationPin(flow.getDestinationPin());
-						flowsToAdd.add(clonedFlow);
-					}
-					for (Flow flow : flowsToNode) {
-						Flow clonedFlow = (Flow) copier.copy(flow);
-						clonedFlow.setEntityName(clonedFlow.getEntityName() + "_" + instanceNumber);
-						clonedFlow.setDestinationNode(clonedSource);
-						clonedFlow.setDestinationPin(clonedBehavior.getInPin().stream()
-								.filter(pin -> pin.getId().equals(flow.getDestinationPin().getId())).findFirst().get());
-						// clonedFlow.setSourceNode(flow.getSourceNode());
-						// clonedFlow.setSourcePin(flow.getSourcePin());
-						flowsToAdd.add(clonedFlow);
+						pin.setId(pin.getId() + "_" + instanceNumber);
 					}
 
 					instanceNumber++;
@@ -182,18 +191,8 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 		this.dataFlowDiagram.getNodes().addAll(nodesToAdd);
 		this.dataFlowDiagram.getFlows().addAll(flowsToAdd);
 
-		// Delete sources and their behavior
-		for (var source : sources) {
-			this.dataFlowDiagram.getNodes().remove(source);
-			this.dataDictionary.getBehavior().remove(source.getBehavior());
-		}
-
-		// Delete old flows
-		this.dataFlowDiagram.getFlows().removeAll(flowsToRemove);
-
 		DFDTransposeFlowGraphFinder finder = new DFDTransposeFlowGraphFinder(this.dataDictionary, this.dataFlowDiagram);
-		var result = finder.findTransposeFlowGraphs().stream().filter(DFDTransposeFlowGraph.class::isInstance)
-				.map(DFDTransposeFlowGraph.class::cast).toList();
+		var result = finder.findTransposeFlowGraphs();
 
 		return result;
 

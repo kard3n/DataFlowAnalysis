@@ -26,7 +26,6 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 	private static final Logger logger = LoggerManager.getLogger(PrivacyDFDTransposeFlowGraphFinder.class);
 	protected final DataFlowDiagram dataFlowDiagram;
 	protected final PrivacyModel privacyModel;
-	private boolean hasCycles = false;
 	private final DataDictionary dataDictionary;
 
 	public PrivacyDFDTransposeFlowGraphFinder(DFDResourceProvider resourceProvider) {
@@ -40,7 +39,8 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 		this.dataDictionary = ((PrivacyDFDResourceProvider) resourceProvider).getDataDictionary();
 	}
 
-	public PrivacyDFDTransposeFlowGraphFinder(DataDictionary dataDictionary, DataFlowDiagram dataFlowDiagram, PrivacyModel privacyModel) {
+	public PrivacyDFDTransposeFlowGraphFinder(DataDictionary dataDictionary, DataFlowDiagram dataFlowDiagram,
+			PrivacyModel privacyModel) {
 
 		this.dataDictionary = dataDictionary;
 		this.dataFlowDiagram = dataFlowDiagram;
@@ -75,7 +75,8 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 		List<Behavior> behaviorToAdd = new LinkedList<>();
 		List<Flow> flowsToAdd = new LinkedList<>();
 
-		// Go over all source nodes and replicate them by role x functionalities (consent options)
+		// Go over all source nodes and replicate them by role x functionalities
+		// (consent options)
 		for (Node source : sources) {
 
 			List<Flow> flowsFromNode = this.dataFlowDiagram.getFlows().stream()
@@ -84,7 +85,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 					.filter(flow -> flow.getDestinationNode() == source).toList();
 			flowsToRemove.addAll(flowsToNode);
 			flowsToRemove.addAll(flowsFromNode);
-			
+
 			int instanceNumber = 0;
 
 			List<RoleLabel> roles = source.getProperties().stream().filter(label -> label instanceof RoleLabel)
@@ -92,8 +93,8 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 			for (RoleLabel roleLabel : roles) {
 				if (!roleToCombinations.containsKey(roleLabel)) {
 					roleToCombinations.put(roleLabel, this.calculateRoleFunctionalityOptions(roleLabel.getRole()));
-					logger.debug("Final amount of consented functionality combinations for role " + roleLabel.getRole().getEntityName()
-							+ " : " + roleToCombinations.get(roleLabel).size());
+					logger.debug("Final amount of consented functionality combinations for role "
+							+ roleLabel.getRole().getEntityName() + " : " + roleToCombinations.get(roleLabel).size());
 				}
 
 				Set<Set<Functionality>> currentCombinations = roleToCombinations.get(roleLabel);
@@ -136,11 +137,11 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 						}
 
 					});
-					
-					for(var pin: clonedBehavior.getInPin()) {
+
+					for (var pin : clonedBehavior.getInPin()) {
 						pin.setEntityName(pin.getEntityName() + "_" + instanceNumber);
 					}
-					for(var pin: clonedBehavior.getOutPin()) {
+					for (var pin : clonedBehavior.getOutPin()) {
 						pin.setEntityName(pin.getEntityName() + "_" + instanceNumber);
 					}
 
@@ -164,7 +165,7 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 						// clonedFlow.setSourcePin(flow.getSourcePin());
 						flowsToAdd.add(clonedFlow);
 					}
-					
+
 					instanceNumber++;
 
 					// Wires flows, so that they can be seen in the next iteration
@@ -363,10 +364,6 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 			}
 		}
 		return true;
-	}
-
-	public boolean hasCycles() {
-		return hasCycles;
 	}
 
 }

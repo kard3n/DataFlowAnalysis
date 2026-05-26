@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<privacymodel:PrivacyModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_UqNa0D1jEfGmFKwwtJJekw" entityName="PrivacyModel">
+  <roleLabelType id="_MxHEsD1wEfGmFKwwtJJekw" entityName="Roles">
+    <labels id="_O6VbAD1wEfGmFKwwtJJekw" entityName="Inspector">
+      <role id="_RVxisD1wEfGmFKwwtJJekw" entityName="Inspector" alwaysAllows="_qlihUD1xEfGtevHBcNoGlQ _aXi2gFA6EfGTR9ryzHSFWg"/>
+    </labels>
+    <labels id="_U05U8D1wEfGmFKwwtJJekw" entityName="Customer">
+      <role id="_WA1joD1wEfGmFKwwtJJekw" entityName="Customer" alwaysAllows="__6GOoD1yEfGtevHBcNoGlQ _zCGd8D1xEfGtevHBcNoGlQ _5NYfAD1yEfGtevHBcNoGlQ _8hpFED1yEfGtevHBcNoGlQ _qlihUD1xEfGtevHBcNoGlQ _s0bjoEhaEfGzrqe1i1LqUQ _qxmO0EfOEfGZw_-C8A2RPA _uzKYUD1xEfGtevHBcNoGlQ"/>
+    </labels>
+    <labels id="_ZSvZQD1wEfGmFKwwtJJekw" entityName="AnalysisStaff">
+      <role id="_bOD2cD1wEfGmFKwwtJJekw" entityName="AnalysisStaff" alwaysAllows="__6GOoD1yEfGtevHBcNoGlQ _aXi2gFA6EfGTR9ryzHSFWg"/>
+    </labels>
+  </roleLabelType>
+  <functionalityLabelType id="_JLbiAT1xEfGmFKwwtJJekw" entityName="Functionalities">
+    <labels id="_mchdgD1xEfGtevHBcNoGlQ" entityName="InspectCustomer">
+      <functionality id="_qlihUD1xEfGtevHBcNoGlQ" entityName="InspectCustomer">
+        <allowsFor id="_pXBjsEfNEfGZw_-C8A2RPA" entityName="input">
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+          <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
+          <members item="_KCGWMD1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+        <allowsFor id="_aOzx8EfOEfGZw_-C8A2RPA" entityName="result">
+          <members item="_UtlBcD1vEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_tvLy0D1xEfGtevHBcNoGlQ" entityName="CheckIn">
+      <functionality id="_uzKYUD1xEfGtevHBcNoGlQ" entityName="CheckIn" requires="_qxmO0EfOEfGZw_-C8A2RPA _s0bjoEhaEfGzrqe1i1LqUQ">
+        <allowsFor id="__YCHUEfOEfGZw_-C8A2RPA">
+          <members item="_bfWFoD1uEfGmFKwwtJJekw" context="_i88PsFXEEfGYorr8ON6bsg"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_i88PsFXEEfGYorr8ON6bsg"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_xpjzID1wEfGmFKwwtJJekw _i88PsFXEEfGYorr8ON6bsg"/>
+          <members item="_5Oq1QD1uEfGmFKwwtJJekw" context="_i88PsFXEEfGYorr8ON6bsg"/>
+          <members item="_EJ8QAD1vEfGmFKwwtJJekw" context="_i88PsFXEEfGYorr8ON6bsg"/>
+          <members item="_9VWWwD1uEfGmFKwwtJJekw" context="_i88PsFXEEfGYorr8ON6bsg"/>
+          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw _i88PsFXEEfGYorr8ON6bsg"/>
+          <members item="_eO_tUD1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_xaC7AD1xEfGtevHBcNoGlQ" entityName="CheckOut">
+      <functionality id="_zCGd8D1xEfGtevHBcNoGlQ" entityName="CheckOut" requires="_qxmO0EfOEfGZw_-C8A2RPA _s0bjoEhaEfGzrqe1i1LqUQ">
+        <allowsFor id="_mnE5sEfPEfGZw_-C8A2RPA">
+          <members item="_bfWFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_xpjzID1wEfGmFKwwtJJekw"/>
+          <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
+          <members item="_EJ8QAD1vEfGmFKwwtJJekw"/>
+          <members item="_9VWWwD1uEfGmFKwwtJJekw"/>
+          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
+          <members item="_prFWID1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_0OGXAD1xEfGtevHBcNoGlQ" entityName="TripHistory">
+      <functionality id="_5NYfAD1yEfGtevHBcNoGlQ" entityName="TripHistory">
+        <allowsFor id="_DwfsMEhaEfGzrqe1i1LqUQ">
+          <members item="_bfWFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_4qU1QD1yEfGtevHBcNoGlQ" entityName="UserManagement">
+      <functionality id="_8hpFED1yEfGtevHBcNoGlQ" entityName="UserManagement">
+        <allowsFor id="_a7ucsEhaEfGzrqe1i1LqUQ" entityName="register">
+          <members item="_kYyykD1uEfGmFKwwtJJekw" context="_4GFKoD1wEfGmFKwwtJJekw"/>
+          <members item="_oWD5YD1uEfGmFKwwtJJekw" context="_4GFKoD1wEfGmFKwwtJJekw"/>
+          <members item="_2nI84D1vEfGmFKwwtJJekw"/>
+          <members item="_-7pwwD1vEfGmFKwwtJJekw"/>
+          <members item="_bfWFoD1uEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+          <members item="_bfWFoD1uEfGmFKwwtJJekw" context="_7tsKgD1wEfGmFKwwtJJekw"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_7tsKgD1wEfGmFKwwtJJekw"/>
+          <members item="_-7pwwD1vEfGmFKwwtJJekw" context="_7tsKgD1wEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_YieyUFA6EfGTR9ryzHSFWg" entityName="StaffAuthentication">
+      <functionality id="_aXi2gFA6EfGTR9ryzHSFWg" entityName="StaffAuthentication">
+        <allowsFor id="_b9ReMFA6EfGTR9ryzHSFWg">
+          <members item="_KCGWMD1vEfGmFKwwtJJekw"/>
+          <members item="_N5oBYD1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_-afdED1yEfGtevHBcNoGlQ" entityName="Analysis">
+      <functionality id="__6GOoD1yEfGtevHBcNoGlQ" entityName="Analysis">
+        <allowsFor id="_KqpwAEhcEfGzrqe1i1LqUQ">
+          <members item="_yoGUcD1vEfGmFKwwtJJekw"/>
+          <members item="_KCGWMD1vEfGmFKwwtJJekw"/>
+          <members item="_N5oBYD1vEfGmFKwwtJJekw"/>
+          <members item="_eeGsYEhcEfGzrqe1i1LqUQ"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_owiWAEfOEfGZw_-C8A2RPA" entityName="VehicleSign">
+      <functionality id="_qxmO0EfOEfGZw_-C8A2RPA" entityName="VehicleSign">
+        <allowsFor id="_sOnmcEfOEfGZw_-C8A2RPA">
+          <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
+          <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
+          <members item="_EJ8QAD1vEfGmFKwwtJJekw"/>
+          <members item="_9VWWwD1uEfGmFKwwtJJekw"/>
+          <members item="_YgerUD1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_rkCSwEhaEfGzrqe1i1LqUQ" entityName="ResetSTS">
+      <functionality id="_s0bjoEhaEfGzrqe1i1LqUQ" entityName="ResetSTS">
+        <allowsFor id="_uFzE4EhaEfGzrqe1i1LqUQ">
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_ksazAD2LEfGtevHBcNoGlQ"/>
+          <members item="_YlzFoD1uEfGmFKwwtJJekw" context="_xpjzID1wEfGmFKwwtJJekw"/>
+          <members item="_uDbPYD1vEfGmFKwwtJJekw"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+  </functionalityLabelType>
+  <dataItemLabelType id="_U0NDUT1uEfGmFKwwtJJekw" entityName="Customer">
+    <labels id="_W8uPAD1uEfGmFKwwtJJekw" entityName="TripUID">
+      <dataItem id="_YlzFoD1uEfGmFKwwtJJekw" entityName="TripUID"/>
+    </labels>
+    <labels id="_Z-xDsD1uEfGmFKwwtJJekw" entityName="CustomerUID">
+      <dataItem id="_bfWFoD1uEfGmFKwwtJJekw" entityName="CustomerUID"/>
+    </labels>
+    <labels id="_jUQzcD1uEfGmFKwwtJJekw" entityName="Name">
+      <dataItem id="_kYyykD1uEfGmFKwwtJJekw" entityName="Name"/>
+    </labels>
+    <labels id="_m21iUD1uEfGmFKwwtJJekw" entityName="Address">
+      <dataItem id="_oWD5YD1uEfGmFKwwtJJekw" entityName="Address"/>
+    </labels>
+  </dataItemLabelType>
+  <dataItemLabelType id="_151AYj1uEfGmFKwwtJJekw" entityName="Vehicle">
+    <labels id="_3OV8QD1uEfGmFKwwtJJekw" entityName="VehicleUID">
+      <dataItem id="_5Oq1QD1uEfGmFKwwtJJekw" entityName="VehicleUID"/>
+    </labels>
+    <labels id="_74q9YD1uEfGmFKwwtJJekw" entityName="VehiclePublicKey">
+      <dataItem id="_9VWWwD1uEfGmFKwwtJJekw" entityName="VehiclePublicKey"/>
+    </labels>
+    <labels id="_CZ3ZgD1vEfGmFKwwtJJekw" entityName="VehicleSignature">
+      <dataItem id="_EJ8QAD1vEfGmFKwwtJJekw" entityName="VehicleSignature"/>
+    </labels>
+  </dataItemLabelType>
+  <dataItemLabelType id="_GQwykj1vEfGmFKwwtJJekw" entityName="Staff">
+    <labels id="_HvrAkD1vEfGmFKwwtJJekw" entityName="StaffAuthCredentials">
+      <dataItem id="_KCGWMD1vEfGmFKwwtJJekw" entityName="StaffAuthCredentials"/>
+    </labels>
+    <labels id="_Mf51YD1vEfGmFKwwtJJekw" entityName="StaffAuthResult">
+      <dataItem id="_N5oBYD1vEfGmFKwwtJJekw" entityName="StaffAuthResult"/>
+    </labels>
+  </dataItemLabelType>
+  <dataItemLabelType id="_Qj2L8j1vEfGmFKwwtJJekw" entityName="Data">
+    <labels id="_Rw508D1vEfGmFKwwtJJekw" entityName="InspectionResult">
+      <dataItem id="_UtlBcD1vEfGmFKwwtJJekw" entityName="InspectionResult"/>
+    </labels>
+    <labels id="_WkDa4D1vEfGmFKwwtJJekw" entityName="Location">
+      <dataItem id="_YgerUD1vEfGmFKwwtJJekw" entityName="Location"/>
+    </labels>
+    <labels id="_chnlgD1vEfGmFKwwtJJekw" entityName="CheckInReport">
+      <dataItem id="_eO_tUD1vEfGmFKwwtJJekw" entityName="CheckInReport"/>
+    </labels>
+    <labels id="_gaEdwD1vEfGmFKwwtJJekw" entityName="CheckOutReport">
+      <dataItem id="_prFWID1vEfGmFKwwtJJekw" entityName="CheckOutReport"/>
+    </labels>
+    <labels id="_sDW1ED1vEfGmFKwwtJJekw" entityName="ResetReport">
+      <dataItem id="_uDbPYD1vEfGmFKwwtJJekw" entityName="ResetReport"/>
+    </labels>
+    <labels id="_xC54QD1vEfGmFKwwtJJekw" entityName="AnalysisFunction">
+      <dataItem id="_yoGUcD1vEfGmFKwwtJJekw" entityName="AnalysisFunction"/>
+    </labels>
+    <labels id="_1q8aYD1vEfGmFKwwtJJekw" entityName="CAck">
+      <dataItem id="_2nI84D1vEfGmFKwwtJJekw" entityName="CAck"/>
+    </labels>
+    <labels id="_9jSPoD1vEfGmFKwwtJJekw" entityName="Provider">
+      <dataItem id="_-7pwwD1vEfGmFKwwtJJekw" entityName="ProviderUID"/>
+    </labels>
+    <labels id="_IgNrEEeTEfGyLfhotDOSOw" entityName="AnalysisResult">
+      <dataItem id="_eeGsYEhcEfGzrqe1i1LqUQ" entityName="AnalysisResult"/>
+    </labels>
+  </dataItemLabelType>
+  <dataContextLabelType id="_tYC6pD1wEfGmFKwwtJJekw" entityName="DataContext">
+    <labels id="_t5NuAD1wEfGmFKwwtJJekw" entityName="Old">
+      <dataContext id="_xpjzID1wEfGmFKwwtJJekw" entityName="Old"/>
+    </labels>
+    <labels id="_y4C_gD1wEfGmFKwwtJJekw" entityName="TripStartEnd">
+      <dataContext id="_0WpEcD1wEfGmFKwwtJJekw" entityName="TripStartEnd"/>
+    </labels>
+    <labels id="_2Gf4gD1wEfGmFKwwtJJekw" entityName="Registration">
+      <dataContext id="_4GFKoD1wEfGmFKwwtJJekw" entityName="Registration"/>
+    </labels>
+    <labels id="_6QoWoD1wEfGmFKwwtJJekw" entityName="RegistrationReport">
+      <dataContext id="_7tsKgD1wEfGmFKwwtJJekw" entityName="RegistrationReport"/>
+    </labels>
+    <labels id="_jSDt0D2LEfGtevHBcNoGlQ" entityName="New">
+      <dataContext id="_ksazAD2LEfGtevHBcNoGlQ" entityName="New"/>
+    </labels>
+    <labels id="_hBtSEFXEEfGYorr8ON6bsg" entityName="ForCheckIn">
+      <dataContext id="_i88PsFXEEfGYorr8ON6bsg" entityName="ForCheckIn"/>
+    </labels>
+  </dataContextLabelType>
+</privacymodel:PrivacyModel>

@@ -101,7 +101,11 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 				List<Set<Functionality>> currentCombinations = new ArrayList<>(roleToCombinations.get(roleLabel));
 				for (int c = 0; c < currentCombinations.size(); c++) {
 					Set<Functionality> combination = currentCombinations.get(c);
+
+					// For the last user, the original node is adapted. This is to prevent a bug
+					// that occurs when a node is removed and re-added from the DFD's flow diagram
 					boolean lastReplication = r == roles.size() - 1 && c == currentCombinations.size() - 1;
+
 					// Copier is created here to prevent it from rewiring everything (including
 					// those created by previous iterations) every time
 					Copier copier = new Copier();
@@ -163,14 +167,14 @@ public class PrivacyDFDTransposeFlowGraphFinder implements TransposeFlowGraphFin
 							flowsToAdd.add(clonedFlow);
 						}
 					}
-					
-					
-					for(var pin: clonedBehavior.getInPin()) {
+
+					// Set pin names and ID: this is done for the prevention of a bug
+					for (var pin : clonedBehavior.getInPin()) {
 						pin.setEntityName(pin.getEntityName() + "_" + instanceNumber);
 						pin.setId(pin.getId() + "_" + instanceNumber);
 					}
-					
-					for(var pin: clonedBehavior.getOutPin()) {
+
+					for (var pin : clonedBehavior.getOutPin()) {
 						pin.setEntityName(pin.getEntityName() + "_" + instanceNumber);
 						pin.setId(pin.getId() + "_" + instanceNumber);
 					}

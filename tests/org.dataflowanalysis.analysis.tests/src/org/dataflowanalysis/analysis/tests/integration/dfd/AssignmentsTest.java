@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.core.CharacteristicValue;
 import org.dataflowanalysis.analysis.dfd.DFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
@@ -252,8 +251,6 @@ public class AssignmentsTest {
                 .build();
         var tfg = analysis.findFlowGraphs();
         tfg.evaluate();
-        
-        Logger logger = Logger.getLogger("AssignmentsTest");
         
         assertEquals(1, tfg.getTransposeFlowGraphs().size());
         

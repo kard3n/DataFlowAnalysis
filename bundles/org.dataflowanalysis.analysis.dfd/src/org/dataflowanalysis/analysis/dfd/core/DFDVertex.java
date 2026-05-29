@@ -21,6 +21,7 @@ import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
 import org.dataflowanalysis.dfd.datadictionary.AbstractLabelType;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
 import org.dataflowanalysis.dfd.datadictionary.BinaryOperator;
+import org.dataflowanalysis.dfd.datadictionary.ConditionalForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.LabelReference;
 import org.dataflowanalysis.dfd.datadictionary.NOT;
@@ -229,6 +230,17 @@ public class DFDVertex extends AbstractVertex<Node> {
                 outputPinsOutgoingLabelMap.get(abstractAssignment.getOutputPin())
                         .removeAll(assignment.getOutputLabels());
         }
+		else if (abstractAssignment instanceof ConditionalForwardingAssignment conditionalForwardingAssignment
+				&& evaluateTerm(conditionalForwardingAssignment.getTerm(), incomingLabels)) {
+			
+			// Determine labels from the input pins and add them.
+			List<AbstractLabel> labelsToAdd = new ArrayList<>();
+			for (var inputPin : conditionalForwardingAssignment.getInputPins()) {
+				labelsToAdd.addAll(inputPinsIncomingLabelMap.getOrDefault(inputPin, new ArrayList<>()));
+			}
+			outputPinsOutgoingLabelMap.get(conditionalForwardingAssignment.getOutputPin()).addAll(labelsToAdd);
+
+		}
 
     }
 
@@ -277,6 +289,13 @@ public class DFDVertex extends AbstractVertex<Node> {
         } else if (abstractAssignment instanceof ForwardingAssignment forwardingAssignment) {
             for (var inputPin : forwardingAssignment.getInputPins()) {
                 allLabel.addAll(inputPinsIncomingLabelMap.getOrDefault(inputPin, new ArrayList<>()));
+            }
+        } else if (abstractAssignment instanceof ConditionalForwardingAssignment conditionalForwardingAssignment) {
+        	// Only the labels for the term are returned.
+        	// This was done since the Term is always evaluated, and these labels used.
+        	// Only if the Term evaluates to true, the handleOutgoingAssignments function will calculate the labels that should go into the output
+            for (var termInputPin : conditionalForwardingAssignment.getTermInputPins()) {
+            	allLabel.addAll(inputPinsIncomingLabelMap.getOrDefault(termInputPin, new ArrayList<>()));
             }
         }
 

@@ -6,6 +6,7 @@ import org.dataflowanalysis.analysis.core.TransposeFlowGraphFinder;
 import org.dataflowanalysis.analysis.dfd.resource.DFDResourceProvider;
 import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
+import org.dataflowanalysis.dfd.datadictionary.ConditionalForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.Pin;
@@ -130,6 +131,13 @@ public class DFDSimpleTransposeFlowGraphFinder implements TransposeFlowGraphFind
                                 .equals(node.getBehavior()
                                         .getInPin()))
                 || node.getBehavior()
+						.getAssignment().stream().filter(ConditionalForwardingAssignment.class::isInstance)
+						// Both term and normal input pins must be used
+						.anyMatch(it -> (((ConditionalForwardingAssignment) it).getInputPins()
+								.equals(node.getBehavior().getInPin())
+								&& ((ConditionalForwardingAssignment) it).getTermInputPins()
+										.equals(node.getBehavior().getInPin())))
+                || node.getBehavior()
                         .getInPin()
                         .size() == 0
                 || node.getBehavior()
@@ -153,10 +161,14 @@ public class DFDSimpleTransposeFlowGraphFinder implements TransposeFlowGraphFind
                     .getInPin()) {
                 for (AbstractAssignment abstractAssignment : node.getBehavior()
                         .getAssignment()) {
-                    if ((abstractAssignment instanceof ForwardingAssignment forwardingAssignment && forwardingAssignment.getInputPins()
-                            .contains(inputPin)) || (abstractAssignment instanceof Assignment assignment
-                                    && assignment.getInputPins()
-                                            .contains(inputPin))) {
+					if ((abstractAssignment instanceof ForwardingAssignment forwardingAssignment
+							&& forwardingAssignment.getInputPins().contains(inputPin))
+							|| (abstractAssignment instanceof Assignment assignment
+									&& assignment.getInputPins().contains(inputPin))
+							|| (abstractAssignment instanceof ConditionalForwardingAssignment conditionalForwardingAssignment
+									&& (conditionalForwardingAssignment.getInputPins().contains(inputPin)
+											|| conditionalForwardingAssignment.getTermInputPins()
+													.contains(inputPin)))) {
                         endNodes.remove(node);
                         break;
                     }

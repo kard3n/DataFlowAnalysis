@@ -8,7 +8,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" upperBound="-1"
         eType="#//Behavior" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Behavior" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+  <eClassifiers xsi:type="ecore:EClass" name="Behavior" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inPin" upperBound="-1"
         eType="#//Pin" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outPin" upperBound="-1"
@@ -64,12 +64,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputLabels" upperBound="-1"
         eType="#//AbstractLabel"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractLabel" abstract="true" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractLabelType" abstract="true" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PinRelation" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractLabel" abstract="true" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractLabelType" abstract="true" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PinRelation" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputPin" lowerBound="1"
         eType="#//Pin"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputPin" lowerBound="1"
         eType="#//Pin"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalForwardingAssignment" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity #//AbstractAssignment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="termInputPins" upperBound="-1"
+        eType="#//Pin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputPins" upperBound="-1"
+        eType="#//Pin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" lowerBound="1" eType="#//Term"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

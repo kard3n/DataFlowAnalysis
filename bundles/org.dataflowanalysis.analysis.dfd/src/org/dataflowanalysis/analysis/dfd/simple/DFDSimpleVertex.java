@@ -21,6 +21,7 @@ import org.dataflowanalysis.dfd.datadictionary.AbstractLabel;
 import org.dataflowanalysis.dfd.datadictionary.AbstractLabelType;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
 import org.dataflowanalysis.dfd.datadictionary.BinaryOperator;
+import org.dataflowanalysis.dfd.datadictionary.ConditionalForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.LabelReference;
 import org.dataflowanalysis.dfd.datadictionary.NOT;
@@ -113,6 +114,10 @@ public class DFDSimpleVertex extends AbstractVertex<Node> {
                                 if (abstractAssignment instanceof Assignment assignment)
                                     return assignment.getInputPins()
                                             .contains(key);
+                                if(abstractAssignment instanceof ConditionalForwardingAssignment conditionalForwardingAssignment) {
+                                	return conditionalForwardingAssignment.getTermInputPins()
+                                			.contains(key);
+                                }
                                 else
                                     return abstractAssignment instanceof ForwardingAssignment forwardingAssignment
                                             && forwardingAssignment.getInputPins()
@@ -154,6 +159,18 @@ public class DFDSimpleVertex extends AbstractVertex<Node> {
                 outgoingLabelPerPin.get(assignment.getOutputPin())
                         .removeAll(assignment.getOutputLabels());
         }
+        else if (abstractAssignment instanceof ConditionalForwardingAssignment conditionalForwardingAssignment
+				&& evaluateTerm(conditionalForwardingAssignment.getTerm(), incomingLabels)) {
+			// Determine labels from the input pins and add them.
+			outgoingLabelPerPin.get(conditionalForwardingAssignment.getOutputPin())
+					.addAll(incomingDataCharacteristics.stream().filter(it -> {
+						return mapPinToFlow.keySet().stream().filter(key -> {
+							return conditionalForwardingAssignment.getInputPins().contains(key);
+						}).map(key -> mapPinToFlow.get(key).getEntityName()).toList().contains(it.getVariableName());
+					}).flatMap(it -> it.getAllCharacteristics().stream()
+							.map(value -> ((DFDCharacteristicValue) value).getLabel())).collect(Collectors.toSet()));
+
+		}
     }
 
     /**

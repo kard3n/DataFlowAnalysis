@@ -4,15 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
 import org.dataflowanalysis.analysis.core.CharacteristicValue;
 import org.dataflowanalysis.analysis.dfd.DFDDataFlowAnalysisBuilder;
 import org.dataflowanalysis.analysis.dfd.core.DFDVertex;
 import org.dataflowanalysis.analysis.dfd.resource.DFDModelResourceProvider;
 import org.dataflowanalysis.analysis.tests.integration.dfd.util.DFDTestUtil;
+import org.dataflowanalysis.dfd.datadictionary.ConditionalForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.Label;
+import org.dataflowanalysis.dfd.datadictionary.LabelReference;
 import org.dataflowanalysis.dfd.datadictionary.LabelType;
+import org.dataflowanalysis.dfd.datadictionary.Pin;
 import org.dataflowanalysis.dfd.datadictionary.SetAssignment;
 import org.dataflowanalysis.dfd.datadictionary.UnsetAssignment;
 import org.dataflowanalysis.dfd.datadictionary.datadictionaryFactory;
@@ -192,5 +197,80 @@ public class AssignmentsTest {
                 .flatMap(it -> it.getAllCharacteristics()
                         .stream())
                 .collect(Collectors.toList());
+    }
+    
+    @Test
+    public void testTFGBuildingWithConditionalForwardAssignment() {
+        // Test whether Set Assignment starts TFG of 2 Nodes
+        Node source = DFDTestUtil.createNode("Source", dataFlowDiagram, dataDictionary);
+        Node middle = DFDTestUtil.createNode("Middle", dataFlowDiagram, dataDictionary);
+        Node sink = DFDTestUtil.createNode("Sink", dataFlowDiagram, dataDictionary);
+        
+        LabelType type = datadictionaryFactory.eINSTANCE.createLabelType();
+        type.setEntityName("type");
+        Label forwardingLabel = datadictionaryFactory.eINSTANCE.createLabel();
+        forwardingLabel.setEntityName("forwarding");
+        type.getLabel()
+                .add(forwardingLabel);
+        Label conditionLabel = datadictionaryFactory.eINSTANCE.createLabel();
+        conditionLabel.setEntityName("condition");
+        type.getLabel()
+                .add(conditionLabel);
+        dataDictionary.getLabelTypes()
+                .add(type);
+
+        
+        Pin sourceOut = datadictionaryFactory.eINSTANCE.createPin();
+        Pin middleIn = datadictionaryFactory.eINSTANCE.createPin();
+        Pin middleOut = datadictionaryFactory.eINSTANCE.createPin();
+        Pin sinkIn = datadictionaryFactory.eINSTANCE.createPin();
+        
+        source.getBehavior().getOutPin().add(sourceOut);
+        middle.getBehavior().getInPin().add(middleIn);
+        middle.getBehavior().getOutPin().add(middleOut);
+        sink.getBehavior().getInPin().add(sinkIn);
+        
+        
+        DFDTestUtil.createFlow(source, middle, sourceOut, middleIn, "source_middle");
+        DFDTestUtil.createFlow(middle, sink, middleOut, sinkIn, "middle_sink");
+        
+        DFDTestUtil.createAndAddAssignment(source, null, null, List.of(forwardingLabel), null, SetAssignment.class);
+        
+        // The middle has a ConditionalForwardingAssignment that only forwards if the "condition" label was received
+        ConditionalForwardingAssignment middleCForward = datadictionaryFactory.eINSTANCE.createConditionalForwardingAssignment();
+        middleCForward.setEntityName("middleForward");
+        middleCForward.getTermInputPins().add(middleIn);
+        middleCForward.getInputPins().add(middleIn);
+        middleCForward.setOutputPin(middleOut);
+        LabelReference middleRequireConditionLabel = datadictionaryFactory.eINSTANCE.createLabelReference();
+        middleRequireConditionLabel.setLabel(conditionLabel);
+        middleCForward.setTerm(middleRequireConditionLabel);
+        middle.getBehavior().getAssignment().add(middleCForward);
+        
+        var analysis = new DFDDataFlowAnalysisBuilder().standalone()
+                .useCustomResourceProvider(new DFDModelResourceProvider(dataDictionary, dataFlowDiagram))
+                .build();
+        var tfg = analysis.findFlowGraphs();
+        tfg.evaluate();
+        
+        Logger logger = Logger.getLogger("AssignmentsTest");
+        
+        assertEquals(1, tfg.getTransposeFlowGraphs().size());
+        
+        // Test that the forwarding label did not reach the sink node (condition label was not sent)
+        assertEquals(0, tfg.getTransposeFlowGraphs().get(0).getSink().getAllIncomingDataCharacteristics().stream().filter(i -> i.getAllCharacteristics().stream().anyMatch(c -> c.getValueName().equals("forwarding"))).count());
+        
+
+        // Condition label is sent
+       ((SetAssignment) source.getBehavior().getAssignment().get(0)).getOutputLabels().add(conditionLabel);
+
+        analysis = new DFDDataFlowAnalysisBuilder().standalone()
+                .useCustomResourceProvider(new DFDModelResourceProvider(dataDictionary, dataFlowDiagram))
+                .build();
+        tfg = analysis.findFlowGraphs();
+        tfg.evaluate();
+        
+        // Test that the forwarding label did not reach the sink node
+        assertEquals(1, tfg.getTransposeFlowGraphs().get(0).getSink().getAllIncomingDataCharacteristics().stream().filter(i -> i.getAllCharacteristics().stream().anyMatch(c -> c.getValueName().equals("forwarding"))).count());
     }
 }

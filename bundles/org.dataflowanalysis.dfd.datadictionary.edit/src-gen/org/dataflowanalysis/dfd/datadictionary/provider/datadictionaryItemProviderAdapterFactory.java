@@ -410,6 +410,29 @@ public class datadictionaryItemProviderAdapterFactory extends datadictionaryAdap
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.dataflowanalysis.dfd.datadictionary.ConditionalForwardingAssignment} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConditionalForwardingAssignmentItemProvider conditionalForwardingAssignmentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dataflowanalysis.dfd.datadictionary.ConditionalForwardingAssignment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createConditionalForwardingAssignmentAdapter() {
+		if (conditionalForwardingAssignmentItemProvider == null) {
+			conditionalForwardingAssignmentItemProvider = new ConditionalForwardingAssignmentItemProvider(this);
+		}
+
+		return conditionalForwardingAssignmentItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -555,6 +578,8 @@ public class datadictionaryItemProviderAdapterFactory extends datadictionaryAdap
 			unsetAssignmentItemProvider.dispose();
 		if (pinRelationItemProvider != null)
 			pinRelationItemProvider.dispose();
+		if (conditionalForwardingAssignmentItemProvider != null)
+			conditionalForwardingAssignmentItemProvider.dispose();
 	}
 
 }

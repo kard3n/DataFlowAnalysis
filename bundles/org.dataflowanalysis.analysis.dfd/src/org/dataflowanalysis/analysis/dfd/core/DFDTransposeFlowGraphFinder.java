@@ -9,6 +9,7 @@ import org.dataflowanalysis.analysis.utils.LoggerManager;
 import org.dataflowanalysis.dfd.datadictionary.AbstractAssignment;
 import org.dataflowanalysis.dfd.datadictionary.Assignment;
 import org.dataflowanalysis.dfd.datadictionary.Behavior;
+import org.dataflowanalysis.dfd.datadictionary.ConditionalForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.DataDictionary;
 import org.dataflowanalysis.dfd.datadictionary.ForwardingAssignment;
 import org.dataflowanalysis.dfd.datadictionary.Pin;
@@ -128,6 +129,17 @@ public class DFDTransposeFlowGraphFinder implements TransposeFlowGraphFinder {
                                 .filter(ForwardingAssignment.class::isInstance)
                                 .forEach(it -> inToPreviousNodeInPinsMap.get(pin)
                                         .addAll(((ForwardingAssignment) it).getInputPins()));
+                        
+						behaviour.getAssignment().stream().filter(it -> it.getOutputPin().equals(outPin))
+								.filter(ConditionalForwardingAssignment.class::isInstance).forEach(it -> {
+									inToPreviousNodeInPinsMap.get(pin)
+											.addAll(((ConditionalForwardingAssignment) it).getInputPins());
+
+									inToPreviousNodeInPinsMap.get(pin)
+											.addAll(((ConditionalForwardingAssignment) it).getTermInputPins());
+
+								});
+                        
                         behaviour.getAssignment()
                                 .stream()
                                 .filter(it -> it.getOutputPin()
@@ -279,8 +291,13 @@ public class DFDTransposeFlowGraphFinder implements TransposeFlowGraphFinder {
                 .getAssignment()) {
             if (abstractAssignment.getOutputPin()
                     .equals(flow.getSourcePin())) {
-                if ((abstractAssignment instanceof ForwardingAssignment forwardingAssignment))
-                    previousNodeInputPins.addAll(forwardingAssignment.getInputPins());
+                if ((abstractAssignment instanceof ForwardingAssignment forwardingAssignment)) {
+                	previousNodeInputPins.addAll(forwardingAssignment.getInputPins());
+                }
+                else if (abstractAssignment instanceof ConditionalForwardingAssignment conditionalForwardingAssignment) {
+                    previousNodeInputPins.addAll(conditionalForwardingAssignment.getInputPins());
+                    previousNodeInputPins.addAll(conditionalForwardingAssignment.getTermInputPins());
+                }
                 else if (abstractAssignment instanceof Assignment assignment) {
                     previousNodeInputPins.addAll(assignment.getInputPins());
                 }
@@ -357,18 +374,19 @@ public class DFDTransposeFlowGraphFinder implements TransposeFlowGraphFinder {
      * @param node Node
      * @return
      */
-    private boolean isInputPinUsed(Pin pin, Node node) {
-        for (AbstractAssignment abstractAssignment : node.getBehavior()
-                .getAssignment()) {
-            if ((abstractAssignment instanceof ForwardingAssignment forwardingAssignment && forwardingAssignment.getInputPins()
-                    .contains(pin)) || (abstractAssignment instanceof Assignment assignment
-                            && assignment.getInputPins()
-                                    .contains(pin))) {
-                return false;
-            }
-        }
-        return true;
-    }
+	private boolean isInputPinUsed(Pin pin, Node node) {
+		for (AbstractAssignment abstractAssignment : node.getBehavior().getAssignment()) {
+			if ((abstractAssignment instanceof ForwardingAssignment forwardingAssignment
+					&& forwardingAssignment.getInputPins().contains(pin))
+					|| (abstractAssignment instanceof Assignment assignment && assignment.getInputPins().contains(pin))
+					|| (abstractAssignment instanceof ConditionalForwardingAssignment conditionalForwardingAssignment
+							&& (conditionalForwardingAssignment.getInputPins().contains(pin)
+									|| conditionalForwardingAssignment.getTermInputPins().contains(pin)))) {
+				return false;
+			}
+		}
+		return true;
+	}
 
     public boolean hasCycles() {
         return hasCycles;

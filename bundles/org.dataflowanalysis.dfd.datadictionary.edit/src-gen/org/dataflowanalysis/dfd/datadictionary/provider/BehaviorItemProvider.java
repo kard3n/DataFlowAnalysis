@@ -154,6 +154,9 @@ public class BehaviorItemProvider extends EntityItemProvider {
 		newChildDescriptors.add(createChildParameter(datadictionaryPackage.Literals.BEHAVIOR__ASSIGNMENT,
 				datadictionaryFactory.eINSTANCE.createUnsetAssignment()));
 
+		newChildDescriptors.add(createChildParameter(datadictionaryPackage.Literals.BEHAVIOR__ASSIGNMENT,
+				datadictionaryFactory.eINSTANCE.createConditionalForwardingAssignment()));
+
 		newChildDescriptors.add(createChildParameter(datadictionaryPackage.Literals.BEHAVIOR__PIN_RELATIONS,
 				datadictionaryFactory.eINSTANCE.createPinRelation()));
 	}

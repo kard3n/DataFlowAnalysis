@@ -68,5 +68,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//PinRelation/inputPin"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//PinRelation/outputPin"/>
     </genClasses>
+    <genClasses ecoreClass="datadictionary.ecore#//ConditionalForwardingAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//ConditionalForwardingAssignment/termInputPins"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datadictionary.ecore#//ConditionalForwardingAssignment/inputPins"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datadictionary.ecore#//ConditionalForwardingAssignment/term"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

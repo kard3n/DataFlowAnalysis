@@ -162,7 +162,7 @@ public class ConditionalForwardingAssignmentItemProvider extends EntityItemProvi
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ConditionalForwardingAssignment) object).getId();
+		String label = ((ConditionalForwardingAssignment) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_ConditionalForwardingAssignment_type")
 				: getString("_UI_ConditionalForwardingAssignment_type") + " " + label;
 	}

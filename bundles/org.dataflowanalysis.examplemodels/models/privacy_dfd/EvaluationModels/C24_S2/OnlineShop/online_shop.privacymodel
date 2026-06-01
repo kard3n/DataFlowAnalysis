@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<privacymodel:PrivacyModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_ZvN3sCxKEfGY9NwNwqb70Q">
+  <roleLabelType id="_rOGwEC5xEfGTosUH5llL5A" entityName="Roles">
+    <labels id="_s3-Q4C5xEfGTosUH5llL5A" entityName="Customer">
+      <role id="_uJjNgC5xEfGTosUH5llL5A" entityName="Customer" alwaysAllows="_y2xjQCxQEfGY9NwNwqb70Q _VI7-MCxMEfGY9NwNwqb70Q" optionallyAllows="_gCwOICxREfGY9NwNwqb70Q"/>
+    </labels>
+  </roleLabelType>
+  <functionalityLabelType id="_Qx2CISxMEfGY9NwNwqb70Q" entityName="ConsentOptions">
+    <labels id="_S-5IgCxMEfGY9NwNwqb70Q" entityName="UserManagement">
+      <functionality id="_VI7-MCxMEfGY9NwNwqb70Q" entityName="UserManagement">
+        <allowsFor id="_We4dcCxMEfGY9NwNwqb70Q">
+          <members item="_YrcwwCxOEfGY9NwNwqb70Q"/>
+          <members item="_a4NjQCxOEfGY9NwNwqb70Q"/>
+          <members item="_doDNoCxOEfGY9NwNwqb70Q"/>
+          <members state="_cX4w0CxPEfGY9NwNwqb70Q" item="_hFasYCxOEfGY9NwNwqb70Q"/>
+          <members item="_k50LECxOEfGY9NwNwqb70Q"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_w9DokCxQEfGY9NwNwqb70Q" entityName="BasicRecommendations">
+      <functionality id="_y2xjQCxQEfGY9NwNwqb70Q" entityName="BasicRecommendations">
+        <allowsFor id="_2NGl4CxQEfGY9NwNwqb70Q">
+          <members state="_1wCI4FnCEfG3iNJ9L3ZEhA" item="_a4NjQCxOEfGY9NwNwqb70Q"/>
+          <members state="_4VkAsFnCEfG3iNJ9L3ZEhA" item="_a4NjQCxOEfGY9NwNwqb70Q"/>
+          <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_J5PoECxLEfGY9NwNwqb70Q"/>
+          <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_ckQ8wCxLEfGY9NwNwqb70Q"/>
+          <members item="_-Oq6gCxOEfGY9NwNwqb70Q" context="_ckQ8wCxLEfGY9NwNwqb70Q"/>
+          <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_gToKcCxLEfGY9NwNwqb70Q"/>
+        </allowsFor>
+        <allowsFor id="_OqjMMCxREfGY9NwNwqb70Q">
+          <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_U_4lUCxLEfGY9NwNwqb70Q"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_dW8IISxREfGY9NwNwqb70Q" entityName="PersonalizedRecommendations">
+      <functionality id="_gCwOICxREfGY9NwNwqb70Q" entityName="PersonalizedRecommendations">
+        <allowsFor id="_iYpHcCxREfGY9NwNwqb70Q">
+          <members item="_a4NjQCxOEfGY9NwNwqb70Q"/>
+          <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_J5PoECxLEfGY9NwNwqb70Q"/>
+          <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_PGjacCxLEfGY9NwNwqb70Q"/>
+          <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_gToKcCxLEfGY9NwNwqb70Q"/>
+          <members item="_-Oq6gCxOEfGY9NwNwqb70Q" context="_ckQ8wCxLEfGY9NwNwqb70Q"/>
+          <members item="_-Oq6gCxOEfGY9NwNwqb70Q" context="_YGz6ACxLEfGY9NwNwqb70Q"/>
+          <members item="_tOjocCxOEfGY9NwNwqb70Q" context="_U_4lUCxLEfGY9NwNwqb70Q"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+  </functionalityLabelType>
+  <dataItemLabelType id="_is2PIixMEfGY9NwNwqb70Q" entityName="AccountData">
+    <labels id="_kiNOQCxMEfGY9NwNwqb70Q" entityName="Name">
+      <dataItem id="_YrcwwCxOEfGY9NwNwqb70Q" entityName="Name"/>
+    </labels>
+    <labels id="_aDC10CxOEfGY9NwNwqb70Q" entityName="ID">
+      <dataItem id="_a4NjQCxOEfGY9NwNwqb70Q" entityName="ID"/>
+    </labels>
+    <labels id="_cXgLwCxOEfGY9NwNwqb70Q" entityName="Email">
+      <dataItem id="_doDNoCxOEfGY9NwNwqb70Q" entityName="Email"/>
+    </labels>
+    <labels id="_fKFBESxOEfGY9NwNwqb70Q" entityName="Password">
+      <dataItem id="_hFasYCxOEfGY9NwNwqb70Q" entityName="Password"/>
+    </labels>
+    <labels id="_jgqm0CxOEfGY9NwNwqb70Q" entityName="AuthToken">
+      <dataItem id="_k50LECxOEfGY9NwNwqb70Q" entityName="AuthToken"/>
+    </labels>
+  </dataItemLabelType>
+  <dataItemLabelType id="_mtUwEixOEfGY9NwNwqb70Q" entityName="Product">
+    <labels id="_qZZZMCxOEfGY9NwNwqb70Q" entityName="Product">
+      <dataItem id="_tOjocCxOEfGY9NwNwqb70Q" entityName="Product"/>
+    </labels>
+  </dataItemLabelType>
+  <dataItemLabelType id="_52Qv0yxOEfGY9NwNwqb70Q" entityName="Search">
+    <labels id="_73KQlixOEfGY9NwNwqb70Q" entityName="SearchTerm">
+      <dataItem id="_-Oq6gCxOEfGY9NwNwqb70Q" entityName="SearchTerm"/>
+    </labels>
+  </dataItemLabelType>
+  <dataStateLabelType id="_ZLE2kyxPEfGY9NwNwqb70Q" entityName="DataStates">
+    <labels id="_a9P-0CxPEfGY9NwNwqb70Q" entityName="HashSalted">
+      <dataState id="_cX4w0CxPEfGY9NwNwqb70Q" entityName="HashSalted"/>
+    </labels>
+    <labels id="_w8Q34FnCEfG3iNJ9L3ZEhA" entityName="Encrypted">
+      <dataState id="_1wCI4FnCEfG3iNJ9L3ZEhA" entityName="Encrypted" notRelatableWith="_cX4w0CxPEfGY9NwNwqb70Q _4VkAsFnCEfG3iNJ9L3ZEhA"/>
+    </labels>
+    <labels id="_3LcW8FnCEfG3iNJ9L3ZEhA" entityName="Serialized">
+      <dataState id="_4VkAsFnCEfG3iNJ9L3ZEhA" entityName="Serialized"/>
+    </labels>
+  </dataStateLabelType>
+  <dataContextLabelType id="_BcBkJCxLEfGY9NwNwqb70Q" entityName="DataContext">
+    <labels id="_GFK5gCxLEfGY9NwNwqb70Q" entityName="Purchased">
+      <dataContext id="_J5PoECxLEfGY9NwNwqb70Q" entityName="Purchased"/>
+    </labels>
+    <labels id="_NFwnYCxLEfGY9NwNwqb70Q" entityName="Viewed">
+      <dataContext id="_PGjacCxLEfGY9NwNwqb70Q" entityName="Viewed"/>
+    </labels>
+    <labels id="_Tv9OgCxLEfGY9NwNwqb70Q" entityName="Recommended">
+      <dataContext id="_U_4lUCxLEfGY9NwNwqb70Q" entityName="Recommended"/>
+    </labels>
+    <labels id="_XBkwQCxLEfGY9NwNwqb70Q" entityName="Previous">
+      <dataContext id="_YGz6ACxLEfGY9NwNwqb70Q" entityName="Previous"/>
+    </labels>
+    <labels id="_a31QICxLEfGY9NwNwqb70Q" entityName="Current">
+      <dataContext id="_ckQ8wCxLEfGY9NwNwqb70Q" entityName="Current"/>
+    </labels>
+    <labels id="_ez4O8CxLEfGY9NwNwqb70Q" entityName="SearchResult">
+      <dataContext id="_gToKcCxLEfGY9NwNwqb70Q" entityName="SearchResult"/>
+    </labels>
+    <labels id="_c_LjgFp0EfGPG7CPSGGFQA" entityName="LegalEntity">
+      <dataContext id="_ezZ6MFp0EfGPG7CPSGGFQA" entityName="LegalEntity"/>
+    </labels>
+    <labels id="_gO7dAFp0EfGPG7CPSGGFQA" entityName="Human">
+      <dataContext id="_iC3f0Fp0EfGPG7CPSGGFQA" entityName="Human"/>
+    </labels>
+  </dataContextLabelType>
+</privacymodel:PrivacyModel>

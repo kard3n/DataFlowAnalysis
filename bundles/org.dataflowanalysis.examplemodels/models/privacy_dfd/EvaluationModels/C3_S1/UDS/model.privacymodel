@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<privacymodel:PrivacyModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_Oh5lwE3rEfGAqc68XEY7zA">
+  <roleLabelType id="_qORmME3rEfGAqc68XEY7zA" entityName="RoleLabelType">
+    <labels id="_sVPSsE3rEfGAqc68XEY7zA" entityName="UserRoleLabel">
+      <role id="_uOXXgE3rEfGAqc68XEY7zA" entityName="User" alwaysAllows="_PJulUE3sEfGAqc68XEY7zA _LFWw8E3sEfGAqc68XEY7zA"/>
+    </labels>
+  </roleLabelType>
+  <functionalityLabelType id="_GIzXYU3sEfGAqc68XEY7zA" entityName="FunctionalityLabelType">
+    <labels id="_JjdgYE3sEfGAqc68XEY7zA" entityName="Registration">
+      <functionality id="_LFWw8E3sEfGAqc68XEY7zA" entityName="Registration">
+        <allowsFor id="_T19q8E3sEfGAqc68XEY7zA">
+          <members item="_BTi4oE3sEfGAqc68XEY7zA"/>
+          <members item="_DSlYME3sEfGAqc68XEY7zA"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+    <labels id="_NqzwQE3sEfGAqc68XEY7zA" entityName="GetUserInfo">
+      <functionality id="_PJulUE3sEfGAqc68XEY7zA" entityName="GetUserInfo">
+        <allowsFor id="_QUFfoE3sEfGAqc68XEY7zA">
+          <members item="_BTi4oE3sEfGAqc68XEY7zA"/>
+          <members item="_DSlYME3sEfGAqc68XEY7zA"/>
+        </allowsFor>
+        <allowsFor id="_hGlcwFp_EfGPG7CPSGGFQA">
+          <members item="_BTi4oE3sEfGAqc68XEY7zA"/>
+          <members item="_k3AaYFp_EfGPG7CPSGGFQA"/>
+        </allowsFor>
+      </functionality>
+    </labels>
+  </functionalityLabelType>
+  <dataItemLabelType id="_4RwIAk3rEfGAqc68XEY7zA" entityName="UserData">
+    <labels id="_9jcEEE3rEfGAqc68XEY7zA" entityName="ID">
+      <dataItem id="_BTi4oE3sEfGAqc68XEY7zA" entityName="ID"/>
+    </labels>
+    <labels id="_CaPa8E3sEfGAqc68XEY7zA" entityName="Name">
+      <dataItem id="_DSlYME3sEfGAqc68XEY7zA" entityName="Name"/>
+    </labels>
+    <labels id="_jxC34Fp_EfGPG7CPSGGFQA" entityName="DeviceNumber">
+      <dataItem id="_k3AaYFp_EfGPG7CPSGGFQA" entityName="DeviceNumber"/>
+    </labels>
+  </dataItemLabelType>
+</privacymodel:PrivacyModel>

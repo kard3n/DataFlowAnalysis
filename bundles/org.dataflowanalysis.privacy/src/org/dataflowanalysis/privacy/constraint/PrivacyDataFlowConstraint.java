@@ -800,6 +800,10 @@ public class PrivacyDataFlowConstraint {
 									baseNewCombination.get(item.getKey()).context.addAll(item.getValue().context);
 									stateWasReduced = true;
 								}
+								else if(baseNewCombination.get(item.getKey()).state.isEmpty()) {
+									baseNewCombination.get(item.getKey()).context.addAll(item.getValue().context);
+								}
+								
 							}
 						}
 					}

@@ -268,7 +268,7 @@ public class PrivacyDataFlowConstrainTest {
 	}
 
 	@Test
-	public void testAllFunctionalitiesPrivacyedTo() {
+	public void testAllFunctionalitiesConsentedTo() {
 		// Scenario one: all privacy options met
 		Set<Set<CharacteristicValue>> pinIncoming = Set.of(
 				Set.of(new DFDCharacteristicValue(privacyLabelType, privacyLabelOne),
@@ -601,13 +601,18 @@ public class PrivacyDataFlowConstrainTest {
 		Map<DataItem, ItemInformation> mapTwo = new HashMap<>(
 				Map.of(this.dataItemTwo, new ItemInformation(new HashSet<>(), new HashSet<>()), this.dataItemThree,
 						new ItemInformation(new HashSet<>(), new HashSet<>())));
+		
+		// Add context. ItemTwo of the first map has context one, ItemTwo of the second
+		// map has context two. This should be tracked by the application.
+		mapOne.get(dataItemTwo).context().add(Set.of(this.dataContextOne));
+		mapTwo.get(dataItemTwo).context().add(Set.of(this.dataContextTwo));
 
 		logger.debug("Result: "
 				+ PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo)))
 						.get(0).keySet().stream().map(item -> item.getEntityName()).toList());
 		// Scenario one: no state
 		assertEquals(List.of(Map.of(this.dataItemOne, new ItemInformation(Set.of(), Set.of()), this.dataItemTwo,
-				new ItemInformation(Set.of(), Set.of()), this.dataItemThree, new ItemInformation(Set.of(), Set.of()))),
+				new ItemInformation(Set.of(), Set.of(Set.of(this.dataContextOne), Set.of(this.dataContextTwo))), this.dataItemThree, new ItemInformation(Set.of(), Set.of()))),
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
 
 		// Scenario two: state, but no incompatibilities
@@ -615,11 +620,12 @@ public class PrivacyDataFlowConstrainTest {
 		mapOne.get(this.dataItemTwo).state().add(this.dataStateTwo);
 		mapTwo.get(this.dataItemTwo).state().add(this.dataStateOne);
 		mapTwo.get(this.dataItemTwo).state().add(this.dataStateThree);
-
+		
 		assertEquals(
 				List.of(Map.of(this.dataItemOne, new ItemInformation(Set.of(), Set.of()), this.dataItemTwo,
-						new ItemInformation(Set.of(this.dataStateOne), Set.of()), this.dataItemThree,
-						new ItemInformation(Set.of(), Set.of()))),
+						new ItemInformation(Set.of(this.dataStateOne),
+								Set.of(Set.of(this.dataContextOne), Set.of(this.dataContextTwo))),
+						this.dataItemThree, new ItemInformation(Set.of(), Set.of()))),
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));
 
 		// Scenario three: non-relatability resulting in the initial two sets, as the
@@ -637,10 +643,10 @@ public class PrivacyDataFlowConstrainTest {
 		mapTwo.put(dataItemFour, new ItemInformation(new HashSet<>(), new HashSet<>()));
 
 		assertEquals(List.of(Map.of(this.dataItemOne, new ItemInformation(Set.of(), Set.of()), this.dataItemTwo,
-				new ItemInformation(Set.of(this.dataStateOne, this.dataStateTwo), Set.of()), this.dataItemThree,
+				new ItemInformation(Set.of(this.dataStateOne, this.dataStateTwo), Set.of(Set.of(this.dataContextOne))), this.dataItemThree,
 				new ItemInformation(Set.of(), Set.of()), this.dataItemFour, new ItemInformation(Set.of(), Set.of())),
 				Map.of(this.dataItemOne, new ItemInformation(Set.of(), Set.of()), this.dataItemTwo,
-						new ItemInformation(Set.of(this.dataStateOne, this.dataStateThree), Set.of()),
+						new ItemInformation(Set.of(this.dataStateOne, this.dataStateThree), Set.of(Set.of(this.dataContextTwo))),
 						this.dataItemThree, new ItemInformation(Set.of(), Set.of()), this.dataItemFour,
 						new ItemInformation(Set.of(), Set.of()))),
 				PrivacyDataFlowConstraint.uniteItemTuples(List.of(new HashMap<>(mapOne), new HashMap<>(mapTwo))));

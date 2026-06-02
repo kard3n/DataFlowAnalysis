@@ -48,10 +48,6 @@
     <destinationPin href="online_shop.datadictionary#_z6B4ICzhEfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#_dLaKISzsEfGNV_Cy3dkeSg"/>
   </flows>
-  <flows id="_MeGX0C53EfGTosUH5llL5A" entityName="PersonalizedRecommendations_ProductSearch_RR_Personalized" sourceNode="_qQrCAy5yEfGTosUH5llL5A" destinationNode="_Qh6k0y5yEfGTosUH5llL5A">
-    <destinationPin href="online_shop.datadictionary#_z6B4ICzhEfGNV_Cy3dkeSg"/>
-    <sourcePin href="online_shop.datadictionary#_D2v9ESzuEfGNV_Cy3dkeSg"/>
-  </flows>
   <flows id="_Twj40C53EfGTosUH5llL5A" entityName="ProductSearch_PurchaseDB_IFPF" sourceNode="_Qh6k0y5yEfGTosUH5llL5A" destinationNode="_WrhAUi5yEfGTosUH5llL5A">
     <destinationPin href="online_shop.datadictionary#_XqjRACzpEfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#__WIIASzhEfGNV_Cy3dkeSg"/>
@@ -64,8 +60,8 @@
     <destinationPin href="online_shop.datadictionary#_DTg_ECzsEfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#_JA150SziEfGNV_Cy3dkeSg"/>
   </flows>
-  <flows id="_XKAEYC54EfGTosUH5llL5A" entityName="ProductSearch_BasicRecommendations_D_ProductPurchased" sourceNode="_Qh6k0y5yEfGTosUH5llL5A" destinationNode="_Qh6k0y5yEfGTosUH5llL5A">
-    <destinationPin href="online_shop.datadictionary#_feB4kSziEfGNV_Cy3dkeSg"/>
+  <flows id="_XKAEYC54EfGTosUH5llL5A" entityName="ProductSearch_BasicRecommendations_D_ProductPurchased" sourceNode="_Qh6k0y5yEfGTosUH5llL5A" destinationNode="_j4Sjoy5yEfGTosUH5llL5A">
+    <destinationPin href="online_shop.datadictionary#_DTg_ECzsEfGNV_Cy3dkeSg"/>
     <sourcePin href="online_shop.datadictionary#_feB4kSziEfGNV_Cy3dkeSg"/>
   </flows>
   <flows id="_n84ywC54EfGTosUH5llL5A" entityName="ProductSearch_BasicRecommendations_D_ProductSearched" sourceNode="_Qh6k0y5yEfGTosUH5llL5A" destinationNode="_j4Sjoy5yEfGTosUH5llL5A">

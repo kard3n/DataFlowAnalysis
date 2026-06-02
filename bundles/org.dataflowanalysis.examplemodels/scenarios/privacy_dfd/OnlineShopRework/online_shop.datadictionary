@@ -103,17 +103,17 @@
       </term>
     </assignment>
     <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_Xdt3S12vEfG1haTt0qXNkQ" entityName="ProductSearch_Out_ForRecommendations_Personalized" outputPin="_lM-YYSziEfGNV_Cy3dkeSg" termInputPins="_l5ShQCzhEfGNV_Cy3dkeSg" inputPins="_l5ShQCzhEfGNV_Cy3dkeSg">
-      <term xsi:type="datadictionary:LabelReference" id="_dOKL5F2vEfG1haTt0qXNkQ">
+      <term xsi:type="datadictionary:LabelReference" id="__ndoRF24EfG1haTt0qXNkQ">
         <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
       </term>
     </assignment>
-    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_hivmi12vEfG1haTt0qXNkQ" entityName="ProductSearch_Out_ForRecommendations_Personalized_ProductsPurchased" outputPin="_qcfKMSziEfGNV_Cy3dkeSg" termInputPins="_l5ShQCzhEfGNV_Cy3dkeSg" inputPins="_oYw0YCzhEfGNV_Cy3dkeSg">
-      <term xsi:type="datadictionary:LabelReference" id="_nO20xF2vEfG1haTt0qXNkQ">
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_hivmi12vEfG1haTt0qXNkQ" entityName="ProductSearch_Out_ForRecommendations_Personalized_ProductsPurchased" outputPin="_qcfKMSziEfGNV_Cy3dkeSg" termInputPins="_oYw0YCzhEfGNV_Cy3dkeSg" inputPins="_oYw0YCzhEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_RTOfZF25EfG1haTt0qXNkQ">
         <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
       </term>
     </assignment>
-    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_qwpgi12vEfG1haTt0qXNkQ" entityName="ProductSearch_Out_ForRecommendations_Personalized_ProductsSearched" outputPin="_tqrkgSziEfGNV_Cy3dkeSg" termInputPins="_l5ShQCzhEfGNV_Cy3dkeSg" inputPins="_vTFiMCzhEfGNV_Cy3dkeSg">
-      <term xsi:type="datadictionary:LabelReference" id="_yKDXBF2vEfG1haTt0qXNkQ">
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_qwpgi12vEfG1haTt0qXNkQ" entityName="ProductSearch_Out_ForRecommendations_Personalized_ProductsSearched" outputPin="_tqrkgSziEfGNV_Cy3dkeSg" termInputPins="_vTFiMCzhEfGNV_Cy3dkeSg" inputPins="_vTFiMCzhEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_TEclZF25EfG1haTt0qXNkQ">
         <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
       </term>
     </assignment>
@@ -148,14 +148,14 @@
   <behavior id="_-3HsQSzrEfGNV_Cy3dkeSg" entityName="BasicRecommendations">
     <inPin id="_DTg_ECzsEfGNV_Cy3dkeSg" entityName="BasicRecommendations_In_Data"/>
     <outPin id="_dLaKISzsEfGNV_Cy3dkeSg" entityName="BasicRecommendations_Out_Result"/>
-    <assignment xsi:type="datadictionary:Assignment" id="_yXpQsi6UEfGYst92ovUroA" entityName="BasicRecommendations_Out_Result" outputPin="_dLaKISzsEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg">
+    <assignment xsi:type="datadictionary:Assignment" id="_yXpQsi6UEfGYst92ovUroA" entityName="BasicRecommendations_Out_Result" outputPin="_dLaKISzsEfGNV_Cy3dkeSg" inputPins="_DTg_ECzsEfGNV_Cy3dkeSg">
       <term xsi:type="datadictionary:LabelReference" id="_-HmwFE1GEfG7QOPB_Wci6g">
         <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_w9DokCxQEfGY9NwNwqb70Q"/>
       </term>
       <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_Tv9OgCxLEfGY9NwNwqb70Q"/>
       <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
     </assignment>
-    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_QA-je12wEfG1haTt0qXNkQ" entityName="BasicRecommendations_Out_Result" outputPin="_dLaKISzsEfGNV_Cy3dkeSg" termInputPins="_Rk7ZwCztEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg">
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_QA-je12wEfG1haTt0qXNkQ" entityName="BasicRecommendations_Out_Result" outputPin="_dLaKISzsEfGNV_Cy3dkeSg" termInputPins="_DTg_ECzsEfGNV_Cy3dkeSg" inputPins="_DTg_ECzsEfGNV_Cy3dkeSg">
       <term xsi:type="datadictionary:LabelReference" id="_cpcf1F2wEfG1haTt0qXNkQ">
         <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_w9DokCxQEfGY9NwNwqb70Q"/>
       </term>
@@ -190,14 +190,18 @@
       <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
       <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_73KQlixOEfGY9NwNwqb70Q"/>
     </assignment>
-    <assignment xsi:type="datadictionary:Assignment" id="_-Rjv4i6SEfGYst92ovUroA" entityName="PersonalizedRecommendations_Out_Result" outputPin="_D2v9ESzuEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg _7C_BYCztEfGNV_Cy3dkeSg">
+    <assignment xsi:type="datadictionary:Assignment" id="_-Rjv4i6SEfGYst92ovUroA" entityName="PersonalizedRecommendations_Out_Result" outputPin="_D2v9ESzuEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg">
       <term xsi:type="datadictionary:LabelReference" id="_BZRHtC6TEfGYst92ovUroA">
         <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
       </term>
       <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_Tv9OgCxLEfGY9NwNwqb70Q"/>
       <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
     </assignment>
-    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_0Bm5GF2wEfG1haTt0qXNkQ" entityName="PersonalizedRecommendations_Out_Result" outputPin="_D2v9ESzuEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg _7C_BYCztEfGNV_Cy3dkeSg"/>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_ytXXFl29EfG1haTt0qXNkQ" entityName="PersonalizedRecommendations_Out_Result" outputPin="_D2v9ESzuEfGNV_Cy3dkeSg" termInputPins="_Rk7ZwCztEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_RASpZF3GEfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
+    </assignment>
     <assignment xsi:type="datadictionary:UnsetAssignment" id="_EXxQZSz3EfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations_Out_Result" outputPin="_D2v9ESzuEfGNV_Cy3dkeSg">
       <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>
       <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_XBkwQCxLEfGY9NwNwqb70Q"/>
@@ -215,7 +219,11 @@
     <outPin id="_1IG9YSz4EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_Product"/>
     <outPin id="_3KBKwSz4EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_Term"/>
     <assignment xsi:type="datadictionary:ForwardingAssignment" id="_4AdDgyz4EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_ID" outputPin="_bRT-gSz4EfGNV_Cy3dkeSg" inputPins="_XK1RUCz4EfGNV_Cy3dkeSg"/>
-    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_YaQcYyz5EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_Product" outputPin="_1IG9YSz4EfGNV_Cy3dkeSg" inputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg"/>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_jLIYRl29EfG1haTt0qXNkQ" entityName="RecommenderDB_Out_FetchResult_Product" outputPin="_1IG9YSz4EfGNV_Cy3dkeSg" termInputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg" inputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_qL990V29EfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
+    </assignment>
     <assignment xsi:type="datadictionary:UnsetAssignment" id="_vvKGRSz5EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_Product" outputPin="_1IG9YSz4EfGNV_Cy3dkeSg">
       <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>
       <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_aDC10CxOEfGY9NwNwqb70Q"/>
@@ -223,11 +231,16 @@
       <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_XBkwQCxLEfGY9NwNwqb70Q"/>
     </assignment>
     <assignment xsi:type="datadictionary:Assignment" id="_Ni5Wgi6UEfGYst92ovUroA" entityName="RecommenderDB_Out_FetchResult_Term" outputPin="_3KBKwSz4EfGNV_Cy3dkeSg" inputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg">
-      <term xsi:type="datadictionary:LabelReference" id="_34dN5C6UEfGYst92ovUroA">
+      <term xsi:type="datadictionary:LabelReference" id="_aGHUhF29EfG1haTt0qXNkQ">
         <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
       </term>
       <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_XBkwQCxLEfGY9NwNwqb70Q"/>
-      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_73KQlixOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_ItWZS126EfG1haTt0qXNkQ" entityName="RecommenderDB_Out_FetchResult_Term" outputPin="_3KBKwSz4EfGNV_Cy3dkeSg" termInputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg" inputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_bT0lJF26EfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
     </assignment>
     <assignment xsi:type="datadictionary:UnsetAssignment" id="_T6hFNSz6EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_Term" outputPin="_3KBKwSz4EfGNV_Cy3dkeSg">
       <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>

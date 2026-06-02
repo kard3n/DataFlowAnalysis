@@ -439,7 +439,7 @@ public class PrivacyDataFlowConstraint {
 
 		// Check that the incoming labels contain at least one data item
 		if (pinIncomingCharacteristics.stream()
-				.filter(i -> ((DFDCharacteristicValue) i).getLabel() instanceof DataItemLabel).count() == 0) {
+				.noneMatch(i -> ((DFDCharacteristicValue) i).getLabel() instanceof DataItemLabel)) {
 			return true;
 		}
 
@@ -800,8 +800,11 @@ public class PrivacyDataFlowConstraint {
 									baseNewCombination.get(item.getKey()).context.addAll(item.getValue().context);
 									stateWasReduced = true;
 								}
-								else if(baseNewCombination.get(item.getKey()).state.isEmpty()) {
-									baseNewCombination.get(item.getKey()).context.addAll(item.getValue().context);
+								else if (baseNewCombination.get(item.getKey()).state.isEmpty()
+										&& baseNewCombination.get(item.getKey()).context
+												.addAll(item.getValue().context)) {
+
+									stateWasReduced = true;
 								}
 								
 							}
@@ -911,11 +914,11 @@ public class PrivacyDataFlowConstraint {
 	 */
 	public static String itemInformationToString(HashMap<DataItem, ItemInformation> input) {
 		return input.entrySet().stream()
-				.map(entry -> entry.getKey().getEntityName() + ": {state: {"
-						+ entry.getValue().state.stream().map(state -> state.getEntityName()).toList() + "}, context: {"
+				.map(entry -> entry.getKey().getEntityName() + ": {state: "
+						+ entry.getValue().state.stream().map(state -> state.getEntityName()).toList() + ", context: "
 						+ entry.getValue().context.stream()
 								.map(contl -> contl.stream().map(cont -> cont.getEntityName()).toList()).toList()
-						+ "}}")
+						+ "}")
 				.toList().toString();
 	}
 
@@ -925,9 +928,9 @@ public class PrivacyDataFlowConstraint {
 	public static String functionalityToString(Functionality input) {
 		return "\n\t" + input.getEntityName() + ". Allows for: " + input.getAllowsFor().stream().map(af -> "\n\t\t"
 				+ af.getEntityName() + ":"
-				+ af.getMembers().stream().map(member -> member.getItem().getEntityName() + ": {state: {"
-						+ member.getState().stream().map(state -> state.getEntityName()).toList() + "}, context: {"
-						+ member.getContext().stream().map(contl -> contl.getEntityName()).toList() + "}}").toList())
+				+ af.getMembers().stream().map(member -> member.getItem().getEntityName() + ": {state: "
+						+ member.getState().stream().map(state -> state.getEntityName()).toList() + ", context: "
+						+ member.getContext().stream().map(contl -> contl.getEntityName()).toList() + "}").toList())
 				.toList();
 	}
 }

@@ -19,7 +19,6 @@
           <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
           <members item="_KCGWMD1vEfGmFKwwtJJekw"/>
         </allowsFor>
-        <allowsFor id="_2BbPIF6JEfGKwNWD-TM1Xg"/>
         <allowsFor id="_aOzx8EfOEfGZw_-C8A2RPA" entityName="result">
           <members item="_UtlBcD1vEfGmFKwwtJJekw"/>
           <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
@@ -35,10 +34,9 @@
           <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
           <members item="_EJ8QAD1vEfGmFKwwtJJekw"/>
           <members item="_9VWWwD1uEfGmFKwwtJJekw"/>
-          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
-        </allowsFor>
-        <allowsFor id="_ZgODAF6KEfGKwNWD-TM1Xg">
+          <members state="_L1J_8F80EfGL8Yetsp8eng" item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw _rNSxQGDFEfGRWKFXViK0ZQ"/>
           <members item="_eO_tUD1vEfGmFKwwtJJekw"/>
+          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_CBMxcGDHEfGRWKFXViK0ZQ"/>
         </allowsFor>
       </functionality>
     </labels>
@@ -51,8 +49,9 @@
           <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
           <members item="_EJ8QAD1vEfGmFKwwtJJekw"/>
           <members item="_9VWWwD1uEfGmFKwwtJJekw"/>
-          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
+          <members state="_JOA-kF80EfGL8Yetsp8eng" item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw _ui73YGDFEfGRWKFXViK0ZQ"/>
           <members item="_prFWID1vEfGmFKwwtJJekw"/>
+          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_CBMxcGDHEfGRWKFXViK0ZQ"/>
         </allowsFor>
       </functionality>
     </labels>
@@ -180,6 +179,14 @@
       <dataItem id="_eeGsYEhcEfGzrqe1i1LqUQ" entityName="AnalysisResult"/>
     </labels>
   </dataItemLabelType>
+  <dataStateLabelType id="_ErP-A180EfGL8Yetsp8eng" entityName="State">
+    <labels id="_FpBN0F80EfGL8Yetsp8eng" entityName="Approximate">
+      <dataState id="_JOA-kF80EfGL8Yetsp8eng" entityName="Approximate"/>
+    </labels>
+    <labels id="_KxwCMF80EfGL8Yetsp8eng" entityName="StationID">
+      <dataState id="_L1J_8F80EfGL8Yetsp8eng" entityName="StationID"/>
+    </labels>
+  </dataStateLabelType>
   <dataContextLabelType id="_tYC6pD1wEfGmFKwwtJJekw" entityName="DataContext">
     <labels id="_t5NuAD1wEfGmFKwwtJJekw" entityName="Old">
       <dataContext id="_xpjzID1wEfGmFKwwtJJekw" entityName="Old"/>
@@ -195,6 +202,15 @@
     </labels>
     <labels id="_jSDt0D2LEfGtevHBcNoGlQ" entityName="New">
       <dataContext id="_ksazAD2LEfGtevHBcNoGlQ" entityName="New"/>
+    </labels>
+    <labels id="_owmFUGDFEfGRWKFXViK0ZQ" entityName="ForCheckIn">
+      <dataContext id="_rNSxQGDFEfGRWKFXViK0ZQ" entityName="ForCheckIn"/>
+    </labels>
+    <labels id="_tWkK4GDFEfGRWKFXViK0ZQ" entityName="ForCheckOut">
+      <dataContext id="_ui73YGDFEfGRWKFXViK0ZQ" entityName="ForCheckOut"/>
+    </labels>
+    <labels id="_A8d-AGDHEfGRWKFXViK0ZQ" entityName="Debug">
+      <dataContext id="_CBMxcGDHEfGRWKFXViK0ZQ" entityName="Debug"/>
     </labels>
   </dataContextLabelType>
 </privacymodel:PrivacyModel>

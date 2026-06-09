@@ -19,7 +19,6 @@
           <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
           <members item="_KCGWMD1vEfGmFKwwtJJekw"/>
         </allowsFor>
-        <allowsFor id="_2BbPIF6JEfGKwNWD-TM1Xg"/>
         <allowsFor id="_aOzx8EfOEfGZw_-C8A2RPA" entityName="result">
           <members item="_UtlBcD1vEfGmFKwwtJJekw"/>
           <members item="_YlzFoD1uEfGmFKwwtJJekw"/>
@@ -35,9 +34,7 @@
           <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
           <members item="_EJ8QAD1vEfGmFKwwtJJekw"/>
           <members item="_9VWWwD1uEfGmFKwwtJJekw"/>
-          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
-        </allowsFor>
-        <allowsFor id="_ZgODAF6KEfGKwNWD-TM1Xg">
+          <members state="_L1J_8F80EfGL8Yetsp8eng" item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
           <members item="_eO_tUD1vEfGmFKwwtJJekw"/>
         </allowsFor>
       </functionality>
@@ -51,7 +48,7 @@
           <members item="_5Oq1QD1uEfGmFKwwtJJekw"/>
           <members item="_EJ8QAD1vEfGmFKwwtJJekw"/>
           <members item="_9VWWwD1uEfGmFKwwtJJekw"/>
-          <members item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
+          <members state="_JOA-kF80EfGL8Yetsp8eng" item="_YgerUD1vEfGmFKwwtJJekw" context="_0WpEcD1wEfGmFKwwtJJekw"/>
           <members item="_prFWID1vEfGmFKwwtJJekw"/>
         </allowsFor>
       </functionality>
@@ -180,6 +177,14 @@
       <dataItem id="_eeGsYEhcEfGzrqe1i1LqUQ" entityName="AnalysisResult"/>
     </labels>
   </dataItemLabelType>
+  <dataStateLabelType id="_ErP-A180EfGL8Yetsp8eng" entityName="State">
+    <labels id="_FpBN0F80EfGL8Yetsp8eng" entityName="Approximate">
+      <dataState id="_JOA-kF80EfGL8Yetsp8eng" entityName="Approximate"/>
+    </labels>
+    <labels id="_KxwCMF80EfGL8Yetsp8eng" entityName="StationID">
+      <dataState id="_L1J_8F80EfGL8Yetsp8eng" entityName="StationID"/>
+    </labels>
+  </dataStateLabelType>
   <dataContextLabelType id="_tYC6pD1wEfGmFKwwtJJekw" entityName="DataContext">
     <labels id="_t5NuAD1wEfGmFKwwtJJekw" entityName="Old">
       <dataContext id="_xpjzID1wEfGmFKwwtJJekw" entityName="Old"/>

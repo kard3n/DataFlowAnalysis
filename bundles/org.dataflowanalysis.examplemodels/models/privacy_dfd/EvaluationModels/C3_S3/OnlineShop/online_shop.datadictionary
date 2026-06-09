@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datadictionary:DataDictionary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:datadictionary="http://dataflowanalysis.org/dfd/datadictionary" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_sd8HACxSEfGY9NwNwqb70Q">
+  <behavior id="_tCuPESxSEfGY9NwNwqb70Q" entityName="Customer">
+    <inPin id="_2LTkMCxSEfGY9NwNwqb70Q" entityName="Customer_In_LoginSignupResult"/>
+    <inPin id="_8-iLgCxSEfGY9NwNwqb70Q" entityName="Customer_In_SearchResult"/>
+    <outPin id="_P15TESxTEfGY9NwNwqb70Q" entityName="Customer_Out_Signup_NameEmail"/>
+    <outPin id="_TNDcISxTEfGY9NwNwqb70Q" entityName="Customer_Out_Signup_Password"/>
+    <outPin id="_Uv3SsSxTEfGY9NwNwqb70Q" entityName="Customer_Out_Login_Email"/>
+    <outPin id="_V1rEMSxTEfGY9NwNwqb70Q" entityName="Customer_Out_Login_Password"/>
+    <outPin id="_Ztax0SxTEfGY9NwNwqb70Q" entityName="Customer_Out_ProductSearch_ID"/>
+    <outPin id="_c5g6YSxTEfGY9NwNwqb70Q" entityName="Customer_Out_ProductSearch_Term"/>
+    <assignment xsi:type="datadictionary:Assignment" id="_0z7FEixTEfGY9NwNwqb70Q" entityName="Customer_Out_Signup_NameEmail" outputPin="_P15TESxTEfGY9NwNwqb70Q">
+      <term xsi:type="datadictionary:TRUE" id="_EWvSsCxUEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_cXgLwCxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_kiNOQCxMEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:Assignment" id="_EoB3ByxUEfGY9NwNwqb70Q" entityName="Customer_Out_Signup_Password" outputPin="_TNDcISxTEfGY9NwNwqb70Q">
+      <term xsi:type="datadictionary:TRUE" id="_NEyn8CxUEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_fKFBESxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataStateLabel" href="online_shop.privacymodel#_a9P-0CxPEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_vYEXUGC_EfGRWKFXViK0ZQ"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:Assignment" id="_Np8jdyxUEfGY9NwNwqb70Q" entityName="Customer_Out_Login_Email" outputPin="_Uv3SsSxTEfGY9NwNwqb70Q">
+      <term xsi:type="datadictionary:TRUE" id="_Sec0QCxUEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_cXgLwCxOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:Assignment" id="_S8mI1yxUEfGY9NwNwqb70Q" entityName="Customer_Out_Login_Password" outputPin="_V1rEMSxTEfGY9NwNwqb70Q">
+      <term xsi:type="datadictionary:TRUE" id="_ZWg4QCxUEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_fKFBESxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataStateLabel" href="online_shop.privacymodel#_bnmeoF8sEfGL8Yetsp8eng"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_zdsI4GC_EfGRWKFXViK0ZQ"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:Assignment" id="_Zs1GhyxUEfGY9NwNwqb70Q" entityName="Customer_Out_ProductSearch_ID" outputPin="_Ztax0SxTEfGY9NwNwqb70Q">
+      <term xsi:type="datadictionary:TRUE" id="_fAuCACxUEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_aDC10CxOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:Assignment" id="_fQAbNyxUEfGY9NwNwqb70Q" entityName="Customer_Out_ProductSearch_Term" outputPin="_c5g6YSxTEfGY9NwNwqb70Q">
+      <term xsi:type="datadictionary:TRUE" id="_lr1PICxUEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_73KQlixOEfGY9NwNwqb70Q"/>
+    </assignment>
+  </behavior>
+  <behavior id="_rumhESzcEfGNV_Cy3dkeSg" entityName="AuthService">
+    <inPin id="_uJrcYCzcEfGNV_Cy3dkeSg" entityName="AuthService_In_Signup"/>
+    <inPin id="_Rc5oYF8wEfGL8Yetsp8eng" entityName="AuthService_In_Login"/>
+    <outPin id="_5OOH4SzcEfGNV_Cy3dkeSg" entityName="AuthService_Out_LoginSignupResult"/>
+    <outPin id="_8QUm8SzcEfGNV_Cy3dkeSg" entityName="AuthService_Out_DataForUserDB_Signup"/>
+    <outPin id="_KJa-QV8xEfGL8Yetsp8eng" entityName="AuthService_Out_DataForUserDB_Login"/>
+    <assignment xsi:type="datadictionary:Assignment" id="_xlPu4izdEfGNV_Cy3dkeSg" entityName="AuthService_Out_LoginSignupResult" outputPin="_5OOH4SzcEfGNV_Cy3dkeSg" inputPins="_uJrcYCzcEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:TRUE" id="_hT6Y8CzeEfGNV_Cy3dkeSg"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_jgqm0CxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_aDC10CxOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_6_O9FSzdEfGNV_Cy3dkeSg" entityName="AuthService_Out_LoginSignupResult" outputPin="_5OOH4SzcEfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_cXgLwCxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_kiNOQCxMEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_fKFBESxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataStateLabel" href="online_shop.privacymodel#_a9P-0CxPEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_e4EBkyzeEfGNV_Cy3dkeSg" entityName="AuthService_Out_DataForUserDB_Signup" outputPin="_8QUm8SzcEfGNV_Cy3dkeSg" inputPins="_uJrcYCzcEfGNV_Cy3dkeSg"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_e4EBkyzeEfGNV_Ka3dkeSg" entityName="AuthService_Out_DataForUserDB_Login" outputPin="_KJa-QV8xEfGL8Yetsp8eng" inputPins="_Rc5oYF8wEfGL8Yetsp8eng"/>
+  </behavior>
+  <behavior id="_E4ARoSzhEfGNV_Cy3dkeSg" entityName="UserDB">
+    <inPin id="_HINZsCzhEfGNV_Cy3dkeSg" entityName="UserDB_In_SignupData"/>
+    <inPin id="_W2bcYF8xEfGL8Yetsp8eng" entityName="UserDB_In_LoginData"/>
+  </behavior>
+  <behavior id="_dqOOESzhEfGNV_Cy3dkeSg" entityName="ProductSearch">
+    <inPin id="_l5ShQCzhEfGNV_Cy3dkeSg" entityName="ProductSearch_In_UserSearchRequest"/>
+    <inPin id="_oYw0YCzhEfGNV_Cy3dkeSg" entityName="ProductSearch_In_PurchasedProducts"/>
+    <inPin id="_vTFiMCzhEfGNV_Cy3dkeSg" entityName="ProductSearch_In_ProductSearchByTermResult"/>
+    <inPin id="_z6B4ICzhEfGNV_Cy3dkeSg" entityName="ProductSearch_In_RecommendationResult"/>
+    <outPin id="__WIIASzhEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_IDForPurchaseDB"/>
+    <outPin id="_EyK58SziEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_TermForProductDB"/>
+    <outPin id="_JA150SziEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_ForRecommendations_Basic"/>
+    <outPin id="_feB4kSziEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_ForRecommendations_Basic_ProductsPurchased"/>
+    <outPin id="_hhQUkSziEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_ForRecommendations_Basic_ProductsSearched"/>
+    <outPin id="_lM-YYSziEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_ForRecommendations_Personalized"/>
+    <outPin id="_qcfKMSziEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_ForRecommendations_Personalized_ProductsPurchased"/>
+    <outPin id="_tqrkgSziEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_ForRecommendations_Personalized_ProductsSearched"/>
+    <outPin id="_v0hl4SziEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_ResultForCustomer"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_63rKQyziEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_IDForPurchaseDB" outputPin="__WIIASzhEfGNV_Cy3dkeSg" inputPins="_l5ShQCzhEfGNV_Cy3dkeSg"/>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_KAim1SzjEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_IDForPurchaseDB" outputPin="__WIIASzhEfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_73KQlixOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_d0erYyzjEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_TermForProductDB" outputPin="_EyK58SziEfGNV_Cy3dkeSg" inputPins="_l5ShQCzhEfGNV_Cy3dkeSg"/>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_r1H7pSzjEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_TermForProductDB" outputPin="_EyK58SziEfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_aDC10CxOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_x41WFl2tEfGDKIQFzrLdDA" entityName="ProductSearch_Out_ForRecommendations_Basic" outputPin="_JA150SziEfGNV_Cy3dkeSg" termInputPins="_l5ShQCzhEfGNV_Cy3dkeSg" inputPins="_l5ShQCzhEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:NOT" id="_FJgVg12uEfG1haTt0qXNkQ">
+        <negatedTerm xsi:type="datadictionary:LabelReference" id="_dDUDRF2uEfG1haTt0qXNkQ">
+          <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+        </negatedTerm>
+      </term>
+    </assignment>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_hcd0212uEfG1haTt0qXNkQ" entityName="ProductSearch_Out_ForRecommendations_Basic_ProductsPurchased" outputPin="_feB4kSziEfGNV_Cy3dkeSg" termInputPins="_l5ShQCzhEfGNV_Cy3dkeSg" inputPins="_oYw0YCzhEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:NOT" id="_zMW-A12uEfG1haTt0qXNkQ">
+        <negatedTerm xsi:type="datadictionary:LabelReference" id="_z1wgVF2uEfG1haTt0qXNkQ">
+          <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+        </negatedTerm>
+      </term>
+    </assignment>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_5kHxW12uEfG1haTt0qXNkQ" entityName="ProductSearch_Out_ForRecommendations_Basic_ProductsSearched" outputPin="_hhQUkSziEfGNV_Cy3dkeSg" termInputPins="_l5ShQCzhEfGNV_Cy3dkeSg" inputPins="_vTFiMCzhEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:NOT" id="_B6ips12vEfG1haTt0qXNkQ">
+        <negatedTerm xsi:type="datadictionary:LabelReference" id="_C_ccRF2vEfG1haTt0qXNkQ">
+          <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+        </negatedTerm>
+      </term>
+    </assignment>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_Xdt3S12vEfG1haTt0qXNkQ" entityName="ProductSearch_Out_ForRecommendations_Personalized" outputPin="_lM-YYSziEfGNV_Cy3dkeSg" termInputPins="_l5ShQCzhEfGNV_Cy3dkeSg" inputPins="_l5ShQCzhEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="__ndoRF24EfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
+    </assignment>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_hivmi12vEfG1haTt0qXNkQ" entityName="ProductSearch_Out_ForRecommendations_Personalized_ProductsPurchased" outputPin="_qcfKMSziEfGNV_Cy3dkeSg" termInputPins="_oYw0YCzhEfGNV_Cy3dkeSg" inputPins="_oYw0YCzhEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_RTOfZF25EfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
+    </assignment>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_qwpgi12vEfG1haTt0qXNkQ" entityName="ProductSearch_Out_ForRecommendations_Personalized_ProductsSearched" outputPin="_tqrkgSziEfGNV_Cy3dkeSg" termInputPins="_vTFiMCzhEfGNV_Cy3dkeSg" inputPins="_vTFiMCzhEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_TEclZF25EfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
+    </assignment>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_ffb_GCzoEfGNV_Cy3dkeSg" entityName="ProductSearch_Out_ResultForCustomer" outputPin="_v0hl4SziEfGNV_Cy3dkeSg" inputPins="_z6B4ICzhEfGNV_Cy3dkeSg"/>
+    <pinRelations id="_6vOWNlA_EfGTR9ryzHSFWg" entityName="PurchasedProducts" inputPin="__WIIASzhEfGNV_Cy3dkeSg" outputPin="_oYw0YCzhEfGNV_Cy3dkeSg"/>
+  </behavior>
+  <behavior id="_VsxVsSzpEfGNV_Cy3dkeSg" entityName="PurchaseDB">
+    <inPin id="_XqjRACzpEfGNV_Cy3dkeSg" entityName="PurchaseDB_In_IdForProductFetch"/>
+    <outPin id="_hQ5gMSzpEfGNV_Cy3dkeSg" entityName="PurchaseDB_Out_BoughtProducts_Products"/>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_-NZEtCzpEfGNV_Cy3dkeSg" entityName="PurchaseDB_Out_BoughtProducts_Products" outputPin="_hQ5gMSzpEfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_GFK5gCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_hVCdky6PEfGYst92ovUroA" entityName="PurchaseDB_Out_BoughtProducts_Products" outputPin="_hQ5gMSzpEfGNV_Cy3dkeSg" inputPins="_XqjRACzpEfGNV_Cy3dkeSg"/>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_vbrBFS6PEfGYst92ovUroA" entityName="PurchaseDB_Out_BoughtProducts_Products" outputPin="_hQ5gMSzpEfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_aDC10CxOEfGY9NwNwqb70Q"/>
+    </assignment>
+  </behavior>
+  <behavior id="_QhegESzqEfGNV_Cy3dkeSg" entityName="ProductDB">
+    <inPin id="_SBVwUCzqEfGNV_Cy3dkeSg" entityName="ProductDB_In_SearchTerm"/>
+    <outPin id="_WHSSASzqEfGNV_Cy3dkeSg" entityName="ProductDB_Out_MatchedProductsForTerm"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_ffkQAyzqEfGNV_Cy3dkeSg" entityName="ProductDB_Out_MatchedProductsForTerm" outputPin="_WHSSASzqEfGNV_Cy3dkeSg" inputPins="_SBVwUCzqEfGNV_Cy3dkeSg"/>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_oE3R5CzqEfGNV_Cy3dkeSg" entityName="ProductDB_Out_MatchedProductsForTerm" outputPin="_WHSSASzqEfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_ez4O8CxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_tFJ79SzqEfGNV_Cy3dkeSg" entityName="ProductDB_Out_MatchedProductsForTerm" outputPin="_WHSSASzqEfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_73KQlixOEfGY9NwNwqb70Q"/>
+    </assignment>
+  </behavior>
+  <behavior id="_-3HsQSzrEfGNV_Cy3dkeSg" entityName="BasicRecommendations">
+    <inPin id="_DTg_ECzsEfGNV_Cy3dkeSg" entityName="BasicRecommendations_In_Data"/>
+    <outPin id="_dLaKISzsEfGNV_Cy3dkeSg" entityName="BasicRecommendations_Out_Result"/>
+    <assignment xsi:type="datadictionary:Assignment" id="_yXpQsi6UEfGYst92ovUroA" entityName="BasicRecommendations_Out_Result" outputPin="_dLaKISzsEfGNV_Cy3dkeSg" inputPins="_DTg_ECzsEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_-HmwFE1GEfG7QOPB_Wci6g">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_w9DokCxQEfGY9NwNwqb70Q"/>
+      </term>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_Tv9OgCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_QA-je12wEfG1haTt0qXNkQ" entityName="BasicRecommendations_Out_Result" outputPin="_dLaKISzsEfGNV_Cy3dkeSg" termInputPins="_DTg_ECzsEfGNV_Cy3dkeSg" inputPins="_DTg_ECzsEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_cpcf1F2wEfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_w9DokCxQEfGY9NwNwqb70Q"/>
+      </term>
+    </assignment>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_leeMhSzsEfGNV_Cy3dkeSg" entityName="BasicRecommendations_Out_Result" outputPin="_dLaKISzsEfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_GFK5gCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_ez4O8CxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_aDC10CxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_73KQlixOEfGY9NwNwqb70Q"/>
+    </assignment>
+  </behavior>
+  <behavior id="_QVIl0SztEfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations">
+    <inPin id="_Rk7ZwCztEfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations_In_Data"/>
+    <inPin id="_7C_BYCztEfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations_In_RecommenderDBFetchResult"/>
+    <outPin id="_8y3DkSztEfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations_Out_RecommenderDBFetch"/>
+    <outPin id="_-dTzMSztEfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations_Out_RecommenderDBUpdate"/>
+    <outPin id="_D2v9ESzuEfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations_Out_Result"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_W1Smgyz1EfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations_Out_RecommenderDBFetch" outputPin="_8y3DkSztEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg"/>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_gK4c5Sz1EfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations_Out_RecommenderDBFetch" outputPin="_8y3DkSztEfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_GFK5gCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_ez4O8CxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_73KQlixOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_2Tvxcyz1EfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations_Out_RecommenderDBUpdate" outputPin="_-dTzMSztEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg"/>
+    <assignment xsi:type="datadictionary:Assignment" id="_-Rjv4i6SEfGYst92ovUroA" entityName="PersonalizedRecommendations_Out_Result" outputPin="_D2v9ESzuEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_BZRHtC6TEfGYst92ovUroA">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_Tv9OgCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_ytXXFl29EfG1haTt0qXNkQ" entityName="PersonalizedRecommendations_Out_Result" outputPin="_D2v9ESzuEfGNV_Cy3dkeSg" termInputPins="_Rk7ZwCztEfGNV_Cy3dkeSg" inputPins="_Rk7ZwCztEfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_RASpZF3GEfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
+    </assignment>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_EXxQZSz3EfGNV_Cy3dkeSg" entityName="PersonalizedRecommendations_Out_Result" outputPin="_D2v9ESzuEfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_XBkwQCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_GFK5gCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_ez4O8CxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_NFwnYCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_aDC10CxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_73KQlixOEfGY9NwNwqb70Q"/>
+    </assignment>
+  </behavior>
+  <behavior id="_RHWE4Sz4EfGNV_Cy3dkeSg" entityName="RecommenderDB">
+    <inPin id="_XK1RUCz4EfGNV_Cy3dkeSg" entityName="RecommenderDB_In_FetchData"/>
+    <inPin id="_ZaXD8Cz4EfGNV_Cy3dkeSg" entityName="RecommenderDB_In_UpdateData"/>
+    <outPin id="_bRT-gSz4EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_ID"/>
+    <outPin id="_1IG9YSz4EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_Product"/>
+    <outPin id="_3KBKwSz4EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_Term"/>
+    <assignment xsi:type="datadictionary:ForwardingAssignment" id="_4AdDgyz4EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_ID" outputPin="_bRT-gSz4EfGNV_Cy3dkeSg" inputPins="_XK1RUCz4EfGNV_Cy3dkeSg"/>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_jLIYRl29EfG1haTt0qXNkQ" entityName="RecommenderDB_Out_FetchResult_Product" outputPin="_1IG9YSz4EfGNV_Cy3dkeSg" termInputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg" inputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_qL990V29EfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
+    </assignment>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_vvKGRSz5EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_Product" outputPin="_1IG9YSz4EfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_aDC10CxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_73KQlixOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_XBkwQCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_GFK5gCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_ez4O8CxLEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:SetAssignment" id="_re77FF55EfG5QfjRC5A2Kg" entityName="RecommenderDB_Out_FetchResult_Product" outputPin="_1IG9YSz4EfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_NFwnYCxLEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:Assignment" id="_Ni5Wgi6UEfGYst92ovUroA" entityName="RecommenderDB_Out_FetchResult_Term" outputPin="_3KBKwSz4EfGNV_Cy3dkeSg" inputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_aGHUhF29EfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_XBkwQCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_73KQlixOEfGY9NwNwqb70Q"/>
+    </assignment>
+    <assignment xsi:type="datadictionary:ConditionalForwardingAssignment" id="_ItWZS126EfG1haTt0qXNkQ" entityName="RecommenderDB_Out_FetchResult_Term" outputPin="_3KBKwSz4EfGNV_Cy3dkeSg" termInputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg" inputPins="_XK1RUCz4EfGNV_Cy3dkeSg _ZaXD8Cz4EfGNV_Cy3dkeSg">
+      <term xsi:type="datadictionary:LabelReference" id="_bT0lJF26EfG1haTt0qXNkQ">
+        <label xsi:type="privacymodel:FunctionalityLabel" href="online_shop.privacymodel#_dW8IISxREfGY9NwNwqb70Q"/>
+      </term>
+    </assignment>
+    <assignment xsi:type="datadictionary:UnsetAssignment" id="_T6hFNSz6EfGNV_Cy3dkeSg" entityName="RecommenderDB_Out_FetchResult_Term" outputPin="_3KBKwSz4EfGNV_Cy3dkeSg">
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_a31QICxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataContextLabel" href="online_shop.privacymodel#_NFwnYCxLEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_aDC10CxOEfGY9NwNwqb70Q"/>
+      <outputLabels xsi:type="privacymodel:DataItemLabel" href="online_shop.privacymodel#_qZZZMCxOEfGY9NwNwqb70Q"/>
+    </assignment>
+  </behavior>
+</datadictionary:DataDictionary>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataflowdiagram:DataFlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dataflowdiagram="http://dataflowanalysis.org/dfd/dataflowdiagram" xmlns:privacymodel="http://www.dataflowanalysis.org/privacymodel" id="_wSJ1YE4FEfGKdqFEChFimQ">
+  <flows id="_69VJME4GEfGKdqFEChFimQ" entityName="Register_User_RegisterService_Encrypted" sourceNode="_3v9DsE4FEfGKdqFEChFimQ" destinationNode="_G70J404GEfGKdqFEChFimQ">
+    <destinationPin href="model.datadictionary#_82sxgE35EfGKdqFEChFimQ"/>
+    <sourcePin href="model.datadictionary#_3weTAU4DEfGKdqFEChFimQ"/>
+  </flows>
+  <flows id="_VN6Y8F6NEfGKwNWD-TM1Xg" entityName="Register_User_RegisterService_Serialized" sourceNode="_3v9DsE4FEfGKdqFEChFimQ" destinationNode="_G70J404GEfGKdqFEChFimQ">
+    <destinationPin href="model.datadictionary#_PGHUQF6NEfGKwNWD-TM1Xg"/>
+    <sourcePin href="model.datadictionary#_ZUPxoV6MEfGKwNWD-TM1Xg"/>
+  </flows>
+  <flows id="_MqZn4E4HEfGKdqFEChFimQ" entityName="Register_RegisterService_Userdatabase" sourceNode="_G70J404GEfGKdqFEChFimQ" destinationNode="_mhKnAk4GEfGKdqFEChFimQ">
+    <destinationPin href="model.datadictionary#_7NosgE36EfGKdqFEChFimQ"/>
+    <sourcePin href="model.datadictionary#_fW5PIU36EfGKdqFEChFimQ"/>
+  </flows>
+  <flows id="_dylQ0E4HEfGKdqFEChFimQ" entityName="GetUserInfo_User_UserInfoService" sourceNode="_3v9DsE4FEfGKdqFEChFimQ" destinationNode="_NZpwA04GEfGKdqFEChFimQ">
+    <destinationPin href="model.datadictionary#_m1it0E4BEfGKdqFEChFimQ"/>
+    <sourcePin href="model.datadictionary#_xec7UU4DEfGKdqFEChFimQ"/>
+  </flows>
+  <flows id="_oJJcAE4HEfGKdqFEChFimQ" entityName="GetUserInfo_UserInfoService_UserDatabase" sourceNode="_NZpwA04GEfGKdqFEChFimQ" destinationNode="_mhKnAk4GEfGKdqFEChFimQ">
+    <destinationPin href="model.datadictionary#_Sy2_cU39EfGKdqFEChFimQ"/>
+    <sourcePin href="model.datadictionary#_pcdFsE4BEfGKdqFEChFimQ"/>
+  </flows>
+  <flows id="_M0Y04E4IEfGKdqFEChFimQ" entityName="GetUserInfo_UserDatabase_UserInfoService_Result" sourceNode="_mhKnAk4GEfGKdqFEChFimQ" destinationNode="_NZpwA04GEfGKdqFEChFimQ">
+    <destinationPin href="model.datadictionary#_0v-oYE4BEfGKdqFEChFimQ"/>
+    <sourcePin href="model.datadictionary#_ZnZ1YU39EfGKdqFEChFimQ"/>
+  </flows>
+  <flows id="_tsD1gE4IEfGKdqFEChFimQ" entityName="GetUserInfo_UserInfoService_User_Result" sourceNode="_NZpwA04GEfGKdqFEChFimQ" destinationNode="_3v9DsE4FEfGKdqFEChFimQ">
+    <destinationPin href="model.datadictionary#_ugaBYE35EfGKdqFEChFimQ"/>
+    <sourcePin href="model.datadictionary#_5rguQU4BEfGKdqFEChFimQ"/>
+  </flows>
+  <nodes xsi:type="dataflowdiagram:External" id="_3v9DsE4FEfGKdqFEChFimQ" entityName="User">
+    <behavior href="model.datadictionary#_ISt-UU35EfGKdqFEChFimQ"/>
+    <properties xsi:type="privacymodel:RoleLabel" href="model.privacymodel#_sVPSsE3rEfGAqc68XEY7zA"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Process" id="_G70J404GEfGKdqFEChFimQ" entityName="RegisterService">
+    <behavior href="model.datadictionary#_6Rm-kU35EfGKdqFEChFimQ"/>
+    <properties xsi:type="privacymodel:FunctionalityLabel" href="model.privacymodel#_JjdgYE3sEfGAqc68XEY7zA"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Process" id="_NZpwA04GEfGKdqFEChFimQ" entityName="UserInfoService">
+    <behavior href="model.datadictionary#_kFUo8U4BEfGKdqFEChFimQ"/>
+    <properties xsi:type="privacymodel:FunctionalityLabel" href="model.privacymodel#_NqzwQE3sEfGAqc68XEY7zA"/>
+  </nodes>
+  <nodes xsi:type="dataflowdiagram:Store" id="_mhKnAk4GEfGKdqFEChFimQ" entityName="UserDatabase">
+    <behavior href="model.datadictionary#_4dxM8U36EfGKdqFEChFimQ"/>
+    <properties xsi:type="privacymodel:FunctionalityLabel" href="model.privacymodel#_NqzwQE3sEfGAqc68XEY7zA"/>
+    <properties xsi:type="privacymodel:FunctionalityLabel" href="model.privacymodel#_JjdgYE3sEfGAqc68XEY7zA"/>
+  </nodes>
+</dataflowdiagram:DataFlowDiagram>

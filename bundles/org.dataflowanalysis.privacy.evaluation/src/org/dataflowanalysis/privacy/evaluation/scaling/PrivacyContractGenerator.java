@@ -94,10 +94,11 @@ public class PrivacyContractGenerator {
 	 * @param dataCombinationOverlap The number of labels that should overlap
 	 *                               between those sent by two nodes. This is
 	 *                               pair-wise.
+	 * @param replicateDestinationPins If true, duplicates the destination pin for each new flow.
 	 * @return The resulting modified models
 	 */
-	public static PrivacyModelPackage generateSourceNodes(PrivacyModelPackage input, String sourceNodeName,
-			int numberSourceNodes, int dataCombinationSize, int dataCombinationOverlap) {
+	public static PrivacyModelPackage replicateSourceNode(PrivacyModelPackage input, String sourceNodeName,
+			int numberSourceNodes, int dataCombinationSize, int dataCombinationOverlap, boolean replicateDestinationPins) {
 		var ddFactory = datadictionaryFactory.eINSTANCE;
 		var dfdFactory = dataflowdiagramFactory.eINSTANCE;
 		var pmFactory = privacymodelFactory.eINSTANCE;
@@ -124,12 +125,12 @@ public class PrivacyContractGenerator {
 				.orElseThrow(() -> new RuntimeException("The defined source node does not have an outgoing flow."));
 		
 		if(input.cm().getDataItemLabelType().size() < 1) {
-			new RuntimeException("No DataItemLabelType detected.");
+			throw new RuntimeException("No DataItemLabelType detected.");
 		}
 		DataItemLabelType itemLabelType = input.cm().getDataItemLabelType().get(0);
 		
 		if(input.cm().getRoleLabelType() == null) {
-			new RuntimeException("No RoleItemLabelType detected.");
+			throw new RuntimeException("No RoleItemLabelType detected.");
 		}
 		RoleLabelType  roleLabelType = input.cm().getRoleLabelType();
 		
@@ -162,6 +163,8 @@ public class PrivacyContractGenerator {
 				assignment.getOutputLabels().add(createUniqueDataItemLabel(itemLabelType));
 			}
 			
+			behavior.getAssignment().add(assignment);
+			
 			// Create node
 			Node newNode = dfdFactory.createExternal();
 			newNode.setEntityName("Node_" + 1);
@@ -170,10 +173,24 @@ public class PrivacyContractGenerator {
 			
 			//create flow
 			Flow flow = dfdFactory.createFlow();
-			flow.setDestinationNode(sourceOutFlow.getDestinationNode());
-			flow.setDestinationPin(sourceOutFlow.getDestinationPin());
 			flow.setSourceNode(newNode);
 			flow.setSourcePin(outPin);
+			Node destNode= sourceOutFlow.getDestinationNode();
+			flow.setDestinationNode(destNode);
+			
+			if (replicateDestinationPins) {
+				Pin newDestPin = ddFactory.createPin();
+				Behavior destBehavior = destNode.getBehavior();
+				if (destBehavior == null) {
+					destBehavior = ddFactory.createBehavior();
+					destNode.setBehavior(destBehavior);
+					input.dd().getBehavior().add(destBehavior);
+				}
+				destBehavior.getInPin().add(newDestPin);
+				flow.setDestinationPin(newDestPin);
+			} else {
+				flow.setDestinationPin(sourceOutFlow.getDestinationPin());
+			}
 			
 			input.dd().getBehavior().add(behavior);
 			input.dfd().getFlows().add(flow);
@@ -181,6 +198,147 @@ public class PrivacyContractGenerator {
 		}
 		
 		
+		return input;
+	}
+	
+	/**
+	 * @param input                  The input model
+	 * @param sourceNodeName         The name of the node whose pins should be
+	 *                               scaled
+	 * @param numberNewPins      How many times new pins should be added
+	 * @param dataCombinationSize    The number of labels that each pin outputs
+	 * @param dataCombinationOverlap The number of labels that should overlap
+	 *                               between those output by two pins. This is
+	 *                               pair-wise.
+	 * @param replicateDestinationPins If true, duplicates the destination pin for each new flow.
+	 * @return The resulting modified models
+	 */
+	public static PrivacyModelPackage replicatePinInSourceNode(PrivacyModelPackage input, String sourceNodeName,
+			int numberNewPins, int dataCombinationSize, int dataCombinationOverlap, boolean replicateDestinationPins) {
+		var ddFactory = datadictionaryFactory.eINSTANCE;
+		var dfdFactory = dataflowdiagramFactory.eINSTANCE;
+		var pmFactory = privacymodelFactory.eINSTANCE;
+
+		if (dataCombinationOverlap * 2 > dataCombinationSize) {
+			throw new RuntimeException("The requested overlap is bigger than halve the requested combination size.");
+		}
+
+		Node source = null;
+		for (var node : input.dfd().getNodes()) {
+			if (node.getEntityName().equals(sourceNodeName)) {
+				source = node;
+				break;
+			}
+		}
+		
+		if (source == null) {
+			throw new RuntimeException("Could not find the defined source node in the DFD.");
+		}
+
+		final Node sourceCopy = source;
+		Flow sourceOutFlow = input.dfd().getFlows().stream().filter(flow -> flow.getSourceNode() == sourceCopy)
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException("The defined source node does not have an outgoing flow."));
+
+		if (input.cm().getDataItemLabelType().size() < 1) {
+			throw new RuntimeException("No DataItemLabelType detected.");
+		}
+		DataItemLabelType itemLabelType = input.cm().getDataItemLabelType().get(0);
+
+		if (input.cm().getRoleLabelType() == null) {
+			throw new RuntimeException("No RoleItemLabelType detected.");
+		}
+		RoleLabelType roleLabelType = input.cm().getRoleLabelType();
+
+		ArrayList<DataItemLabel> overlap = new ArrayList<>();
+		for (int i = 0; i < dataCombinationOverlap; i++) {
+			overlap.add(createUniqueDataItemLabel(itemLabelType));
+		}
+
+		Role defaultRole = pmFactory.createRole();
+		defaultRole.setEntityName("defaultRole");
+		RoleLabel defaultRoleLabel = pmFactory.createRoleLabel();
+		defaultRoleLabel.setEntityName("defaultRoleLabel");
+		defaultRoleLabel.setRole(defaultRole);
+		roleLabelType.getLabels().add(defaultRoleLabel);
+		
+		source.getProperties().add(defaultRoleLabel);
+
+		// Retrieve existing behavior from the original source node, or create one if absent
+		Behavior behavior = source.getBehavior();
+		if (behavior == null) {
+			behavior = ddFactory.createBehavior();
+			// Ensure the newly created behavior also gets a unique identifier
+			behavior.setEntityName("Behavior_" + sourceNodeName);
+			behavior.setId("ID_Behavior_" + sourceNodeName);
+			
+			source.setBehavior(behavior);
+			input.dd().getBehavior().add(behavior);
+		}
+
+		for (int i = 0; i < numberNewPins; i++) {
+			// Create a sequential suffix for unique identification
+			int seqNum = i;
+			String suffix = "_" + sourceNodeName + "_" + seqNum;
+
+			// Create new pin and add it to the original node's behavior
+			Pin outPin = ddFactory.createPin();
+			outPin.setEntityName("OutPin" + suffix);
+			outPin.setId("ID_OutPin" + suffix);
+			behavior.getOutPin().add(outPin);
+
+			// Create assignment behavior for the pin
+			SetAssignment assignment = ddFactory.createSetAssignment();
+			assignment.setEntityName("Assignment" + suffix);
+			assignment.setId("ID_Assignment" + suffix);
+			assignment.setOutputPin(outPin);
+
+			assignment.getOutputLabels().addAll(overlap);
+			overlap.clear();
+			for (int x = 0; x < dataCombinationOverlap; x++) {
+				overlap.add(createUniqueDataItemLabel(itemLabelType));
+			}
+			assignment.getOutputLabels().addAll(overlap);
+			while (assignment.getOutputLabels().size() < dataCombinationSize) {
+				assignment.getOutputLabels().add(createUniqueDataItemLabel(itemLabelType));
+			}
+			
+			behavior.getAssignment().add(assignment);
+
+			// Create flow from the new pin to the destination
+			Flow flow = dfdFactory.createFlow();
+			flow.setEntityName("Flow" + suffix);
+			flow.setId("ID_Flow" + suffix);
+			
+			flow.setSourceNode(source);
+			flow.setSourcePin(outPin);
+			Node destNode = sourceOutFlow.getDestinationNode();
+			flow.setDestinationNode(destNode);
+			
+			if (replicateDestinationPins) {
+				Pin newDestPin = ddFactory.createPin();
+				newDestPin.setEntityName("InPin_Dest" + suffix);
+				newDestPin.setId("ID_InPin_Dest" + suffix);
+				
+				Behavior destBehavior = destNode.getBehavior();
+				if (destBehavior == null) {
+					destBehavior = ddFactory.createBehavior();
+					destBehavior.setEntityName("Behavior_" + destNode.getEntityName());
+					destBehavior.setId("ID_Behavior_" + destNode.getEntityName());
+					
+					destNode.setBehavior(destBehavior);
+					input.dd().getBehavior().add(destBehavior);
+				}
+				destBehavior.getInPin().add(newDestPin);
+				flow.setDestinationPin(newDestPin);
+			} else {
+				flow.setDestinationPin(sourceOutFlow.getDestinationPin());
+			}
+
+			// Add the new flow to the diagram
+			input.dfd().getFlows().add(flow);
+		}
+
 		return input;
 	}
 

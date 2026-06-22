@@ -60,7 +60,7 @@ public class PrivacyDFDAnalysisCLI {
 			System.exit(-1);
 		}
 
-		boolean nodeInference = false;
+		boolean nodeInference = true;
 		boolean considerOutputPins = false;
 		for (int i = 3; i < args.length; i++) {
 			if (args[i].startsWith("-nodeInference")) {

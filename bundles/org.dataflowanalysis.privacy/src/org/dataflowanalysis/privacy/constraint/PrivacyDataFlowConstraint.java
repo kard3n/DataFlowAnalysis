@@ -39,8 +39,8 @@ public class PrivacyDataFlowConstraint {
 	private static final Logger logger = LoggerManager.getLogger(PrivacyDataFlowConstraint.class);
 
 	public static HashSet<AbstractPrivacyConstraintViolation> findViolations(FlowGraphCollection flowGraphs,
-			boolean checkNodeLevelInference, boolean considerOutputPins) {
-		return findViolations(flowGraphs.getTransposeFlowGraphs(), checkNodeLevelInference, considerOutputPins);
+			boolean disableNodeLevelInference, boolean considerOutputPins) {
+		return findViolations(flowGraphs.getTransposeFlowGraphs(), disableNodeLevelInference, considerOutputPins);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class PrivacyDataFlowConstraint {
 	 * Detects and returns all privacy violations over the given flow graphs
 	 * 
 	 * @param flowGraphs
-	 * @param checkNodeLevelInference If inference should be simulated on a node
+	 * @param disableNodeLevelInference If inference should not be simulated on a node
 	 *                                level
 	 * @param considerOutputPins      If the data from output pins should be checked
 	 *                                for validity. Output pins part of a pin
@@ -73,7 +73,7 @@ public class PrivacyDataFlowConstraint {
 	 * @return
 	 */
 	public static HashSet<AbstractPrivacyConstraintViolation> findViolations(
-			List<? extends AbstractTransposeFlowGraph> flowGraphs, boolean checkNodeLevelInference,
+			List<? extends AbstractTransposeFlowGraph> flowGraphs, boolean disableNodeLevelInference,
 			boolean considerOutputPins) {
 		HashSet<AbstractPrivacyConstraintViolation> violations = new HashSet<>();
 
@@ -291,7 +291,7 @@ public class PrivacyDataFlowConstraint {
 				}
 
 				// Evaluate inference at the node level
-				if (checkNodeLevelInference) {
+				if (!disableNodeLevelInference) {
 					violations.addAll(verifyDataTupleConformance(uniteItemTuples(finalCombinations), functionalities,
 							vert.getName()));
 				}

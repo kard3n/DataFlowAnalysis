@@ -18,17 +18,17 @@ public class UserScalerTest {
 
 	@Test
 	public void testGenerateUsers() {
-		final var privacyModelPath = Paths.get("models", "dfd", "PrivacyScalingModels", "base.privacymodel");
-		final var dataFlowDiagramPath = Paths.get("models", "dfd", "PrivacyScalingModels",
+		final var privacyModelPath = Paths.get("models", "privacy_dfd", "PrivacyScalingModels", "base.privacymodel");
+		final var dataFlowDiagramPath = Paths.get("models", "privacy_dfd", "PrivacyScalingModels",
 				"simple_forward.dataflowdiagram");
-		final var dataDictionaryPath = Paths.get("models", "dfd", "PrivacyScalingModels",
+		final var dataDictionaryPath = Paths.get("models", "privacy_dfd", "PrivacyScalingModels",
 				"simple_forward.datadictionary");
 
 		String outputDir = "scaled_models";
 		String scaledModelNameBase = "scaled_users_";
-		int numberWarmupRuns = 3; // How many times each scenario should be run before starting the evaluation
-		int numberEvaluationRuns = 10; // How many times each scenario should be ran to determine the result
-		int[] numberUsers = { 1, 100, 1000, 2000, 5000, 10000 };
+		int numberWarmupRuns = 2; // How many times each scenario should be run before starting the evaluation
+		int numberEvaluationRuns = 20; // How many times each scenario should be ran to determine the result
+		int[] numberUsers = { 1, 100, 500, 1000, 2500, 5000, 10000, 15000, 20000, 25000, 30000};
 
 		ModelManager manager = new ModelManager();
 
@@ -43,6 +43,8 @@ public class UserScalerTest {
 		}
 
 		String scaledModelName;
+		long startInitialization;
+		long endInitialization;
 		long startFindGraphs;
 		long endFindGraphs;
 		long startLabelPropagation;
@@ -50,10 +52,12 @@ public class UserScalerTest {
 		long startAnalysis;
 		long endAnalysis;
 
+		long initializationTime;
 		long findGraphsTime;
 		long labelPropagationTime;
 		long analysisTime;
 
+		long[] resultInitialization = new long[numberUsers.length];
 		long[] resultGraphFind = new long[numberUsers.length];
 		long[] resultPropagation = new long[numberUsers.length];
 		long[] resultAnalysis = new long[numberUsers.length];
@@ -78,7 +82,18 @@ public class UserScalerTest {
 						.useDataFlowDiagram(outputDir + "/" + scaledModelName + ".dataflowdiagram")
 						.useDataDictionary(outputDir + "/" + scaledModelName + ".datadictionary")
 						.usePrivacyModel(outputDir + "/" + scaledModelName + ".privacymodel").build();
+				
+				startInitialization = System.nanoTime();
 				analysis.initializeAnalysis();
+				endInitialization = System.nanoTime();
+				
+				System.gc();
+				try {
+					Thread.sleep(2000);
+				}
+				catch(InterruptedException e){
+					logger.warn("Interrupted");
+				}
 
 				startFindGraphs = System.nanoTime();
 				DFDFlowGraphCollection flowGraphCollection = analysis.findFlowGraphs();
@@ -90,6 +105,7 @@ public class UserScalerTest {
 				var violations = PrivacyDataFlowConstraint.findViolations(flowGraphCollection, true, false);
 				endAnalysis = System.nanoTime();
 
+				initializationTime = endInitialization - startInitialization;
 				findGraphsTime = endFindGraphs - startFindGraphs;
 				labelPropagationTime = endLabelPropagation - startLabelPropagation;
 				analysisTime = endAnalysis - startAnalysis;
@@ -101,6 +117,7 @@ public class UserScalerTest {
 							+ currentAmount + " finished. TFG Find: " + findGraphsTime + ". Label Propagation: "
 							+ labelPropagationTime + ". Analysis: " + analysisTime + ". Violations detected: " + violations.size());
 					// Add runtimes
+					resultInitialization[x] += initializationTime;
 					resultGraphFind[x] += findGraphsTime;
 					resultPropagation[x] += labelPropagationTime;
 					resultAnalysis[x] += analysisTime;
@@ -112,9 +129,13 @@ public class UserScalerTest {
 		    int currentAmount = numberUsers[x];
 		    logger.info("### RESULTS (" + currentAmount + " users) ###");
 		    
+		    resultInitialization[x] = resultInitialization[x] / numberEvaluationRuns;
 		    resultGraphFind[x] = resultGraphFind[x] / numberEvaluationRuns;
 		    resultPropagation[x] = resultPropagation[x] / numberEvaluationRuns;
 		    resultAnalysis[x] = resultAnalysis[x] / numberEvaluationRuns;
+		    
+		    logger.info("\tAverage time for analysis initialization: " + resultInitialization[x] + "ns ("
+		            + String.format("%.4f", resultInitialization[x] / 1000000000.0) + "s)");
 		    
 		    logger.info("\tAverage time for TFG finding: " + resultGraphFind[x] + "ns ("
 		            + String.format("%.4f", resultGraphFind[x] / 1000000000.0) + "s)");
@@ -125,7 +146,11 @@ public class UserScalerTest {
 		    logger.info("\tAverage time for privacy analysis: " + resultAnalysis[x] + "ns ("
 		            + String.format("%.4f", resultAnalysis[x] / 1000000000.0) + "s)");
 		    
-		    logger.info("Average Total: " + (resultAnalysis[x] + resultPropagation[x] + resultGraphFind[x])/1000000000.0 + "s");
+		    logger.info(
+					"Average Total: " + (resultAnalysis[x] + resultPropagation[x] + resultGraphFind[x]) / 1000000000.0
+							+ "s. Average Total incl. initialization: "
+							+ (resultAnalysis[x] + resultPropagation[x] + resultGraphFind[x] + resultInitialization[x])/ 1000000000.0
+							+ "s.");
 		}
 
 	}
